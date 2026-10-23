@@ -202,3 +202,5 @@ section.alt { background: var(--bg-alt); }
   .cta { padding: 28px 22px; }
 }
 :root[lang="ja"] .hero h1, :root[lang="zh-CN"] .hero h1 { font-size: clamp(32px, 6vw, 60px); }
+.not-found { min-height: calc(100vh - 64px); display: flex; align-items: center; }
+.not-found .wrap { width: 100%; grid-template-columns: 1fr; }
