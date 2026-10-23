@@ -17,6 +17,9 @@
 :root[lang="ja"] {
   --font: "Source Sans 3", "Noto Sans JP", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
 }
+:root[lang="zh-CN"] {
+  --font: "Source Sans 3", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #070d1f;
@@ -198,4 +201,4 @@ section.alt { background: var(--bg-alt); }
   .wrap { padding: 0 16px; }
   .cta { padding: 28px 22px; }
 }
-:root[lang="ja"] .hero h1 { font-size: clamp(32px, 6vw, 60px); }
+:root[lang="ja"] .hero h1, :root[lang="zh-CN"] .hero h1 { font-size: clamp(32px, 6vw, 60px); }
