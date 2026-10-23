@@ -129,6 +129,7 @@ section.alt { background: var(--bg-alt); }
 .resource .tag { align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: rgba(11, 95, 255, .1); color: var(--blue); margin-bottom: 14px; }
 .resource.soon .tag { background: var(--bg-alt); color: var(--muted); border: 1px solid var(--border); }
 .resource p { flex: 1; }
+.resource .meta { margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--muted); }
 .resource a.more { margin-top: 18px; font-weight: 600; text-decoration: none; }
 .resource a.more:hover { text-decoration: underline; }
 
