@@ -3,8 +3,16 @@
   "categories": [
     {
       "id": "marketplace-apps",
-      "name": { "en": "Marketplace apps", "ja": "Marketplace アプリ", "zh": "Marketplace 应用" },
-      "tag": { "en": "Marketplace app", "ja": "Marketplace アプリ", "zh": "Marketplace 应用" },
+      "name": {
+        "en": "Marketplace apps",
+        "ja": "Marketplace アプリ",
+        "zh": "Marketplace 应用"
+      },
+      "tag": {
+        "en": "Marketplace app",
+        "ja": "Marketplace アプリ",
+        "zh": "Marketplace 应用"
+      },
       "comingSoon": true
     }
   ],
@@ -20,13 +28,20 @@
       },
       "version": "1.0.0",
       "dxp": "Liferay DXP 2026.Q1 LTS",
-      "docsLanguages": ["en"],
-      "image": { "src": "assets/kb/liferay-forums-home.png", "width": 1600, "height": 1075 },
-      "docs": "knowledge-base/marketplace-apps/liferay-forums/",
+      "docsLanguages": [
+        "en"
+      ],
+      "image": {
+        "src": "assets/kb/liferay-forums-home.png",
+        "width": 1600,
+        "height": 1075
+      },
+      "docs": "liferay-forums/",
       "repo": "https://github.com/LGSAPAC/lfrgs-liferay-forums",
       "marketplace": null,
-      "search": null,
-      "sitemap": null
+      "search": "liferay-forums/pagefind/",
+      "sitemap": "liferay-forums/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/liferay-forums"
     }
   ]
 }
