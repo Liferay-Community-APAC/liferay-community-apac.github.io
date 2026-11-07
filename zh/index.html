@@ -84,29 +84,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=kb2">
+  <link rel="stylesheet" href="../assets/site.css?v=sh1">
+  <script src="../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="wrap">
     <a class="brand" href="./"><img class="brand-logo" src="../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>用户组 APAC</small></a>
-    <nav class="nav" aria-label="主导航">
-      <a href="#how-we-work">赞助方</a>
-      <a href="#resources">教程与代码</a>
-      <a href="#knowledge-base">知识库</a>
-      <a href="#stay-updated">获取最新信息</a>
-      <a href="#contact">联系我们</a>
-    </nav>
-    <div class="lang" aria-label="语言">
-      <a href="../" hreflang="en" lang="en">EN</a>
-      <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-      <span aria-current="true">中文</span>
-    </div>
   </div>
 </header>
 
-<main>
+<main data-pagefind-body>
   <section class="hero">
     <div class="wrap">
       <div>
@@ -324,23 +313,7 @@
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-brand">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="../assets/liferay-logo-reversed.png">
-        <img src="../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
-      </picture>
-      <span>Liferay 用户组 APAC · 赞助方：Liferay 客户成功团队</span>
-    </div>
-    <nav aria-label="页脚">
-      <a href="https://www.liferay.com.cn/">liferay.com.cn</a>
-      <a href="https://learn.liferay.com/">Liferay Learn</a>
-      <a href="https://github.com/Liferay-Community-APAC">GitHub</a>
-      <a href="../" hreflang="en" lang="en">English</a>
-      <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-    </nav>
-  </div>
+<footer class="site-footer" data-site-footer>
   <p class="wrap disclaimer">本网站上的教程、示例代码和指南均为非官方内容，按“原样”提供，使用风险自负。</p>
 </footer>
 

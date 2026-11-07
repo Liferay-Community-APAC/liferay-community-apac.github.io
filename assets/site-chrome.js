@@ -1,0 +1,211 @@
+/*
+ * Shared header, footer and site search for Liferay Community APAC.
+ *
+ * Every page on the main site, and every app's docs site published from its
+ * own repository under the same address, loads this one file:
+ *
+ *   <script src="/assets/site-chrome.js" defer></script>
+ *
+ * and marks where the header and footer go:
+ *
+ *   <header class="site-header" data-site-header>...fallback...</header>
+ *   <footer class="site-footer" data-site-footer>...fallback...</footer>
+ *
+ * Edit the menu, footer or search here once and every page picks it up.
+ * The site root is worked out from this script's own address, so the same
+ * file works on the live site, under a preview folder, and locally.
+ */
+(function () {
+  'use strict';
+
+  var script = document.currentScript;
+  var ROOT = new URL('../', script ? script.src : location.href).href; // the site root, ending in "/"
+  var SITE = 'https://liferay-community-apac.github.io/'; // the live address
+
+  /*
+   * Search indexes to search, besides the main site's own. Add one entry per
+   * app whose docs are published from its own repository, for example:
+   *   { path: 'lfrgs-liferay-forums/pagefind/', label: 'Liferay Forums' }
+   */
+  var SEARCH_INDEXES = [];
+
+  var STRINGS = {
+    en: {
+      home: '', brandSub: 'User Group APAC', navLabel: 'Main',
+      nav: [['#how-we-work', 'Our sponsor'], ['#resources', 'Tutorials & code'], ['knowledge-base/', 'Knowledge base'],
+            ['#stay-updated', 'Stay updated'], ['#contact', 'Contact']],
+      langLabel: 'Language', search: 'Search', searchTitle: 'Search the site', close: 'Close',
+      searchUnavailable: 'Search becomes available once the site is published.',
+      footerBrand: 'Liferay User Group APAC · Sponsored by Liferay Customer Success', footerLabel: 'Footer',
+      footerLinks: [['https://www.liferay.com/', 'liferay.com'], ['https://learn.liferay.com/', 'Liferay Learn'],
+                    ['https://github.com/Liferay-Community-APAC', 'GitHub']],
+      disclaimer: 'Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.'
+    },
+    ja: {
+      home: 'ja/', brandSub: 'ユーザーグループ APAC', navLabel: 'メイン',
+      nav: [['#how-we-work', 'スポンサー'], ['#resources', 'チュートリアル'], ['#knowledge-base', 'ナレッジベース'],
+            ['#stay-updated', '最新情報'], ['#contact', 'お問い合わせ']],
+      langLabel: '言語', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
+      searchUnavailable: '検索はサイトの公開後に利用できます。',
+      footerBrand: 'Liferay ユーザーグループ APAC · スポンサー：Liferay カスタマーサクセス', footerLabel: 'フッター',
+      footerLinks: [['https://www.liferay.co.jp/', 'liferay.co.jp'], ['https://learn.liferay.com/', 'Liferay Learn'],
+                    ['https://github.com/Liferay-Community-APAC', 'GitHub']],
+      disclaimer: '本サイトのアプリ、チュートリアル、サンプルコード、ガイドは非公式のものであり、現状のまま提供されます。ご利用は自己責任でお願いします。'
+    },
+    zh: {
+      home: 'zh/', brandSub: '用户组 APAC', navLabel: '主导航',
+      nav: [['#how-we-work', '赞助方'], ['#resources', '教程与代码'], ['#knowledge-base', '知识库'],
+            ['#stay-updated', '获取最新信息'], ['#contact', '联系我们']],
+      langLabel: '语言', search: '搜索', searchTitle: '搜索本站', close: '关闭',
+      searchUnavailable: '网站发布后即可使用搜索。',
+      footerBrand: 'Liferay 用户组 APAC · 赞助方：Liferay 客户成功团队', footerLabel: '页脚',
+      footerLinks: [['https://www.liferay.com.cn/', 'liferay.com.cn'], ['https://learn.liferay.com/', 'Liferay Learn'],
+                    ['https://github.com/Liferay-Community-APAC', 'GitHub']],
+      disclaimer: '本网站上的应用、教程、示例代码和指南均为非官方内容，按“原样”提供，使用风险自负。'
+    }
+  };
+  var LANGS = [['en', 'EN', 'en'], ['ja', '日本語', 'ja'], ['zh', '中文', 'zh-CN']];
+  var HREFLANG = { en: 'en', ja: 'ja', zh: 'zh-Hans' };
+
+  var htmlLang = (document.documentElement.lang || 'en').toLowerCase();
+  var lang = htmlLang.indexOf('ja') === 0 ? 'ja' : htmlLang.indexOf('zh') === 0 ? 'zh' : 'en';
+  var t = STRINGS[lang];
+  var homeUrl = ROOT + t.home;
+  var here = location.href.split('#')[0];
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
+
+  // A menu entry is a section of this language's homepage ("#…") or a page under the site root.
+  function navHref(target) {
+    return target.charAt(0) === '#' ? homeUrl + target : ROOT + target;
+  }
+
+  // The same page in another language: the page's own <link rel="alternate" hreflang> if it has one,
+  // otherwise that language's homepage (its knowledge base section, from an English-only page).
+  function altHref(code) {
+    var link = document.querySelector('link[rel="alternate"][hreflang="' + HREFLANG[code] + '"]');
+    if (link) {
+      // hreflang links name the live address; keep visitors on whichever copy they're viewing (preview, local).
+      var href = new URL(link.getAttribute('href'), location.href).href;
+      return href.indexOf(SITE) === 0 ? ROOT + href.slice(SITE.length) : href;
+    }
+    var onKb = location.pathname.indexOf('/knowledge-base/') !== -1 || document.querySelector('[data-kb-page]');
+    return ROOT + STRINGS[code].home + (onKb && code !== 'en' ? '#knowledge-base' : '');
+  }
+
+  function renderHeader(el) {
+    var nav = t.nav.map(function (item) {
+      var href = navHref(item[0]);
+      var current = item[0].charAt(0) !== '#' && here.indexOf(href) === 0;
+      return '<a href="' + esc(href) + '"' + (current ? ' aria-current="page"' : '') + '>' + esc(item[1]) + '</a>';
+    }).join('');
+    var langs = LANGS.map(function (l) {
+      return l[0] === lang
+        ? '<span aria-current="true">' + esc(l[1]) + '</span>'
+        : '<a href="' + esc(altHref(l[0])) + '" hreflang="' + HREFLANG[l[0]] + '" lang="' + l[2] + '">' + esc(l[1]) + '</a>';
+    }).join('');
+    el.innerHTML =
+      '<div class="wrap">' +
+        '<a class="brand" href="' + esc(homeUrl) + '"><img class="brand-logo" src="' + ROOT + 'assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>' + esc(t.brandSub) + '</small></a>' +
+        '<nav class="nav" aria-label="' + esc(t.navLabel) + '">' + nav + '</nav>' +
+        '<button class="search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K Meta+K">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
+          '<span>' + esc(t.search) + '</span></button>' +
+        '<div class="lang" aria-label="' + esc(t.langLabel) + '">' + langs + '</div>' +
+      '</div>';
+    el.querySelector('.search-btn').addEventListener('click', openSearch);
+  }
+
+  function renderFooter(el) {
+    var links = t.footerLinks.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('');
+    LANGS.forEach(function (l) {
+      if (l[0] !== lang) links += '<a href="' + esc(altHref(l[0])) + '" hreflang="' + HREFLANG[l[0]] + '" lang="' + l[2] + '">' + (l[0] === 'en' ? 'English' : esc(l[1])) + '</a>';
+    });
+    // A page can add its own line, such as a licence, with <p data-footer-note>…</p> inside the footer.
+    var note = el.querySelector('[data-footer-note]');
+    el.innerHTML =
+      '<div class="wrap">' +
+        '<div class="footer-brand"><picture>' +
+          '<source media="(prefers-color-scheme: dark)" srcset="' + ROOT + 'assets/liferay-logo-reversed.png">' +
+          '<img src="' + ROOT + 'assets/liferay-logo-color.png" alt="Liferay" width="116" height="32"></picture>' +
+          '<span>' + esc(t.footerBrand) + '</span></div>' +
+        '<nav aria-label="' + esc(t.footerLabel) + '">' + links + '</nav>' +
+      '</div>' +
+      (note ? '<p class="wrap disclaimer">' + note.innerHTML + '</p>' : '') +
+      '<p class="wrap disclaimer">' + esc(t.disclaimer) + '</p>';
+  }
+
+  // ---------- Search (Pagefind) ----------
+  var dialog, searchReady = false;
+
+  function loadAsset(tag, attrs) {
+    return new Promise(function (resolve, reject) {
+      var node = document.createElement(tag);
+      for (var k in attrs) node.setAttribute(k, attrs[k]);
+      node.onload = resolve; node.onerror = reject;
+      document.head.appendChild(node);
+    });
+  }
+
+  function buildDialog() {
+    dialog = document.createElement('dialog');
+    dialog.className = 'search-dialog';
+    dialog.setAttribute('aria-label', t.searchTitle);
+    dialog.innerHTML =
+      '<div class="search-head"><strong>' + esc(t.searchTitle) + '</strong>' +
+      '<button type="button" class="search-close" aria-label="' + esc(t.close) + '">×</button></div>' +
+      '<div id="site-search"></div>';
+    dialog.querySelector('.search-close').addEventListener('click', function () { dialog.close(); });
+    dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
+    document.body.appendChild(dialog);
+  }
+
+  function startSearch() {
+    var base = ROOT + 'pagefind/';
+    return Promise.all([
+      loadAsset('link', { rel: 'stylesheet', href: base + 'pagefind-ui.css' }),
+      loadAsset('script', { src: base + 'pagefind-ui.js' })
+    ]).then(function () {
+      /* global PagefindUI */
+      new PagefindUI({
+        element: '#site-search',
+        bundlePath: base,
+        showSubResults: true,
+        showImages: false,
+        resetStyles: false,
+        autofocus: true,
+        mergeIndex: SEARCH_INDEXES.map(function (i) {
+          return { bundlePath: ROOT + i.path, mergeFilter: { app: i.label } };
+        })
+      });
+      searchReady = true;
+    }).catch(function () {
+      dialog.querySelector('#site-search').innerHTML = '<p class="search-note">' + esc(t.searchUnavailable) + '</p>';
+    });
+  }
+
+  function openSearch() {
+    if (!dialog) buildDialog();
+    if (!dialog.open) dialog.showModal();
+    if (!searchReady && !dialog.dataset.started) { dialog.dataset.started = '1'; startSearch(); }
+    var input = dialog.querySelector('input');
+    if (input) input.focus();
+  }
+
+  document.addEventListener('keydown', function (e) {
+    var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable;
+    if ((e.key === '/' && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+      e.preventDefault(); openSearch();
+    }
+  });
+
+  function init() {
+    var h = document.querySelector('[data-site-header]');
+    var f = document.querySelector('[data-site-footer]');
+    if (h) renderHeader(h);
+    if (f) renderFooter(f);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
