@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://liferay-community-apac.github.io/sitemap.xml
+
+# apps:sitemaps
+# /apps:sitemaps

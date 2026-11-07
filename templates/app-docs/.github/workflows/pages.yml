@@ -1,0 +1,20 @@
+# Publishes these docs with Liferay Community APAC's shared workflow: Jekyll, link check, search index.
+# In Settings → Pages, set "Source" to "GitHub Actions".
+name: Publish docs
+
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**', '.github/workflows/pages.yml']
+  workflow_dispatch:
+
+jobs:
+  publish:
+    uses: Liferay-Community-APAC/liferay-community-apac.github.io/.github/workflows/publish-site.yml@main
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    with:
+      builder: jekyll
+      source: docs

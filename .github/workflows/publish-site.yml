@@ -1,0 +1,119 @@
+# Shared publishing workflow for Liferay Community APAC sites.
+#
+# Builds a site (plain files or Jekyll), adds a Pagefind search index, checks its links, and
+# publishes it to GitHub Pages. The main site and every app's docs repository call it, so a fix
+# or upgrade here reaches all of them.
+#
+# Call it from a repository's own workflow:
+#
+#   jobs:
+#     publish:
+#       uses: Liferay-Community-APAC/liferay-community-apac.github.io/.github/workflows/publish-site.yml@main
+#       permissions:
+#         contents: read
+#         pages: write
+#         id-token: write
+#       with:
+#         builder: jekyll        # or "static" for plain HTML files
+#         source: docs           # the folder that holds the site
+#
+# The repository's Settings → Pages "Source" must be set to "GitHub Actions".
+name: Publish site (shared)
+
+on:
+  workflow_call:
+    inputs:
+      builder:
+        description: '"static" publishes the files as they are; "jekyll" builds them with Jekyll first.'
+        type: string
+        default: static
+      source:
+        description: The folder that holds the site, relative to the repository root.
+        type: string
+        default: .
+      prebuild:
+        description: A command to run after the site is in $SITE_DIR and before the search index is built.
+        type: string
+        default: ''
+      check-links:
+        description: Stop the publish if the site has broken links or anchors.
+        type: boolean
+        default: true
+      exclude:
+        description: Space-separated files or folders not to publish (static builder only), such as "scripts README.md".
+        type: string
+        default: ''
+      pagefind-version:
+        type: string
+        default: 1.3.0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SITE_DIR: _site
+    steps:
+      - uses: actions/checkout@v4
+
+      # The shared scripts (link checker) live next to this workflow.
+      - uses: actions/checkout@v4
+        with:
+          repository: Liferay-Community-APAC/liferay-community-apac.github.io
+          ref: main
+          path: .shared
+          sparse-checkout: scripts
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Copy the site
+        if: inputs.builder == 'static'
+        env:
+          EXCLUDE: ${{ inputs.exclude }}
+        run: |
+          args=(--exclude .git --exclude .github --exclude .shared --exclude _site)
+          for e in $EXCLUDE; do args+=(--exclude "$e"); done
+          rsync -a "${args[@]}" "${{ inputs.source }}/" _site/
+
+      - name: Build with Jekyll
+        if: inputs.builder == 'jekyll'
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ${{ inputs.source }}
+          destination: ./_site
+
+      - name: Make the built files writable
+        if: inputs.builder == 'jekyll'
+        run: sudo chown -R "$(id -u):$(id -g)" _site
+
+      - name: Prepare the site
+        if: inputs.prebuild != ''
+        run: ${{ inputs.prebuild }}
+
+      - name: Check links
+        if: inputs.check-links
+        run: node .shared/scripts/check-links.mjs _site --base "${{ steps.pages.outputs.base_path }}/"
+
+      - name: Build the search index
+        run: npx --yes pagefind@${{ inputs.pagefind-version }} --site _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-${{ github.repository }}
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -11,6 +11,7 @@
  *   <header class="site-header" data-site-header>...fallback...</header>
  *   <footer class="site-footer" data-site-footer>...fallback...</footer>
  *
+ * Apps with docs in their own repositories are added to the search from data/apps.json.
  * Edit the menu, footer or search here once and every page picks it up.
  * The site root is worked out from this script's own address, so the same
  * file works on the live site, under a preview folder, and locally.
@@ -22,12 +23,13 @@
   var ROOT = new URL('../', script ? script.src : location.href).href; // the site root, ending in "/"
   var SITE = 'https://liferay-community-apac.github.io/'; // the live address
 
-  /*
-   * Search indexes to search, besides the main site's own. Add one entry per
-   * app whose docs are published from its own repository, for example:
-   *   { path: 'lfrgs-liferay-forums/pagefind/', label: 'Liferay Forums' }
-   */
-  var SEARCH_INDEXES = [];
+  // Apps whose docs are published from their own repositories list their search index in
+  // data/apps.json ("search"); the site search merges those indexes with the main site's.
+  function appIndexes() {
+    return fetch(ROOT + 'data/apps.json').then(function (r) { return r.ok ? r.json() : { apps: [] }; })
+      .then(function (d) { return (d.apps || []).filter(function (a) { return a.search; }); })
+      .catch(function () { return []; });
+  }
 
   var STRINGS = {
     en: {
@@ -98,7 +100,8 @@
   function renderHeader(el) {
     var nav = t.nav.map(function (item) {
       var href = navHref(item[0]);
-      var current = item[0].charAt(0) !== '#' && here.indexOf(href) === 0;
+      // App docs published from their own repositories mark <body data-kb-page>: they belong to the knowledge base.
+      var current = item[0].charAt(0) !== '#' && (here.indexOf(href) === 0 || (item[0] === 'knowledge-base/' && !!document.querySelector('[data-kb-page]')));
       return '<a href="' + esc(href) + '"' + (current ? ' aria-current="page"' : '') + '>' + esc(item[1]) + '</a>';
     }).join('');
     var langs = LANGS.map(function (l) {
@@ -164,9 +167,11 @@
 
   function startSearch() {
     var base = ROOT + 'pagefind/';
+    var apps = [];
     return Promise.all([
       loadAsset('link', { rel: 'stylesheet', href: base + 'pagefind-ui.css' }),
-      loadAsset('script', { src: base + 'pagefind-ui.js' })
+      loadAsset('script', { src: base + 'pagefind-ui.js' }),
+      appIndexes().then(function (list) { apps = list; })
     ]).then(function () {
       /* global PagefindUI */
       new PagefindUI({
@@ -176,8 +181,8 @@
         showImages: false,
         resetStyles: false,
         autofocus: true,
-        mergeIndex: SEARCH_INDEXES.map(function (i) {
-          return { bundlePath: ROOT + i.path, mergeFilter: { app: i.label } };
+        mergeIndex: apps.map(function (a) {
+          return { bundlePath: ROOT + a.search, mergeFilter: { app: a.name } };
         })
       });
       searchReady = true;

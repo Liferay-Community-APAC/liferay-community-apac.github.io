@@ -1,0 +1,121 @@
+{%- comment -%}
+  App docs layout. The header, footer, styles and site search come from the main site
+  (site.main_site, "" on the live site), so every app's docs look and behave like the rest of it.
+
+  Navigation comes from each page's front matter:
+    title:      the page's name in the sidebar and browser tab
+    nav_order:  its position (lower first)
+    parent:     the title of its section page, for pages inside a section
+    nav_exclude: true to leave a page out of the sidebar
+{%- endcomment -%}
+{%- assign main = site.main_site | default: "" -%}
+{%- assign docs_pages = site.pages | where_exp: "p", "p.title" | where_exp: "p", "p.nav_exclude != true" -%}
+{%- assign tops = docs_pages | where_exp: "p", "p.parent == nil" | sort: "nav_order", "last" -%}
+{%- assign ordered = "" | split: "" -%}
+{%- for t in tops -%}
+  {%- assign ordered = ordered | push: t -%}
+  {%- assign kids = docs_pages | where: "parent", t.title | sort: "nav_order", "last" -%}
+  {%- for k in kids -%}{%- assign ordered = ordered | push: k -%}{%- endfor -%}
+{%- endfor -%}
+{%- assign is_home = false -%}{%- if page.url == "/" -%}{%- assign is_home = true -%}{%- endif -%}
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% unless is_home %}{{ page.title }} · {% endunless %}{{ site.app_name }} · Liferay Community APAC</title>
+  {%- assign desc = page.description | default: site.description %}
+  <meta name="description" content="{{ desc | escape }}">
+  <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+  <meta property="og:title" content="{% unless is_home %}{{ page.title }} · {% endunless %}{{ site.app_name }}">
+  <meta property="og:description" content="{{ desc | escape }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+  <meta property="og:site_name" content="Liferay Community APAC">
+  {%- if site.og_image %}
+  <meta property="og:image" content="{{ site.url }}{{ site.og_image }}">
+  <meta name="twitter:card" content="summary_large_image">
+  {%- endif %}
+  <link rel="icon" href="{{ main }}/assets/liferay-mark.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="{{ main }}/assets/site.css">
+  <script src="{{ main }}/assets/site-chrome.js" defer></script>
+</head>
+<body data-kb-page>
+
+<header class="site-header" data-site-header>
+  <div class="wrap">
+    <a class="brand" href="{{ main }}/"><img class="brand-logo" src="{{ main }}/assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>{{ site.app_name }} docs</summary>
+    <ul class="docs-nav-list">
+      {%- for t in tops %}
+      {%- assign kids = docs_pages | where: "parent", t.title | sort: "nav_order", "last" -%}
+      {%- assign open = false -%}{%- if t.url == page.url or page.parent == t.title -%}{%- assign open = true -%}{%- endif %}
+      <li{% if open %} class="open"{% endif %}><a href="{{ t.url | relative_url }}"{% if t.url == page.url %} aria-current="page"{% endif %}>{% if t.url == "/" %}Overview{% else %}{{ t.title }}{% endif %}</a>
+        {%- if kids.size > 0 %}
+        <ul>
+          {%- for k in kids %}
+          <li><a href="{{ k.url | relative_url }}"{% if k.url == page.url %} aria-current="page"{% endif %}>{{ k.title }}</a></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+  </details>
+
+  <main class="docs-main">
+    <p class="docs-crumbs">
+      <a href="{{ main }}/knowledge-base/">Knowledge base</a><span>/</span>
+      {%- if site.category_name %}<a href="{{ main }}/knowledge-base/#{{ site.category_id }}">{{ site.category_name }}</a><span>/</span>{% endif -%}
+      {%- if is_home %}{{ site.app_name }}{% else %}<a href="{{ '/' | relative_url }}">{{ site.app_name }}</a>{% endif -%}
+      {%- if page.parent %}{% assign par = tops | where: "title", page.parent | first %}{% if par %}<span>/</span><a href="{{ par.url | relative_url }}">{{ par.title }}</a>{% endif %}{% endif %}
+    </p>
+    <article class="prose" data-pagefind-body>
+      {{ content }}
+    </article>
+
+    {%- assign idx = -1 -%}
+    {%- for p in ordered -%}{%- if p.url == page.url -%}{%- assign idx = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+    {%- if idx >= 0 %}
+    {%- assign prev_i = idx | minus: 1 -%}{%- assign next_i = idx | plus: 1 %}
+    <nav class="pager" aria-label="Previous and next">
+      {%- if idx > 0 %}{% assign pp = ordered[prev_i] %}<a class="prev" href="{{ pp.url | relative_url }}"><span>Previous</span>{% if pp.url == "/" %}Overview{% else %}{{ pp.title }}{% endif %}</a>{% endif %}
+      {%- if next_i < ordered.size %}{% assign np = ordered[next_i] %}<a class="next" href="{{ np.url | relative_url }}"><span>Next</span>{{ np.title }}</a>{% endif %}
+    </nav>
+    {%- endif %}
+  </main>
+</div>
+
+<footer class="site-footer" data-site-footer>
+  {%- if site.footer_note %}
+  <p data-footer-note>{{ site.footer_note }}</p>
+  {%- endif %}
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+<script>
+  (function () {
+    // Open the sidebar on wide screens; on phones it starts folded.
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+    // A "#" link on each heading, for sharing a section.
+    document.querySelectorAll('.prose h2[id], .prose h3[id], .prose h4[id]').forEach(function (h) {
+      var a = document.createElement('a');
+      a.className = 'anchor'; a.href = '#' + h.id; a.textContent = '#';
+      a.setAttribute('aria-label', 'Link to this section');
+      h.appendChild(a);
+    });
+  })();
+</script>
+</body>
+</html>
