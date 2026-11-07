@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../../assets/site.css?v=sh1">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=sh2">
   <script src="../../../../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
@@ -43,9 +43,9 @@
 <ul><li><strong>From</strong>: an address of a domain your site owns, for example <code>forums@example.com</code>;</li><li><strong>From Name</strong>: the name members see, for example <em>Example Community</em>;</li><li><strong>To</strong>: an address you own. Members are always added in BCC, so <strong>To</strong> only gets a copy.</li></ul></li><li>Do the same for <strong>C2M0 Notification Email Mention</strong>.</li><li>In <em>Control Panel</em> → <em>Instance Settings</em> → <em>Email</em> → <em>Email Sender</em>, set the address Liferay sends email from. Liferay sends no email without it.</li><li>Make sure Liferay's mail server is configured.</li></ol>
 <div class="callout callout-warning"><p class="callout-title">Warning</p><p>Until you change them, the templates use the placeholder address <code>forums-noreply@example.xyz</code>. Mail servers reject or junk email from a domain you don't own.</p></div>
 <div class="callout callout-note"><p class="callout-title">Note</p><p>The batch creates these two templates, and keeps your changes to them when it's deployed again. The microservice reads the templates when it starts, so restart it after changing them.</p></div>
-<h2 id="web-notifications">Web Notifications<a class="anchor" href="#web-notifications" aria-label="Link to this section">#</a></h2>
+<h2 id="web-notifications">Web Notifications<a class="anchor" data-pagefind-ignore href="#web-notifications" aria-label="Link to this section">#</a></h2>
 <p>Members also get notifications in Liferay's notifications menu. They need no setup.</p>
-<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<h2 id="related-information">Related Information<a class="anchor" data-pagefind-ignore href="#related-information" aria-label="Link to this section">#</a></h2>
 <ul><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li></ul>
     </article>
     <nav class="pager" aria-label="Previous and next"><a class="prev" href="categories.html"><span>Previous</span>Managing Categories</a><a class="next" href="customizing.html"><span>Next</span>Customizing the Forum</a></nav>

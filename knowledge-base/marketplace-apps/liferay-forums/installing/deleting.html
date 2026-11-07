@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../../assets/site.css?v=sh1">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=sh2">
   <script src="../../../../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
@@ -42,7 +42,7 @@
 <div class="callout callout-warning"><p class="callout-title">Warning</p><p>Deleting a site can't be undone. Back up Liferay's database first if you might need its content.</p></div>
 <ol><li>Check that the site's site initializer zip isn't in Liferay's <code>osgi/client-extensions</code> folder; <a href="creating-sites.html">Creating Forum Sites</a> has you remove it once the site exists. Deployed again later, it would create the site again, empty. On Liferay PaaS, check the same for its site initializer project in <code>liferay/client-extensions</code>.</li><li>In <em>Control Panel</em> → <em>Sites</em>, open the site's <strong>Actions</strong> menu, click <strong>Delete</strong>, and confirm.</li></ol>
 <p>The forum's shared parts stay, since other forum sites use them: its data model from the batch, the microservice, and the <strong>Forum Moderator</strong>, <strong>Forum Category Admin</strong>, and <strong>Forum Banned</strong> roles.</p>
-<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<h2 id="related-information">Related Information<a class="anchor" data-pagefind-ignore href="#related-information" aria-label="Link to this section">#</a></h2>
 <ul><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li><li><a href="./">Installing</a></li></ul>
     </article>
     <nav class="pager" aria-label="Previous and next"><a class="prev" href="checking.html"><span>Previous</span>Checking the Installation</a><a class="next" href="workspace.html"><span>Next</span>Developing With a Liferay Workspace</a></nav>
