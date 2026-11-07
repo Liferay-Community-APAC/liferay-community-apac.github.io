@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lgsapac.github.io/sitemap.xml
+Sitemap: https://liferay-community-apac.github.io/sitemap.xml
