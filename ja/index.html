@@ -84,29 +84,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=kb2">
+  <link rel="stylesheet" href="../assets/site.css?v=sh1">
+  <script src="../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="wrap">
     <a class="brand" href="./"><img class="brand-logo" src="../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>ユーザーグループ APAC</small></a>
-    <nav class="nav" aria-label="メイン">
-      <a href="#how-we-work">スポンサー</a>
-      <a href="#resources">チュートリアル</a>
-      <a href="#knowledge-base">ナレッジベース</a>
-      <a href="#stay-updated">最新情報</a>
-      <a href="#contact">お問い合わせ</a>
-    </nav>
-    <div class="lang" aria-label="言語">
-      <a href="../" hreflang="en" lang="en">EN</a>
-      <span aria-current="true">日本語</span>
-      <a href="../zh/" hreflang="zh-Hans" lang="zh-CN">中文</a>
-    </div>
   </div>
 </header>
 
-<main>
+<main data-pagefind-body>
   <section class="hero">
     <div class="wrap">
       <div>
@@ -324,23 +313,7 @@
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-brand">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="../assets/liferay-logo-reversed.png">
-        <img src="../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
-      </picture>
-      <span>Liferay ユーザーグループ APAC · スポンサー：Liferay カスタマーサクセス</span>
-    </div>
-    <nav aria-label="フッター">
-      <a href="https://www.liferay.co.jp/">liferay.co.jp</a>
-      <a href="https://learn.liferay.com/">Liferay Learn</a>
-      <a href="https://github.com/Liferay-Community-APAC">GitHub</a>
-      <a href="../" hreflang="en" lang="en">English</a>
-      <a href="../zh/" hreflang="zh-Hans" lang="zh-CN">中文</a>
-    </nav>
-  </div>
+<footer class="site-footer" data-site-footer>
   <p class="wrap disclaimer">本サイトのチュートリアル、サンプルコード、ガイドは非公式のものであり、現状のまま提供されます。ご利用は自己責任でお願いします。</p>
 </footer>
 

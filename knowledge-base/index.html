@@ -18,28 +18,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=kb2">
+  <link rel="stylesheet" href="../assets/site.css?v=sh1">
+  <script src="../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="wrap">
     <a class="brand" href="../"><img class="brand-logo" src="../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
-    <nav class="nav" aria-label="Main">
-      <a href="../#how-we-work">Our sponsor</a>
-      <a href="../#resources">Tutorials &amp; code</a>
-      <a href="./" aria-current="page">Knowledge base</a>
-      <a href="../#contact">Contact</a>
-    </nav>
-    <div class="lang" aria-label="Language">
-      <span aria-current="true">EN</span>
-      <a href="../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
-      <a href="../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
-    </div>
   </div>
 </header>
 
-<main>
+<main data-pagefind-body>
   <section class="hero page">
     <div class="wrap">
       <div>
@@ -87,21 +77,7 @@
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-brand">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="../assets/liferay-logo-reversed.png">
-        <img src="../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
-      </picture>
-      <span>Liferay User Group APAC · Sponsored by Liferay Customer Success</span>
-    </div>
-    <nav aria-label="Footer">
-      <a href="https://www.liferay.com/">liferay.com</a>
-      <a href="https://learn.liferay.com/">Liferay Learn</a>
-      <a href="https://github.com/Liferay-Community-APAC">GitHub</a>
-    </nav>
-  </div>
+<footer class="site-footer" data-site-footer>
   <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
 </footer>
 
