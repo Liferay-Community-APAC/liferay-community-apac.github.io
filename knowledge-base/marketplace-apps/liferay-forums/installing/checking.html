@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../../assets/site.css?v=sh1">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=sh2">
   <script src="../../../../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
@@ -40,32 +40,32 @@
       <h1>Checking the Installation</h1>
 <p>Four quick checks tell you the forum works. If one fails, the fixes below cover the usual causes.</p>
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#check-1-the-microservice">Check 1: The Microservice</a></li><li><a href="#check-2-the-forum-banned-role">Check 2: The Forum Banned Role</a></li><li><a href="#check-3-post">Check 3: Post</a></li><li><a href="#check-4-get-an-email">Check 4: Get an Email</a></li><li><a href="#if-somethings-wrong">If Something's Wrong</a><ul><li><a href="#posts-are-rejected">Posts Are Rejected</a></li><li><a href="#topic-links-show-a-not-found-page">Topic Links Show a Not Found Page</a></li><li><a href="#bans-have-no-effect-or-moderators-dont-see-lock-topic">Bans Have No Effect, or Moderators Don't See Lock Topic</a></li><li><a href="#no-email-arrives">No Email Arrives</a></li></ul></li><li><a href="#related-information">Related Information</a></li></ul></nav>
-<h2 id="check-1-the-microservice">Check 1: The Microservice<a class="anchor" href="#check-1-the-microservice" aria-label="Link to this section">#</a></h2>
+<h2 id="check-1-the-microservice">Check 1: The Microservice<a class="anchor" data-pagefind-ignore href="#check-1-the-microservice" aria-label="Link to this section">#</a></h2>
 <p>On the Liferay machine, this prints <code>READY</code>:</p>
 <pre><code class="language-bash">curl http://localhost:58081/ready</code></pre>
 <p>On Liferay Self-Hosted (Docker), run <code>docker exec forums-liferay curl -s http://localhost:58081/ready</code>.</p>
 <p>On Liferay PaaS and Liferay SaaS, check in the Liferay Cloud console that the <code>liferayforumsetcspringboot</code> service is running.</p>
-<h2 id="check-2-the-forum-banned-role">Check 2: The Forum Banned Role<a class="anchor" href="#check-2-the-forum-banned-role" aria-label="Link to this section">#</a></h2>
+<h2 id="check-2-the-forum-banned-role">Check 2: The Forum Banned Role<a class="anchor" data-pagefind-ignore href="#check-2-the-forum-banned-role" aria-label="Link to this section">#</a></h2>
 <p>Signed in to Liferay as an administrator, open this address, with your Liferay's address in place of <code>&lt;liferay-url&gt;</code>. It shows the <strong>Forum Banned</strong> role, not a not found error, once the first forum site exists:</p>
 <pre><code>&lt;liferay-url&gt;/o/headless-admin-user/v1.0/roles/by-external-reference-code/FORUM_BANNED</code></pre>
 <p>If it shows not found, see <a href="#bans-have-no-effect-or-moderators-dont-see-lock-topic">Bans Have No Effect</a>.</p>
-<h2 id="check-3-post">Check 3: Post<a class="anchor" href="#check-3-post" aria-label="Link to this section">#</a></h2>
+<h2 id="check-3-post">Check 3: Post<a class="anchor" data-pagefind-ignore href="#check-3-post" aria-label="Link to this section">#</a></h2>
 <ol><li>As an administrator, complete the <a href="../getting-started.html#first-time-setup">first-time setup</a>. At least one category must exist before anyone can post.</li><li>Sign in as a member, open a forum site, for example <code>/web/forums</code>, and start a topic.</li><li>Reply to it.</li></ol>
-<h2 id="check-4-get-an-email">Check 4: Get an Email<a class="anchor" href="#check-4-get-an-email" aria-label="Link to this section">#</a></h2>
+<h2 id="check-4-get-an-email">Check 4: Get an Email<a class="anchor" data-pagefind-ignore href="#check-4-get-an-email" aria-label="Link to this section">#</a></h2>
 <ol><li>As one member, follow a topic.</li><li>As another member, reply to it.</li><li>Check that the first member gets an email, sent from the address you set in <a href="../administering/email-notifications.html">Email Notifications</a>.</li></ol>
-<h2 id="if-somethings-wrong">If Something's Wrong<a class="anchor" href="#if-somethings-wrong" aria-label="Link to this section">#</a></h2>
-<h3 id="posts-are-rejected">Posts Are Rejected<a class="anchor" href="#posts-are-rejected" aria-label="Link to this section">#</a></h3>
+<h2 id="if-somethings-wrong">If Something's Wrong<a class="anchor" data-pagefind-ignore href="#if-somethings-wrong" aria-label="Link to this section">#</a></h2>
+<h3 id="posts-are-rejected">Posts Are Rejected<a class="anchor" data-pagefind-ignore href="#posts-are-rejected" aria-label="Link to this section">#</a></h3>
 <p>Members see <strong>Your account has been banned from participating in the forums.</strong> or a lock error, though they aren't banned and the topic isn't locked.</p>
 <ol><li>Check that the microservice is running, and that Liferay reaches it (<a href="#check-1-the-microservice">Check 1</a>). On Liferay Self-Hosted (Docker), restart the microservice's container after Liferay's restarts.</li><li><p>If it is, and its log shows <code>403</code> errors from Liferay, its zip was deployed before the batch finished, so Liferay didn't give it access to the forum's data. Deploying the same zip again doesn't help; deploy it fresh:</p>
 <ol><li>Remove <code>liferay-forums-etc-spring-boot.zip</code> from Liferay's <code>osgi/client-extensions</code> folder.</li><li>Wait until the Liferay log shows its bundle <code>STOPPED</code>.</li><li>Copy the zip back in.</li><li>Restart the microservice.</li></ol></li><li>On Liferay PaaS, deploy a second build and restart the microservice, as in <a href="paas.html#step-5-deploy-a-second-build">Installing on Liferay PaaS</a>. On Liferay SaaS, ask Liferay Support to remove the microservice's client extension, then deploy it again.</li></ol>
-<h3 id="topic-links-show-a-not-found-page">Topic Links Show a Not Found Page<a class="anchor" href="#topic-links-show-a-not-found-page" aria-label="Link to this section">#</a></h3>
+<h3 id="topic-links-show-a-not-found-page">Topic Links Show a Not Found Page<a class="anchor" data-pagefind-ignore href="#topic-links-show-a-not-found-page" aria-label="Link to this section">#</a></h3>
 <p>The site was created while Liferay was still starting, so it's missing its topic pages. Before anyone posts in it, delete the site in <em>Control Panel</em> → <em>Sites</em>, and deploy its site initializer zip again into the running Liferay, as in <a href="creating-sites.html">Creating Forum Sites</a>.</p>
-<h3 id="bans-have-no-effect-or-moderators-dont-see-lock-topic">Bans Have No Effect, or Moderators Don't See Lock Topic<a class="anchor" href="#bans-have-no-effect-or-moderators-dont-see-lock-topic" aria-label="Link to this section">#</a></h3>
+<h3 id="bans-have-no-effect-or-moderators-dont-see-lock-topic">Bans Have No Effect, or Moderators Don't See Lock Topic<a class="anchor" data-pagefind-ignore href="#bans-have-no-effect-or-moderators-dont-see-lock-topic" aria-label="Link to this section">#</a></h3>
 <p>The <strong>Forum Banned</strong> role doesn't have the external reference code <code>FORUM_BANNED</code>, which happens without the Liferay fix LPD-90465. Set it by hand, signed in as an administrator, for example with Liferay's API explorer at <code>&lt;liferay-url&gt;/o/api</code>:</p>
 <ol><li>Find the role's ID: <code>GET /o/headless-admin-user/v1.0/roles?search=Forum%20Banned</code>.</li><li>Set its code: <code>PATCH /o/headless-admin-user/v1.0/roles/&lt;role ID&gt;</code> with the body <code>{"externalReferenceCode": "FORUM_BANNED"}</code>.</li><li>Check that <a href="#check-2-the-forum-banned-role">Check 2</a> now shows the role.</li></ol>
-<h3 id="no-email-arrives">No Email Arrives<a class="anchor" href="#no-email-arrives" aria-label="Link to this section">#</a></h3>
+<h3 id="no-email-arrives">No Email Arrives<a class="anchor" data-pagefind-ignore href="#no-email-arrives" aria-label="Link to this section">#</a></h3>
 <p>Check the templates' <strong>From</strong> address and Liferay's email sender in <a href="../administering/email-notifications.html">Email Notifications</a>, and that Liferay's mail server is configured. After changing a template, restart the microservice: it reads the templates only when it starts.</p>
-<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<h2 id="related-information">Related Information<a class="anchor" data-pagefind-ignore href="#related-information" aria-label="Link to this section">#</a></h2>
 <ul><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../reference/known-issues.html">Known Issues</a></li></ul>
     </article>
     <nav class="pager" aria-label="Previous and next"><a class="prev" href="creating-sites.html"><span>Previous</span>Creating Forum Sites</a><a class="next" href="deleting.html"><span>Next</span>Deleting a Forum Site</a></nav>

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../../assets/site.css?v=sh1">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=sh2">
   <script src="../../../../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
@@ -41,18 +41,18 @@
 <p>Follow these steps when Liferay is installed from a Tomcat bundle on a server you manage.</p>
 <div class="callout callout-important"><p class="callout-title">Important</p><p>You need file access to the Liferay server, the <a href="./#required-liferay-fixes">required Liferay fixes</a> installed with Liferay's <a href="https://learn.liferay.com/w/dxp/self-hosted-installation-and-upgrades/maintaining-a-liferay-installation/patching-liferay">patching tool</a> or their workarounds, and Liferay must have finished starting before you begin. In the steps below, <code>&lt;liferay-home&gt;</code> is the Liferay installation folder, the one that contains the <code>osgi</code> and <code>routes</code> folders.</p></div>
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#step-1-download-the-release">Step 1: Download the Release</a></li><li><a href="#step-2-deploy-the-batch">Step 2: Deploy the Batch</a></li><li><a href="#step-3-deploy-the-microservices-zip">Step 3: Deploy the Microservice's Zip</a></li><li><a href="#step-4-start-the-microservice">Step 4: Start the Microservice</a><ul><li><a href="#on-the-liferay-machine">On the Liferay Machine</a></li><li><a href="#on-another-machine">On Another Machine</a></li></ul></li><li><a href="#step-5-set-up-email-notifications">Step 5: Set Up Email Notifications</a></li><li><a href="#step-6-create-the-forum-sites">Step 6: Create the Forum Sites</a></li><li><a href="#related-information">Related Information</a></li></ul></nav>
-<h2 id="step-1-download-the-release">Step 1: Download the Release<a class="anchor" href="#step-1-download-the-release" aria-label="Link to this section">#</a></h2>
+<h2 id="step-1-download-the-release">Step 1: Download the Release<a class="anchor" data-pagefind-ignore href="#step-1-download-the-release" aria-label="Link to this section">#</a></h2>
 <p>From the <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">release</a>, download:</p>
 <ul><li><code>liferay-forums-batch.zip</code></li><li><code>liferay-forums-etc-spring-boot.zip</code></li><li><code>liferay-forums-site-initializer.zip</code></li><li><strong>Source code (zip)</strong>, only to run several forum sites: it has the script in its <code>scripts</code> folder.</li></ul>
-<h2 id="step-2-deploy-the-batch">Step 2: Deploy the Batch<a class="anchor" href="#step-2-deploy-the-batch" aria-label="Link to this section">#</a></h2>
+<h2 id="step-2-deploy-the-batch">Step 2: Deploy the Batch<a class="anchor" data-pagefind-ignore href="#step-2-deploy-the-batch" aria-label="Link to this section">#</a></h2>
 <ol><li>Copy <code>liferay-forums-batch.zip</code> into <code>&lt;liferay-home&gt;/osgi/client-extensions</code>.</li><li>Wait until the Liferay log shows five lines containing <code>Finished batch engine import task</code> after the copy. This takes about a minute.</li></ol>
 <div class="callout callout-warning"><p class="callout-title">Warning</p><p>Don't continue until all five have finished. The microservice deployed in the next step only gets access to the parts of the forum that exist by then. Liferay also logs a few of these lines while it starts, so only count the ones after the copy.</p></div>
-<h2 id="step-3-deploy-the-microservices-zip">Step 3: Deploy the Microservice's Zip<a class="anchor" href="#step-3-deploy-the-microservices-zip" aria-label="Link to this section">#</a></h2>
+<h2 id="step-3-deploy-the-microservices-zip">Step 3: Deploy the Microservice's Zip<a class="anchor" data-pagefind-ignore href="#step-3-deploy-the-microservices-zip" aria-label="Link to this section">#</a></h2>
 <p>Copy <code>liferay-forums-etc-spring-boot.zip</code> into <code>&lt;liferay-home&gt;/osgi/client-extensions</code>.</p>
 <p>Liferay registers the microservice and writes its credentials to <code>&lt;liferay-home&gt;/routes/default</code>. Liferay doesn't run the microservice itself; the next step starts it.</p>
-<h2 id="step-4-start-the-microservice">Step 4: Start the Microservice<a class="anchor" href="#step-4-start-the-microservice" aria-label="Link to this section">#</a></h2>
+<h2 id="step-4-start-the-microservice">Step 4: Start the Microservice<a class="anchor" data-pagefind-ignore href="#step-4-start-the-microservice" aria-label="Link to this section">#</a></h2>
 <p>The microservice must run whenever Liferay runs: posting, notifications, and moderation all depend on it. Run it on the Liferay machine if you can; it's simpler.</p>
-<h3 id="on-the-liferay-machine">On the Liferay Machine<a class="anchor" href="#on-the-liferay-machine" aria-label="Link to this section">#</a></h3>
+<h3 id="on-the-liferay-machine">On the Liferay Machine<a class="anchor" data-pagefind-ignore href="#on-the-liferay-machine" aria-label="Link to this section">#</a></h3>
 <ol><li>Unzip <code>liferay-forums-etc-spring-boot.zip</code> into a folder of your choice, such as <code>/opt/liferay-forums</code>.</li><li><p>From that folder, start it, with <code>LIFERAY_HOME</code> set to the Liferay installation folder. It finds Liferay's address and its credentials there, so there's nothing to configure.</p>
 <p>On Linux:</p>
 <pre><code class="language-bash">LIFERAY_HOME=/opt/liferay ./start.sh</code></pre>
@@ -76,13 +76,13 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target</code></pre>
 <p>Then run <code>sudo systemctl enable --now liferay-forums</code>.</p>
-<h3 id="on-another-machine">On Another Machine<a class="anchor" href="#on-another-machine" aria-label="Link to this section">#</a></h3>
+<h3 id="on-another-machine">On Another Machine<a class="anchor" data-pagefind-ignore href="#on-another-machine" aria-label="Link to this section">#</a></h3>
 <p>Liferay always calls the microservice at <code>localhost:58081</code>. To run the microservice on another machine, fill in its <code>application.properties</code> with Liferay's address and the microservice's credentials, and forward port <code>58081</code> on the Liferay machine to it. The README describes both, step by step: <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums#option-2-on-another-machine">Option 2: On Another Machine</a>.</p>
-<h2 id="step-5-set-up-email-notifications">Step 5: Set Up Email Notifications<a class="anchor" href="#step-5-set-up-email-notifications" aria-label="Link to this section">#</a></h2>
+<h2 id="step-5-set-up-email-notifications">Step 5: Set Up Email Notifications<a class="anchor" data-pagefind-ignore href="#step-5-set-up-email-notifications" aria-label="Link to this section">#</a></h2>
 <p>The batch created two email templates with a placeholder sender address. Set real addresses, then restart the microservice, before members get email. See <a href="../administering/email-notifications.html">Email Notifications</a>.</p>
-<h2 id="step-6-create-the-forum-sites">Step 6: Create the Forum Sites<a class="anchor" href="#step-6-create-the-forum-sites" aria-label="Link to this section">#</a></h2>
+<h2 id="step-6-create-the-forum-sites">Step 6: Create the Forum Sites<a class="anchor" data-pagefind-ignore href="#step-6-create-the-forum-sites" aria-label="Link to this section">#</a></h2>
 <p>Continue with <a href="creating-sites.html">Creating Forum Sites</a>.</p>
-<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<h2 id="related-information">Related Information<a class="anchor" data-pagefind-ignore href="#related-information" aria-label="Link to this section">#</a></h2>
 <ul><li><a href="checking.html">Checking the Installation</a></li><li><a href="./">Installing</a></li></ul>
     </article>
     <nav class="pager" aria-label="Previous and next"><a class="prev" href="./"><span>Previous</span>Installing</a><a class="next" href="docker.html"><span>Next</span>Liferay Self-Hosted (Docker)</a></nav>

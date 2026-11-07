@@ -366,3 +366,12 @@ section.alt { background: var(--bg-alt); }
   .search-btn span { display: none; }
   .search-dialog { margin-top: 16px; max-height: calc(100vh - 32px); }
 }
+.search-dialog .pagefind-ui__search-input { font-family: var(--font); font-weight: 600; color: var(--text); background: var(--bg-alt); }
+.search-dialog .pagefind-ui__search-input::placeholder { color: var(--muted); opacity: 1; }
+.search-dialog .pagefind-ui__search-clear { font-family: var(--font); color: var(--muted); background: transparent; border: 0; }
+.search-dialog .pagefind-ui__search-clear:hover { color: var(--text); }
+.search-dialog .pagefind-ui__result-link { color: var(--text); text-decoration: none; }
+.search-dialog .pagefind-ui__result-link:hover { color: var(--blue); text-decoration: underline; }
+.search-dialog .pagefind-ui__result-excerpt { color: var(--muted); }
+.search-dialog mark { background: rgba(11, 95, 255, .16); color: var(--text); border-radius: 3px; padding: 0 2px; }
+@media (prefers-color-scheme: dark) { .search-dialog mark { background: rgba(111, 160, 255, .28); } }

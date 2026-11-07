@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../../assets/site.css?v=sh1">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=sh2">
   <script src="../../../../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
@@ -41,9 +41,9 @@
 <p>Liferay and PostgreSQL run in containers, and the forum's microservice runs in a third container that shares Liferay's network, so Liferay reaches it at <code>localhost:58081</code> as on a server. You copy the forum's zips into the running Liferay container, in the same order as on a server. These steps were tested with the <code>liferay/dxp:2026.q1.4-lts</code> image.</p>
 <div class="callout callout-important"><p class="callout-title">Important</p><p>You need Docker. Run the commands from a folder that holds the release's three zips, downloaded from the <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">release</a>.</p></div>
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#step-1-add-the-liferay-fixes">Step 1: Add the Liferay Fixes</a></li><li><a href="#step-2-start-postgresql-and-liferay">Step 2: Start PostgreSQL and Liferay</a></li><li><a href="#step-3-deploy-the-batch">Step 3: Deploy the Batch</a></li><li><a href="#step-4-deploy-the-microservices-zip">Step 4: Deploy the Microservice's Zip</a></li><li><a href="#step-5-start-the-microservice">Step 5: Start the Microservice</a></li><li><a href="#step-6-set-up-email-notifications">Step 6: Set Up Email Notifications</a></li><li><a href="#step-7-create-the-forum-sites">Step 7: Create the Forum Sites</a></li><li><a href="#day-to-day">Day to Day</a></li><li><a href="#related-information">Related Information</a></li></ul></nav>
-<h2 id="step-1-add-the-liferay-fixes">Step 1: Add the Liferay Fixes<a class="anchor" href="#step-1-add-the-liferay-fixes" aria-label="Link to this section">#</a></h2>
+<h2 id="step-1-add-the-liferay-fixes">Step 1: Add the Liferay Fixes<a class="anchor" data-pagefind-ignore href="#step-1-add-the-liferay-fixes" aria-label="Link to this section">#</a></h2>
 <p>Create a folder named <code>patching</code> next to the zips, and put the hotfix from Liferay Support in it. Liferay installs it each time its container starts. Without a hotfix, leave the folder empty, and use the <a href="./#without-a-hotfix">workarounds</a>.</p>
-<h2 id="step-2-start-postgresql-and-liferay">Step 2: Start PostgreSQL and Liferay<a class="anchor" href="#step-2-start-postgresql-and-liferay" aria-label="Link to this section">#</a></h2>
+<h2 id="step-2-start-postgresql-and-liferay">Step 2: Start PostgreSQL and Liferay<a class="anchor" data-pagefind-ignore href="#step-2-start-postgresql-and-liferay" aria-label="Link to this section">#</a></h2>
 <ol><li><p>Create a network for the containers, and start PostgreSQL. Replace <code>change-me</code> with a password of your own, here and in the next command:</p>
 <pre><code class="language-bash">docker network create forums
 docker run -d --name forums-postgres --network forums --restart unless-stopped \
@@ -59,15 +59,15 @@ docker run -d --name forums-postgres --network forums --restart unless-stopped \
   -v forums-liferay-routes:/opt/liferay/routes \
   -v "$PWD/patching:/mnt/liferay/patching" \
   liferay/dxp:2026.q1.4-lts</code></pre></li><li>Wait until Liferay has started: <code>docker logs forums-liferay</code> shows <code>Server startup in</code>. This takes a few minutes. Liferay is then at <code>http://localhost:8080</code>.</li></ol>
-<h2 id="step-3-deploy-the-batch">Step 3: Deploy the Batch<a class="anchor" href="#step-3-deploy-the-batch" aria-label="Link to this section">#</a></h2>
+<h2 id="step-3-deploy-the-batch">Step 3: Deploy the Batch<a class="anchor" data-pagefind-ignore href="#step-3-deploy-the-batch" aria-label="Link to this section">#</a></h2>
 <ol><li><p>Copy the batch into the running container:</p>
 <pre><code class="language-bash">docker cp liferay-forums-batch.zip forums-liferay:/opt/liferay/osgi/client-extensions/</code></pre></li><li><p>Follow the log, and wait until it shows five lines containing <code>Finished batch engine import task</code> after the copy, then press <strong>Ctrl+C</strong>:</p>
 <pre><code class="language-bash">docker logs -f --since 2m forums-liferay | grep "Finished batch engine import task"</code></pre></li></ol>
 <div class="callout callout-warning"><p class="callout-title">Warning</p><p>Liferay also logs a few of these lines while it starts. Only count the ones after the copy, and don't continue until all five have finished.</p></div>
-<h2 id="step-4-deploy-the-microservices-zip">Step 4: Deploy the Microservice's Zip<a class="anchor" href="#step-4-deploy-the-microservices-zip" aria-label="Link to this section">#</a></h2>
+<h2 id="step-4-deploy-the-microservices-zip">Step 4: Deploy the Microservice's Zip<a class="anchor" data-pagefind-ignore href="#step-4-deploy-the-microservices-zip" aria-label="Link to this section">#</a></h2>
 <pre><code class="language-bash">docker cp liferay-forums-etc-spring-boot.zip forums-liferay:/opt/liferay/osgi/client-extensions/</code></pre>
 <p>Wait until <code>docker logs forums-liferay</code> shows <code>STARTED liferayforumsetcspringboot</code>.</p>
-<h2 id="step-5-start-the-microservice">Step 5: Start the Microservice<a class="anchor" href="#step-5-start-the-microservice" aria-label="Link to this section">#</a></h2>
+<h2 id="step-5-start-the-microservice">Step 5: Start the Microservice<a class="anchor" data-pagefind-ignore href="#step-5-start-the-microservice" aria-label="Link to this section">#</a></h2>
 <ol><li><p>Build the microservice's image from the <code>Dockerfile</code> in its zip:</p>
 <pre><code class="language-bash">mkdir microservice
 unzip liferay-forums-etc-spring-boot.zip -d microservice
@@ -78,14 +78,14 @@ docker build -t liferay-forums-microservice microservice</code></pre></li><li><p
   -e LIFERAY_ROUTES_DXP=/opt/liferay/routes/default/dxp \
   liferay-forums-microservice</code></pre></li><li><p>Check that Liferay reaches it. This prints <code>READY</code>:</p>
 <pre><code class="language-bash">docker exec forums-liferay curl -s http://localhost:58081/ready</code></pre></li></ol>
-<h2 id="step-6-set-up-email-notifications">Step 6: Set Up Email Notifications<a class="anchor" href="#step-6-set-up-email-notifications" aria-label="Link to this section">#</a></h2>
+<h2 id="step-6-set-up-email-notifications">Step 6: Set Up Email Notifications<a class="anchor" data-pagefind-ignore href="#step-6-set-up-email-notifications" aria-label="Link to this section">#</a></h2>
 <p>The batch created two email templates with a placeholder sender address. Set real addresses, then restart the microservice with <code>docker restart forums-microservice</code>, before members get email. See <a href="../administering/email-notifications.html">Email Notifications</a>.</p>
-<h2 id="step-7-create-the-forum-sites">Step 7: Create the Forum Sites<a class="anchor" href="#step-7-create-the-forum-sites" aria-label="Link to this section">#</a></h2>
+<h2 id="step-7-create-the-forum-sites">Step 7: Create the Forum Sites<a class="anchor" data-pagefind-ignore href="#step-7-create-the-forum-sites" aria-label="Link to this section">#</a></h2>
 <p>Continue with <a href="creating-sites.html">Creating Forum Sites</a>.</p>
-<h2 id="day-to-day">Day to Day<a class="anchor" href="#day-to-day" aria-label="Link to this section">#</a></h2>
+<h2 id="day-to-day">Day to Day<a class="anchor" data-pagefind-ignore href="#day-to-day" aria-label="Link to this section">#</a></h2>
 <ul><li><strong>After Liferay's container restarts,</strong> restart the microservice's container too, since it shares Liferay's network: <code>docker restart forums-microservice</code>.</li><li><p><strong>The zips live in Liferay's container.</strong> If you remove the container and start a new one, for example to change a setting or the image, the new container has none of the forum's zips. Copy in the batch, then the microservice's zip, as in Steps 3 and 4. Then remove the microservice's container and start it again with the <code>docker run</code> command of Step 5: it was tied to the old Liferay container, so restarting it fails.</p>
 <pre><code class="language-bash">docker rm -f forums-microservice</code></pre></li><li><strong>Logs:</strong> <code>docker logs forums-liferay</code> and <code>docker logs forums-microservice</code>.</li></ul>
-<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<h2 id="related-information">Related Information<a class="anchor" data-pagefind-ignore href="#related-information" aria-label="Link to this section">#</a></h2>
 <ul><li><a href="checking.html">Checking the Installation</a></li><li><a href="./">Installing</a></li></ul>
     </article>
     <nav class="pager" aria-label="Previous and next"><a class="prev" href="tomcat.html"><span>Previous</span>Liferay Self-Hosted (Tomcat)</a><a class="next" href="paas.html"><span>Next</span>On Liferay PaaS</a></nav>

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../../assets/site.css?v=sh1">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=sh2">
   <script src="../../../../assets/site-chrome.js?v=2" defer></script>
 </head>
 <body>
@@ -41,15 +41,15 @@
 <p>Each forum is a Liferay site, created by a site initializer when it's deployed into a running Liferay. A site initializer creates exactly one site, so each forum site needs its own. The batch and the microservice are shared by all forum sites, and deployed once.</p>
 <div class="callout callout-note"><p class="callout-title">Note</p><p>The forum can't be added to a site that already exists, because Liferay sets up a site's pages only when it creates the site. Create a forum site instead, and link to it from your existing site.</p></div>
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#one-site">One Site</a></li><li><a href="#several-sites">Several Sites</a><ul><li><a href="#step-1-make-a-site-initializer-for-each-site">Step 1: Make a Site Initializer for Each Site</a></li><li><a href="#step-2-deploy-it-once">Step 2: Deploy It Once</a></li><li><a href="#a-shortcut-on-liferay-self-hosted">A Shortcut on Liferay Self-Hosted</a></li></ul></li><li><a href="#related-information">Related Information</a></li></ul></nav>
-<h2 id="one-site">One Site<a class="anchor" href="#one-site" aria-label="Link to this section">#</a></h2>
+<h2 id="one-site">One Site<a class="anchor" data-pagefind-ignore href="#one-site" aria-label="Link to this section">#</a></h2>
 <p><code>liferay-forums-site-initializer.zip</code> creates the site <strong>FORUMS</strong>, at <code>/web/forums</code>.</p>
 <ul><li><strong>Liferay Self-Hosted (Tomcat):</strong> copy the zip into <code>&lt;liferay-home&gt;/osgi/client-extensions</code>. Liferay creates the site in about a minute. Once it exists, remove the zip again.</li><li><p><strong>Liferay Self-Hosted (Docker):</strong> copy the zip into the container, wait for the site, then remove the zip:</p>
 <pre><code class="language-bash">docker cp liferay-forums-site-initializer.zip forums-liferay:/opt/liferay/osgi/client-extensions/
 docker exec forums-liferay rm /opt/liferay/osgi/client-extensions/liferay-forums-site-initializer.zip</code></pre></li><li><strong>Liferay PaaS and Liferay SaaS:</strong> the install creates it; see <a href="paas.html">On Liferay PaaS</a> or <a href="saas.html">On Liferay SaaS</a>.</li></ul>
 <p>Removing the zip doesn't change the site. It keeps the site initializer from creating the site again, empty, if the site is ever deleted.</p>
-<h2 id="several-sites">Several Sites<a class="anchor" href="#several-sites" aria-label="Link to this section">#</a></h2>
+<h2 id="several-sites">Several Sites<a class="anchor" data-pagefind-ignore href="#several-sites" aria-label="Link to this section">#</a></h2>
 <p>Before you add sites, see <a href="../administering/several-sites.html">Running Several Forum Sites</a>, in particular about moderators.</p>
-<h3 id="step-1-make-a-site-initializer-for-each-site">Step 1: Make a Site Initializer for Each Site<a class="anchor" href="#step-1-make-a-site-initializer-for-each-site" aria-label="Link to this section">#</a></h3>
+<h3 id="step-1-make-a-site-initializer-for-each-site">Step 1: Make a Site Initializer for Each Site<a class="anchor" data-pagefind-ignore href="#step-1-make-a-site-initializer-for-each-site" aria-label="Link to this section">#</a></h3>
 <p>You copy the forum's site initializer project once for each site, and give each copy names of its own.</p>
 <ol><li>Download <strong>Source code (zip)</strong> from the <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">release</a>, and unzip it.</li><li>Copy <code>client-extensions/liferay-forums-site-initializer</code> to a name of its own in the same folder, for example <code>client-extensions/liferay-forums-site-initializer-acme</code>. On Liferay PaaS, copy it into <code>liferay/client-extensions</code> in your PaaS project's repository instead.</li><li><p>In the copy, replace <code>client-extension.yaml</code> with one that names the new site. Every name in it must be unique to the copy: the two keys, the OAuth application, and the site's external reference code. For a site named <em>Acme</em>:</p>
 <pre><code class="language-yaml">liferay-forums-site-initializer-acme:
@@ -68,11 +68,11 @@ liferay-forums-site-initializer-acme-oahs:
 <p>Liferay builds the site's address from <code>siteName</code>: this site is served at <code>/web/acme</code>.</p></li><li><p>Except on Liferay PaaS, which builds the project itself, build the copy from the unzipped folder. You need Java 17 or later:</p>
 <pre><code class="language-bash">./gradlew :client-extensions:liferay-forums-site-initializer-acme:build</code></pre>
 <p>The zip is <code>client-extensions/liferay-forums-site-initializer-acme/dist/liferay-forums-site-initializer-acme.zip</code>.</p></li></ol>
-<h3 id="step-2-deploy-it-once">Step 2: Deploy It Once<a class="anchor" href="#step-2-deploy-it-once" aria-label="Link to this section">#</a></h3>
+<h3 id="step-2-deploy-it-once">Step 2: Deploy It Once<a class="anchor" data-pagefind-ignore href="#step-2-deploy-it-once" aria-label="Link to this section">#</a></h3>
 <ul><li><strong>Liferay Self-Hosted (Tomcat or Docker):</strong> deploy each zip as in <a href="#one-site">One Site</a>, then remove it once its site exists.</li><li><strong>Liferay PaaS:</strong> push, and deploy the build. Restart the <code>liferayforumsetcspringboot</code> service, and check the site. Then delete the copy's folder from your repository, push, deploy that build, and restart the service again. Its job would otherwise run again at every deploy, and reset the site's address. See <a href="paas.html#later-deploys">Later Deploys</a>.</li><li><p><strong>Liferay SaaS:</strong> deploy the zip, and never deploy it again: its job would reset the site's address.</p>
 <pre><code class="language-bash">lcp deploy -p &lt;project&gt;-&lt;environment&gt; --extension client-extensions/liferay-forums-site-initializer-acme/dist/liferay-forums-site-initializer-acme.zip</code></pre></li></ul>
 <p>Then check each new site at its address, and post a reply there.</p>
-<h3 id="a-shortcut-on-liferay-self-hosted">A Shortcut on Liferay Self-Hosted<a class="anchor" href="#a-shortcut-on-liferay-self-hosted" aria-label="Link to this section">#</a></h3>
+<h3 id="a-shortcut-on-liferay-self-hosted">A Shortcut on Liferay Self-Hosted<a class="anchor" data-pagefind-ignore href="#a-shortcut-on-liferay-self-hosted" aria-label="Link to this section">#</a></h3>
 <p>On Liferay Self-Hosted (Tomcat or Docker), the <code>generate-site-initializer-zips.sh</code> script, in the release's <strong>Source code</strong> download, makes the copies from <code>liferay-forums-site-initializer.zip</code> without building them. It runs on Linux, with Bash, <code>unzip</code>, and <code>zip</code>. Don't use its zips on Liferay PaaS or SaaS: they all share one OAuth application, which works only when they're deployed to Liferay itself.</p>
 <ol><li>Put the script in a folder with <code>liferay-forums-site-initializer.zip</code>.</li><li><p>Edit the <code>SITES</code> list near the top of the script. Each entry maps the site's external reference code to its name:</p>
 <pre><code class="language-bash">declare -A SITES=(
@@ -81,7 +81,7 @@ liferay-forums-site-initializer-acme-oahs:
 )</code></pre></li><li><p>Run it. It writes one zip per site to the <code>out</code> folder:</p>
 <pre><code class="language-bash">bash generate-site-initializer-zips.sh</code></pre></li><li>Deploy the generated zips as in <a href="#one-site">One Site</a>, then remove them once the sites exist.</li></ol>
 <p>A site named <em>Acme, Inc. site</em> is served at <code>/web/acme-inc.-site</code>. To use another address, choose a different name, or change the site's friendly URL in <em>Site Settings</em> after it's created.</p>
-<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<h2 id="related-information">Related Information<a class="anchor" data-pagefind-ignore href="#related-information" aria-label="Link to this section">#</a></h2>
 <ul><li><a href="checking.html">Checking the Installation</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li><li><a href="https://github.com/LGSAPAC/lfrgs-liferay-forums#option-2-several-sites">Option 2: Several Sites</a> in the README, with all the script's options</li></ul>
     </article>
     <nav class="pager" aria-label="Previous and next"><a class="prev" href="saas.html"><span>Previous</span>On Liferay SaaS</a><a class="next" href="checking.html"><span>Next</span>Checking the Installation</a></nav>
