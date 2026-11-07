@@ -13,13 +13,12 @@ The website for Liferay Community APAC: <https://liferay-community-apac.github.i
 | App cards generator | `scripts/build-apps.mjs` | Writes the app cards and sitemap lines from `data/apps.json`. |
 | Link checker | `scripts/check-links.mjs` | Fails the publish if a link or `#anchor` is broken. |
 | Publishing | `.github/workflows/publish-site.yml` | The shared publishing workflow: build, link check, search index (Pagefind), publish. This site and every app's docs repository use it. |
-| App docs template | `templates/app-docs/` | A starting point for an app's docs in its own repository. See its README. |
 
-`scripts/`, `templates/` and this README aren't published.
+`scripts/` and this README aren't published. App docs live in their own repositories, started from the [app docs template](https://github.com/Liferay-Community-APAC/app-docs-template), such as [liferay-forums](https://github.com/Liferay-Community-APAC/liferay-forums).
 
 ## Add an app
 
-1. Give the app docs in its own repository, starting from [`templates/app-docs`](templates/app-docs/README.md).
+1. Give the app docs in its own repository, created from the [app docs template](https://github.com/Liferay-Community-APAC/app-docs-template) (**Use this template**).
 2. Add an entry for it to `data/apps.json`:
 
     ```json
@@ -36,12 +35,13 @@ The website for Liferay Community APAC: <https://liferay-community-apac.github.i
       "repo": "https://github.com/Liferay-Community-APAC/my-app",
       "marketplace": "https://marketplace.liferay.com/p/my-app",
       "search": "my-app/pagefind/",
-      "sitemap": "my-app/sitemap.xml"
+      "sitemap": "my-app/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/my-app"
     }
     ```
 
-    `image`, `marketplace`, `search` and `sitemap` are optional. Leave `search` and `sitemap` as `null`
-    for an app whose docs are part of this site, such as Liferay Forums today.
+    `image`, `marketplace`, `search`, `sitemap` and `docsRepo` are optional. Leave `search` and `sitemap` as
+    `null` for an app whose docs are part of this site rather than published from their own repository.
 3. Run `node scripts/build-apps.mjs` and commit the updated pages. (Publishing runs it too, so the live site always matches the list.)
 
 ## Preview locally
