@@ -1,0 +1,32 @@
+# Settings for this app's docs. Change the four marked lines for a new app.
+app_name: My App                                  # change: the app's name
+description: Documentation for My App, a Liferay DXP app.   # change: one sentence for search results
+baseurl: /my-app                                  # change: "/" + this repository's name
+footer_note: My App is available under the MIT license.     # change, or remove the line
+
+# Where the docs sit in the knowledge base (as in the main site's data/apps.json).
+category_id: marketplace-apps
+category_name: Marketplace apps
+
+url: https://liferay-community-apac.github.io
+lang: en
+# The main site the header, footer, styles and search come from. Leave it empty on the live site;
+# set it to the full address (https://liferay-community-apac.github.io) to preview the docs on their own.
+main_site: ""
+
+plugins:
+  - jekyll-sitemap      # writes sitemap.xml; the main site lists it in robots.txt via data/apps.json
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+  hard_wrap: false
+  syntax_highlighter_opts:
+    disable: true
+
+defaults:
+  - scope: { path: "" }
+    values: { layout: default }
+
+exclude: [README.md, Gemfile, Gemfile.lock, vendor]
