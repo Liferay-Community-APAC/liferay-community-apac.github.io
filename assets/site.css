@@ -403,10 +403,12 @@ section.alt { background: var(--bg-alt); }
 .prose table th { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--bg-alt); white-space: nowrap; }
 .prose .versions { display: table; }
 
-/* Phone menu (shared header) */
+/* Menu button (shared header): below 1024px the menu links fold into a panel, so the header never wraps */
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.nav a, .search-btn, .lang a, .lang span, .brand, .brand small { white-space: nowrap; }
 .menu-btn { display: none; }
-@media (max-width: 720px) {
+@media (max-width: 1023px) {
+  .nav { display: none; }
   .menu-btn {
     display: inline-grid; place-items: center; width: 36px; height: 34px; margin-left: auto; padding: 0;
     border-radius: 10px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .06); color: #d6e3ff; cursor: pointer;

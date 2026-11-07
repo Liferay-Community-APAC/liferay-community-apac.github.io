@@ -84,7 +84,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=m2">
+  <link rel="stylesheet" href="../assets/site.css?v=m3">
   <script src="../assets/site-chrome.js?v=6" defer></script>
 </head>
 <body>
@@ -173,32 +173,36 @@
           <h3>Liferay DXP で作るネイティブ iOS アプリ</h3>
           <p>Liferay DXP 2026.Q1 のヘッドレス REST API だけで構築する SwiftUI アプリの、ステップバイステップのチュートリアルとリファレンス実装です。OAuth 2.0 と PKCE でサインインし、プロフィール、住所、カスタム Liferay オブジェクトを管理します。サードパーティのライブラリは使用しません。一部のみ検証済みです。</p>
           <span class="meta">全 12 章 · Swift · SwiftUI · OAuth 2.0</span>
-          <a class="more" href="https://github.com/LGSAPAC/lfrgs-iOS-mobile-native-bootstrap">チュートリアルを始める →</a>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">チュートリアルを始める →</a>
         </article>
         <article class="card resource">
           <span class="tag">チュートリアル</span>
           <h3>SharePoint Online から Liferay DXP への移行</h3>
-          <p>稼働中の SharePoint Online サイトを Liferay DXP 2026.Q3 と新しい CMS へ移行する、全 11 章のハンズオンチュートリアルと実用ツールです。MCP サーバーを使い、AI エージェントが移行元の棚卸し、マッピングの計画、移行結果の確認を支援します。</p>
-          <span class="meta">全 11 章 · Python · MCP</span>
-          <a class="more" href="https://github.com/LGSAPAC/lfrgs-sharepoint-to-liferay-migration-tutorial">チュートリアルを始める →</a>
+          <p>稼働中の SharePoint Online サイト（またはオンプレミスの SharePoint Server）を Liferay DXP 2026.Q3 と新しい CMS へ移行する、全 14 章のハンズオンチュートリアルと実用ツールです。MCP サーバーを使い、AI エージェントが移行元の棚卸し、マッピングの計画、移行結果の確認を支援します。</p>
+          <span class="meta">全 14 章 · Python · MCP</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">チュートリアルを始める →</a>
         </article>
         <article class="card resource">
           <span class="tag">チュートリアル</span>
           <h3>Amazon EC2 上でのセルフホスト型 Liferay DXP</h3>
           <p>Liferay DXP を Amazon EC2 上で、シングル構成または高可用性構成、Docker または Tomcat バンドルで構築するステップバイステップガイドです。インフラは Terraform で構築し、コードは GitHub Actions でデプロイします。ドラフト版で、AWS での検証は一部のみ完了しています。</p>
           <span class="meta">全 18 セクション · Terraform · Docker · GitHub Actions</span>
-          <a class="more" href="https://github.com/LGSAPAC/lfrgs-sh-aws-ec2-tutorial">チュートリアルを始める →</a>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial">チュートリアルを始める →</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">サンプルコード</span>
+          <h3>EC2 向け Liferay DXP サンプルワークスペース</h3>
+          <p>EC2 ガイドと対になるサンプルです。OSGi モジュール、CSS クライアントエクステンション、React クライアントエクステンションを含む DXP 2026.Q3 の Liferay Workspace と、イメージをビルドして Amazon ECR にプッシュし、EC2 インスタンスへデプロイする GitHub Actions を備えています。ドラフト版です。</p>
+          <span class="meta">Liferay Workspace · React · GitHub Actions</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-sample-workspace">GitHub で見る →</a>
         </article>
         <article class="card resource">
           <span class="tag">ツール</span>
           <h3>Liferay アップグレードレポートスクリプト</h3>
-          <p>Liferay のスクリプトコンソールから実行し、現在の DXP バージョンのアップグレード準備状況レポートを取得できる Groovy スクリプトです。</p>
-          <a class="more" href="https://github.com/LGSAPAC/liferay-upgrade-report-script">GitHub で見る →</a>
-        </article>
-        <article class="card resource soon">
-          <span class="tag">近日公開</span>
-          <h3>その他のチュートリアルとサンプルコード</h3>
-          <p>お客様の Liferay ワークスペースで再利用できるステップバイステップのチュートリアルやサンプルコードを、順次公開予定です。</p>
+          <p>お使いのバージョン（Liferay Portal CE 6.1 から DXP 2026.Q3 まで）に合った読み取り専用の Groovy スクリプトを選び、スクリプトコンソールでアップグレード準備状況レポートを取得する手順を案内する Web ページです。日本語を含む 7 言語に対応しています。</p>
+          <span class="meta">CE 6.1〜DXP 2026.Q3 · Groovy · 7 言語</span>
+          <a class="more" href="https://liferay-community-apac.github.io/liferay-upgrade-report-script/?lang=ja">ツールを開く →</a>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/liferay-upgrade-report-script">GitHub で見る →</a>
         </article>
       </div>
       <div class="subhead">
