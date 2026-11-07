@@ -1,5 +1,5 @@
 {
-  "$comment": "One entry per app. scripts/build-apps.mjs turns this list into the app cards on the homepages and the knowledge base, the sitemap lines in robots.txt, and the list of search indexes the site search merges. Run `node scripts/build-apps.mjs` after editing; the publishing workflow also runs it.",
+  "$comment": "One entry per app. scripts/build-apps.mjs turns this list into the app showcases (homepages and the Marketplace apps page), the app cards (homepages and the knowledge base), the sitemap lines in robots.txt, and the list of search indexes the site search merges. tagline, highlights, screenshots and download feed the showcases. Run `node scripts/build-apps.mjs` after editing; the publishing workflow also runs it.",
   "categories": [
     {
       "id": "marketplace-apps",
@@ -21,11 +21,114 @@
       "id": "liferay-forums",
       "category": "marketplace-apps",
       "name": "Liferay Forums",
+      "tagline": {
+        "en": "Modern discussion forums for Liferay DXP",
+        "ja": "Liferay DXP のためのモダンなディスカッションフォーラム",
+        "zh": "面向 Liferay DXP 的现代讨论论坛"
+      },
       "summary": {
         "en": "Discussion forums for Liferay DXP. Members ask questions, share answers and follow topics, while moderators keep the community healthy.",
         "ja": "Liferay DXP 向けのディスカッションフォーラムです。メンバーは質問や回答を共有し、トピックをフォローできます。モデレーターはコミュニティを健全に保ちます。",
         "zh": "面向 Liferay DXP 的讨论论坛。成员可以提问、分享答案并关注话题，版主负责维护社区秩序。"
       },
+      "highlights": [
+        {
+          "title": {
+            "en": "Discussions and questions",
+            "ja": "ディスカッションと質問",
+            "zh": "讨论与提问"
+          },
+          "text": {
+            "en": "Post a topic as an open discussion, or as a question members can mark as solved.",
+            "ja": "トピックを自由なディスカッションとして、または解決済みにできる質問として投稿できます。",
+            "zh": "可将话题发布为开放讨论，或发布为可标记为已解决的问题。"
+          }
+        },
+        {
+          "title": {
+            "en": "Mentions and subscriptions",
+            "ja": "メンションと購読",
+            "zh": "提及与订阅"
+          },
+          "text": {
+            "en": "Mention members with @, and get web and email notifications for the topics you follow.",
+            "ja": "@ でメンバーにメンションでき、フォローしているトピックの Web 通知とメール通知を受け取れます。",
+            "zh": "使用 @ 提及成员，并接收所关注话题的网页和邮件通知。"
+          }
+        },
+        {
+          "title": {
+            "en": "Moderation",
+            "ja": "モデレーション",
+            "zh": "内容审核"
+          },
+          "text": {
+            "en": "Members report content; moderators validate reports, lock or delete topics, and ban authors per site.",
+            "ja": "メンバーがコンテンツを報告し、モデレーターが報告の確認、トピックのロックや削除、サイトごとの投稿者の利用停止を行えます。",
+            "zh": "成员可以举报内容，版主可以审核举报、锁定或删除话题，并按站点封禁作者。"
+          }
+        },
+        {
+          "title": {
+            "en": "Search",
+            "ja": "検索",
+            "zh": "搜索"
+          },
+          "text": {
+            "en": "Find topics with facets for category, tag, author and date.",
+            "ja": "カテゴリー、タグ、投稿者、日付のファセットでトピックを検索できます。",
+            "zh": "按类别、标签、作者和日期等维度筛选查找话题。"
+          }
+        },
+        {
+          "title": {
+            "en": "Categories",
+            "ja": "カテゴリー",
+            "zh": "类别"
+          },
+          "text": {
+            "en": "Organize topics into categories, with one level of subcategories.",
+            "ja": "トピックをカテゴリーと 1 階層のサブカテゴリーで整理できます。",
+            "zh": "将话题按类别和一级子类别进行组织。"
+          }
+        },
+        {
+          "title": {
+            "en": "Voting",
+            "ja": "投票",
+            "zh": "投票"
+          },
+          "text": {
+            "en": "Upvote or downvote topics and replies.",
+            "ja": "トピックと返信に賛成票・反対票を投じられます。",
+            "zh": "可以对话题和回复点赞或点踩。"
+          }
+        },
+        {
+          "title": {
+            "en": "Several sites",
+            "ja": "複数サイト",
+            "zh": "多个站点"
+          },
+          "text": {
+            "en": "Run separate forums, each with its own categories, topics and bans.",
+            "ja": "カテゴリー、トピック、利用停止をそれぞれ持つ独立したフォーラムを運営できます。",
+            "zh": "运行多个独立论坛，每个论坛都有自己的类别、话题和封禁设置。"
+          }
+        },
+        {
+          "title": {
+            "en": "13 languages",
+            "ja": "13 言語",
+            "zh": "13 种语言"
+          },
+          "text": {
+            "en": "Labels ship in 13 languages, including Japanese and Chinese.",
+            "ja": "日本語と中国語を含む 13 言語の表示ラベルが用意されています。",
+            "zh": "界面标签提供 13 种语言，包括日语和中文。"
+          }
+        }
+      ],
       "version": "1.0.0",
       "dxp": "Liferay DXP 2026.Q1 LTS",
       "docsLanguages": [
@@ -36,7 +139,34 @@
         "width": 1600,
         "height": 1075
       },
+      "screenshots": [
+        {
+          "src": "assets/apps/liferay-forums/discussions.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "Browse discussions by category, with replies, votes and solved questions at a glance."
+        },
+        {
+          "src": "assets/apps/liferay-forums/topic-solved.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "Mark the reply that answers a question as the solution."
+        },
+        {
+          "src": "assets/apps/liferay-forums/search.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "Search topics and narrow results by category, tag, author and date."
+        },
+        {
+          "src": "assets/apps/liferay-forums/moderation-pending.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "Review reported content in the moderation queue."
+        }
+      ],
       "docs": "liferay-forums/",
+      "download": "https://github.com/LGSAPAC/lfrgs-liferay-forums/releases",
       "repo": "https://github.com/LGSAPAC/lfrgs-liferay-forums",
       "marketplace": null,
       "search": "liferay-forums/pagefind/",

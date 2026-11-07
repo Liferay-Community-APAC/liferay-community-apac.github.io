@@ -34,8 +34,8 @@
   var STRINGS = {
     en: {
       home: '', brandSub: 'Community APAC', navLabel: 'Main',
-      nav: [['#how-we-work', 'Our sponsor'], ['#resources', 'Tutorials & code'], ['knowledge-base/', 'Knowledge base'],
-            ['#stay-updated', 'Stay updated'], ['#contact', 'Contact']],
+      nav: [['#how-we-work', 'Our sponsor'], ['#resources', 'Tutorials & code'], ['marketplace-apps/', 'Apps'], ['knowledge-base/', 'Knowledge base'],
+            ['#contact', 'Contact']],
       langLabel: 'Language', menu: 'Menu', search: 'Search', searchTitle: 'Search the site', close: 'Close',
       searchUnavailable: 'Search becomes available once the site is published.',
       footerBrand: 'Liferay Community APAC · Sponsored by Liferay Customer Success', footerLabel: 'Footer', marketplace: 'Liferay Community apps on Liferay Marketplace', 
@@ -45,8 +45,8 @@
     },
     ja: {
       home: 'ja/', brandSub: 'コミュニティ APAC', navLabel: 'メイン',
-      nav: [['#how-we-work', 'スポンサー'], ['#resources', 'チュートリアル'], ['#knowledge-base', 'ナレッジベース'],
-            ['#stay-updated', '最新情報'], ['#contact', 'お問い合わせ']],
+      nav: [['#how-we-work', 'スポンサー'], ['#resources', 'チュートリアル'], ['#marketplace-apps', 'アプリ'], ['#knowledge-base', 'ナレッジベース'],
+            ['#contact', 'お問い合わせ']],
       langLabel: '言語', menu: 'メニュー', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
       searchUnavailable: '検索はサイトの公開後に利用できます。',
       footerBrand: 'Liferay コミュニティ APAC · スポンサー：Liferay カスタマーサクセス', footerLabel: 'フッター', marketplace: 'Liferay Marketplace の Liferay Community アプリ', 
@@ -56,8 +56,8 @@
     },
     zh: {
       home: 'zh/', brandSub: '社区 APAC', navLabel: '主导航',
-      nav: [['#how-we-work', '赞助方'], ['#resources', '教程与代码'], ['#knowledge-base', '知识库'],
-            ['#stay-updated', '获取最新信息'], ['#contact', '联系我们']],
+      nav: [['#how-we-work', '赞助方'], ['#resources', '教程与代码'], ['#marketplace-apps', '应用'], ['#knowledge-base', '知识库'],
+            ['#contact', '联系我们']],
       langLabel: '语言', menu: '菜单', search: '搜索', searchTitle: '搜索本站', close: '关闭',
       searchUnavailable: '网站发布后即可使用搜索。',
       footerBrand: 'Liferay 社区 APAC · 赞助方：Liferay 客户成功团队', footerLabel: '页脚', marketplace: 'Liferay Marketplace 上的 Liferay Community 应用', 

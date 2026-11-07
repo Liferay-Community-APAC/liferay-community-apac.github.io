@@ -84,8 +84,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=m3">
-  <script src="../assets/site-chrome.js?v=6" defer></script>
+  <link rel="stylesheet" href="../assets/site.css?v=m5">
+  <script src="../assets/site-chrome.js?v=8" defer></script>
 </head>
 <body>
 
@@ -242,7 +242,44 @@
     </div>
   </section>
 
-  <section id="knowledge-base">
+  <section id="marketplace-apps">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Marketplace 应用</span>
+        <h2>适用于 Liferay DXP 的应用</h2>
+        <p>由 Liferay 亚太地区客户成功团队开发、为 Liferay DXP 增加功能的应用，每个应用都附有完整的用户指南。</p>
+      </div>
+      <div class="showcases">
+        <!-- apps:showcase marketplace-apps -->
+        <article class="showcase" id="liferay-forums">
+          <a class="showcase-shot" href="../liferay-forums/" tabindex="-1" aria-hidden="true">
+            <img src="../assets/kb/liferay-forums-home.png" alt="" width="1600" height="1075" loading="lazy">
+          </a>
+          <div class="showcase-body">
+            <span class="tag">Marketplace 应用</span>
+            <h3>Liferay Forums</h3>
+            <p class="showcase-tagline">面向 Liferay DXP 的现代讨论论坛</p>
+            <p>面向 Liferay DXP 的讨论论坛。成员可以提问、分享答案并关注话题，版主负责维护社区秩序。</p>
+            <ul class="showcase-points">
+              <li><strong>讨论与提问.</strong> 可将话题发布为开放讨论，或发布为可标记为已解决的问题。</li>
+              <li><strong>提及与订阅.</strong> 使用 @ 提及成员，并接收所关注话题的网页和邮件通知。</li>
+              <li><strong>内容审核.</strong> 成员可以举报内容，版主可以审核举报、锁定或删除话题，并按站点封禁作者。</li>
+              <li><strong>搜索.</strong> 按类别、标签、作者和日期等维度筛选查找话题。</li>
+            </ul>
+            <p class="meta">v1.0.0 · Liferay DXP 2026.Q1 LTS</p>
+            <div class="btns">
+              <a class="btn" href="../liferay-forums/">阅读指南（英文） →</a>
+              <a class="btn outline" href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">下载</a>
+            </div>
+            <a class="more" href="../marketplace-apps/#liferay-forums">全部功能与截图（英文）→</a>
+          </div>
+        </article>
+        <!-- /apps:showcase -->
+      </div>
+    </div>
+  </section>
+
+  <section id="knowledge-base" class="alt">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">知识库</span>
@@ -276,7 +313,7 @@
     </div>
   </section>
 
-  <section id="stay-updated" class="alt">
+  <section id="stay-updated">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">获取最新信息</span>
@@ -306,7 +343,7 @@
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="alt">
     <div class="wrap">
       <div class="cta">
         <div>
