@@ -24,4 +24,8 @@
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/"/>
   </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/knowledge-base/</loc>
+    <lastmod>2026-11-07</lastmod>
+  </url>
 </urlset>

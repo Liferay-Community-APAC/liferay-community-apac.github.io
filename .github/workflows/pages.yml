@@ -1,0 +1,21 @@
+# Publishes this site with the shared workflow next to this file.
+# In Settings → Pages, set "Source" to "GitHub Actions".
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    uses: ./.github/workflows/publish-site.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    with:
+      builder: static
+      exclude: scripts README.md
+      # Regenerate the app cards and sitemap lines from data/apps.json, so the live site always matches it.
+      prebuild: node scripts/build-apps.mjs "$SITE_DIR"

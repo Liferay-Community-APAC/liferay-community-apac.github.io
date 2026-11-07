@@ -84,28 +84,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=ug2">
+  <link rel="stylesheet" href="../assets/site.css?v=m1">
+  <script src="../assets/site-chrome.js?v=5" defer></script>
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="wrap">
     <a class="brand" href="./"><img class="brand-logo" src="../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>ユーザーグループ APAC</small></a>
-    <nav class="nav" aria-label="メイン">
-      <a href="#how-we-work">スポンサー</a>
-      <a href="#resources">チュートリアル</a>
-      <a href="#stay-updated">最新情報</a>
-      <a href="#contact">お問い合わせ</a>
-    </nav>
-    <div class="lang" aria-label="言語">
-      <a href="../" hreflang="en" lang="en">EN</a>
-      <span aria-current="true">日本語</span>
-      <a href="../zh/" hreflang="zh-Hans" lang="zh-CN">中文</a>
-    </div>
   </div>
 </header>
 
-<main>
+<main data-pagefind-body>
   <section class="hero">
     <div class="wrap">
       <div>
@@ -248,7 +238,41 @@
     </div>
   </section>
 
-  <section id="stay-updated">
+  <section id="knowledge-base">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">ナレッジベース</span>
+        <h2>アプリとツールのガイド</h2>
+        <p>Liferay DXP 向けに開発したアプリやツールのユーザーガイドです。インストール、利用、運用の方法を紹介します。</p>
+      </div>
+      <div class="subhead">
+        <h3>Marketplace アプリ</h3>
+        <p>Liferay DXP に機能を追加するアプリです。それぞれにドキュメントがあります。</p>
+      </div>
+      <div class="resources">
+        <!-- apps:cards marketplace-apps -->
+        <article class="card resource app">
+          <img class="app-shot" src="../assets/kb/liferay-forums-home.png" alt="" width="1600" height="1075" loading="lazy">
+          <span class="tag">Marketplace アプリ</span>
+          <h3>Liferay Forums</h3>
+          <p>Liferay DXP 向けのディスカッションフォーラムです。メンバーは質問や回答を共有し、トピックをフォローできます。モデレーターはコミュニティを健全に保ちます。</p>
+          <span class="meta">v1.0.0 · Liferay DXP 2026.Q1 LTS</span>
+          <a class="more" href="../liferay-forums/">ガイドを読む（英語）→</a>
+        </article>
+        <article class="card resource soon">
+          <span class="tag">近日公開</span>
+          <h3>その他のアプリも近日公開</h3>
+          <p>新しい Marketplace アプリとガイドを準備中です。</p>
+        </article>
+        <!-- /apps:cards -->
+      </div>
+      <div class="btns kb-all">
+        <a class="btn" href="../knowledge-base/">ナレッジベースを見る →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="stay-updated" class="alt">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">最新情報を受け取る</span>
@@ -278,7 +302,7 @@
     </div>
   </section>
 
-  <section id="contact" class="alt">
+  <section id="contact">
     <div class="wrap">
       <div class="cta">
         <div>
@@ -291,23 +315,7 @@
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-brand">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="../assets/liferay-logo-reversed.png">
-        <img src="../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
-      </picture>
-      <span>Liferay ユーザーグループ APAC · スポンサー：Liferay カスタマーサクセス</span>
-    </div>
-    <nav aria-label="フッター">
-      <a href="https://www.liferay.co.jp/">liferay.co.jp</a>
-      <a href="https://learn.liferay.com/">Liferay Learn</a>
-      <a href="https://github.com/Liferay-Community-APAC">GitHub</a>
-      <a href="../" hreflang="en" lang="en">English</a>
-      <a href="../zh/" hreflang="zh-Hans" lang="zh-CN">中文</a>
-    </nav>
-  </div>
+<footer class="site-footer" data-site-footer>
   <p class="wrap disclaimer">本サイトのチュートリアル、サンプルコード、ガイドは非公式のものであり、現状のまま提供されます。ご利用は自己責任でお願いします。</p>
 </footer>
 

@@ -1,0 +1,47 @@
+{
+  "$comment": "One entry per app. scripts/build-apps.mjs turns this list into the app cards on the homepages and the knowledge base, the sitemap lines in robots.txt, and the list of search indexes the site search merges. Run `node scripts/build-apps.mjs` after editing; the publishing workflow also runs it.",
+  "categories": [
+    {
+      "id": "marketplace-apps",
+      "name": {
+        "en": "Marketplace apps",
+        "ja": "Marketplace アプリ",
+        "zh": "Marketplace 应用"
+      },
+      "tag": {
+        "en": "Marketplace app",
+        "ja": "Marketplace アプリ",
+        "zh": "Marketplace 应用"
+      },
+      "comingSoon": true
+    }
+  ],
+  "apps": [
+    {
+      "id": "liferay-forums",
+      "category": "marketplace-apps",
+      "name": "Liferay Forums",
+      "summary": {
+        "en": "Discussion forums for Liferay DXP. Members ask questions, share answers and follow topics, while moderators keep the community healthy.",
+        "ja": "Liferay DXP 向けのディスカッションフォーラムです。メンバーは質問や回答を共有し、トピックをフォローできます。モデレーターはコミュニティを健全に保ちます。",
+        "zh": "面向 Liferay DXP 的讨论论坛。成员可以提问、分享答案并关注话题，版主负责维护社区秩序。"
+      },
+      "version": "1.0.0",
+      "dxp": "Liferay DXP 2026.Q1 LTS",
+      "docsLanguages": [
+        "en"
+      ],
+      "image": {
+        "src": "assets/kb/liferay-forums-home.png",
+        "width": 1600,
+        "height": 1075
+      },
+      "docs": "liferay-forums/",
+      "repo": "https://github.com/LGSAPAC/lfrgs-liferay-forums",
+      "marketplace": null,
+      "search": "liferay-forums/pagefind/",
+      "sitemap": "liferay-forums/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/liferay-forums"
+    }
+  ]
+}
