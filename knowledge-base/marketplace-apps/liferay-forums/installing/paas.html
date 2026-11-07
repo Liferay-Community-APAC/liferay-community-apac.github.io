@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On Liferay PaaS · Liferay Forums · Liferay User Group APAC</title>
+  <meta name="description" content="On Liferay PaaS, you add the forum&#x27;s three projects to your PaaS project&#x27;s repository, and deploy them with the rest of the project. Each runs as its own PaaS service: the batch and the forum site as jobs, and the microservice as a service that stays up.">
+  <meta property="og:title" content="On Liferay PaaS · Liferay Forums">
+  <meta property="og:description" content="On Liferay PaaS, you add the forum&#x27;s three projects to your PaaS project&#x27;s repository, and deploy them with the rest of the project. Each runs as its own PaaS service: the batch and the forum site as jobs, and the microservice as a service that stays up.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/paas.html">
+  <meta property="og:url" content="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/paas.html">
+  <meta property="og:site_name" content="Liferay User Group APAC">
+  <meta property="og:image" content="https://lgsapac.github.io/assets/kb/liferay-forums-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=kb2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../../../"><img class="brand-logo" src="../../../../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../../../#how-we-work">Our sponsor</a>
+      <a href="../../../../#resources">Tutorials &amp; code</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+      <a href="../../../../#contact">Contact</a>
+    </nav>
+    <div class="lang" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="../../../../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
+      <a href="../../../../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>Liferay Forums docs</summary>
+    <ul class="docs-nav-list"><li><a href="../">Overview</a></li><li class=""><a href="../getting-started.html">Getting Started</a></li><li class="open"><a href="./">Installing</a><ul><li><a href="tomcat.html">Liferay Self-Hosted (Tomcat)</a></li><li><a href="docker.html">Liferay Self-Hosted (Docker)</a></li><li><a href="paas.html" aria-current="page">On Liferay PaaS</a></li><li><a href="saas.html">On Liferay SaaS</a></li><li><a href="creating-sites.html">Creating Forum Sites</a></li><li><a href="checking.html">Checking the Installation</a></li><li><a href="deleting.html">Deleting a Forum Site</a></li><li><a href="workspace.html">Developing With a Liferay Workspace</a></li></ul></li><li class=""><a href="../using/">Using the Forum</a><ul><li><a href="../using/browsing-and-searching.html">Browsing and Searching</a></li><li><a href="../using/starting-a-discussion.html">Starting a Discussion</a></li><li><a href="../using/replying.html">Replying and Mentions</a></li><li><a href="../using/questions-and-answers.html">Questions and Answers</a></li><li><a href="../using/voting.html">Voting</a></li><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li><li><a href="../using/reporting.html">Reporting Content</a></li></ul></li><li class=""><a href="../moderating/">Moderating</a><ul><li><a href="../moderating/locking.html">Locking Topics</a></li><li><a href="../moderating/priority.html">Pinning Topics with Priority</a></li><li><a href="../moderating/reviewing-reports.html">Reviewing Reports</a></li><li><a href="../moderating/banning.html">Banning Members</a></li></ul></li><li class=""><a href="../administering/">Administering</a><ul><li><a href="../administering/categories.html">Managing Categories</a></li><li><a href="../administering/email-notifications.html">Email Notifications</a></li><li><a href="../administering/customizing.html">Customizing the Forum</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li></ul></li><li class=""><a href="../reference/">Reference</a><ul><li><a href="../reference/roles-and-permissions.html">Roles and Permissions</a></li><li><a href="../reference/pages.html">Pages</a></li><li><a href="../reference/configuration.html">Configuration Reference</a></li><li><a href="../reference/known-issues.html">Known Issues</a></li></ul></li></ul>
+  </details>
+  <main class="docs-main">
+    <p class="docs-crumbs"><a href="../../../../knowledge-base/">Knowledge base</a><span>/</span><a href="../../../../knowledge-base/#marketplace-apps">Marketplace apps</a><span>/</span><a href="../">Liferay Forums</a><span>/</span><a href="./">Installing</a></p>
+    <article class="prose">
+      <h1>Installing on Liferay PaaS</h1>
+<p>On Liferay PaaS, you add the forum's three projects to your PaaS project's repository, and deploy them with the rest of the project. Each runs as its own PaaS service: the batch and the forum site as jobs, and the microservice as a service that stays up.</p>
+<div class="callout callout-warning"><p class="callout-title">Warning</p><p>These steps were tested on a clean Liferay DXP 2026.Q1.4 LTS with the required fixes, in a local copy of how Liferay PaaS runs client extensions, not yet on a Liferay PaaS environment. Client extensions are a beta feature on Liferay PaaS.</p></div>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#step-1-prepare-the-project">Step 1: Prepare the Project</a></li><li><a href="#step-2-install-the-liferay-fixes">Step 2: Install the Liferay Fixes</a></li><li><a href="#step-3-add-the-forums-projects">Step 3: Add the Forum's Projects</a></li><li><a href="#step-4-deploy-the-first-build">Step 4: Deploy the First Build</a></li><li><a href="#step-5-deploy-a-second-build">Step 5: Deploy a Second Build</a></li><li><a href="#step-6-restart-the-microservice">Step 6: Restart the Microservice</a></li><li><a href="#step-7-set-up-email-notifications">Step 7: Set Up Email Notifications</a></li><li><a href="#step-8-check-the-installation">Step 8: Check the Installation</a></li><li><a href="#adding-more-forum-sites">Adding More Forum Sites</a></li><li><a href="#later-deploys">Later Deploys</a></li><li><a href="#related-information">Related Information</a></li></ul></nav>
+<h2 id="step-1-prepare-the-project">Step 1: Prepare the Project<a class="anchor" href="#step-1-prepare-the-project" aria-label="Link to this section">#</a></h2>
+<p>Follow Liferay's <a href="https://learn.liferay.com/w/dxp/cloud/customizing-liferay-dxp-in-the-cloud/configuring-liferay-paas-for-client-extensions">Configuring Liferay PaaS for Client Extensions</a>. In particular:</p>
+<ol><li>If your <code>infra</code> environment doesn't have the client extension build pipeline, ask Liferay Cloud Support to enable it.</li><li>If an environment uses basic authentication on its web server, let the <code>/o</code> path through without it. Liferay and the microservice call each other under <code>/o</code>.</li><li>Remove <code>virtual.hosts.valid.hosts</code> and <code>web.server.protocol</code> from the Liferay service's settings, if they're set. Client extensions don't work with them.</li></ol>
+<h2 id="step-2-install-the-liferay-fixes">Step 2: Install the Liferay Fixes<a class="anchor" href="#step-2-install-the-liferay-fixes" aria-label="Link to this section">#</a></h2>
+<p>Install the hotfix with the <a href="./#required-liferay-fixes">required Liferay fixes</a> before you add the forum's projects.</p>
+<ol><li><p>Add the hotfix to your project in one of these ways:</p>
+<ul><li><p><strong>For every environment:</strong> in <code>ci/LCP.json</code>, set the environment variable <code>LCP_CI_LIFERAY_DXP_HOTFIXES_COMMON</code> to the hotfix's name without <code>.zip</code>:</p>
+<pre><code class="language-json">"env": {
+  "LCP_CI_LIFERAY_DXP_HOTFIXES_COMMON": "&lt;hotfix-name&gt;"
+}</code></pre></li><li><strong>For one environment:</strong> use <code>LCP_CI_LIFERAY_DXP_HOTFIXES_&lt;ENVIRONMENT&gt;</code> instead, for example <code>LCP_CI_LIFERAY_DXP_HOTFIXES_PRD</code>.</li><li><strong>In the repository:</strong> put the hotfix zip in <code>liferay/configs/&lt;environment&gt;/patching/</code>, for example <code>liferay/configs/prd/patching/</code>, once for each environment.</li></ul></li><li>Push the change, and deploy its build to your environment, as in <a href="#step-4-deploy-the-first-build">Step 4</a>.</li><li>Once the Liferay service has restarted, check that its log shows <code>The following patches are installed:</code> with the hotfix.</li></ol>
+<p>See Liferay's <a href="https://learn.liferay.com/w/dxp/cloud/customizing-liferay-dxp-in-the-cloud/using-the-liferay-dxp-service/deploying-to-the-liferay-service">Deploying to the Liferay Service</a> for more about installing hotfixes.</p>
+<h2 id="step-3-add-the-forums-projects">Step 3: Add the Forum's Projects<a class="anchor" href="#step-3-add-the-forums-projects" aria-label="Link to this section">#</a></h2>
+<ol><li>Download <strong>Source code (zip)</strong> from the <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">release</a>, and unzip it.</li><li><p>Copy these three folders into <code>liferay/client-extensions</code> in your PaaS project's repository:</p>
+<ul><li><code>client-extensions/liferay-forums-batch</code></li><li><code>client-extensions/liferay-forums-etc-spring-boot</code></li><li><code>client-extensions/liferay-forums-site-initializer</code></li></ul></li></ol>
+<h2 id="step-4-deploy-the-first-build">Step 4: Deploy the First Build<a class="anchor" href="#step-4-deploy-the-first-build" aria-label="Link to this section">#</a></h2>
+<ol><li>Push the project. Liferay Cloud builds it; a build of client extensions is a <strong>Custom Services</strong> build.</li><li>In the Liferay Cloud console, open <strong>Builds</strong>, and on that build, choose <strong>Deploy Build to...</strong>, then your environment.</li></ol>
+<p>When the deploy finishes, the jobs have created the forum's data and the forum site at <code>/web/forums</code>, and the microservice has started. Check that:</p>
+<ul><li>The Liferay service's log shows five lines containing <code>Finished batch engine import task</code>, one for each of the batch's files.</li><li><em>Control Panel</em> → <em>Objects</em> shows the <strong>C2M0 Forums</strong> folder, with seven objects: C2M0 Attachment, C2M0 Message, C2M0 Subscription, C2M0 Suspicious Activity, C2M0 Thread, C2M0 User, and C2M0 Vote.</li><li><em>Control Panel</em> → <em>Security</em> → <em>OAuth 2 Administration</em> shows four forum applications: one each for the batch and the site initializer, and two for the microservice, <strong>Liferay Forums Etc Spring Boot OAuth Application Headless Server</strong> and <strong>User Agent</strong>.</li></ul>
+<p>At this point, every reply is rejected with <strong>Your account has been banned from participating in the forums.</strong> That's expected: Liferay registered the microservice before the forum's data existed, so it has no access to it yet. The next two steps fix that.</p>
+<h2 id="step-5-deploy-a-second-build">Step 5: Deploy a Second Build<a class="anchor" href="#step-5-deploy-a-second-build" aria-label="Link to this section">#</a></h2>
+<p>The forum's jobs run again at every deploy, which they shouldn't, now that the forum's data and site exist:</p>
+<ul><li>From the second deploy on, the batch job would report a failed item for the forum's two email templates, because they already exist.</li><li>Each time the site initializer's job runs again, the forum site's address is reset to <code>/web/group-&lt;number&gt;</code>, which breaks the forum's links. LPD-85594 doesn't prevent this on Liferay PaaS.</li></ul>
+<p>So the second build leaves out the email templates file and the site initializer:</p>
+<ol><li><p>Delete this file and this folder from your repository:</p>
+<pre><code>liferay/client-extensions/liferay-forums-batch/batch/05-notification-email-template.batch-engine-data.json
+liferay/client-extensions/liferay-forums-site-initializer</code></pre></li><li>Push, and deploy the new build to your environment, as in Step 4.</li></ol>
+<p>Liferay registers the microservice again, this time with access to the forum's data, and gives it new credentials. The batch job passes, at this deploy and every later one, and the email templates, with your changes to them, stay as they are. The forum site stays at <code>/web/forums</code>, with its pages and content: removing a site initializer doesn't remove its site.</p>
+<h2 id="step-6-restart-the-microservice">Step 6: Restart the Microservice<a class="anchor" href="#step-6-restart-the-microservice" aria-label="Link to this section">#</a></h2>
+<p>In the Liferay Cloud console, restart the <code>liferayforumsetcspringboot</code> service, so it uses the new credentials. Replies are now accepted.</p>
+<div class="callout callout-note"><p class="callout-title">Note</p><p>If replies are still rejected after the restart, Liferay may not reach the microservice at <code>localhost:58081</code>. In <code>liferay/client-extensions/liferay-forums-etc-spring-boot/client-extension.yaml</code>, change both <code>.serviceAddress: localhost:58081</code> lines to <code>liferayforumsetcspringboot:58081</code>, the address of the microservice's service, and deploy again. This hasn't been verified on Liferay PaaS yet.</p></div>
+<h2 id="step-7-set-up-email-notifications">Step 7: Set Up Email Notifications<a class="anchor" href="#step-7-set-up-email-notifications" aria-label="Link to this section">#</a></h2>
+<p>The batch created two email templates with a placeholder sender address. Set real addresses, then restart the <code>liferayforumsetcspringboot</code> service, before members get email. See <a href="../administering/email-notifications.html">Email Notifications</a>.</p>
+<h2 id="step-8-check-the-installation">Step 8: Check the Installation<a class="anchor" href="#step-8-check-the-installation" aria-label="Link to this section">#</a></h2>
+<p>Continue with <a href="checking.html">Checking the Installation</a>, for the forum site at <code>/web/forums</code>.</p>
+<h2 id="adding-more-forum-sites">Adding More Forum Sites<a class="anchor" href="#adding-more-forum-sites" aria-label="Link to this section">#</a></h2>
+<p>Each forum site gets its own site initializer project in your repository, deployed once, then removed again, as with the first site. See <a href="creating-sites.html#several-sites">Several Sites</a>.</p>
+<h2 id="later-deploys">Later Deploys<a class="anchor" href="#later-deploys" aria-label="Link to this section">#</a></h2>
+<p>Liferay gives the microservice new credentials at every deploy of your project, even one that doesn't change the forum. Until the microservice restarts with them, replies are rejected with <strong>Your account has been banned from participating in the forums.</strong> After every deploy, restart the <code>liferayforumsetcspringboot</code> service, as in <a href="#step-6-restart-the-microservice">Step 6</a>, and check that a reply is accepted.</p>
+<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="saas.html">On Liferay SaaS</a></li><li><a href="./">Installing</a></li></ul>
+    </article>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="docker.html"><span>Previous</span>Liferay Self-Hosted (Docker)</a><a class="next" href="saas.html"><span>Next</span>On Liferay SaaS</a></nav>
+  </main>
+</div>
+<script>
+  (function () {
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="../../../../assets/liferay-logo-reversed.png">
+        <img src="../../../../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
+      </picture>
+      <span>Liferay Forums is available under Liferay's dual license, LGPL-2.1-or-later or the Liferay DXP EULA. Copyright © 2026 Liferay, Inc.</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums">Liferay Forums on GitHub</a>
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Releases</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+    </nav>
+  </div>
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>

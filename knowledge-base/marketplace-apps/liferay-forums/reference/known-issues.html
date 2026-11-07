@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Known Issues · Liferay Forums · Liferay User Group APAC</title>
+  <meta name="description" content="Known limitations in Liferay Forums 1.0.0.">
+  <meta property="og:title" content="Known Issues · Liferay Forums">
+  <meta property="og:description" content="Known limitations in Liferay Forums 1.0.0.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/reference/known-issues.html">
+  <meta property="og:url" content="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/reference/known-issues.html">
+  <meta property="og:site_name" content="Liferay User Group APAC">
+  <meta property="og:image" content="https://lgsapac.github.io/assets/kb/liferay-forums-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=kb2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../../../"><img class="brand-logo" src="../../../../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../../../#how-we-work">Our sponsor</a>
+      <a href="../../../../#resources">Tutorials &amp; code</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+      <a href="../../../../#contact">Contact</a>
+    </nav>
+    <div class="lang" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="../../../../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
+      <a href="../../../../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>Liferay Forums docs</summary>
+    <ul class="docs-nav-list"><li><a href="../">Overview</a></li><li class=""><a href="../getting-started.html">Getting Started</a></li><li class=""><a href="../installing/">Installing</a><ul><li><a href="../installing/tomcat.html">Liferay Self-Hosted (Tomcat)</a></li><li><a href="../installing/docker.html">Liferay Self-Hosted (Docker)</a></li><li><a href="../installing/paas.html">On Liferay PaaS</a></li><li><a href="../installing/saas.html">On Liferay SaaS</a></li><li><a href="../installing/creating-sites.html">Creating Forum Sites</a></li><li><a href="../installing/checking.html">Checking the Installation</a></li><li><a href="../installing/deleting.html">Deleting a Forum Site</a></li><li><a href="../installing/workspace.html">Developing With a Liferay Workspace</a></li></ul></li><li class=""><a href="../using/">Using the Forum</a><ul><li><a href="../using/browsing-and-searching.html">Browsing and Searching</a></li><li><a href="../using/starting-a-discussion.html">Starting a Discussion</a></li><li><a href="../using/replying.html">Replying and Mentions</a></li><li><a href="../using/questions-and-answers.html">Questions and Answers</a></li><li><a href="../using/voting.html">Voting</a></li><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li><li><a href="../using/reporting.html">Reporting Content</a></li></ul></li><li class=""><a href="../moderating/">Moderating</a><ul><li><a href="../moderating/locking.html">Locking Topics</a></li><li><a href="../moderating/priority.html">Pinning Topics with Priority</a></li><li><a href="../moderating/reviewing-reports.html">Reviewing Reports</a></li><li><a href="../moderating/banning.html">Banning Members</a></li></ul></li><li class=""><a href="../administering/">Administering</a><ul><li><a href="../administering/categories.html">Managing Categories</a></li><li><a href="../administering/email-notifications.html">Email Notifications</a></li><li><a href="../administering/customizing.html">Customizing the Forum</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li></ul></li><li class="open"><a href="./">Reference</a><ul><li><a href="roles-and-permissions.html">Roles and Permissions</a></li><li><a href="pages.html">Pages</a></li><li><a href="configuration.html">Configuration Reference</a></li><li><a href="known-issues.html" aria-current="page">Known Issues</a></li></ul></li></ul>
+  </details>
+  <main class="docs-main">
+    <p class="docs-crumbs"><a href="../../../../knowledge-base/">Knowledge base</a><span>/</span><a href="../../../../knowledge-base/#marketplace-apps">Marketplace apps</a><span>/</span><a href="../">Liferay Forums</a><span>/</span><a href="./">Reference</a></p>
+    <article class="prose">
+      <h1>Known Issues</h1>
+<p>Known limitations in Liferay Forums 1.0.0.</p>
+<h2 id="a-questions-author-cant-mark-an-answer">A Question's Author Can't Mark an Answer<a class="anchor" href="#a-questions-author-cant-mark-an-answer" aria-label="Link to this section">#</a></h2>
+<p>The author of a question sees <strong>Mark as Answer</strong>, but marking a reply fails, because members aren't allowed to change other members' replies. Moderators can mark the answer.</p>
+<h2 id="deploying-the-batch-again">Deploying the Batch Again<a class="anchor" href="#deploying-the-batch-again" aria-label="Link to this section">#</a></h2>
+<p>Deploy <code>liferay-forums-batch.zip</code> once. Each time it's deployed again:</p>
+<ul><li>Custom fields and relationships that an administrator added to Liferay's <strong>User</strong> object are deleted. Add them again afterwards.</li><li>Liferay logs an error that the email templates already exist. The batch keeps your changes to them.</li><li>On Liferay PaaS, where the batch job runs at every deploy, the job shows as failed for the same reason. The forum's data is imported before that, so nothing is lost. <a href="../installing/paas.html#step-5-deploy-a-second-build">Step 5 of On Liferay PaaS</a> prevents it, by removing the email templates file after the first deploy.</li></ul>
+<h2 id="an-error-is-logged-when-a-topic-is-updated">An Error Is Logged When a Topic Is Updated<a class="anchor" href="#an-error-is-logged-when-a-topic-is-updated" aria-label="Link to this section">#</a></h2>
+<p>Without the Liferay fix LPD-102310, when the forum's microservice updates a topic that has a category, Liferay logs <code>ERROR ... Invalid asset category with external reference code ...</code>. The topic keeps its category, and nothing else is affected.</p>
+<h2 id="on-liferay-paas-and-saas-a-site-initializer-job-run-again-resets-the-sites-address">On Liferay PaaS and SaaS, a Site Initializer Job Run Again Resets the Site's Address<a class="anchor" href="#on-liferay-paas-and-saas-a-site-initializer-job-run-again-resets-the-sites-address" aria-label="Link to this section">#</a></h2>
+<p>Each time a site initializer's job runs again on an existing site, the site's friendly URL is reset to <code>/group-&lt;number&gt;</code>, and the forum's links show not found pages. LPD-85594 fixes this for site initializer zips deployed to Liferay itself, but not for the job that Liferay Cloud runs. Remove each site initializer project once its site exists, as in <a href="../installing/paas.html#step-5-deploy-a-second-build">Installing on Liferay PaaS</a>, and on Liferay SaaS don't deploy a site initializer again. If an address was reset, set it back in <em>Site Settings</em>.</p>
+<h2 id="deleting-a-reply-doesnt-change-a-topics-activity-date">Deleting a Reply Doesn't Change a Topic's Activity Date<a class="anchor" href="#deleting-a-reply-doesnt-change-a-topics-activity-date" aria-label="Link to this section">#</a></h2>
+<p>A topic keeps its place in <strong>Recent Activity</strong> after its latest reply is deleted.</p>
+<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Release notes</a></li></ul>
+    </article>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="configuration.html"><span>Previous</span>Configuration Reference</a></nav>
+  </main>
+</div>
+<script>
+  (function () {
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="../../../../assets/liferay-logo-reversed.png">
+        <img src="../../../../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
+      </picture>
+      <span>Liferay Forums is available under Liferay's dual license, LGPL-2.1-or-later or the Liferay DXP EULA. Copyright © 2026 Liferay, Inc.</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums">Liferay Forums on GitHub</a>
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Releases</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+    </nav>
+  </div>
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>

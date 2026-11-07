@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liferay Self-Hosted (Docker) · Liferay Forums · Liferay User Group APAC</title>
+  <meta name="description" content="Liferay and PostgreSQL run in containers, and the forum&#x27;s microservice runs in a third container that shares Liferay&#x27;s network, so Liferay reaches it at localhost:58081 as on a server. You copy the forum&#x27;s zips into the running Liferay container, in the same order as on a server. These steps were tested with the liferay/dxp:2026.q1.4-lts image.">
+  <meta property="og:title" content="Liferay Self-Hosted (Docker) · Liferay Forums">
+  <meta property="og:description" content="Liferay and PostgreSQL run in containers, and the forum&#x27;s microservice runs in a third container that shares Liferay&#x27;s network, so Liferay reaches it at localhost:58081 as on a server. You copy the forum&#x27;s zips into the running Liferay container, in the same order as on a server. These steps were tested with the liferay/dxp:2026.q1.4-lts image.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/docker.html">
+  <meta property="og:url" content="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/docker.html">
+  <meta property="og:site_name" content="Liferay User Group APAC">
+  <meta property="og:image" content="https://lgsapac.github.io/assets/kb/liferay-forums-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=kb2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../../../"><img class="brand-logo" src="../../../../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../../../#how-we-work">Our sponsor</a>
+      <a href="../../../../#resources">Tutorials &amp; code</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+      <a href="../../../../#contact">Contact</a>
+    </nav>
+    <div class="lang" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="../../../../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
+      <a href="../../../../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>Liferay Forums docs</summary>
+    <ul class="docs-nav-list"><li><a href="../">Overview</a></li><li class=""><a href="../getting-started.html">Getting Started</a></li><li class="open"><a href="./">Installing</a><ul><li><a href="tomcat.html">Liferay Self-Hosted (Tomcat)</a></li><li><a href="docker.html" aria-current="page">Liferay Self-Hosted (Docker)</a></li><li><a href="paas.html">On Liferay PaaS</a></li><li><a href="saas.html">On Liferay SaaS</a></li><li><a href="creating-sites.html">Creating Forum Sites</a></li><li><a href="checking.html">Checking the Installation</a></li><li><a href="deleting.html">Deleting a Forum Site</a></li><li><a href="workspace.html">Developing With a Liferay Workspace</a></li></ul></li><li class=""><a href="../using/">Using the Forum</a><ul><li><a href="../using/browsing-and-searching.html">Browsing and Searching</a></li><li><a href="../using/starting-a-discussion.html">Starting a Discussion</a></li><li><a href="../using/replying.html">Replying and Mentions</a></li><li><a href="../using/questions-and-answers.html">Questions and Answers</a></li><li><a href="../using/voting.html">Voting</a></li><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li><li><a href="../using/reporting.html">Reporting Content</a></li></ul></li><li class=""><a href="../moderating/">Moderating</a><ul><li><a href="../moderating/locking.html">Locking Topics</a></li><li><a href="../moderating/priority.html">Pinning Topics with Priority</a></li><li><a href="../moderating/reviewing-reports.html">Reviewing Reports</a></li><li><a href="../moderating/banning.html">Banning Members</a></li></ul></li><li class=""><a href="../administering/">Administering</a><ul><li><a href="../administering/categories.html">Managing Categories</a></li><li><a href="../administering/email-notifications.html">Email Notifications</a></li><li><a href="../administering/customizing.html">Customizing the Forum</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li></ul></li><li class=""><a href="../reference/">Reference</a><ul><li><a href="../reference/roles-and-permissions.html">Roles and Permissions</a></li><li><a href="../reference/pages.html">Pages</a></li><li><a href="../reference/configuration.html">Configuration Reference</a></li><li><a href="../reference/known-issues.html">Known Issues</a></li></ul></li></ul>
+  </details>
+  <main class="docs-main">
+    <p class="docs-crumbs"><a href="../../../../knowledge-base/">Knowledge base</a><span>/</span><a href="../../../../knowledge-base/#marketplace-apps">Marketplace apps</a><span>/</span><a href="../">Liferay Forums</a><span>/</span><a href="./">Installing</a></p>
+    <article class="prose">
+      <h1>Installing on Liferay Self-Hosted (Docker)</h1>
+<p>Liferay and PostgreSQL run in containers, and the forum's microservice runs in a third container that shares Liferay's network, so Liferay reaches it at <code>localhost:58081</code> as on a server. You copy the forum's zips into the running Liferay container, in the same order as on a server. These steps were tested with the <code>liferay/dxp:2026.q1.4-lts</code> image.</p>
+<div class="callout callout-important"><p class="callout-title">Important</p><p>You need Docker. Run the commands from a folder that holds the release's three zips, downloaded from the <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">release</a>.</p></div>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#step-1-add-the-liferay-fixes">Step 1: Add the Liferay Fixes</a></li><li><a href="#step-2-start-postgresql-and-liferay">Step 2: Start PostgreSQL and Liferay</a></li><li><a href="#step-3-deploy-the-batch">Step 3: Deploy the Batch</a></li><li><a href="#step-4-deploy-the-microservices-zip">Step 4: Deploy the Microservice's Zip</a></li><li><a href="#step-5-start-the-microservice">Step 5: Start the Microservice</a></li><li><a href="#step-6-set-up-email-notifications">Step 6: Set Up Email Notifications</a></li><li><a href="#step-7-create-the-forum-sites">Step 7: Create the Forum Sites</a></li><li><a href="#day-to-day">Day to Day</a></li><li><a href="#related-information">Related Information</a></li></ul></nav>
+<h2 id="step-1-add-the-liferay-fixes">Step 1: Add the Liferay Fixes<a class="anchor" href="#step-1-add-the-liferay-fixes" aria-label="Link to this section">#</a></h2>
+<p>Create a folder named <code>patching</code> next to the zips, and put the hotfix from Liferay Support in it. Liferay installs it each time its container starts. Without a hotfix, leave the folder empty, and use the <a href="./#without-a-hotfix">workarounds</a>.</p>
+<h2 id="step-2-start-postgresql-and-liferay">Step 2: Start PostgreSQL and Liferay<a class="anchor" href="#step-2-start-postgresql-and-liferay" aria-label="Link to this section">#</a></h2>
+<ol><li><p>Create a network for the containers, and start PostgreSQL. Replace <code>change-me</code> with a password of your own, here and in the next command:</p>
+<pre><code class="language-bash">docker network create forums
+docker run -d --name forums-postgres --network forums --restart unless-stopped \
+  -e POSTGRES_DB=lportal -e POSTGRES_USER=liferay -e POSTGRES_PASSWORD=change-me \
+  -v forums-postgres-data:/var/lib/postgresql/data \
+  postgres:16.15</code></pre></li><li><p>Start Liferay. The <code>forums-liferay-routes</code> volume holds the credentials Liferay writes for the microservice:</p>
+<pre><code class="language-bash">docker run -d --name forums-liferay --network forums -p 8080:8080 --restart unless-stopped \
+  -e LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_DRIVER_UPPERCASEC_LASS_UPPERCASEN_AME=org.postgresql.Driver \
+  -e LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL=jdbc:postgresql://forums-postgres:5432/lportal \
+  -e LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME=liferay \
+  -e LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD=change-me \
+  -v forums-liferay-data:/opt/liferay/data \
+  -v forums-liferay-routes:/opt/liferay/routes \
+  -v "$PWD/patching:/mnt/liferay/patching" \
+  liferay/dxp:2026.q1.4-lts</code></pre></li><li>Wait until Liferay has started: <code>docker logs forums-liferay</code> shows <code>Server startup in</code>. This takes a few minutes. Liferay is then at <code>http://localhost:8080</code>.</li></ol>
+<h2 id="step-3-deploy-the-batch">Step 3: Deploy the Batch<a class="anchor" href="#step-3-deploy-the-batch" aria-label="Link to this section">#</a></h2>
+<ol><li><p>Copy the batch into the running container:</p>
+<pre><code class="language-bash">docker cp liferay-forums-batch.zip forums-liferay:/opt/liferay/osgi/client-extensions/</code></pre></li><li><p>Follow the log, and wait until it shows five lines containing <code>Finished batch engine import task</code> after the copy, then press <strong>Ctrl+C</strong>:</p>
+<pre><code class="language-bash">docker logs -f --since 2m forums-liferay | grep "Finished batch engine import task"</code></pre></li></ol>
+<div class="callout callout-warning"><p class="callout-title">Warning</p><p>Liferay also logs a few of these lines while it starts. Only count the ones after the copy, and don't continue until all five have finished.</p></div>
+<h2 id="step-4-deploy-the-microservices-zip">Step 4: Deploy the Microservice's Zip<a class="anchor" href="#step-4-deploy-the-microservices-zip" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-bash">docker cp liferay-forums-etc-spring-boot.zip forums-liferay:/opt/liferay/osgi/client-extensions/</code></pre>
+<p>Wait until <code>docker logs forums-liferay</code> shows <code>STARTED liferayforumsetcspringboot</code>.</p>
+<h2 id="step-5-start-the-microservice">Step 5: Start the Microservice<a class="anchor" href="#step-5-start-the-microservice" aria-label="Link to this section">#</a></h2>
+<ol><li><p>Build the microservice's image from the <code>Dockerfile</code> in its zip:</p>
+<pre><code class="language-bash">mkdir microservice
+unzip liferay-forums-etc-spring-boot.zip -d microservice
+docker build -t liferay-forums-microservice microservice</code></pre></li><li><p>Start it in Liferay's network, with Liferay's credentials volume:</p>
+<pre><code class="language-bash">docker run -d --name forums-microservice --network container:forums-liferay --restart unless-stopped \
+  -v forums-liferay-routes:/opt/liferay/routes:ro \
+  -e LIFERAY_ROUTES_CLIENT_EXTENSION=/opt/liferay/routes/default/liferay-forums-etc-spring-boot \
+  -e LIFERAY_ROUTES_DXP=/opt/liferay/routes/default/dxp \
+  liferay-forums-microservice</code></pre></li><li><p>Check that Liferay reaches it. This prints <code>READY</code>:</p>
+<pre><code class="language-bash">docker exec forums-liferay curl -s http://localhost:58081/ready</code></pre></li></ol>
+<h2 id="step-6-set-up-email-notifications">Step 6: Set Up Email Notifications<a class="anchor" href="#step-6-set-up-email-notifications" aria-label="Link to this section">#</a></h2>
+<p>The batch created two email templates with a placeholder sender address. Set real addresses, then restart the microservice with <code>docker restart forums-microservice</code>, before members get email. See <a href="../administering/email-notifications.html">Email Notifications</a>.</p>
+<h2 id="step-7-create-the-forum-sites">Step 7: Create the Forum Sites<a class="anchor" href="#step-7-create-the-forum-sites" aria-label="Link to this section">#</a></h2>
+<p>Continue with <a href="creating-sites.html">Creating Forum Sites</a>.</p>
+<h2 id="day-to-day">Day to Day<a class="anchor" href="#day-to-day" aria-label="Link to this section">#</a></h2>
+<ul><li><strong>After Liferay's container restarts,</strong> restart the microservice's container too, since it shares Liferay's network: <code>docker restart forums-microservice</code>.</li><li><p><strong>The zips live in Liferay's container.</strong> If you remove the container and start a new one, for example to change a setting or the image, the new container has none of the forum's zips. Copy in the batch, then the microservice's zip, as in Steps 3 and 4. Then remove the microservice's container and start it again with the <code>docker run</code> command of Step 5: it was tied to the old Liferay container, so restarting it fails.</p>
+<pre><code class="language-bash">docker rm -f forums-microservice</code></pre></li><li><strong>Logs:</strong> <code>docker logs forums-liferay</code> and <code>docker logs forums-microservice</code>.</li></ul>
+<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="checking.html">Checking the Installation</a></li><li><a href="./">Installing</a></li></ul>
+    </article>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="tomcat.html"><span>Previous</span>Liferay Self-Hosted (Tomcat)</a><a class="next" href="paas.html"><span>Next</span>On Liferay PaaS</a></nav>
+  </main>
+</div>
+<script>
+  (function () {
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="../../../../assets/liferay-logo-reversed.png">
+        <img src="../../../../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
+      </picture>
+      <span>Liferay Forums is available under Liferay's dual license, LGPL-2.1-or-later or the Liferay DXP EULA. Copyright © 2026 Liferay, Inc.</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums">Liferay Forums on GitHub</a>
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Releases</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+    </nav>
+  </div>
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>
