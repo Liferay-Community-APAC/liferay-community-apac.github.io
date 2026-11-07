@@ -181,7 +181,12 @@
         showImages: false,
         resetStyles: false,
         autofocus: true,
-        mergeIndex: apps.map(function (a) {
+        // Merge each app's own index when its docs are in the page's language. Pagefind fails when a search
+        // in Japanese or Chinese characters reaches an index built in another language, so an app with
+        // English-only docs appears in English search; list more languages in data/apps.json "docsLanguages".
+        mergeIndex: apps.filter(function (a) {
+          return (a.docsLanguages || ['en']).indexOf(lang) !== -1;
+        }).map(function (a) {
           return { bundlePath: ROOT + a.search, mergeFilter: { app: a.name } };
         })
       });
