@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Developing With a Liferay Workspace · Liferay Forums · Liferay User Group APAC</title>
+  <meta name="description" content="If you build your own Liferay code with a Liferay Workspace, you can add the forum&#x27;s projects to it, build them with your code, and deploy them to the workspace&#x27;s own Liferay bundle for development.">
+  <meta property="og:title" content="Developing With a Liferay Workspace · Liferay Forums">
+  <meta property="og:description" content="If you build your own Liferay code with a Liferay Workspace, you can add the forum&#x27;s projects to it, build them with your code, and deploy them to the workspace&#x27;s own Liferay bundle for development.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/workspace.html">
+  <meta property="og:url" content="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/workspace.html">
+  <meta property="og:site_name" content="Liferay User Group APAC">
+  <meta property="og:image" content="https://lgsapac.github.io/assets/kb/liferay-forums-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=kb2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../../../"><img class="brand-logo" src="../../../../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../../../#how-we-work">Our sponsor</a>
+      <a href="../../../../#resources">Tutorials &amp; code</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+      <a href="../../../../#contact">Contact</a>
+    </nav>
+    <div class="lang" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="../../../../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
+      <a href="../../../../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>Liferay Forums docs</summary>
+    <ul class="docs-nav-list"><li><a href="../">Overview</a></li><li class=""><a href="../getting-started.html">Getting Started</a></li><li class="open"><a href="./">Installing</a><ul><li><a href="tomcat.html">Liferay Self-Hosted (Tomcat)</a></li><li><a href="docker.html">Liferay Self-Hosted (Docker)</a></li><li><a href="paas.html">On Liferay PaaS</a></li><li><a href="saas.html">On Liferay SaaS</a></li><li><a href="creating-sites.html">Creating Forum Sites</a></li><li><a href="checking.html">Checking the Installation</a></li><li><a href="deleting.html">Deleting a Forum Site</a></li><li><a href="workspace.html" aria-current="page">Developing With a Liferay Workspace</a></li></ul></li><li class=""><a href="../using/">Using the Forum</a><ul><li><a href="../using/browsing-and-searching.html">Browsing and Searching</a></li><li><a href="../using/starting-a-discussion.html">Starting a Discussion</a></li><li><a href="../using/replying.html">Replying and Mentions</a></li><li><a href="../using/questions-and-answers.html">Questions and Answers</a></li><li><a href="../using/voting.html">Voting</a></li><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li><li><a href="../using/reporting.html">Reporting Content</a></li></ul></li><li class=""><a href="../moderating/">Moderating</a><ul><li><a href="../moderating/locking.html">Locking Topics</a></li><li><a href="../moderating/priority.html">Pinning Topics with Priority</a></li><li><a href="../moderating/reviewing-reports.html">Reviewing Reports</a></li><li><a href="../moderating/banning.html">Banning Members</a></li></ul></li><li class=""><a href="../administering/">Administering</a><ul><li><a href="../administering/categories.html">Managing Categories</a></li><li><a href="../administering/email-notifications.html">Email Notifications</a></li><li><a href="../administering/customizing.html">Customizing the Forum</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li></ul></li><li class=""><a href="../reference/">Reference</a><ul><li><a href="../reference/roles-and-permissions.html">Roles and Permissions</a></li><li><a href="../reference/pages.html">Pages</a></li><li><a href="../reference/configuration.html">Configuration Reference</a></li><li><a href="../reference/known-issues.html">Known Issues</a></li></ul></li></ul>
+  </details>
+  <main class="docs-main">
+    <p class="docs-crumbs"><a href="../../../../knowledge-base/">Knowledge base</a><span>/</span><a href="../../../../knowledge-base/#marketplace-apps">Marketplace apps</a><span>/</span><a href="../">Liferay Forums</a><span>/</span><a href="./">Installing</a></p>
+    <article class="prose">
+      <h1>Developing With a Liferay Workspace</h1>
+<p>If you build your own Liferay code with a <a href="https://learn.liferay.com/w/dxp/liferay-development/tooling/liferay-workspace">Liferay Workspace</a>, you can add the forum's projects to it, build them with your code, and deploy them to the workspace's own Liferay bundle for development.</p>
+<p>This isn't a separate way to install the forum. To install it on a server, in Docker, or on Liferay SaaS, build the zips here, then follow <a href="./">Installing</a> with them. A Liferay PaaS project's <code>liferay</code> folder is already a workspace: follow <a href="paas.html">On Liferay PaaS</a>.</p>
+<div class="callout callout-important"><p class="callout-title">Important</p><p>Tested with the Liferay Workspace Gradle plugin 15.0.0 and Liferay DXP 2026.Q1.4. You need <a href="https://learn.liferay.com/w/dxp/liferay-development/tooling/blade-cli">Blade</a>, or run the workspace's <code>./gradlew</code> in place of <code>blade gw</code>.</p></div>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#step-1-add-the-forums-projects">Step 1: Add the Forum's Projects</a></li><li><a href="#step-2-build-them">Step 2: Build Them</a></li><li><a href="#step-3-deploy-them-to-the-workspaces-bundle">Step 3: Deploy Them to the Workspace's Bundle</a></li><li><a href="#step-4-check-the-installation">Step 4: Check the Installation</a></li><li><a href="#things-to-avoid">Things to Avoid</a></li><li><a href="#related-information">Related Information</a></li></ul></nav>
+<h2 id="step-1-add-the-forums-projects">Step 1: Add the Forum's Projects<a class="anchor" href="#step-1-add-the-forums-projects" aria-label="Link to this section">#</a></h2>
+<ol><li>Download <strong>Source code (zip)</strong> from the <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">release</a>, and unzip it.</li><li><p>Copy these three folders into your workspace's <code>client-extensions</code> folder:</p>
+<ul><li><code>client-extensions/liferay-forums-batch</code></li><li><code>client-extensions/liferay-forums-etc-spring-boot</code></li><li><code>client-extensions/liferay-forums-site-initializer</code></li></ul></li></ol>
+<p>The workspace picks them up as client extension projects, next to your own, with no other change.</p>
+<h2 id="step-2-build-them">Step 2: Build Them<a class="anchor" href="#step-2-build-them" aria-label="Link to this section">#</a></h2>
+<p>From the workspace's root folder:</p>
+<pre><code class="language-bash">blade gw build</code></pre>
+<p>Each zip is written to its project's <code>dist</code> folder, for example <code>client-extensions/liferay-forums-batch/dist/liferay-forums-batch.zip</code>. They're the same zips as a release's.</p>
+<h2 id="step-3-deploy-them-to-the-workspaces-bundle">Step 3: Deploy Them to the Workspace's Bundle<a class="anchor" href="#step-3-deploy-them-to-the-workspaces-bundle" aria-label="Link to this section">#</a></h2>
+<p>For the workspace's Liferay bundle, set up with <code>blade server init</code>. Start it, and wait until it has started. Each project's <code>deploy</code> task copies only its own zip into the bundle, in <code>bundles/osgi/client-extensions</code> by default.</p>
+<div class="callout callout-warning"><p class="callout-title">Warning</p><p><strong>Never install with <code>blade gw deploy</code>.</strong> The workspace-wide deploy deploys every project at once, so the microservice's zip can arrive before the batch has finished, and every post is then rejected.</p></div>
+<p>If you put the projects in a subfolder, such as <code>client-extensions/forums</code>, the task paths follow it: <code>:client-extensions:forums:liferay-forums-batch:deploy</code>.</p>
+<ol><li><p><strong>The batch.</strong> Then wait until the Liferay log shows five lines containing <code>Finished batch engine import task</code>:</p>
+<pre><code class="language-bash">blade gw :client-extensions:liferay-forums-batch:deploy</code></pre></li><li><p><strong>The microservice's zip:</strong></p>
+<pre><code class="language-bash">blade gw :client-extensions:liferay-forums-etc-spring-boot:deploy</code></pre></li><li><p><strong>Start the microservice,</strong> as in <a href="tomcat.html#step-4-start-the-microservice">Step 4 of Liferay Self-Hosted (Tomcat)</a>: unzip <code>client-extensions/liferay-forums-etc-spring-boot/dist/liferay-forums-etc-spring-boot.zip</code> into a folder, and start it with <code>LIFERAY_HOME</code> set to the full path of the bundle. Use a full path: <code>start.sh</code> runs from its own folder.</p>
+<pre><code class="language-bash">LIFERAY_HOME=/home/me/my-workspace/bundles ./start.sh</code></pre></li><li><strong>Set up email notifications,</strong> as in <a href="../administering/email-notifications.html">Email Notifications</a>, then restart the microservice.</li><li><p><strong>The forum site.</strong> Once the site exists, remove <code>liferay-forums-site-initializer.zip</code> from <code>bundles/osgi/client-extensions</code>.</p>
+<pre><code class="language-bash">blade gw :client-extensions:liferay-forums-site-initializer:deploy</code></pre></li></ol>
+<p>For more forum sites, add a copy of the site initializer project per site, as in <a href="creating-sites.html#several-sites">Several Sites</a>, and deploy each with its own <code>deploy</code> task.</p>
+<h2 id="step-4-check-the-installation">Step 4: Check the Installation<a class="anchor" href="#step-4-check-the-installation" aria-label="Link to this section">#</a></h2>
+<p>Continue with <a href="checking.html">Checking the Installation</a>.</p>
+<h2 id="things-to-avoid">Things to Avoid<a class="anchor" href="#things-to-avoid" aria-label="Link to this section">#</a></h2>
+<ul><li><strong>Later workspace-wide deploys</strong> skip projects that haven't changed, so <code>blade gw deploy</code> for your own code doesn't deploy the forum again. After <code>blade gw clean</code>, or a change to a forum project, it deploys the forum's zips again, all at once. Then restart the microservice, which gets new credentials, and see <a href="../reference/known-issues.html#deploying-the-batch-again">Deploying the Batch Again</a>.</li><li><strong>The workspace's Docker tasks,</strong> such as <code>buildDockerImage</code> and <code>startDockerContainer</code>, put every project in Liferay's image, and Liferay deploys them while it starts, which is too early for the microservice and the site initializer. For Docker, build the zips here, then follow <a href="docker.html">Liferay Self-Hosted (Docker)</a>.</li></ul>
+<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="tomcat.html">Liferay Self-Hosted (Tomcat)</a></li><li><a href="creating-sites.html">Creating Forum Sites</a></li></ul>
+    </article>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="deleting.html"><span>Previous</span>Deleting a Forum Site</a><a class="next" href="../using/"><span>Next</span>Using the Forum</a></nav>
+  </main>
+</div>
+<script>
+  (function () {
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="../../../../assets/liferay-logo-reversed.png">
+        <img src="../../../../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
+      </picture>
+      <span>Liferay Forums is available under Liferay's dual license, LGPL-2.1-or-later or the Liferay DXP EULA. Copyright © 2026 Liferay, Inc.</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums">Liferay Forums on GitHub</a>
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Releases</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+    </nav>
+  </div>
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>

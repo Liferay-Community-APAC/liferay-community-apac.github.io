@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Installing · Liferay Forums · Liferay User Group APAC</title>
+  <meta name="description" content="These pages walk you through installing Liferay Forums 1.0.0, from an empty Liferay to a working forum site. Plan for about an hour the first time, most of it waiting for Liferay to start.">
+  <meta property="og:title" content="Installing · Liferay Forums">
+  <meta property="og:description" content="These pages walk you through installing Liferay Forums 1.0.0, from an empty Liferay to a working forum site. Plan for about an hour the first time, most of it waiting for Liferay to start.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/">
+  <meta property="og:url" content="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/">
+  <meta property="og:site_name" content="Liferay User Group APAC">
+  <meta property="og:image" content="https://lgsapac.github.io/assets/kb/liferay-forums-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=kb2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../../../"><img class="brand-logo" src="../../../../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../../../#how-we-work">Our sponsor</a>
+      <a href="../../../../#resources">Tutorials &amp; code</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+      <a href="../../../../#contact">Contact</a>
+    </nav>
+    <div class="lang" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="../../../../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
+      <a href="../../../../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>Liferay Forums docs</summary>
+    <ul class="docs-nav-list"><li><a href="../">Overview</a></li><li class=""><a href="../getting-started.html">Getting Started</a></li><li class="open"><a href="./" aria-current="page">Installing</a><ul><li><a href="tomcat.html">Liferay Self-Hosted (Tomcat)</a></li><li><a href="docker.html">Liferay Self-Hosted (Docker)</a></li><li><a href="paas.html">On Liferay PaaS</a></li><li><a href="saas.html">On Liferay SaaS</a></li><li><a href="creating-sites.html">Creating Forum Sites</a></li><li><a href="checking.html">Checking the Installation</a></li><li><a href="deleting.html">Deleting a Forum Site</a></li><li><a href="workspace.html">Developing With a Liferay Workspace</a></li></ul></li><li class=""><a href="../using/">Using the Forum</a><ul><li><a href="../using/browsing-and-searching.html">Browsing and Searching</a></li><li><a href="../using/starting-a-discussion.html">Starting a Discussion</a></li><li><a href="../using/replying.html">Replying and Mentions</a></li><li><a href="../using/questions-and-answers.html">Questions and Answers</a></li><li><a href="../using/voting.html">Voting</a></li><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li><li><a href="../using/reporting.html">Reporting Content</a></li></ul></li><li class=""><a href="../moderating/">Moderating</a><ul><li><a href="../moderating/locking.html">Locking Topics</a></li><li><a href="../moderating/priority.html">Pinning Topics with Priority</a></li><li><a href="../moderating/reviewing-reports.html">Reviewing Reports</a></li><li><a href="../moderating/banning.html">Banning Members</a></li></ul></li><li class=""><a href="../administering/">Administering</a><ul><li><a href="../administering/categories.html">Managing Categories</a></li><li><a href="../administering/email-notifications.html">Email Notifications</a></li><li><a href="../administering/customizing.html">Customizing the Forum</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li></ul></li><li class=""><a href="../reference/">Reference</a><ul><li><a href="../reference/roles-and-permissions.html">Roles and Permissions</a></li><li><a href="../reference/pages.html">Pages</a></li><li><a href="../reference/configuration.html">Configuration Reference</a></li><li><a href="../reference/known-issues.html">Known Issues</a></li></ul></li></ul>
+  </details>
+  <main class="docs-main">
+    <p class="docs-crumbs"><a href="../../../../knowledge-base/">Knowledge base</a><span>/</span><a href="../../../../knowledge-base/#marketplace-apps">Marketplace apps</a><span>/</span><a href="../">Liferay Forums</a></p>
+    <article class="prose">
+      <h1>Installing</h1>
+<p>These pages walk you through installing Liferay Forums 1.0.0, from an empty Liferay to a working forum site. Plan for about an hour the first time, most of it waiting for Liferay to start.</p>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#before-you-begin">Before You Begin</a><ul><li><a href="#required-liferay-fixes">Required Liferay Fixes</a></li></ul></li><li><a href="#what-youll-install">What You'll Install</a></li><li><a href="#choose-where-liferay-runs">Choose Where Liferay Runs</a></li><li><a href="#why-the-order-matters">Why the Order Matters</a></li><li><a href="#related-information">Related Information</a></li></ul></nav>
+<h2 id="before-you-begin">Before You Begin<a class="anchor" href="#before-you-begin" aria-label="Link to this section">#</a></h2>
+<p>Check that you have:</p>
+<ul><li><strong>Liferay DXP 2026.Q1 LTS</strong>, on a server from a Tomcat bundle, in Docker, on Liferay PaaS, or on Liferay SaaS, with the <a href="#required-liferay-fixes">Liferay fixes</a> below installed, or their workarounds.</li><li><strong>A database Liferay supports</strong>, such as PostgreSQL. The forum doesn't work on Hypersonic, the demo database Liferay starts with when none is set up.</li><li><strong>Java 17 or later</strong> on the machine where the forum's microservice runs, on Liferay Self-Hosted (Tomcat), and to build the site initializers for <a href="creating-sites.html#several-sites">several forum sites</a>.</li></ul>
+<h3 id="required-liferay-fixes">Required Liferay Fixes<a class="anchor" href="#required-liferay-fixes" aria-label="Link to this section">#</a></h3>
+<p>Ask Liferay Support for a hotfix for your 2026.Q1 release that includes the required fixes, and install it before the forum. On Liferay SaaS, Liferay installs hotfixes for a whole cluster, not for one environment, so use the workarounds for any fix your environment's release doesn't include; see <a href="saas.html#step-1-check-the-liferay-version-and-fixes">On Liferay SaaS</a>.</p>
+<div class="table-wrap"><table class="versions"><thead><tr><th>Fix</th><th>Without It</th><th>Needed</th></tr></thead><tbody><tr><td>LPD-90465 (on 2026.Q1.4, its backport LPD-112124)</td><td>Bans have no effect, and moderators don't see <strong>Lock Topic</strong>.</td><td>Yes</td></tr><tr><td>LPD-85594</td><td>Each time a site initializer zip is deployed again on an existing site, the site's address is reset, and the forum's links show not found pages. It doesn't cover Liferay PaaS and SaaS, where the install steps avoid running a site initializer again.</td><td>Yes, until 2026.Q1.12, which includes it</td></tr><tr><td>LPD-102310</td><td>Liferay logs an <code>Invalid asset category</code> error when a topic is updated. Nothing else is affected.</td><td>No, recommended</td></tr></tbody></table></div>
+<p>Liferay Forums 1.0.0 was tested on 2026.Q1.1 and 2026.Q1.4.</p>
+<h4 id="without-a-hotfix">Without a Hotfix<a class="anchor" href="#without-a-hotfix" aria-label="Link to this section">#</a></h4>
+<ul><li><strong>Instead of LPD-90465:</strong> after the first forum site is created, give the <strong>Forum Banned</strong> role its external reference code by hand, as described in <a href="checking.html#bans-have-no-effect-or-moderators-dont-see-lock-topic">Bans Have No Effect</a>.</li><li><strong>Instead of LPD-85594:</strong> after each deployment of a site initializer zip on an existing site, check the site's friendly URL in <em>Site Settings</em>, and set it back if it changed.</li></ul>
+<h2 id="what-youll-install">What You'll Install<a class="anchor" href="#what-youll-install" aria-label="Link to this section">#</a></h2>
+<p>Each <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">release</a> has three zips, and its <strong>Source code</strong> download has a script:</p>
+<div class="table-wrap"><table class="versions"><thead><tr><th>File</th><th>What It Is</th></tr></thead><tbody><tr><td><code>liferay-forums-batch.zip</code></td><td>The forum's data: topics, replies, votes, reports, and follows, plus its notification templates and search settings.</td></tr><tr><td><code>liferay-forums-etc-spring-boot.zip</code></td><td>The forum's <strong>microservice</strong>, a small program that runs next to Liferay. It checks every post for bans and locked topics, and sends notifications. Liferay needs its zip, and the microservice itself runs as its own process or container.</td></tr><tr><td><code>liferay-forums-site-initializer.zip</code></td><td>The forum site itself: its pages, roles, and permissions. Deploying it creates one forum site.</td></tr><tr><td><code>scripts/generate-site-initializer-zips.sh</code></td><td>On Liferay Self-Hosted, makes one copy of the site initializer zip per site, to run several forum sites.</td></tr></tbody></table></div>
+<h2 id="choose-where-liferay-runs">Choose Where Liferay Runs<a class="anchor" href="#choose-where-liferay-runs" aria-label="Link to this section">#</a></h2>
+<div class="doc-cards">
+  <a class="card doc" href="tomcat.html"><strong>Liferay Self-Hosted (Tomcat)</strong><span>Liferay installed from a Tomcat bundle. The microservice runs on the same machine or another one.</span></a>
+  <a class="card doc" href="docker.html"><strong>Liferay Self-Hosted (Docker)</strong><span>Liferay and PostgreSQL in containers, and the microservice in a container next to Liferay's.</span></a>
+  <a class="card doc" href="paas.html"><strong>On Liferay PaaS</strong><span>The forum's projects in your PaaS project's repository, deployed with the rest of it.</span></a>
+  <a class="card doc" href="saas.html"><strong>On Liferay SaaS</strong><span>The forum's zips deployed one at a time with Liferay Cloud's command line tool.</span></a>
+</div>
+<p>On Liferay Self-Hosted, you then follow <a href="creating-sites.html">Creating Forum Sites</a>, then <a href="checking.html">Checking the Installation</a>. On Liferay PaaS and Liferay SaaS, the forum site is created during the install. <a href="creating-sites.html#several-sites">Creating Forum Sites</a> covers more forum sites for every install type.</p>
+<p>If you build your own Liferay code with a Liferay Workspace, see <a href="workspace.html">Developing With a Liferay Workspace</a> to add the forum's projects to it.</p>
+<h2 id="why-the-order-matters">Why the Order Matters<a class="anchor" href="#why-the-order-matters" aria-label="Link to this section">#</a></h2>
+<p>The forum is installed in a fixed order: the batch, then the microservice, then the sites. Each step needs the one before it.</p>
+<ul><li><strong>The batch comes first.</strong> When the microservice's zip is deployed, Liferay gives the microservice access to the forum's data, but only to the parts that already exist. Deployed before the batch has finished, the microservice gets no access, and every post is rejected.</li><li><strong>The sites come last, once Liferay has fully started.</strong> A forum site created while Liferay is still starting is missing its topic pages. That happens when a site initializer zip is copied in while Liferay is stopped, so always deploy it into a running Liferay.</li></ul>
+<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="../getting-started.html">Getting Started</a></li><li><a href="deleting.html">Deleting a Forum Site</a></li><li>The <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums#readme">README</a>, with every detail of the installation</li></ul>
+    </article>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="../getting-started.html"><span>Previous</span>Getting Started</a><a class="next" href="tomcat.html"><span>Next</span>Liferay Self-Hosted (Tomcat)</a></nav>
+  </main>
+</div>
+<script>
+  (function () {
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="../../../../assets/liferay-logo-reversed.png">
+        <img src="../../../../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
+      </picture>
+      <span>Liferay Forums is available under Liferay's dual license, LGPL-2.1-or-later or the Liferay DXP EULA. Copyright © 2026 Liferay, Inc.</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums">Liferay Forums on GitHub</a>
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Releases</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+    </nav>
+  </div>
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>

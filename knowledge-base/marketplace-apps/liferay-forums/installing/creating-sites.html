@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creating Forum Sites · Liferay Forums · Liferay User Group APAC</title>
+  <meta name="description" content="Each forum is a Liferay site, created by a site initializer when it&#x27;s deployed into a running Liferay. A site initializer creates exactly one site, so each forum site needs its own. The batch and the microservice are shared by all forum sites, and deployed once.">
+  <meta property="og:title" content="Creating Forum Sites · Liferay Forums">
+  <meta property="og:description" content="Each forum is a Liferay site, created by a site initializer when it&#x27;s deployed into a running Liferay. A site initializer creates exactly one site, so each forum site needs its own. The batch and the microservice are shared by all forum sites, and deployed once.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/creating-sites.html">
+  <meta property="og:url" content="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/creating-sites.html">
+  <meta property="og:site_name" content="Liferay User Group APAC">
+  <meta property="og:image" content="https://lgsapac.github.io/assets/kb/liferay-forums-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=kb2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../../../"><img class="brand-logo" src="../../../../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../../../#how-we-work">Our sponsor</a>
+      <a href="../../../../#resources">Tutorials &amp; code</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+      <a href="../../../../#contact">Contact</a>
+    </nav>
+    <div class="lang" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="../../../../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
+      <a href="../../../../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>Liferay Forums docs</summary>
+    <ul class="docs-nav-list"><li><a href="../">Overview</a></li><li class=""><a href="../getting-started.html">Getting Started</a></li><li class="open"><a href="./">Installing</a><ul><li><a href="tomcat.html">Liferay Self-Hosted (Tomcat)</a></li><li><a href="docker.html">Liferay Self-Hosted (Docker)</a></li><li><a href="paas.html">On Liferay PaaS</a></li><li><a href="saas.html">On Liferay SaaS</a></li><li><a href="creating-sites.html" aria-current="page">Creating Forum Sites</a></li><li><a href="checking.html">Checking the Installation</a></li><li><a href="deleting.html">Deleting a Forum Site</a></li><li><a href="workspace.html">Developing With a Liferay Workspace</a></li></ul></li><li class=""><a href="../using/">Using the Forum</a><ul><li><a href="../using/browsing-and-searching.html">Browsing and Searching</a></li><li><a href="../using/starting-a-discussion.html">Starting a Discussion</a></li><li><a href="../using/replying.html">Replying and Mentions</a></li><li><a href="../using/questions-and-answers.html">Questions and Answers</a></li><li><a href="../using/voting.html">Voting</a></li><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li><li><a href="../using/reporting.html">Reporting Content</a></li></ul></li><li class=""><a href="../moderating/">Moderating</a><ul><li><a href="../moderating/locking.html">Locking Topics</a></li><li><a href="../moderating/priority.html">Pinning Topics with Priority</a></li><li><a href="../moderating/reviewing-reports.html">Reviewing Reports</a></li><li><a href="../moderating/banning.html">Banning Members</a></li></ul></li><li class=""><a href="../administering/">Administering</a><ul><li><a href="../administering/categories.html">Managing Categories</a></li><li><a href="../administering/email-notifications.html">Email Notifications</a></li><li><a href="../administering/customizing.html">Customizing the Forum</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li></ul></li><li class=""><a href="../reference/">Reference</a><ul><li><a href="../reference/roles-and-permissions.html">Roles and Permissions</a></li><li><a href="../reference/pages.html">Pages</a></li><li><a href="../reference/configuration.html">Configuration Reference</a></li><li><a href="../reference/known-issues.html">Known Issues</a></li></ul></li></ul>
+  </details>
+  <main class="docs-main">
+    <p class="docs-crumbs"><a href="../../../../knowledge-base/">Knowledge base</a><span>/</span><a href="../../../../knowledge-base/#marketplace-apps">Marketplace apps</a><span>/</span><a href="../">Liferay Forums</a><span>/</span><a href="./">Installing</a></p>
+    <article class="prose">
+      <h1>Creating Forum Sites</h1>
+<p>Each forum is a Liferay site, created by a site initializer when it's deployed into a running Liferay. A site initializer creates exactly one site, so each forum site needs its own. The batch and the microservice are shared by all forum sites, and deployed once.</p>
+<div class="callout callout-note"><p class="callout-title">Note</p><p>The forum can't be added to a site that already exists, because Liferay sets up a site's pages only when it creates the site. Create a forum site instead, and link to it from your existing site.</p></div>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#one-site">One Site</a></li><li><a href="#several-sites">Several Sites</a><ul><li><a href="#step-1-make-a-site-initializer-for-each-site">Step 1: Make a Site Initializer for Each Site</a></li><li><a href="#step-2-deploy-it-once">Step 2: Deploy It Once</a></li><li><a href="#a-shortcut-on-liferay-self-hosted">A Shortcut on Liferay Self-Hosted</a></li></ul></li><li><a href="#related-information">Related Information</a></li></ul></nav>
+<h2 id="one-site">One Site<a class="anchor" href="#one-site" aria-label="Link to this section">#</a></h2>
+<p><code>liferay-forums-site-initializer.zip</code> creates the site <strong>FORUMS</strong>, at <code>/web/forums</code>.</p>
+<ul><li><strong>Liferay Self-Hosted (Tomcat):</strong> copy the zip into <code>&lt;liferay-home&gt;/osgi/client-extensions</code>. Liferay creates the site in about a minute. Once it exists, remove the zip again.</li><li><p><strong>Liferay Self-Hosted (Docker):</strong> copy the zip into the container, wait for the site, then remove the zip:</p>
+<pre><code class="language-bash">docker cp liferay-forums-site-initializer.zip forums-liferay:/opt/liferay/osgi/client-extensions/
+docker exec forums-liferay rm /opt/liferay/osgi/client-extensions/liferay-forums-site-initializer.zip</code></pre></li><li><strong>Liferay PaaS and Liferay SaaS:</strong> the install creates it; see <a href="paas.html">On Liferay PaaS</a> or <a href="saas.html">On Liferay SaaS</a>.</li></ul>
+<p>Removing the zip doesn't change the site. It keeps the site initializer from creating the site again, empty, if the site is ever deleted.</p>
+<h2 id="several-sites">Several Sites<a class="anchor" href="#several-sites" aria-label="Link to this section">#</a></h2>
+<p>Before you add sites, see <a href="../administering/several-sites.html">Running Several Forum Sites</a>, in particular about moderators.</p>
+<h3 id="step-1-make-a-site-initializer-for-each-site">Step 1: Make a Site Initializer for Each Site<a class="anchor" href="#step-1-make-a-site-initializer-for-each-site" aria-label="Link to this section">#</a></h3>
+<p>You copy the forum's site initializer project once for each site, and give each copy names of its own.</p>
+<ol><li>Download <strong>Source code (zip)</strong> from the <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">release</a>, and unzip it.</li><li>Copy <code>client-extensions/liferay-forums-site-initializer</code> to a name of its own in the same folder, for example <code>client-extensions/liferay-forums-site-initializer-acme</code>. On Liferay PaaS, copy it into <code>liferay/client-extensions</code> in your PaaS project's repository instead.</li><li><p>In the copy, replace <code>client-extension.yaml</code> with one that names the new site. Every name in it must be unique to the copy: the two keys, the OAuth application, and the site's external reference code. For a site named <em>Acme</em>:</p>
+<pre><code class="language-yaml">liferay-forums-site-initializer-acme:
+    name: Liferay Forums Site Initializer Acme
+    oAuthApplicationHeadlessServer: liferay-forums-site-initializer-acme-oahs
+    siteExternalReferenceCode: LIFERAY_ACME
+    siteName: Acme
+    type: siteInitializer
+liferay-forums-site-initializer-acme-oahs:
+    .serviceAddress: localhost:8080
+    .serviceScheme: http
+    name: Liferay Forums Site Initializer Acme OAuth Application Headless Server
+    scopes:
+        -   Liferay.Headless.Site.everything
+    type: oAuthApplicationHeadlessServer</code></pre>
+<p>Liferay builds the site's address from <code>siteName</code>: this site is served at <code>/web/acme</code>.</p></li><li><p>Except on Liferay PaaS, which builds the project itself, build the copy from the unzipped folder. You need Java 17 or later:</p>
+<pre><code class="language-bash">./gradlew :client-extensions:liferay-forums-site-initializer-acme:build</code></pre>
+<p>The zip is <code>client-extensions/liferay-forums-site-initializer-acme/dist/liferay-forums-site-initializer-acme.zip</code>.</p></li></ol>
+<h3 id="step-2-deploy-it-once">Step 2: Deploy It Once<a class="anchor" href="#step-2-deploy-it-once" aria-label="Link to this section">#</a></h3>
+<ul><li><strong>Liferay Self-Hosted (Tomcat or Docker):</strong> deploy each zip as in <a href="#one-site">One Site</a>, then remove it once its site exists.</li><li><strong>Liferay PaaS:</strong> push, and deploy the build. Restart the <code>liferayforumsetcspringboot</code> service, and check the site. Then delete the copy's folder from your repository, push, deploy that build, and restart the service again. Its job would otherwise run again at every deploy, and reset the site's address. See <a href="paas.html#later-deploys">Later Deploys</a>.</li><li><p><strong>Liferay SaaS:</strong> deploy the zip, and never deploy it again: its job would reset the site's address.</p>
+<pre><code class="language-bash">lcp deploy -p &lt;project&gt;-&lt;environment&gt; --extension client-extensions/liferay-forums-site-initializer-acme/dist/liferay-forums-site-initializer-acme.zip</code></pre></li></ul>
+<p>Then check each new site at its address, and post a reply there.</p>
+<h3 id="a-shortcut-on-liferay-self-hosted">A Shortcut on Liferay Self-Hosted<a class="anchor" href="#a-shortcut-on-liferay-self-hosted" aria-label="Link to this section">#</a></h3>
+<p>On Liferay Self-Hosted (Tomcat or Docker), the <code>generate-site-initializer-zips.sh</code> script, in the release's <strong>Source code</strong> download, makes the copies from <code>liferay-forums-site-initializer.zip</code> without building them. It runs on Linux, with Bash, <code>unzip</code>, and <code>zip</code>. Don't use its zips on Liferay PaaS or SaaS: they all share one OAuth application, which works only when they're deployed to Liferay itself.</p>
+<ol><li>Put the script in a folder with <code>liferay-forums-site-initializer.zip</code>.</li><li><p>Edit the <code>SITES</code> list near the top of the script. Each entry maps the site's external reference code to its name:</p>
+<pre><code class="language-bash">declare -A SITES=(
+	[LIFERAY_ACME]="Acme, Inc. site"
+	[LIFERAY_NORTHWIND]="Northwind site"
+)</code></pre></li><li><p>Run it. It writes one zip per site to the <code>out</code> folder:</p>
+<pre><code class="language-bash">bash generate-site-initializer-zips.sh</code></pre></li><li>Deploy the generated zips as in <a href="#one-site">One Site</a>, then remove them once the sites exist.</li></ol>
+<p>A site named <em>Acme, Inc. site</em> is served at <code>/web/acme-inc.-site</code>. To use another address, choose a different name, or change the site's friendly URL in <em>Site Settings</em> after it's created.</p>
+<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="checking.html">Checking the Installation</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li><li><a href="https://github.com/LGSAPAC/lfrgs-liferay-forums#option-2-several-sites">Option 2: Several Sites</a> in the README, with all the script's options</li></ul>
+    </article>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="saas.html"><span>Previous</span>On Liferay SaaS</a><a class="next" href="checking.html"><span>Next</span>Checking the Installation</a></nav>
+  </main>
+</div>
+<script>
+  (function () {
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="../../../../assets/liferay-logo-reversed.png">
+        <img src="../../../../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
+      </picture>
+      <span>Liferay Forums is available under Liferay's dual license, LGPL-2.1-or-later or the Liferay DXP EULA. Copyright © 2026 Liferay, Inc.</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums">Liferay Forums on GitHub</a>
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Releases</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+    </nav>
+  </div>
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>

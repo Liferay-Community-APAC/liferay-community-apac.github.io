@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liferay Self-Hosted (Tomcat) · Liferay Forums · Liferay User Group APAC</title>
+  <meta name="description" content="Follow these steps when Liferay is installed from a Tomcat bundle on a server you manage.">
+  <meta property="og:title" content="Liferay Self-Hosted (Tomcat) · Liferay Forums">
+  <meta property="og:description" content="Follow these steps when Liferay is installed from a Tomcat bundle on a server you manage.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/tomcat.html">
+  <meta property="og:url" content="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/installing/tomcat.html">
+  <meta property="og:site_name" content="Liferay User Group APAC">
+  <meta property="og:image" content="https://lgsapac.github.io/assets/kb/liferay-forums-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=kb2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../../../"><img class="brand-logo" src="../../../../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../../../#how-we-work">Our sponsor</a>
+      <a href="../../../../#resources">Tutorials &amp; code</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+      <a href="../../../../#contact">Contact</a>
+    </nav>
+    <div class="lang" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="../../../../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
+      <a href="../../../../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>Liferay Forums docs</summary>
+    <ul class="docs-nav-list"><li><a href="../">Overview</a></li><li class=""><a href="../getting-started.html">Getting Started</a></li><li class="open"><a href="./">Installing</a><ul><li><a href="tomcat.html" aria-current="page">Liferay Self-Hosted (Tomcat)</a></li><li><a href="docker.html">Liferay Self-Hosted (Docker)</a></li><li><a href="paas.html">On Liferay PaaS</a></li><li><a href="saas.html">On Liferay SaaS</a></li><li><a href="creating-sites.html">Creating Forum Sites</a></li><li><a href="checking.html">Checking the Installation</a></li><li><a href="deleting.html">Deleting a Forum Site</a></li><li><a href="workspace.html">Developing With a Liferay Workspace</a></li></ul></li><li class=""><a href="../using/">Using the Forum</a><ul><li><a href="../using/browsing-and-searching.html">Browsing and Searching</a></li><li><a href="../using/starting-a-discussion.html">Starting a Discussion</a></li><li><a href="../using/replying.html">Replying and Mentions</a></li><li><a href="../using/questions-and-answers.html">Questions and Answers</a></li><li><a href="../using/voting.html">Voting</a></li><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li><li><a href="../using/reporting.html">Reporting Content</a></li></ul></li><li class=""><a href="../moderating/">Moderating</a><ul><li><a href="../moderating/locking.html">Locking Topics</a></li><li><a href="../moderating/priority.html">Pinning Topics with Priority</a></li><li><a href="../moderating/reviewing-reports.html">Reviewing Reports</a></li><li><a href="../moderating/banning.html">Banning Members</a></li></ul></li><li class=""><a href="../administering/">Administering</a><ul><li><a href="../administering/categories.html">Managing Categories</a></li><li><a href="../administering/email-notifications.html">Email Notifications</a></li><li><a href="../administering/customizing.html">Customizing the Forum</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li></ul></li><li class=""><a href="../reference/">Reference</a><ul><li><a href="../reference/roles-and-permissions.html">Roles and Permissions</a></li><li><a href="../reference/pages.html">Pages</a></li><li><a href="../reference/configuration.html">Configuration Reference</a></li><li><a href="../reference/known-issues.html">Known Issues</a></li></ul></li></ul>
+  </details>
+  <main class="docs-main">
+    <p class="docs-crumbs"><a href="../../../../knowledge-base/">Knowledge base</a><span>/</span><a href="../../../../knowledge-base/#marketplace-apps">Marketplace apps</a><span>/</span><a href="../">Liferay Forums</a><span>/</span><a href="./">Installing</a></p>
+    <article class="prose">
+      <h1>Installing on Liferay Self-Hosted (Tomcat)</h1>
+<p>Follow these steps when Liferay is installed from a Tomcat bundle on a server you manage.</p>
+<div class="callout callout-important"><p class="callout-title">Important</p><p>You need file access to the Liferay server, the <a href="./#required-liferay-fixes">required Liferay fixes</a> installed with Liferay's <a href="https://learn.liferay.com/w/dxp/self-hosted-installation-and-upgrades/maintaining-a-liferay-installation/patching-liferay">patching tool</a> or their workarounds, and Liferay must have finished starting before you begin. In the steps below, <code>&lt;liferay-home&gt;</code> is the Liferay installation folder, the one that contains the <code>osgi</code> and <code>routes</code> folders.</p></div>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li><a href="#step-1-download-the-release">Step 1: Download the Release</a></li><li><a href="#step-2-deploy-the-batch">Step 2: Deploy the Batch</a></li><li><a href="#step-3-deploy-the-microservices-zip">Step 3: Deploy the Microservice's Zip</a></li><li><a href="#step-4-start-the-microservice">Step 4: Start the Microservice</a><ul><li><a href="#on-the-liferay-machine">On the Liferay Machine</a></li><li><a href="#on-another-machine">On Another Machine</a></li></ul></li><li><a href="#step-5-set-up-email-notifications">Step 5: Set Up Email Notifications</a></li><li><a href="#step-6-create-the-forum-sites">Step 6: Create the Forum Sites</a></li><li><a href="#related-information">Related Information</a></li></ul></nav>
+<h2 id="step-1-download-the-release">Step 1: Download the Release<a class="anchor" href="#step-1-download-the-release" aria-label="Link to this section">#</a></h2>
+<p>From the <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">release</a>, download:</p>
+<ul><li><code>liferay-forums-batch.zip</code></li><li><code>liferay-forums-etc-spring-boot.zip</code></li><li><code>liferay-forums-site-initializer.zip</code></li><li><strong>Source code (zip)</strong>, only to run several forum sites: it has the script in its <code>scripts</code> folder.</li></ul>
+<h2 id="step-2-deploy-the-batch">Step 2: Deploy the Batch<a class="anchor" href="#step-2-deploy-the-batch" aria-label="Link to this section">#</a></h2>
+<ol><li>Copy <code>liferay-forums-batch.zip</code> into <code>&lt;liferay-home&gt;/osgi/client-extensions</code>.</li><li>Wait until the Liferay log shows five lines containing <code>Finished batch engine import task</code> after the copy. This takes about a minute.</li></ol>
+<div class="callout callout-warning"><p class="callout-title">Warning</p><p>Don't continue until all five have finished. The microservice deployed in the next step only gets access to the parts of the forum that exist by then. Liferay also logs a few of these lines while it starts, so only count the ones after the copy.</p></div>
+<h2 id="step-3-deploy-the-microservices-zip">Step 3: Deploy the Microservice's Zip<a class="anchor" href="#step-3-deploy-the-microservices-zip" aria-label="Link to this section">#</a></h2>
+<p>Copy <code>liferay-forums-etc-spring-boot.zip</code> into <code>&lt;liferay-home&gt;/osgi/client-extensions</code>.</p>
+<p>Liferay registers the microservice and writes its credentials to <code>&lt;liferay-home&gt;/routes/default</code>. Liferay doesn't run the microservice itself; the next step starts it.</p>
+<h2 id="step-4-start-the-microservice">Step 4: Start the Microservice<a class="anchor" href="#step-4-start-the-microservice" aria-label="Link to this section">#</a></h2>
+<p>The microservice must run whenever Liferay runs: posting, notifications, and moderation all depend on it. Run it on the Liferay machine if you can; it's simpler.</p>
+<h3 id="on-the-liferay-machine">On the Liferay Machine<a class="anchor" href="#on-the-liferay-machine" aria-label="Link to this section">#</a></h3>
+<ol><li>Unzip <code>liferay-forums-etc-spring-boot.zip</code> into a folder of your choice, such as <code>/opt/liferay-forums</code>.</li><li><p>From that folder, start it, with <code>LIFERAY_HOME</code> set to the Liferay installation folder. It finds Liferay's address and its credentials there, so there's nothing to configure.</p>
+<p>On Linux:</p>
+<pre><code class="language-bash">LIFERAY_HOME=/opt/liferay ./start.sh</code></pre>
+<p>On Windows:</p>
+<pre><code class="language-bat">set LIFERAY_HOME=C:\liferay
+start.bat</code></pre>
+<p>If it stops with a message that the routes don't exist, its zip isn't deployed to that Liferay yet, or <code>LIFERAY_HOME</code> points to the wrong folder.</p></li><li><p>Check that it's running. This prints <code>READY</code>:</p>
+<pre><code class="language-bash">curl http://localhost:58081/ready</code></pre></li></ol>
+<div class="callout callout-tip"><p class="callout-title">Tip</p><p>To keep it running across reboots on Linux, run it as a system service. For example, a systemd unit at <code>/etc/systemd/system/liferay-forums.service</code>:</p></div>
+<pre><code class="language-ini">[Unit]
+Description=Liferay Forums microservice
+After=network.target
+
+[Service]
+User=liferay
+Environment=LIFERAY_HOME=/opt/liferay
+WorkingDirectory=/opt/liferay-forums
+ExecStart=/opt/liferay-forums/start.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<p>Then run <code>sudo systemctl enable --now liferay-forums</code>.</p>
+<h3 id="on-another-machine">On Another Machine<a class="anchor" href="#on-another-machine" aria-label="Link to this section">#</a></h3>
+<p>Liferay always calls the microservice at <code>localhost:58081</code>. To run the microservice on another machine, fill in its <code>application.properties</code> with Liferay's address and the microservice's credentials, and forward port <code>58081</code> on the Liferay machine to it. The README describes both, step by step: <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums#option-2-on-another-machine">Option 2: On Another Machine</a>.</p>
+<h2 id="step-5-set-up-email-notifications">Step 5: Set Up Email Notifications<a class="anchor" href="#step-5-set-up-email-notifications" aria-label="Link to this section">#</a></h2>
+<p>The batch created two email templates with a placeholder sender address. Set real addresses, then restart the microservice, before members get email. See <a href="../administering/email-notifications.html">Email Notifications</a>.</p>
+<h2 id="step-6-create-the-forum-sites">Step 6: Create the Forum Sites<a class="anchor" href="#step-6-create-the-forum-sites" aria-label="Link to this section">#</a></h2>
+<p>Continue with <a href="creating-sites.html">Creating Forum Sites</a>.</p>
+<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="checking.html">Checking the Installation</a></li><li><a href="./">Installing</a></li></ul>
+    </article>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="./"><span>Previous</span>Installing</a><a class="next" href="docker.html"><span>Next</span>Liferay Self-Hosted (Docker)</a></nav>
+  </main>
+</div>
+<script>
+  (function () {
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="../../../../assets/liferay-logo-reversed.png">
+        <img src="../../../../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
+      </picture>
+      <span>Liferay Forums is available under Liferay's dual license, LGPL-2.1-or-later or the Liferay DXP EULA. Copyright © 2026 Liferay, Inc.</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums">Liferay Forums on GitHub</a>
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Releases</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+    </nav>
+  </div>
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>

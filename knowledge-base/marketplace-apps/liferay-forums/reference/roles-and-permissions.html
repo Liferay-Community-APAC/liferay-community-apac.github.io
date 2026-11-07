@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roles and Permissions · Liferay Forums · Liferay User Group APAC</title>
+  <meta name="description" content="The site initializer creates three roles and sets the forum&#x27;s permissions. Assign roles in Control Panel → Users → Roles, or, for Forum Banned, through moderation.">
+  <meta property="og:title" content="Roles and Permissions · Liferay Forums">
+  <meta property="og:description" content="The site initializer creates three roles and sets the forum&#x27;s permissions. Assign roles in Control Panel → Users → Roles, or, for Forum Banned, through moderation.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/reference/roles-and-permissions.html">
+  <meta property="og:url" content="https://lgsapac.github.io/knowledge-base/marketplace-apps/liferay-forums/reference/roles-and-permissions.html">
+  <meta property="og:site_name" content="Liferay User Group APAC">
+  <meta property="og:image" content="https://lgsapac.github.io/assets/kb/liferay-forums-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../../assets/site.css?v=kb2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../../../"><img class="brand-logo" src="../../../../assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>User Group APAC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../../../../#how-we-work">Our sponsor</a>
+      <a href="../../../../#resources">Tutorials &amp; code</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+      <a href="../../../../#contact">Contact</a>
+    </nav>
+    <div class="lang" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="../../../../ja/#knowledge-base" hreflang="ja" lang="ja">日本語</a>
+      <a href="../../../../zh/#knowledge-base" hreflang="zh-Hans" lang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs">
+  <details class="docs-nav" id="docs-nav">
+    <summary>Liferay Forums docs</summary>
+    <ul class="docs-nav-list"><li><a href="../">Overview</a></li><li class=""><a href="../getting-started.html">Getting Started</a></li><li class=""><a href="../installing/">Installing</a><ul><li><a href="../installing/tomcat.html">Liferay Self-Hosted (Tomcat)</a></li><li><a href="../installing/docker.html">Liferay Self-Hosted (Docker)</a></li><li><a href="../installing/paas.html">On Liferay PaaS</a></li><li><a href="../installing/saas.html">On Liferay SaaS</a></li><li><a href="../installing/creating-sites.html">Creating Forum Sites</a></li><li><a href="../installing/checking.html">Checking the Installation</a></li><li><a href="../installing/deleting.html">Deleting a Forum Site</a></li><li><a href="../installing/workspace.html">Developing With a Liferay Workspace</a></li></ul></li><li class=""><a href="../using/">Using the Forum</a><ul><li><a href="../using/browsing-and-searching.html">Browsing and Searching</a></li><li><a href="../using/starting-a-discussion.html">Starting a Discussion</a></li><li><a href="../using/replying.html">Replying and Mentions</a></li><li><a href="../using/questions-and-answers.html">Questions and Answers</a></li><li><a href="../using/voting.html">Voting</a></li><li><a href="../using/subscriptions-and-notifications.html">Subscriptions and Notifications</a></li><li><a href="../using/reporting.html">Reporting Content</a></li></ul></li><li class=""><a href="../moderating/">Moderating</a><ul><li><a href="../moderating/locking.html">Locking Topics</a></li><li><a href="../moderating/priority.html">Pinning Topics with Priority</a></li><li><a href="../moderating/reviewing-reports.html">Reviewing Reports</a></li><li><a href="../moderating/banning.html">Banning Members</a></li></ul></li><li class=""><a href="../administering/">Administering</a><ul><li><a href="../administering/categories.html">Managing Categories</a></li><li><a href="../administering/email-notifications.html">Email Notifications</a></li><li><a href="../administering/customizing.html">Customizing the Forum</a></li><li><a href="../administering/several-sites.html">Running Several Forum Sites</a></li></ul></li><li class="open"><a href="./">Reference</a><ul><li><a href="roles-and-permissions.html" aria-current="page">Roles and Permissions</a></li><li><a href="pages.html">Pages</a></li><li><a href="configuration.html">Configuration Reference</a></li><li><a href="known-issues.html">Known Issues</a></li></ul></li></ul>
+  </details>
+  <main class="docs-main">
+    <p class="docs-crumbs"><a href="../../../../knowledge-base/">Knowledge base</a><span>/</span><a href="../../../../knowledge-base/#marketplace-apps">Marketplace apps</a><span>/</span><a href="../">Liferay Forums</a><span>/</span><a href="./">Reference</a></p>
+    <article class="prose">
+      <h1>Roles and Permissions</h1>
+<p>The site initializer creates three roles and sets the forum's permissions. Assign roles in <em>Control Panel</em> → <em>Users</em> → <em>Roles</em>, or, for <strong>Forum Banned</strong>, through <a href="../moderating/banning.html">moderation</a>.</p>
+<div class="table-wrap"><table class="versions"><thead><tr><th>Role</th><th>Type</th><th>Purpose</th></tr></thead><tbody><tr><td><strong>Forum Moderator</strong></td><td>Regular</td><td>Moderates topics and reports, and bans members</td></tr><tr><td><strong>Forum Category Admin</strong></td><td>Regular</td><td>Manages the forum's categories</td></tr><tr><td><strong>Forum Banned</strong></td><td>Site</td><td>Stops a member from posting on that site</td></tr></tbody></table></div>
+<div class="callout callout-important"><p class="callout-title">Important</p><p><strong>Forum Moderator</strong> and <strong>Forum Category Admin</strong> are regular roles, so they apply to the whole Liferay instance, not to one site. A Forum Moderator moderates every forum site, and a Forum Category Admin can add, change, and delete categories on every site, not only forum sites. Only bans apply to one site. Give these two roles only to people you trust with every forum site.</p></div>
+<h2 id="what-each-group-can-do">What Each Group Can Do<a class="anchor" href="#what-each-group-can-do" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table class="versions"><thead><tr><th>Action</th><th>Guest</th><th>Signed-in member</th><th>Forum Moderator</th><th>Forum Category Admin</th></tr></thead><tbody><tr><td>Read topics and search</td><td></td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>Start topics, reply, vote, attach files</td><td></td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>Follow topics and get notifications</td><td></td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>Report a topic</td><td></td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>Edit or delete any topic or reply</td><td></td><td></td><td>✓</td><td></td></tr><tr><td>Set a topic's priority</td><td></td><td></td><td>✓</td><td></td></tr><tr><td>Lock and unlock topics</td><td></td><td></td><td>✓</td><td></td></tr><tr><td>Mark an answer on any question</td><td></td><td></td><td>✓</td><td></td></tr><tr><td>Review reports, ban and unban members</td><td></td><td></td><td>✓</td><td></td></tr><tr><td>Create, edit, and delete categories</td><td></td><td></td><td></td><td>✓</td></tr></tbody></table></div>
+<p>Only signed-in members can read the forum. Signed-out visitors see the forum's pages, but no topics, and a topic's address shows a not found page. To open the forum to them, see <a href="#let-guests-read-the-forum">Let Guests Read the Forum</a>.</p>
+<p>Members can edit and delete their own topics and replies. In 1.0.0, a question's author can't mark its answer yet; see <a href="known-issues.html">Known Issues</a>. Liferay's <strong>Administrator</strong> role can do everything.</p>
+<div class="callout callout-note"><p class="callout-title">Note</p><p>A banned member keeps the permissions to read, but every new topic or reply is rejected on the site where they are banned.</p></div>
+<h2 id="let-guests-read-the-forum">Let Guests Read the Forum<a class="anchor" href="#let-guests-read-the-forum" aria-label="Link to this section">#</a></h2>
+<p>Signed-out visitors have Liferay's <strong>Guest</strong> role. To let them read topics, replies, and categories, and search, give the <strong>Guest</strong> role view permissions and let it call the two category APIs the forum's pages use. Guests still can't start topics, reply, vote, follow topics, or report content.</p>
+<div class="callout callout-important"><p class="callout-title">Important</p><p>These permissions apply to every forum site on the Liferay instance, and to the forum's APIs as well as its pages: anyone can then read every topic and reply through <code>/o/c/c2m0threads</code> and <code>/o/c/c2m0messages</code>.</p></div>
+<h3 id="grant-the-permissions">Grant the Permissions<a class="anchor" href="#grant-the-permissions" aria-label="Link to this section">#</a></h3>
+<ol><li>Open <em>Control Panel</em> → <em>Users</em> → <em>Roles</em>, click <strong>Guest</strong>, and open the <strong>Define Permissions</strong> tab.</li><li><p>Search for <code>C2M0</code>. Under <em>Objects</em>, open each of these, select <strong>View</strong> in its entry permissions (for example, <strong>C2M0 Thread</strong> → <strong>View</strong>), and click <strong>Save</strong>:</p>
+<ul><li><strong>C2M0 Thread</strong></li><li><strong>C2M0 Message</strong></li><li><strong>C2M0 Vote</strong></li><li><strong>C2M0 User</strong></li><li><strong>C2M0 Attachment</strong></li></ul>
+<p>Leave <strong>C2M0 Subscription</strong> and <strong>C2M0 Suspicious Activity</strong> as they are.</p></li><li>Search for <code>Categories</code>, and open <em>Site and Asset Library Administration</em> → <em>Categorization</em> → <strong>Categories</strong>. Under <em>Resource Permissions</em>, select <strong>View</strong> for <strong>Category Vocabulary</strong> and for <strong>Category</strong>, and click <strong>Save</strong>.</li><li><p>Open <em>Control Panel</em> → <em>Security</em> → <em>Service Access Policy</em>, and click <strong>FORUM_GUEST_ACCESS</strong>. Under <strong>Allowed Service Signatures</strong>, click <strong>Switch to Advanced Mode</strong>, add these two lines below the existing ones, and click <strong>Save</strong>:</p>
+<pre><code>com.liferay.headless.admin.taxonomy.internal.resource.v1_0.BaseTaxonomyCategoryResourceImpl#getTaxonomyVocabularyTaxonomyCategoriesPage
+com.liferay.headless.admin.taxonomy.internal.resource.v1_0.BaseTaxonomyVocabularyResourceImpl#getSiteTaxonomyVocabulariesPage</code></pre>
+<p>Without them, guests can read topics, but the discussions list shows no categories in its breadcrumb and <strong>All Categories</strong> menu.</p></li></ol>
+<p>Sign out and open the forum to check: the home page, the discussions list, topic pages, and search results now show topics.</p>
+<h3 id="undo-it">Undo It<a class="anchor" href="#undo-it" aria-label="Link to this section">#</a></h3>
+<ol><li>In the <strong>Guest</strong> role's <strong>Define Permissions</strong> tab, open <em>Summary</em>, and click <strong>Remove</strong> next to each permission you added: the five <strong>C2M0</strong> view permissions, and <strong>Category Vocabulary</strong> and <strong>Category</strong> view.</li><li>In <strong>FORUM_GUEST_ACCESS</strong>, delete the two lines you added from <strong>Allowed Service Signatures</strong>, and click <strong>Save</strong>. Keep the two <code>ObjectEntryResourceImpl</code> lines that were there before.</li></ol>
+<p>Signed-out visitors can then no longer read topics.</p>
+<h2 id="related-information">Related Information<a class="anchor" href="#related-information" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="../moderating/">Moderating</a></li><li><a href="pages.html">Pages</a></li></ul>
+    </article>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="./"><span>Previous</span>Reference</a><a class="next" href="pages.html"><span>Next</span>Pages</a></nav>
+  </main>
+</div>
+<script>
+  (function () {
+    var nav = document.getElementById('docs-nav');
+    var mq = window.matchMedia('(min-width: 961px)');
+    function sync() { if (mq.matches) nav.open = true; }
+    sync(); mq.addEventListener('change', sync);
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="../../../../assets/liferay-logo-reversed.png">
+        <img src="../../../../assets/liferay-logo-color.png" alt="Liferay" width="116" height="32">
+      </picture>
+      <span>Liferay Forums is available under Liferay's dual license, LGPL-2.1-or-later or the Liferay DXP EULA. Copyright © 2026 Liferay, Inc.</span>
+    </div>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums">Liferay Forums on GitHub</a>
+      <a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Releases</a>
+      <a href="../../../../knowledge-base/">Knowledge base</a>
+    </nav>
+  </div>
+  <p class="wrap disclaimer">Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>

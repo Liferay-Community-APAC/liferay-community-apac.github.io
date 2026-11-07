@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../assets/site.css?v=kb1">
+  <link rel="stylesheet" href="../../../assets/site.css?v=kb2">
 </head>
 <body>
 
@@ -48,8 +48,9 @@
         <h1>Liferay Forums</h1>
         <p class="lead">Modern discussion forums for Liferay DXP. Members ask questions, share answers, and follow the conversations they care about, while moderators keep the community healthy.</p>
         <div class="btns">
-          <a class="btn" href="https://lgsapac.github.io/lfrgs-liferay-forums/installing/">Install it</a>
-          <a class="btn ghost" href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Download from GitHub</a>
+          <a class="btn" href="getting-started.html">Get started</a>
+          <a class="btn ghost" href="installing/">Install it</a>
+          <a class="btn ghost" href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases">Download</a>
         </div>
       </div>
     </div>
@@ -79,12 +80,12 @@
         <p>Everything you need to install, use, moderate and administer Liferay Forums.</p>
       </div>
       <div class="doc-cards">
-        <a class="card doc" href="#getting-started"><strong>Getting Started</strong><span>What Liferay Forums includes and how to set up your first forum site.</span></a>
-        <a class="card doc" href="https://lgsapac.github.io/lfrgs-liferay-forums/installing/"><strong>Installing</strong><span>Step-by-step installation on Liferay Self-Hosted (Tomcat or Docker), or on Liferay PaaS or SaaS.</span></a>
-        <a class="card doc" href="https://lgsapac.github.io/lfrgs-liferay-forums/using/"><strong>Using the Forum</strong><span>Start discussions, reply, ask questions, vote, and follow topics.</span></a>
-        <a class="card doc" href="https://lgsapac.github.io/lfrgs-liferay-forums/moderating/"><strong>Moderating</strong><span>Lock topics, review reports, and ban members who break the rules.</span></a>
-        <a class="card doc" href="https://lgsapac.github.io/lfrgs-liferay-forums/administering/"><strong>Administering</strong><span>Manage categories, email notifications, the site's look, and several forum sites.</span></a>
-        <a class="card doc" href="https://lgsapac.github.io/lfrgs-liferay-forums/reference/"><strong>Reference</strong><span>Roles and permissions, pages, configuration, and known issues.</span></a>
+        <a class="card doc" href="getting-started.html"><strong>Getting Started</strong><span>What Liferay Forums includes and how to set up your first forum site.</span></a>
+        <a class="card doc" href="installing/"><strong>Installing</strong><span>Step-by-step installation on Liferay Self-Hosted (Tomcat or Docker), or on Liferay PaaS or SaaS.</span></a>
+        <a class="card doc" href="using/"><strong>Using the Forum</strong><span>Start discussions, reply, ask questions, vote, and follow topics.</span></a>
+        <a class="card doc" href="moderating/"><strong>Moderating</strong><span>Lock topics, review reports, and ban members who break the rules.</span></a>
+        <a class="card doc" href="administering/"><strong>Administering</strong><span>Manage categories, email notifications, the site's look, and several forum sites.</span></a>
+        <a class="card doc" href="reference/"><strong>Reference</strong><span>Roles and permissions, pages, configuration, and known issues.</span></a>
       </div>
     </div>
   </section>
@@ -108,23 +109,7 @@
     </div>
   </section>
 
-  <section id="getting-started" class="alt">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="kicker">Getting started</span>
-        <h2>From install to a working forum</h2>
-        <p>Liferay Forums 1.0.0 runs on Liferay DXP 2026.Q1 LTS with the <a href="https://lgsapac.github.io/lfrgs-liferay-forums/installing/#required-liferay-fixes">required Liferay fixes</a>. Follow <a href="https://lgsapac.github.io/lfrgs-liferay-forums/installing/">Installing</a> for Liferay Self-Hosted (Tomcat or Docker), Liferay PaaS or Liferay SaaS. When it finishes, the forum is available at <code>/web/forums</code>. Then complete these steps as an administrator:</p>
-      </div>
-      <ol class="setup">
-        <li><p><strong>Create categories.</strong> Open <strong>Forum Categories Admin</strong> and click <strong>Seed Default Categories</strong>, or add your own. Members can't post until at least one category exists. See <a href="https://lgsapac.github.io/lfrgs-liferay-forums/administering/categories.html">Managing Categories</a>.</p></li>
-        <li><p><strong>Set up email notifications.</strong> Set the sender address of the forum's email templates and of your Liferay instance, then restart the microservice, which reads the templates only when it starts. See <a href="https://lgsapac.github.io/lfrgs-liferay-forums/administering/email-notifications.html">Email Notifications</a>.</p></li>
-        <li><p><strong>Assign moderators.</strong> Give the <strong>Forum Moderator</strong> role to the people who will moderate, and <strong>Forum Category Admin</strong> to the people who will manage categories. See <a href="https://lgsapac.github.io/lfrgs-liferay-forums/reference/roles-and-permissions.html">Roles and Permissions</a>.</p></li>
-        <li><p><strong>Post a welcome topic.</strong> Use <strong>New Discussion</strong> to post community guidelines, and give it the <strong>Announcement</strong> priority so it stays at the top.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="versions">
+  <section id="versions" class="alt">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">Supported versions</span>
@@ -138,7 +123,7 @@
             <tr>
               <td><a href="https://github.com/LGSAPAC/lfrgs-liferay-forums/releases/tag/v1.0.0">1.0.0</a></td>
               <td>Latest release</td>
-              <td>2026.Q1 LTS, with the <a href="https://lgsapac.github.io/lfrgs-liferay-forums/installing/#required-liferay-fixes">required Liferay fixes</a>. Tested on 2026.Q1.1 and 2026.Q1.4.</td>
+              <td>2026.Q1 LTS, with the <a href="installing/#required-liferay-fixes">required Liferay fixes</a>. Tested on 2026.Q1.1 and 2026.Q1.4.</td>
             </tr>
           </tbody>
         </table>
