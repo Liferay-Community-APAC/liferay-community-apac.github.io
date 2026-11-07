@@ -33,39 +33,40 @@
 
   var STRINGS = {
     en: {
-      home: '', brandSub: 'User Group APAC', navLabel: 'Main',
+      home: '', brandSub: 'Community APAC', navLabel: 'Main',
       nav: [['#how-we-work', 'Our sponsor'], ['#resources', 'Tutorials & code'], ['knowledge-base/', 'Knowledge base'],
             ['#stay-updated', 'Stay updated'], ['#contact', 'Contact']],
-      langLabel: 'Language', search: 'Search', searchTitle: 'Search the site', close: 'Close',
+      langLabel: 'Language', menu: 'Menu', search: 'Search', searchTitle: 'Search the site', close: 'Close',
       searchUnavailable: 'Search becomes available once the site is published.',
-      footerBrand: 'Liferay User Group APAC · Sponsored by Liferay Customer Success', footerLabel: 'Footer',
+      footerBrand: 'Liferay Community APAC · Sponsored by Liferay Customer Success', footerLabel: 'Footer', marketplace: 'Liferay Community apps on Liferay Marketplace', 
       footerLinks: [['https://www.liferay.com/', 'liferay.com'], ['https://learn.liferay.com/', 'Liferay Learn'],
                     ['https://github.com/Liferay-Community-APAC', 'GitHub']],
       disclaimer: 'Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.'
     },
     ja: {
-      home: 'ja/', brandSub: 'ユーザーグループ APAC', navLabel: 'メイン',
+      home: 'ja/', brandSub: 'コミュニティ APAC', navLabel: 'メイン',
       nav: [['#how-we-work', 'スポンサー'], ['#resources', 'チュートリアル'], ['#knowledge-base', 'ナレッジベース'],
             ['#stay-updated', '最新情報'], ['#contact', 'お問い合わせ']],
-      langLabel: '言語', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
+      langLabel: '言語', menu: 'メニュー', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
       searchUnavailable: '検索はサイトの公開後に利用できます。',
-      footerBrand: 'Liferay ユーザーグループ APAC · スポンサー：Liferay カスタマーサクセス', footerLabel: 'フッター',
+      footerBrand: 'Liferay コミュニティ APAC · スポンサー：Liferay カスタマーサクセス', footerLabel: 'フッター', marketplace: 'Liferay Marketplace の Liferay Community アプリ', 
       footerLinks: [['https://www.liferay.co.jp/', 'liferay.co.jp'], ['https://learn.liferay.com/', 'Liferay Learn'],
                     ['https://github.com/Liferay-Community-APAC', 'GitHub']],
       disclaimer: '本サイトのアプリ、チュートリアル、サンプルコード、ガイドは非公式のものであり、現状のまま提供されます。ご利用は自己責任でお願いします。'
     },
     zh: {
-      home: 'zh/', brandSub: '用户组 APAC', navLabel: '主导航',
+      home: 'zh/', brandSub: '社区 APAC', navLabel: '主导航',
       nav: [['#how-we-work', '赞助方'], ['#resources', '教程与代码'], ['#knowledge-base', '知识库'],
             ['#stay-updated', '获取最新信息'], ['#contact', '联系我们']],
-      langLabel: '语言', search: '搜索', searchTitle: '搜索本站', close: '关闭',
+      langLabel: '语言', menu: '菜单', search: '搜索', searchTitle: '搜索本站', close: '关闭',
       searchUnavailable: '网站发布后即可使用搜索。',
-      footerBrand: 'Liferay 用户组 APAC · 赞助方：Liferay 客户成功团队', footerLabel: '页脚',
+      footerBrand: 'Liferay 社区 APAC · 赞助方：Liferay 客户成功团队', footerLabel: '页脚', marketplace: 'Liferay Marketplace 上的 Liferay Community 应用', 
       footerLinks: [['https://www.liferay.com.cn/', 'liferay.com.cn'], ['https://learn.liferay.com/', 'Liferay Learn'],
                     ['https://github.com/Liferay-Community-APAC', 'GitHub']],
       disclaimer: '本网站上的应用、教程、示例代码和指南均为非官方内容，按“原样”提供，使用风险自负。'
     }
   };
+  var MARKETPLACE = 'https://marketplace.liferay.com/e/publisher-details/29282497/30020268'; // Liferay's "Liferay Community" publisher page
   var LANGS = [['en', 'EN', 'en'], ['ja', '日本語', 'ja'], ['zh', '中文', 'zh-CN']];
   var HREFLANG = { en: 'en', ja: 'ja', zh: 'zh-Hans' };
 
@@ -112,13 +113,29 @@
     el.innerHTML =
       '<div class="wrap">' +
         '<a class="brand" href="' + esc(homeUrl) + '"><img class="brand-logo" src="' + ROOT + 'assets/liferay-logo-reversed.png" alt="Liferay" width="102" height="28"><small>' + esc(t.brandSub) + '</small></a>' +
-        '<nav class="nav" aria-label="' + esc(t.navLabel) + '">' + nav + '</nav>' +
+        '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
+          '<span class="visually-hidden">' + esc(t.menu) + '</span></button>' +
+        '<nav class="nav" id="site-nav" aria-label="' + esc(t.navLabel) + '">' + nav + '</nav>' +
         '<button class="search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K Meta+K">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
           '<span>' + esc(t.search) + '</span></button>' +
         '<div class="lang" aria-label="' + esc(t.langLabel) + '">' + langs + '</div>' +
       '</div>';
     el.querySelector('.search-btn').addEventListener('click', openSearch);
+
+    // Phone menu: below 720px the menu links fold into a panel behind the menu button.
+    var btn = el.querySelector('.menu-btn');
+    function setMenu(open) {
+      el.classList.toggle('menu-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function () { setMenu(!el.classList.contains('menu-open')); });
+    el.querySelector('.nav').addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && el.classList.contains('menu-open')) { setMenu(false); btn.focus(); }
+    });
+    document.addEventListener('click', function (e) { if (!el.contains(e.target)) setMenu(false); });
   }
 
   function renderFooter(el) {
@@ -137,7 +154,7 @@
         '<nav aria-label="' + esc(t.footerLabel) + '">' + links + '</nav>' +
       '</div>' +
       (note ? '<p class="wrap disclaimer">' + note.innerHTML + '</p>' : '') +
-      '<p class="wrap disclaimer">' + esc(t.disclaimer) + '</p>';
+      '<p class="wrap disclaimer">' + esc(t.disclaimer) + ' <a href="' + MARKETPLACE + '">' + esc(t.marketplace) + '</a></p>';
   }
 
   // ---------- Search (Pagefind) ----------
