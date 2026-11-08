@@ -144,7 +144,7 @@
           "src": "assets/apps/liferay-forums/discussions.png",
           "width": 1280,
           "height": 860,
-          "caption": "Browse discussions by category, with replies, votes and solved questions at a glance."
+          "caption": "Browse discussions, with announcements, tags and reply counts at a glance."
         },
         {
           "src": "assets/apps/liferay-forums/topic-solved.png",
@@ -156,17 +156,17 @@
           "src": "assets/apps/liferay-forums/search.png",
           "width": 1280,
           "height": 860,
-          "caption": "Search topics and narrow results by category, tag, author and date."
+          "caption": "Search topics and narrow the results by category, tag, author and date."
         },
         {
           "src": "assets/apps/liferay-forums/moderation-pending.png",
           "width": 1280,
           "height": 860,
-          "caption": "Review reported content in the moderation queue."
+          "caption": "Review reported content in the moderation queue, then validate or dismiss it."
         }
       ],
       "docs": "liferay-forums/",
-      "download": "https://github.com/LGSAPAC/lfrgs-liferay-forums/releases",
+      "download": "https://github.com/Liferay-Community-APAC/liferay-forums/tree/downloads/1.0.0",
       "repo": "https://github.com/LGSAPAC/lfrgs-liferay-forums",
       "marketplace": null,
       "search": "liferay-forums/pagefind/",
