@@ -75,10 +75,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=c4">
-  <script src="assets/site-chrome.js?v=13" defer></script>
+  <link rel="stylesheet" href="assets/site.css?v=c5">
+  <script src="assets/site-chrome.js?v=14" defer></script>
 </head>
-<body>
+<body data-section="home">
 
 <header class="site-header" data-site-header>
   <div class="wrap">
@@ -94,100 +94,48 @@
         <h1>Liferay Community APAC</h1>
         <p class="lead">A community for individual users, customers, partners and Liferay Solution Architects and Engineers who build with and run Liferay DXP across Asia Pacific, sharing tutorials, sample code and practical know-how.</p>
         <div class="btns">
-          <a class="btn" href="https://www.liferay.com/contact-us">Contact us</a>
-          <a class="btn ghost" href="#resources">Explore tutorials</a>
+          <a class="btn" href="marketplace-apps/">Browse Marketplace Apps</a>
+          <a class="btn ghost" href="tutorials/">Tutorials &amp; Tools</a>
         </div>
       </div>
       <div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
   </section>
 
-
-  <section id="resources" class="alt">
+  <section id="explore" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">Tutorials &amp; sample code</span>
-        <h2>Practical resources for Liferay DXP</h2>
-        <p>We publish tutorials, sample code and tools for Liferay DXP that help with common implementation, upgrade and migration tasks. New material is added regularly.</p>
+        <span class="kicker">Explore</span>
+        <h2>What you'll find here</h2>
+        <p>Marketplace Apps, Solution Recipes, tutorials and tools for Liferay DXP, and a community to share them with.</p>
       </div>
-      <div class="notice" role="note">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r=".6"/></svg>
-        <div>
-          <strong>Unofficial resources. Use at your own risk.</strong>
-          <p>The tutorials, sample code and guides here are unofficial examples. They are not official Liferay products or documentation. Test them thoroughly in a non-production environment before relying on them.</p>
-        </div>
-      </div>
-      <div class="resources">
-        <article class="card resource">
-          <span class="tag">Tutorial</span>
-          <h3>Native iOS app on Liferay DXP</h3>
-          <p>A step-by-step tutorial and reference SwiftUI app built on Liferay DXP 2026.Q1's headless REST APIs. Users sign in with OAuth 2.0 and PKCE, then manage their profile, addresses and a custom Liferay Object, with no third-party dependencies. Partly tested.</p>
-          <span class="meta">12 chapters · Swift · SwiftUI · OAuth 2.0</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">Start the tutorial →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">Tutorial</span>
-          <h3>SharePoint Online to Liferay DXP migration</h3>
-          <p>A 14-chapter hands-on tutorial, with working tooling, for migrating a live SharePoint Online site, or SharePoint Server on premises, to Liferay DXP 2026.Q3 and its new CMS. MCP servers let an AI agent help inventory the source, plan the mapping and check the result, and a mock SharePoint lets you try it without a tenant.</p>
-          <span class="meta">14 chapters · Python · MCP</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">Start the tutorial →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">Tutorial</span>
-          <h3>Liferay DXP self-hosted on Amazon EC2</h3>
-          <p>A step-by-step guide to running Liferay DXP on Amazon EC2, as a single instance or in high availability, with Docker or the Tomcat bundle. Terraform builds the infrastructure and GitHub Actions deploys your code. Draft, partly tested on AWS.</p>
-          <span class="meta">18 sections · Terraform · Docker · GitHub Actions</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial">Start the tutorial →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">Sample code</span>
-          <h3>Sample workspace for Liferay DXP on EC2</h3>
-          <p>The companion to the EC2 guide: a Liferay Workspace for DXP 2026.Q3 with an OSGi module, a CSS client extension and a React client extension, plus GitHub Actions that build an image, push it to Amazon ECR and deploy it to your EC2 instances. Draft.</p>
-          <span class="meta">Liferay Workspace · React · GitHub Actions</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-sample-workspace">View on GitHub →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">Tool</span>
-          <h3>Liferay upgrade report script</h3>
-          <p>A web page that finds the right read-only Groovy script for your version, from Liferay Portal CE 6.1 to DXP 2026.Q3, and walks you through collecting an upgrade-readiness report from the Script Console. In seven languages.</p>
-          <span class="meta">CE 6.1 to DXP 2026.Q3 · Groovy · 7 languages</span>
-          <a class="more" href="https://liferay-community-apac.github.io/liferay-upgrade-report-script/">Open the tool →</a>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/liferay-upgrade-report-script">View on GitHub →</a>
-        </article>
-      </div>
-      <div class="subhead">
-        <h3>Local user groups</h3>
-        <p>Join a Liferay user group near you on Meetup.</p>
-      </div>
-      <div class="groups">
-        <a class="card group" href="https://www.meetup.com/liferay-user-group-india/" lang="en">
-          <span class="region">India</span>
-          <strong>Liferay India User Group</strong>
-          <span class="more">Join on Meetup →</span>
+      <div class="sections">
+        <!-- site:sections -->
+        <a class="card section-card" href="marketplace-apps/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+          <h3>Marketplace Apps</h3>
+          <p>Apps that add features to Liferay DXP, each with a full user guide.</p>
+          <span class="meta">1 Marketplace App</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-japan-user-group/" lang="en">
-          <span class="region">Japan</span>
-          <strong>Liferay Japan User Group</strong>
-          <span class="more">Join on Meetup →</span>
+        <a class="card section-card" href="solution-recipes/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7 15h10"/></svg></span>
+          <h3>Solution Recipes</h3>
+          <p>Step-by-step recipes that combine Marketplace Apps, tutorials and DXP features into a complete use case.</p>
+          <span class="meta">First recipes coming soon</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-australia/" lang="en">
-          <span class="region">Australia</span>
-          <strong>Liferay Australia User Group</strong>
-          <span class="more">Join on Meetup →</span>
+        <a class="card section-card" href="tutorials/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></span>
+          <h3>Tutorials &amp; Tools</h3>
+          <p>Step-by-step tutorials, sample code and tools for implementation, upgrade and migration tasks.</p>
+          <span class="meta">5 tutorials, samples and tools</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-user-group-south-east-asia/" lang="en">
-          <span class="region">Southeast Asia</span>
-          <strong>Liferay User Group - Southeast Asia</strong>
-          <span class="more">Join on Meetup →</span>
+        <a class="card section-card" href="community/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5a5 5 0 0 1 5.5 5"/></svg></span>
+          <h3>Community</h3>
+          <p>Local user groups, events and ways to stay updated.</p>
+          <span class="meta">India · Japan · Australia · Southeast Asia</span>
         </a>
-      </div>
-      <div class="card events">
-        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
-        <div>
-          <h3>Upcoming events</h3>
-          <p>See upcoming Liferay user group events on Meetup.</p>
-        </div>
-        <a class="btn" href="https://www.meetup.com/pro/liferay/">View upcoming events →</a>
+        <!-- /site:sections -->
       </div>
     </div>
   </section>
@@ -227,69 +175,81 @@
         <!-- /apps:showcase -->
       </div>
       <p class="support-note">These Marketplace Apps aren't official Liferay products and don't receive official Liferay support, like the Marketplace Apps from <a href="https://marketplace.liferay.com/e/publisher-details/29282497/30020268">Liferay Community</a> on Liferay Marketplace. They aren't updated for every quarterly release: some are maintained only for certain quarterly releases, as needed. Best-effort support may be available for accounts with a Technical Account Manager (TAM) package, on a case-by-case basis. Contact your Success Delivery Manager for details.</p>
+      <div class="btns section-more">
+        <a class="btn outline" href="marketplace-apps/">All Marketplace Apps →</a>
+      </div>
     </div>
   </section>
 
-  <section id="knowledge-base" class="alt">
+  <section id="resources" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">Knowledge base</span>
-        <h2>Guides for Marketplace Apps and tools</h2>
-        <p>User guides for the Marketplace Apps and tools we build for Liferay DXP: how to install them, use them and run them.</p>
-      </div>
-      <div class="subhead">
-        <h3>Marketplace Apps</h3>
-        <p>Marketplace Apps that add features to Liferay DXP, each with its own documentation. Like the Marketplace Apps from <a href="https://marketplace.liferay.com/e/publisher-details/29282497/30020268">Liferay Community</a> on Liferay Marketplace, they aren't updated for every quarterly release and don't receive official Liferay support. Some are maintained only for certain quarterly releases, as needed. Best-effort support may be available for accounts with a Technical Account Manager (TAM) package, on a case-by-case basis. Contact your Success Delivery Manager for details.</p>
+        <span class="kicker">Latest tutorials</span>
+        <h2>Practical resources for Liferay DXP</h2>
+        <p>We publish tutorials, sample code and tools for Liferay DXP that help with common implementation, upgrade and migration tasks. New material is added regularly.</p>
       </div>
       <div class="resources">
-        <!-- apps:cards marketplace-apps -->
-        <article class="card resource app">
-          <img class="app-shot" src="assets/kb/liferay-forums-home.png" alt="" width="1600" height="1075" loading="lazy">
-          <span class="tag">Marketplace App</span>
-          <h3>Liferay Forums</h3>
-          <p>Discussion forums for Liferay DXP. Members ask questions, share answers and follow topics, while moderators keep the community healthy.</p>
-          <span class="meta">v1.0.0 · Liferay DXP 2026.Q1 LTS</span>
-          <a class="more" href="liferay-forums/">Read the guide →</a>
+        <!-- apps:cards tutorials,sample-code,tools limit=3 -->
+        <article class="card resource">
+          <span class="tag">Tutorial</span>
+          <h3>Native iOS app on Liferay DXP</h3>
+          <p>A step-by-step tutorial and reference SwiftUI app built on Liferay DXP 2026.Q1's headless REST APIs. Users sign in with OAuth 2.0 and PKCE, then manage their profile, addresses and a custom Liferay Object, with no third-party dependencies. Partly tested.</p>
+          <span class="meta">12 chapters · Swift · SwiftUI · OAuth 2.0</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">Start the tutorial →</a>
         </article>
-        <article class="card resource soon">
-          <span class="tag">Coming soon</span>
-          <h3>More Marketplace Apps coming soon</h3>
-          <p>More Marketplace Apps and their guides are on the way.</p>
+        <article class="card resource">
+          <span class="tag">Tutorial</span>
+          <h3>SharePoint Online to Liferay DXP migration</h3>
+          <p>A 14-chapter hands-on tutorial, with working tooling, for migrating a live SharePoint Online site, or SharePoint Server on premises, to Liferay DXP 2026.Q3 and its new CMS. MCP servers let an AI agent help inventory the source, plan the mapping and check the result, and a mock SharePoint lets you try it without a tenant.</p>
+          <span class="meta">14 chapters · Python · MCP</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">Start the tutorial →</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">Tutorial</span>
+          <h3>Liferay DXP self-hosted on Amazon EC2</h3>
+          <p>A step-by-step guide to running Liferay DXP on Amazon EC2, as a single instance or in high availability, with Docker or the Tomcat bundle. Terraform builds the infrastructure and GitHub Actions deploys your code. Draft, partly tested on AWS.</p>
+          <span class="meta">18 sections · Terraform · Docker · GitHub Actions</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial">Start the tutorial →</a>
         </article>
         <!-- /apps:cards -->
       </div>
-      <div class="btns kb-all">
-        <a class="btn" href="knowledge-base/">Browse the knowledge base →</a>
+      <div class="btns section-more">
+        <a class="btn outline" href="tutorials/">All tutorials & tools →</a>
       </div>
     </div>
   </section>
 
-  <section id="stay-updated">
+  <section id="community">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">Stay updated</span>
-        <h2>Get the latest tutorials and samples</h2>
-        <p>We publish everything on GitHub. Here's how to get notified when something new comes out.</p>
+        <span class="kicker">Community</span>
+        <h2>Meet Liferay users near you</h2>
+        <p>Join a Liferay user group near you on Meetup, and see upcoming events.</p>
       </div>
-      <ol class="steps">
-        <li><div class="card">
-          <h3>Follow @Liferay-Community-APAC</h3>
-          <p>New repositories and activity will show up in your GitHub feed.</p>
-        </div></li>
-        <li><div class="card">
-          <h3>Watch for releases</h3>
-          <p>On any repository you're interested in, choose <code>Watch → Custom → Releases</code> to be notified when it's updated.</p>
-        </div></li>
-        <li><div class="card">
-          <h3>Star what you use</h3>
-          <p>Star repositories you find useful so they're easy to find again.</p>
-        </div></li>
-      </ol>
-      <div class="btns">
-        <a class="btn" href="https://github.com/Liferay-Community-APAC">
-          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          Follow us on GitHub
+      <div class="groups">
+        <a class="card group" href="https://www.meetup.com/liferay-user-group-india/" lang="en">
+          <span class="region">India</span>
+          <strong>Liferay India User Group</strong>
+          <span class="more">Join on Meetup →</span>
         </a>
+        <a class="card group" href="https://www.meetup.com/liferay-japan-user-group/" lang="en">
+          <span class="region">Japan</span>
+          <strong>Liferay Japan User Group</strong>
+          <span class="more">Join on Meetup →</span>
+        </a>
+        <a class="card group" href="https://www.meetup.com/liferay-australia/" lang="en">
+          <span class="region">Australia</span>
+          <strong>Liferay Australia User Group</strong>
+          <span class="more">Join on Meetup →</span>
+        </a>
+        <a class="card group" href="https://www.meetup.com/liferay-user-group-south-east-asia/" lang="en">
+          <span class="region">Southeast Asia</span>
+          <strong>Liferay User Group - Southeast Asia</strong>
+          <span class="more">Join on Meetup →</span>
+        </a>
+      </div>
+      <div class="btns section-more">
+        <a class="btn outline" href="community/">Events and how to stay updated →</a>
       </div>
     </div>
   </section>
@@ -305,6 +265,7 @@
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="site-footer" data-site-footer>

@@ -1,5 +1,5 @@
 {
-  "$comment": "One entry per app. scripts/build-apps.mjs turns this list into the app showcases (homepages and the Marketplace Apps page), the app cards (homepages and the knowledge base), the sitemap lines in robots.txt, and the list of search indexes the site search merges. tagline, highlights, screenshots and download feed the showcases. Run `node scripts/build-apps.mjs` after editing; the publishing workflow also runs it.",
+  "$comment": "The site's catalogue: one entry per Marketplace App, recipe collection, tutorial, sample and tool. scripts/build-apps.mjs turns it into the cards and showcases on the homepages and section pages, the section counts, the sitemap lines in robots.txt, and the list of search indexes the site search merges. Names, summaries and labels can be one string or one per language (en, ja, zh). Run `node scripts/build-apps.mjs` after editing; the publishing workflow also runs it.",
   "categories": [
     {
       "id": "marketplace-apps",
@@ -33,6 +33,48 @@
         "ja": "レシピを見る（英語）→",
         "zh": "浏览实践指南（英文）→"
       }
+    },
+    {
+      "id": "tutorials",
+      "name": {
+        "en": "Tutorials",
+        "ja": "チュートリアル",
+        "zh": "教程"
+      },
+      "tag": {
+        "en": "Tutorial",
+        "ja": "チュートリアル",
+        "zh": "教程"
+      },
+      "comingSoon": false
+    },
+    {
+      "id": "sample-code",
+      "name": {
+        "en": "Sample code",
+        "ja": "サンプルコード",
+        "zh": "示例代码"
+      },
+      "tag": {
+        "en": "Sample code",
+        "ja": "サンプルコード",
+        "zh": "示例代码"
+      },
+      "comingSoon": false
+    },
+    {
+      "id": "tools",
+      "name": {
+        "en": "Tools",
+        "ja": "ツール",
+        "zh": "工具"
+      },
+      "tag": {
+        "en": "Tool",
+        "ja": "ツール",
+        "zh": "工具"
+      },
+      "comingSoon": false
     }
   ],
   "apps": [
@@ -210,6 +252,168 @@
       "search": "solution-recipes/pagefind/",
       "sitemap": "solution-recipes/sitemap.xml",
       "docsRepo": "https://github.com/Liferay-Community-APAC/solution-recipes"
+    },
+    {
+      "id": "ios-native-bootstrap",
+      "category": "tutorials",
+      "name": {
+        "en": "Native iOS app on Liferay DXP",
+        "ja": "Liferay DXP で作るネイティブ iOS アプリ",
+        "zh": "基于 Liferay DXP 的原生 iOS 应用"
+      },
+      "summary": {
+        "en": "A step-by-step tutorial and reference SwiftUI app built on Liferay DXP 2026.Q1's headless REST APIs. Users sign in with OAuth 2.0 and PKCE, then manage their profile, addresses and a custom Liferay Object, with no third-party dependencies. Partly tested.",
+        "ja": "Liferay DXP 2026.Q1 のヘッドレス REST API だけで構築する SwiftUI アプリの、ステップバイステップのチュートリアルとリファレンス実装です。OAuth 2.0 と PKCE でサインインし、プロフィール、住所、カスタム Liferay オブジェクトを管理します。サードパーティのライブラリは使用しません。一部のみ検証済みです。",
+        "zh": "一套分步教程和 SwiftUI 参考应用，仅使用 Liferay DXP 2026.Q1 的无头 REST API 构建。用户通过 OAuth 2.0 和 PKCE 登录，然后管理个人资料、地址和自定义 Liferay 对象，无需任何第三方依赖。目前仅部分内容已测试。"
+      },
+      "meta": {
+        "en": "12 chapters · Swift · SwiftUI · OAuth 2.0",
+        "ja": "全 12 章 · Swift · SwiftUI · OAuth 2.0",
+        "zh": "共 12 章 · Swift · SwiftUI · OAuth 2.0"
+      },
+      "docs": "https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap",
+      "links": [
+        {
+          "href": "https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap",
+          "label": {
+            "en": "Start the tutorial →",
+            "ja": "チュートリアルを始める →",
+            "zh": "开始学习教程 →"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sharepoint-migration",
+      "category": "tutorials",
+      "name": {
+        "en": "SharePoint Online to Liferay DXP migration",
+        "ja": "SharePoint Online から Liferay DXP への移行",
+        "zh": "从 SharePoint Online 迁移到 Liferay DXP"
+      },
+      "summary": {
+        "en": "A 14-chapter hands-on tutorial, with working tooling, for migrating a live SharePoint Online site, or SharePoint Server on premises, to Liferay DXP 2026.Q3 and its new CMS. MCP servers let an AI agent help inventory the source, plan the mapping and check the result, and a mock SharePoint lets you try it without a tenant.",
+        "ja": "稼働中の SharePoint Online サイト（またはオンプレミスの SharePoint Server）を Liferay DXP 2026.Q3 と新しい CMS へ移行する、全 14 章のハンズオンチュートリアルと実用ツールです。MCP サーバーを使い、AI エージェントが移行元の棚卸し、マッピングの計画、移行結果の確認を支援します。",
+        "zh": "一套共 14 章的实践教程，附带可用的工具，指导您将正在运行的 SharePoint Online 站点（或本地部署的 SharePoint Server）迁移到 Liferay DXP 2026.Q3 及其新 CMS。借助 MCP 服务器，AI 助手可以帮助盘点源站点、规划映射并检查迁移结果。"
+      },
+      "meta": {
+        "en": "14 chapters · Python · MCP",
+        "ja": "全 14 章 · Python · MCP",
+        "zh": "共 14 章 · Python · MCP"
+      },
+      "docs": "https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial",
+      "links": [
+        {
+          "href": "https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial",
+          "label": {
+            "en": "Start the tutorial →",
+            "ja": "チュートリアルを始める →",
+            "zh": "开始学习教程 →"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec2-self-hosted",
+      "category": "tutorials",
+      "name": {
+        "en": "Liferay DXP self-hosted on Amazon EC2",
+        "ja": "Amazon EC2 上でのセルフホスト型 Liferay DXP",
+        "zh": "在 Amazon EC2 上自托管 Liferay DXP"
+      },
+      "summary": {
+        "en": "A step-by-step guide to running Liferay DXP on Amazon EC2, as a single instance or in high availability, with Docker or the Tomcat bundle. Terraform builds the infrastructure and GitHub Actions deploys your code. Draft, partly tested on AWS.",
+        "ja": "Liferay DXP を Amazon EC2 上で、シングル構成または高可用性構成、Docker または Tomcat バンドルで構築するステップバイステップガイドです。インフラは Terraform で構築し、コードは GitHub Actions でデプロイします。ドラフト版で、AWS での検証は一部のみ完了しています。",
+        "zh": "一份分步指南，介绍如何在 Amazon EC2 上以单实例或高可用模式、使用 Docker 或 Tomcat 包运行 Liferay DXP。使用 Terraform 构建基础设施，并通过 GitHub Actions 部署代码。目前为草稿版，仅部分内容已在 AWS 上测试。"
+      },
+      "meta": {
+        "en": "18 sections · Terraform · Docker · GitHub Actions",
+        "ja": "全 18 セクション · Terraform · Docker · GitHub Actions",
+        "zh": "共 18 节 · Terraform · Docker · GitHub Actions"
+      },
+      "docs": "https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial",
+      "links": [
+        {
+          "href": "https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial",
+          "label": {
+            "en": "Start the tutorial →",
+            "ja": "チュートリアルを始める →",
+            "zh": "开始学习教程 →"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec2-sample-workspace",
+      "category": "sample-code",
+      "name": {
+        "en": "Sample workspace for Liferay DXP on EC2",
+        "ja": "EC2 向け Liferay DXP サンプルワークスペース",
+        "zh": "EC2 上 Liferay DXP 的示例工作区"
+      },
+      "summary": {
+        "en": "The companion to the EC2 guide: a Liferay Workspace for DXP 2026.Q3 with an OSGi module, a CSS client extension and a React client extension, plus GitHub Actions that build an image, push it to Amazon ECR and deploy it to your EC2 instances. Draft.",
+        "ja": "EC2 ガイドと対になるサンプルです。OSGi モジュール、CSS クライアントエクステンション、React クライアントエクステンションを含む DXP 2026.Q3 の Liferay Workspace と、イメージをビルドして Amazon ECR にプッシュし、EC2 インスタンスへデプロイする GitHub Actions を備えています。ドラフト版です。",
+        "zh": "EC2 指南的配套示例：一个 DXP 2026.Q3 的 Liferay Workspace，包含 OSGi 模块、CSS 客户端扩展和 React 客户端扩展，并通过 GitHub Actions 构建镜像、推送到 Amazon ECR 并部署到 EC2 实例。草稿版。"
+      },
+      "meta": {
+        "en": "Liferay Workspace · React · GitHub Actions",
+        "ja": "Liferay Workspace · React · GitHub Actions",
+        "zh": "Liferay Workspace · React · GitHub Actions"
+      },
+      "docs": "https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-sample-workspace",
+      "links": [
+        {
+          "href": "https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-sample-workspace",
+          "label": {
+            "en": "View on GitHub →",
+            "ja": "GitHub で見る →",
+            "zh": "在 GitHub 上查看 →"
+          }
+        }
+      ]
+    },
+    {
+      "id": "upgrade-report-script",
+      "category": "tools",
+      "name": {
+        "en": "Liferay upgrade report script",
+        "ja": "Liferay アップグレードレポートスクリプト",
+        "zh": "Liferay 升级报告脚本"
+      },
+      "summary": {
+        "en": "A web page that finds the right read-only Groovy script for your version, from Liferay Portal CE 6.1 to DXP 2026.Q3, and walks you through collecting an upgrade-readiness report from the Script Console. In seven languages.",
+        "ja": "お使いのバージョン（Liferay Portal CE 6.1 から DXP 2026.Q3 まで）に合った読み取り専用の Groovy スクリプトを選び、スクリプトコンソールでアップグレード準備状況レポートを取得する手順を案内する Web ページです。日本語を含む 7 言語に対応しています。",
+        "zh": "一个网页工具：为您的版本（Liferay Portal CE 6.1 至 DXP 2026.Q3）找到合适的只读 Groovy 脚本，并引导您在脚本控制台中生成升级就绪报告。支持 7 种语言。"
+      },
+      "meta": {
+        "en": "CE 6.1 to DXP 2026.Q3 · Groovy · 7 languages",
+        "ja": "CE 6.1〜DXP 2026.Q3 · Groovy · 7 言語",
+        "zh": "CE 6.1 至 DXP 2026.Q3 · Groovy · 7 种语言"
+      },
+      "docs": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/",
+      "links": [
+        {
+          "href": {
+            "en": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/",
+            "ja": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/?lang=ja",
+            "zh": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/"
+          },
+          "label": {
+            "en": "Open the tool →",
+            "ja": "ツールを開く →",
+            "zh": "打开工具 →"
+          }
+        },
+        {
+          "href": "https://github.com/Liferay-Community-APAC/liferay-upgrade-report-script",
+          "label": {
+            "en": "View on GitHub →",
+            "ja": "GitHub で見る →",
+            "zh": "在 GitHub 上查看 →"
+          }
+        }
+      ]
     }
   ]
 }

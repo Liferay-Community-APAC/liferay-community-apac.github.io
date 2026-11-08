@@ -6,10 +6,10 @@ The website for Liferay Community APAC: <https://liferay-community-apac.github.i
 
 | Part | Where | What it does |
 | --- | --- | --- |
-| Pages | `index.html`, `ja/`, `zh/`, `knowledge-base/` | The homepages in English, Japanese and Chinese, and the knowledge base. |
+| Pages | `index.html`, `marketplace-apps/`, `tutorials/`, `community/`, and the same under `ja/` and `zh/` | The homepages and section pages in English, Japanese and Chinese. `knowledge-base/` forwards old links to `marketplace-apps/`. Solution Recipes are published from their own repository. |
 | Header, footer and search | `assets/site-chrome.js` | One shared header (menu, language switcher, search button) and footer, used by every page here and by every app's docs. Edit the menu or footer here once. |
 | Styles | `assets/site.css` | The styles for the whole site, app docs included. |
-| App list | `data/apps.json` | One entry per app. It drives the app cards on the homepages and the knowledge base, the site search across app docs, and the app docs' sitemaps in `robots.txt`. |
+| App list | `data/apps.json` | One entry per app. It drives the cards and showcases on the homepages, the Marketplace Apps and Tutorials & Tools pages, and the section counts, the site search across app docs, and the app docs' sitemaps in `robots.txt`. |
 | App cards generator | `scripts/build-apps.mjs` | Writes the app cards and sitemap lines from `data/apps.json`. |
 | Link checker | `scripts/check-links.mjs` | Fails the publish if a link or `#anchor` is broken. |
 | Publishing | `.github/workflows/publish-site.yml` | The shared publishing workflow: build, link check, search index (Pagefind), publish. This site and every app's docs repository use it. |

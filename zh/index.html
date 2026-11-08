@@ -75,10 +75,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=c4">
-  <script src="../assets/site-chrome.js?v=13" defer></script>
+  <link rel="stylesheet" href="../assets/site.css?v=c5">
+  <script src="../assets/site-chrome.js?v=14" defer></script>
 </head>
-<body>
+<body data-section="home">
 
 <header class="site-header" data-site-header>
   <div class="wrap">
@@ -94,100 +94,48 @@
         <h1>Liferay Community APAC</h1>
         <p class="lead">面向亚太地区使用和运营 Liferay DXP 的个人用户、客户、合作伙伴以及 Liferay 解决方案架构师和工程师的社区，分享教程、示例代码和实践经验。</p>
         <div class="btns">
-          <a class="btn" href="https://www.liferay.com.cn/contact">联系我们</a>
-          <a class="btn ghost" href="#resources">浏览教程</a>
+          <a class="btn" href="marketplace-apps/">浏览 Marketplace 应用</a>
+          <a class="btn ghost" href="tutorials/">教程与工具</a>
         </div>
       </div>
       <div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
   </section>
 
-
-  <section id="resources" class="alt">
+  <section id="explore" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">教程与示例代码</span>
-        <h2>Liferay DXP 实用资源</h2>
-        <p>我们针对常见的实施、升级和迁移任务，发布 Liferay DXP 教程、示例代码和工具。新内容将持续更新。</p>
+        <span class="kicker">探索</span>
+        <h2>您可以在这里找到</h2>
+        <p>适用于 Liferay DXP 的 Marketplace 应用、解决方案实践指南、教程和工具，以及分享它们的社区。</p>
       </div>
-      <div class="notice" role="note">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r=".6"/></svg>
-        <div>
-          <strong>非官方资源，使用风险自负。</strong>
-          <p>此处提供的教程、示例代码和指南是非官方示例，并非 Liferay 官方产品或文档。在正式使用之前，请先在非生产环境中进行充分测试。</p>
-        </div>
-      </div>
-      <div class="resources">
-        <article class="card resource">
-          <span class="tag">教程</span>
-          <h3>基于 Liferay DXP 的原生 iOS 应用</h3>
-          <p>一套分步教程和 SwiftUI 参考应用，仅使用 Liferay DXP 2026.Q1 的无头 REST API 构建。用户通过 OAuth 2.0 和 PKCE 登录，然后管理个人资料、地址和自定义 Liferay 对象，无需任何第三方依赖。目前仅部分内容已测试。</p>
-          <span class="meta">共 12 章 · Swift · SwiftUI · OAuth 2.0</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">开始学习教程 →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">教程</span>
-          <h3>从 SharePoint Online 迁移到 Liferay DXP</h3>
-          <p>一套共 14 章的实践教程，附带可用的工具，指导您将正在运行的 SharePoint Online 站点（或本地部署的 SharePoint Server）迁移到 Liferay DXP 2026.Q3 及其新 CMS。借助 MCP 服务器，AI 助手可以帮助盘点源站点、规划映射并检查迁移结果。</p>
-          <span class="meta">共 14 章 · Python · MCP</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">开始学习教程 →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">教程</span>
-          <h3>在 Amazon EC2 上自托管 Liferay DXP</h3>
-          <p>一份分步指南，介绍如何在 Amazon EC2 上以单实例或高可用模式、使用 Docker 或 Tomcat 包运行 Liferay DXP。使用 Terraform 构建基础设施，并通过 GitHub Actions 部署代码。目前为草稿版，仅部分内容已在 AWS 上测试。</p>
-          <span class="meta">共 18 节 · Terraform · Docker · GitHub Actions</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial">开始学习教程 →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">示例代码</span>
-          <h3>EC2 上 Liferay DXP 的示例工作区</h3>
-          <p>EC2 指南的配套示例：一个 DXP 2026.Q3 的 Liferay Workspace，包含 OSGi 模块、CSS 客户端扩展和 React 客户端扩展，并通过 GitHub Actions 构建镜像、推送到 Amazon ECR 并部署到 EC2 实例。草稿版。</p>
-          <span class="meta">Liferay Workspace · React · GitHub Actions</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-sample-workspace">在 GitHub 上查看 →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">工具</span>
-          <h3>Liferay 升级报告脚本</h3>
-          <p>一个网页工具：为您的版本（Liferay Portal CE 6.1 至 DXP 2026.Q3）找到合适的只读 Groovy 脚本，并引导您在脚本控制台中生成升级就绪报告。支持 7 种语言。</p>
-          <span class="meta">CE 6.1 至 DXP 2026.Q3 · Groovy · 7 种语言</span>
-          <a class="more" href="https://liferay-community-apac.github.io/liferay-upgrade-report-script/">打开工具 →</a>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/liferay-upgrade-report-script">在 GitHub 上查看 →</a>
-        </article>
-      </div>
-      <div class="subhead">
-        <h3>各地用户组</h3>
-        <p>在 Meetup 上加入您附近的 Liferay 用户组。</p>
-      </div>
-      <div class="groups">
-        <a class="card group" href="https://www.meetup.com/liferay-user-group-india/" lang="en">
-          <span class="region" lang="zh-CN">印度</span>
-          <strong>Liferay India User Group</strong>
-          <span class="more" lang="zh-CN">在 Meetup 上加入 →</span>
+      <div class="sections">
+        <!-- site:sections -->
+        <a class="card section-card" href="marketplace-apps/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+          <h3>Marketplace 应用</h3>
+          <p>为 Liferay DXP 增加功能的应用及其用户指南。</p>
+          <span class="meta">1 个 Marketplace 应用</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-japan-user-group/" lang="en">
-          <span class="region" lang="zh-CN">日本</span>
-          <strong>Liferay Japan User Group</strong>
-          <span class="more" lang="zh-CN">在 Meetup 上加入 →</span>
+        <a class="card section-card" href="../solution-recipes/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7 15h10"/></svg></span>
+          <h3>解决方案实践指南</h3>
+          <p>将 Marketplace 应用、教程和 DXP 功能组合成完整用例的分步指南。</p>
+          <span class="meta">首批指南即将推出</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-australia/" lang="en">
-          <span class="region" lang="zh-CN">澳大利亚</span>
-          <strong>Liferay Australia User Group</strong>
-          <span class="more" lang="zh-CN">在 Meetup 上加入 →</span>
+        <a class="card section-card" href="tutorials/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></span>
+          <h3>教程与工具</h3>
+          <p>用于实施、升级和迁移任务的分步教程、示例代码和工具。</p>
+          <span class="meta">5 个教程、示例和工具</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-user-group-south-east-asia/" lang="en">
-          <span class="region" lang="zh-CN">东南亚</span>
-          <strong>Liferay User Group - Southeast Asia</strong>
-          <span class="more" lang="zh-CN">在 Meetup 上加入 →</span>
+        <a class="card section-card" href="community/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5a5 5 0 0 1 5.5 5"/></svg></span>
+          <h3>社区</h3>
+          <p>各地用户组、活动以及获取最新信息的方式。</p>
+          <span class="meta">印度 · 日本 · 澳大利亚 · 东南亚</span>
         </a>
-      </div>
-      <div class="card events">
-        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
-        <div>
-          <h3>近期活动</h3>
-          <p>在 Meetup 上查看 Liferay 用户组的近期活动。</p>
-        </div>
-        <a class="btn" href="https://www.meetup.com/pro/liferay/">查看近期活动 →</a>
+        <!-- /site:sections -->
       </div>
     </div>
   </section>
@@ -221,75 +169,87 @@
               <a class="btn" href="../liferay-forums/">阅读指南（英文） →</a>
               <a class="btn outline" href="https://github.com/Liferay-Community-APAC/liferay-forums/tree/downloads/1.0.0">下载</a>
             </div>
-            <a class="more" href="../marketplace-apps/#liferay-forums">全部功能与截图（英文）→</a>
+            <a class="more" href="marketplace-apps/#liferay-forums">全部功能与截图 →</a>
           </div>
         </article>
         <!-- /apps:showcase -->
       </div>
       <p class="support-note">这些 Marketplace 应用并非 Liferay 官方产品，与 Liferay Marketplace 上 <a href="https://marketplace.liferay.com/e/publisher-details/29282497/30020268">Liferay Community</a> 的 Marketplace 应用一样，不享受 Liferay 官方支持。这些 Marketplace 应用并不会针对每个季度版本进行更新，部分 Marketplace 应用会根据需要，仅针对特定的季度版本进行维护。对于购买了技术客户经理（TAM）服务包的客户，我们可能会根据具体情况提供尽力而为的支持。详情请联系您的成功交付经理。</p>
+      <div class="btns section-more">
+        <a class="btn outline" href="marketplace-apps/">全部 Marketplace 应用 →</a>
+      </div>
     </div>
   </section>
 
-  <section id="knowledge-base" class="alt">
+  <section id="resources" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">知识库</span>
-        <h2>Marketplace 应用与工具指南</h2>
-        <p>我们为 Liferay DXP 开发的 Marketplace 应用和工具的用户指南，涵盖安装、使用和运维。</p>
-      </div>
-      <div class="subhead">
-        <h3>Marketplace 应用</h3>
-        <p>为 Liferay DXP 增加功能的 Marketplace 应用，每个 Marketplace 应用都有独立的文档。与 Liferay Marketplace 上 <a href="https://marketplace.liferay.com/e/publisher-details/29282497/30020268">Liferay Community</a> 的 Marketplace 应用一样，这些 Marketplace 应用并不会针对每个季度版本进行更新，也不享受 Liferay 官方支持。部分 Marketplace 应用会根据需要，仅针对特定的季度版本进行维护。对于购买了技术客户经理（TAM）服务包的客户，我们可能会根据具体情况提供尽力而为的支持。详情请联系您的成功交付经理。</p>
+        <span class="kicker">最新教程</span>
+        <h2>Liferay DXP 实用资源</h2>
+        <p>我们针对常见的实施、升级和迁移任务，发布 Liferay DXP 教程、示例代码和工具。新内容将持续更新。</p>
       </div>
       <div class="resources">
-        <!-- apps:cards marketplace-apps -->
-        <article class="card resource app">
-          <img class="app-shot" src="../assets/kb/liferay-forums-home.png" alt="" width="1600" height="1075" loading="lazy">
-          <span class="tag">Marketplace 应用</span>
-          <h3>Liferay Forums</h3>
-          <p>面向 Liferay DXP 的讨论论坛。成员可以提问、分享答案并关注话题，版主负责维护社区秩序。</p>
-          <span class="meta">v1.0.0 · Liferay DXP 2026.Q1 LTS</span>
-          <a class="more" href="../liferay-forums/">阅读指南（英文）→</a>
+        <!-- apps:cards tutorials,sample-code,tools limit=3 -->
+        <article class="card resource">
+          <span class="tag">教程</span>
+          <h3>基于 Liferay DXP 的原生 iOS 应用</h3>
+          <p>一套分步教程和 SwiftUI 参考应用，仅使用 Liferay DXP 2026.Q1 的无头 REST API 构建。用户通过 OAuth 2.0 和 PKCE 登录，然后管理个人资料、地址和自定义 Liferay 对象，无需任何第三方依赖。目前仅部分内容已测试。</p>
+          <span class="meta">共 12 章 · Swift · SwiftUI · OAuth 2.0</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">开始学习教程 →</a>
         </article>
-        <article class="card resource soon">
-          <span class="tag">即将推出</span>
-          <h3>更多 Marketplace 应用即将推出</h3>
-          <p>更多 Marketplace 应用及其指南正在准备中。</p>
+        <article class="card resource">
+          <span class="tag">教程</span>
+          <h3>从 SharePoint Online 迁移到 Liferay DXP</h3>
+          <p>一套共 14 章的实践教程，附带可用的工具，指导您将正在运行的 SharePoint Online 站点（或本地部署的 SharePoint Server）迁移到 Liferay DXP 2026.Q3 及其新 CMS。借助 MCP 服务器，AI 助手可以帮助盘点源站点、规划映射并检查迁移结果。</p>
+          <span class="meta">共 14 章 · Python · MCP</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">开始学习教程 →</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">教程</span>
+          <h3>在 Amazon EC2 上自托管 Liferay DXP</h3>
+          <p>一份分步指南，介绍如何在 Amazon EC2 上以单实例或高可用模式、使用 Docker 或 Tomcat 包运行 Liferay DXP。使用 Terraform 构建基础设施，并通过 GitHub Actions 部署代码。目前为草稿版，仅部分内容已在 AWS 上测试。</p>
+          <span class="meta">共 18 节 · Terraform · Docker · GitHub Actions</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial">开始学习教程 →</a>
         </article>
         <!-- /apps:cards -->
       </div>
-      <div class="btns kb-all">
-        <a class="btn" href="../knowledge-base/">浏览知识库 →</a>
+      <div class="btns section-more">
+        <a class="btn outline" href="tutorials/">全部教程与工具 →</a>
       </div>
     </div>
   </section>
 
-  <section id="stay-updated">
+  <section id="community">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">获取最新信息</span>
-        <h2>获取最新的教程和示例</h2>
-        <p>所有内容均在 GitHub 上发布。您可以通过以下方式在有新内容时收到通知。</p>
+        <span class="kicker">社区</span>
+        <h2>结识您附近的 Liferay 用户</h2>
+        <p>在 Meetup 上加入您附近的 Liferay 用户组，并查看近期活动。</p>
       </div>
-      <ol class="steps">
-        <li><div class="card">
-          <h3>关注 @Liferay-Community-APAC</h3>
-          <p>新的代码库和动态会显示在您的 GitHub 动态中。</p>
-        </div></li>
-        <li><div class="card">
-          <h3>关注版本发布</h3>
-          <p>在您感兴趣的代码库中选择 <code>Watch → Custom → Releases</code>，即可在更新时收到通知。</p>
-        </div></li>
-        <li><div class="card">
-          <h3>添加星标</h3>
-          <p>为有用的代码库加上星标（Star），方便日后查找。</p>
-        </div></li>
-      </ol>
-      <div class="btns">
-        <a class="btn" href="https://github.com/Liferay-Community-APAC">
-          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          在 GitHub 上关注我们
+      <div class="groups">
+        <a class="card group" href="https://www.meetup.com/liferay-user-group-india/" lang="en">
+          <span class="region" lang="zh-CN">印度</span>
+          <strong>Liferay India User Group</strong>
+          <span class="more" lang="zh-CN">在 Meetup 上加入 →</span>
         </a>
+        <a class="card group" href="https://www.meetup.com/liferay-japan-user-group/" lang="en">
+          <span class="region" lang="zh-CN">日本</span>
+          <strong>Liferay Japan User Group</strong>
+          <span class="more" lang="zh-CN">在 Meetup 上加入 →</span>
+        </a>
+        <a class="card group" href="https://www.meetup.com/liferay-australia/" lang="en">
+          <span class="region" lang="zh-CN">澳大利亚</span>
+          <strong>Liferay Australia User Group</strong>
+          <span class="more" lang="zh-CN">在 Meetup 上加入 →</span>
+        </a>
+        <a class="card group" href="https://www.meetup.com/liferay-user-group-south-east-asia/" lang="en">
+          <span class="region" lang="zh-CN">东南亚</span>
+          <strong>Liferay User Group - Southeast Asia</strong>
+          <span class="more" lang="zh-CN">在 Meetup 上加入 →</span>
+        </a>
+      </div>
+      <div class="btns section-more">
+        <a class="btn outline" href="community/">活动与获取最新信息的方式 →</a>
       </div>
     </div>
   </section>
@@ -305,6 +265,7 @@
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="site-footer" data-site-footer>

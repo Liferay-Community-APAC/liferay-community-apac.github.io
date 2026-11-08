@@ -75,10 +75,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=c4">
-  <script src="../assets/site-chrome.js?v=13" defer></script>
+  <link rel="stylesheet" href="../assets/site.css?v=c5">
+  <script src="../assets/site-chrome.js?v=14" defer></script>
 </head>
-<body>
+<body data-section="home">
 
 <header class="site-header" data-site-header>
   <div class="wrap">
@@ -94,100 +94,48 @@
         <h1>Liferay Community APAC</h1>
         <p class="lead">アジア太平洋地域で Liferay DXP を活用・運用する個人ユーザー、お客様、パートナー、Liferay のソリューションアーキテクトとエンジニアのためのコミュニティです。チュートリアル、サンプルコード、実践的なノウハウを共有しています。</p>
         <div class="btns">
-          <a class="btn" href="https://www.liferay.co.jp/contact">お問い合わせ</a>
-          <a class="btn ghost" href="#resources">チュートリアルを見る</a>
+          <a class="btn" href="marketplace-apps/">Marketplace アプリを見る</a>
+          <a class="btn ghost" href="tutorials/">チュートリアルとツール</a>
         </div>
       </div>
       <div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
   </section>
 
-
-  <section id="resources" class="alt">
+  <section id="explore" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">チュートリアルとサンプルコード</span>
-        <h2>Liferay DXP のための実践的なリソース</h2>
-        <p>一般的な実装、アップグレード、移行作業に役立つ Liferay DXP 向けのチュートリアル、サンプルコード、ツールを公開しています。新しいコンテンツは随時追加していきます。</p>
+        <span class="kicker">コンテンツ</span>
+        <h2>このサイトでできること</h2>
+        <p>Liferay DXP のための Marketplace アプリ、ソリューションレシピ、チュートリアル、ツール、そしてそれらを共有するコミュニティ。</p>
       </div>
-      <div class="notice" role="note">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r=".6"/></svg>
-        <div>
-          <strong>非公式のリソースです。ご利用は自己責任でお願いします。</strong>
-          <p>ここで公開しているチュートリアル、サンプルコード、ガイドは、非公式に共有されている参考例であり、Liferay の公式製品やドキュメントではありません。ご利用の前に、本番以外の環境で十分にテストしてください。</p>
-        </div>
-      </div>
-      <div class="resources">
-        <article class="card resource">
-          <span class="tag">チュートリアル</span>
-          <h3>Liferay DXP で作るネイティブ iOS アプリ</h3>
-          <p>Liferay DXP 2026.Q1 のヘッドレス REST API だけで構築する SwiftUI アプリの、ステップバイステップのチュートリアルとリファレンス実装です。OAuth 2.0 と PKCE でサインインし、プロフィール、住所、カスタム Liferay オブジェクトを管理します。サードパーティのライブラリは使用しません。一部のみ検証済みです。</p>
-          <span class="meta">全 12 章 · Swift · SwiftUI · OAuth 2.0</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">チュートリアルを始める →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">チュートリアル</span>
-          <h3>SharePoint Online から Liferay DXP への移行</h3>
-          <p>稼働中の SharePoint Online サイト（またはオンプレミスの SharePoint Server）を Liferay DXP 2026.Q3 と新しい CMS へ移行する、全 14 章のハンズオンチュートリアルと実用ツールです。MCP サーバーを使い、AI エージェントが移行元の棚卸し、マッピングの計画、移行結果の確認を支援します。</p>
-          <span class="meta">全 14 章 · Python · MCP</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">チュートリアルを始める →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">チュートリアル</span>
-          <h3>Amazon EC2 上でのセルフホスト型 Liferay DXP</h3>
-          <p>Liferay DXP を Amazon EC2 上で、シングル構成または高可用性構成、Docker または Tomcat バンドルで構築するステップバイステップガイドです。インフラは Terraform で構築し、コードは GitHub Actions でデプロイします。ドラフト版で、AWS での検証は一部のみ完了しています。</p>
-          <span class="meta">全 18 セクション · Terraform · Docker · GitHub Actions</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial">チュートリアルを始める →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">サンプルコード</span>
-          <h3>EC2 向け Liferay DXP サンプルワークスペース</h3>
-          <p>EC2 ガイドと対になるサンプルです。OSGi モジュール、CSS クライアントエクステンション、React クライアントエクステンションを含む DXP 2026.Q3 の Liferay Workspace と、イメージをビルドして Amazon ECR にプッシュし、EC2 インスタンスへデプロイする GitHub Actions を備えています。ドラフト版です。</p>
-          <span class="meta">Liferay Workspace · React · GitHub Actions</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-sample-workspace">GitHub で見る →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">ツール</span>
-          <h3>Liferay アップグレードレポートスクリプト</h3>
-          <p>お使いのバージョン（Liferay Portal CE 6.1 から DXP 2026.Q3 まで）に合った読み取り専用の Groovy スクリプトを選び、スクリプトコンソールでアップグレード準備状況レポートを取得する手順を案内する Web ページです。日本語を含む 7 言語に対応しています。</p>
-          <span class="meta">CE 6.1〜DXP 2026.Q3 · Groovy · 7 言語</span>
-          <a class="more" href="https://liferay-community-apac.github.io/liferay-upgrade-report-script/?lang=ja">ツールを開く →</a>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/liferay-upgrade-report-script">GitHub で見る →</a>
-        </article>
-      </div>
-      <div class="subhead">
-        <h3>地域のユーザーグループ</h3>
-        <p>お近くの Liferay ユーザーグループに Meetup で参加しましょう。</p>
-      </div>
-      <div class="groups">
-        <a class="card group" href="https://www.meetup.com/liferay-user-group-india/" lang="en">
-          <span class="region" lang="ja">インド</span>
-          <strong>Liferay India User Group</strong>
-          <span class="more" lang="ja">Meetup で参加する →</span>
+      <div class="sections">
+        <!-- site:sections -->
+        <a class="card section-card" href="marketplace-apps/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+          <h3>Marketplace アプリ</h3>
+          <p>Liferay DXP に機能を追加するアプリと、そのユーザーガイド。</p>
+          <span class="meta">1 件の Marketplace アプリ</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-japan-user-group/" lang="en">
-          <span class="region" lang="ja">日本</span>
-          <strong>Liferay Japan User Group</strong>
-          <span class="more" lang="ja">Meetup で参加する →</span>
+        <a class="card section-card" href="../solution-recipes/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7 15h10"/></svg></span>
+          <h3>ソリューションレシピ</h3>
+          <p>Marketplace アプリ、チュートリアル、DXP の機能を組み合わせてユースケースを実現するレシピ。</p>
+          <span class="meta">最初のレシピを準備中</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-australia/" lang="en">
-          <span class="region" lang="ja">オーストラリア</span>
-          <strong>Liferay Australia User Group</strong>
-          <span class="more" lang="ja">Meetup で参加する →</span>
+        <a class="card section-card" href="tutorials/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></span>
+          <h3>チュートリアルとツール</h3>
+          <p>実装、アップグレード、移行に役立つチュートリアル、サンプルコード、ツール。</p>
+          <span class="meta">5 件のチュートリアル、サンプル、ツール</span>
         </a>
-        <a class="card group" href="https://www.meetup.com/liferay-user-group-south-east-asia/" lang="en">
-          <span class="region" lang="ja">東南アジア</span>
-          <strong>Liferay User Group - Southeast Asia</strong>
-          <span class="more" lang="ja">Meetup で参加する →</span>
+        <a class="card section-card" href="community/">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5a5 5 0 0 1 5.5 5"/></svg></span>
+          <h3>コミュニティ</h3>
+          <p>地域のユーザーグループ、イベント、最新情報の受け取り方。</p>
+          <span class="meta">インド · 日本 · オーストラリア · 東南アジア</span>
         </a>
-      </div>
-      <div class="card events">
-        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
-        <div>
-          <h3>今後のイベント</h3>
-          <p>Liferay ユーザーグループの今後のイベントを Meetup でご覧いただけます。</p>
-        </div>
-        <a class="btn" href="https://www.meetup.com/pro/liferay/">イベントを見る →</a>
+        <!-- /site:sections -->
       </div>
     </div>
   </section>
@@ -221,75 +169,87 @@
               <a class="btn" href="../liferay-forums/">ガイドを読む（英語） →</a>
               <a class="btn outline" href="https://github.com/Liferay-Community-APAC/liferay-forums/tree/downloads/1.0.0">ダウンロード</a>
             </div>
-            <a class="more" href="../marketplace-apps/#liferay-forums">すべての機能とスクリーンショット（英語）→</a>
+            <a class="more" href="marketplace-apps/#liferay-forums">すべての機能とスクリーンショット →</a>
           </div>
         </article>
         <!-- /apps:showcase -->
       </div>
       <p class="support-note">これらの Marketplace アプリは Liferay の公式製品ではなく、Liferay Marketplace の <a href="https://marketplace.liferay.com/e/publisher-details/29282497/30020268">Liferay Community</a> の Marketplace アプリと同様に、Liferay の公式サポートの対象外です。すべての四半期リリースに対応するわけではなく、一部の Marketplace アプリは必要に応じて特定の四半期リリースでのみメンテナンスされます。テクニカルアカウントマネージャー（TAM）パッケージをご契約のお客様には、個別の判断によりベストエフォートでサポートを提供できる場合があります。詳しくは担当のサクセスデリバリーマネージャーにお問い合わせください。</p>
+      <div class="btns section-more">
+        <a class="btn outline" href="marketplace-apps/">すべての Marketplace アプリ →</a>
+      </div>
     </div>
   </section>
 
-  <section id="knowledge-base" class="alt">
+  <section id="resources" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">ナレッジベース</span>
-        <h2>Marketplace アプリとツールのガイド</h2>
-        <p>Liferay DXP 向けに開発した Marketplace アプリやツールのユーザーガイドです。インストール、利用、運用の方法を紹介します。</p>
-      </div>
-      <div class="subhead">
-        <h3>Marketplace アプリ</h3>
-        <p>Liferay DXP に機能を追加する Marketplace アプリです。それぞれにドキュメントがあります。Liferay Marketplace の <a href="https://marketplace.liferay.com/e/publisher-details/29282497/30020268">Liferay Community</a> の Marketplace アプリと同様に、すべての四半期リリースに対応するわけではなく、Liferay の公式サポートの対象外です。一部の Marketplace アプリは、必要に応じて特定の四半期リリースでのみメンテナンスされます。テクニカルアカウントマネージャー（TAM）パッケージをご契約のお客様には、個別の判断によりベストエフォートでサポートを提供できる場合があります。詳しくは担当のサクセスデリバリーマネージャーにお問い合わせください。</p>
+        <span class="kicker">最新のチュートリアル</span>
+        <h2>Liferay DXP のための実践的なリソース</h2>
+        <p>一般的な実装、アップグレード、移行作業に役立つ Liferay DXP 向けのチュートリアル、サンプルコード、ツールを公開しています。新しいコンテンツは随時追加していきます。</p>
       </div>
       <div class="resources">
-        <!-- apps:cards marketplace-apps -->
-        <article class="card resource app">
-          <img class="app-shot" src="../assets/kb/liferay-forums-home.png" alt="" width="1600" height="1075" loading="lazy">
-          <span class="tag">Marketplace アプリ</span>
-          <h3>Liferay Forums</h3>
-          <p>Liferay DXP 向けのディスカッションフォーラムです。メンバーは質問や回答を共有し、トピックをフォローできます。モデレーターはコミュニティを健全に保ちます。</p>
-          <span class="meta">v1.0.0 · Liferay DXP 2026.Q1 LTS</span>
-          <a class="more" href="../liferay-forums/">ガイドを読む（英語）→</a>
+        <!-- apps:cards tutorials,sample-code,tools limit=3 -->
+        <article class="card resource">
+          <span class="tag">チュートリアル</span>
+          <h3>Liferay DXP で作るネイティブ iOS アプリ</h3>
+          <p>Liferay DXP 2026.Q1 のヘッドレス REST API だけで構築する SwiftUI アプリの、ステップバイステップのチュートリアルとリファレンス実装です。OAuth 2.0 と PKCE でサインインし、プロフィール、住所、カスタム Liferay オブジェクトを管理します。サードパーティのライブラリは使用しません。一部のみ検証済みです。</p>
+          <span class="meta">全 12 章 · Swift · SwiftUI · OAuth 2.0</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">チュートリアルを始める →</a>
         </article>
-        <article class="card resource soon">
-          <span class="tag">近日公開</span>
-          <h3>その他の Marketplace アプリも近日公開</h3>
-          <p>新しい Marketplace アプリとガイドを準備中です。</p>
+        <article class="card resource">
+          <span class="tag">チュートリアル</span>
+          <h3>SharePoint Online から Liferay DXP への移行</h3>
+          <p>稼働中の SharePoint Online サイト（またはオンプレミスの SharePoint Server）を Liferay DXP 2026.Q3 と新しい CMS へ移行する、全 14 章のハンズオンチュートリアルと実用ツールです。MCP サーバーを使い、AI エージェントが移行元の棚卸し、マッピングの計画、移行結果の確認を支援します。</p>
+          <span class="meta">全 14 章 · Python · MCP</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">チュートリアルを始める →</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">チュートリアル</span>
+          <h3>Amazon EC2 上でのセルフホスト型 Liferay DXP</h3>
+          <p>Liferay DXP を Amazon EC2 上で、シングル構成または高可用性構成、Docker または Tomcat バンドルで構築するステップバイステップガイドです。インフラは Terraform で構築し、コードは GitHub Actions でデプロイします。ドラフト版で、AWS での検証は一部のみ完了しています。</p>
+          <span class="meta">全 18 セクション · Terraform · Docker · GitHub Actions</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial">チュートリアルを始める →</a>
         </article>
         <!-- /apps:cards -->
       </div>
-      <div class="btns kb-all">
-        <a class="btn" href="../knowledge-base/">ナレッジベースを見る →</a>
+      <div class="btns section-more">
+        <a class="btn outline" href="tutorials/">すべてのチュートリアルとツール →</a>
       </div>
     </div>
   </section>
 
-  <section id="stay-updated">
+  <section id="community">
     <div class="wrap">
       <div class="section-head">
-        <span class="kicker">最新情報を受け取る</span>
-        <h2>最新のチュートリアルやサンプルをお届けします</h2>
-        <p>すべてのコンテンツは GitHub で公開しています。新しいコンテンツの通知を受け取るには、次の方法をご利用ください。</p>
+        <span class="kicker">コミュニティ</span>
+        <h2>お近くの Liferay ユーザーとつながる</h2>
+        <p>お近くの Liferay ユーザーグループに Meetup で参加し、今後のイベントをチェックしましょう。</p>
       </div>
-      <ol class="steps">
-        <li><div class="card">
-          <h3>@Liferay-Community-APAC をフォロー</h3>
-          <p>新しいリポジトリや更新情報が GitHub のフィードに表示されます。</p>
-        </div></li>
-        <li><div class="card">
-          <h3>リリースを Watch</h3>
-          <p>関心のあるリポジトリで <code>Watch → Custom → Releases</code> を選択すると、更新時に通知が届きます。</p>
-        </div></li>
-        <li><div class="card">
-          <h3>Star を付ける</h3>
-          <p>役に立ったリポジトリに Star を付けておくと、あとから簡単に見つけられます。</p>
-        </div></li>
-      </ol>
-      <div class="btns">
-        <a class="btn" href="https://github.com/Liferay-Community-APAC">
-          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          GitHub でフォロー
+      <div class="groups">
+        <a class="card group" href="https://www.meetup.com/liferay-user-group-india/" lang="en">
+          <span class="region" lang="ja">インド</span>
+          <strong>Liferay India User Group</strong>
+          <span class="more" lang="ja">Meetup で参加する →</span>
         </a>
+        <a class="card group" href="https://www.meetup.com/liferay-japan-user-group/" lang="en">
+          <span class="region" lang="ja">日本</span>
+          <strong>Liferay Japan User Group</strong>
+          <span class="more" lang="ja">Meetup で参加する →</span>
+        </a>
+        <a class="card group" href="https://www.meetup.com/liferay-australia/" lang="en">
+          <span class="region" lang="ja">オーストラリア</span>
+          <strong>Liferay Australia User Group</strong>
+          <span class="more" lang="ja">Meetup で参加する →</span>
+        </a>
+        <a class="card group" href="https://www.meetup.com/liferay-user-group-south-east-asia/" lang="en">
+          <span class="region" lang="ja">東南アジア</span>
+          <strong>Liferay User Group - Southeast Asia</strong>
+          <span class="more" lang="ja">Meetup で参加する →</span>
+        </a>
+      </div>
+      <div class="btns section-more">
+        <a class="btn outline" href="community/">イベントと最新情報の受け取り方 →</a>
       </div>
     </div>
   </section>
@@ -305,6 +265,7 @@
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="site-footer" data-site-footer>

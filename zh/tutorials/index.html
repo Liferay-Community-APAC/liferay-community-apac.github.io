@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>教程与工具 · Liferay Community APAC</title>
+  <meta name="description" content="用于实施、升级和迁移任务的 Liferay DXP 分步教程、示例代码和工具。">
+  <meta property="og:title" content="教程与工具 · Liferay Community APAC">
+  <meta property="og:description" content="用于实施、升级和迁移任务的 Liferay DXP 分步教程、示例代码和工具。">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://liferay-community-apac.github.io/zh/tutorials/">
+  <meta property="og:url" content="https://liferay-community-apac.github.io/zh/tutorials/">
+  <meta property="og:site_name" content="Liferay Community APAC">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://liferay-community-apac.github.io/assets/og-image.png?v=7">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/tutorials/">
+  <link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/tutorials/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/tutorials/">
+  <link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/tutorials/">
+  <link rel="icon" href="../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../assets/site.css?v=c5">
+  <script src="../../assets/site-chrome.js?v=14" defer></script>
+</head>
+<body data-section="tutorials">
+
+<header class="site-header" data-site-header>
+  <div class="wrap">
+    <a class="brand" href="../../zh/"><img class="brand-mark" src="../../assets/liferay-mark-white.png" alt="" width="30" height="30"><span class="brand-name">Liferay Community APAC</span></a>
+  </div>
+</header>
+
+<main data-pagefind-body>
+  <section class="hero page">
+    <div class="wrap">
+      <div>
+        <p class="crumbs"><a href="../../zh/">首页</a><span>/</span>教程与工具</p>
+        <p class="eyebrow">教程与工具</p>
+        <h1>Liferay DXP 实用资源</h1>
+        <p class="lead">我们针对常见的实施、升级和迁移任务，发布 Liferay DXP 教程、示例代码和工具。新内容将持续更新。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="resources">
+    <div class="wrap">
+      <div class="notice" role="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r=".6"/></svg>
+        <div>
+          <strong>非官方资源，使用风险自负。</strong>
+          <p>此处提供的教程、示例代码和指南是非官方示例，并非 Liferay 官方产品或文档。在正式使用之前，请先在非生产环境中进行充分测试。</p>
+        </div>
+      </div>
+
+      <div class="subhead" id="tutorials">
+        <h3>教程</h3>
+        <p>附带可运行代码的分步教程。</p>
+      </div>
+      <div class="resources">
+        <!-- apps:cards tutorials -->
+        <article class="card resource">
+          <span class="tag">教程</span>
+          <h3>基于 Liferay DXP 的原生 iOS 应用</h3>
+          <p>一套分步教程和 SwiftUI 参考应用，仅使用 Liferay DXP 2026.Q1 的无头 REST API 构建。用户通过 OAuth 2.0 和 PKCE 登录，然后管理个人资料、地址和自定义 Liferay 对象，无需任何第三方依赖。目前仅部分内容已测试。</p>
+          <span class="meta">共 12 章 · Swift · SwiftUI · OAuth 2.0</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">开始学习教程 →</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">教程</span>
+          <h3>从 SharePoint Online 迁移到 Liferay DXP</h3>
+          <p>一套共 14 章的实践教程，附带可用的工具，指导您将正在运行的 SharePoint Online 站点（或本地部署的 SharePoint Server）迁移到 Liferay DXP 2026.Q3 及其新 CMS。借助 MCP 服务器，AI 助手可以帮助盘点源站点、规划映射并检查迁移结果。</p>
+          <span class="meta">共 14 章 · Python · MCP</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">开始学习教程 →</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">教程</span>
+          <h3>在 Amazon EC2 上自托管 Liferay DXP</h3>
+          <p>一份分步指南，介绍如何在 Amazon EC2 上以单实例或高可用模式、使用 Docker 或 Tomcat 包运行 Liferay DXP。使用 Terraform 构建基础设施，并通过 GitHub Actions 部署代码。目前为草稿版，仅部分内容已在 AWS 上测试。</p>
+          <span class="meta">共 18 节 · Terraform · Docker · GitHub Actions</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial">开始学习教程 →</a>
+        </article>
+        <!-- /apps:cards -->
+      </div>
+
+      <div class="subhead" id="sample-code">
+        <h3>示例代码</h3>
+        <p>可以直接使用或参考的项目。</p>
+      </div>
+      <div class="resources">
+        <!-- apps:cards sample-code -->
+        <article class="card resource">
+          <span class="tag">示例代码</span>
+          <h3>EC2 上 Liferay DXP 的示例工作区</h3>
+          <p>EC2 指南的配套示例：一个 DXP 2026.Q3 的 Liferay Workspace，包含 OSGi 模块、CSS 客户端扩展和 React 客户端扩展，并通过 GitHub Actions 构建镜像、推送到 Amazon ECR 并部署到 EC2 实例。草稿版。</p>
+          <span class="meta">Liferay Workspace · React · GitHub Actions</span>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-sample-workspace">在 GitHub 上查看 →</a>
+        </article>
+        <!-- /apps:cards -->
+      </div>
+
+      <div class="subhead" id="tools">
+        <h3>工具</h3>
+        <p>帮助运行和升级 Liferay DXP 的工具。</p>
+      </div>
+      <div class="resources">
+        <!-- apps:cards tools -->
+        <article class="card resource">
+          <span class="tag">工具</span>
+          <h3>Liferay 升级报告脚本</h3>
+          <p>一个网页工具：为您的版本（Liferay Portal CE 6.1 至 DXP 2026.Q3）找到合适的只读 Groovy 脚本，并引导您在脚本控制台中生成升级就绪报告。支持 7 种语言。</p>
+          <span class="meta">CE 6.1 至 DXP 2026.Q3 · Groovy · 7 种语言</span>
+          <a class="more" href="https://liferay-community-apac.github.io/liferay-upgrade-report-script/">打开工具 →</a>
+          <a class="more" href="https://github.com/Liferay-Community-APAC/liferay-upgrade-report-script">在 GitHub 上查看 →</a>
+        </article>
+        <!-- /apps:cards -->
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>获取新教程通知</h2>
+          <p>所有内容均在 GitHub 上发布。关注我们，或关注您使用的代码库的新版本。</p>
+        </div>
+        <a class="btn" href="../../zh/community/#stay-updated">如何获取最新信息</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" data-site-footer>
+  <p class="wrap disclaimer">本网站上的教程、示例代码和指南均为非官方内容，按“原样”提供，使用风险自负。</p>
+</footer>
+
+</body>
+</html>

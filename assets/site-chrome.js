@@ -34,8 +34,9 @@
   var STRINGS = {
     en: {
       home: '', brandName: 'Liferay Community APAC', navLabel: 'Main',
-      nav: [['#resources', 'Tutorials & code'], ['marketplace-apps/', 'Marketplace Apps'], ['knowledge-base/', 'Knowledge base'],
-            ['#contact', 'Contact']],
+      nav: [['marketplace-apps', 'marketplace-apps/', 'Marketplace Apps'], ['solution-recipes', 'solution-recipes/', 'Solution Recipes'],
+            ['tutorials', 'tutorials/', 'Tutorials & Tools'], ['community', 'community/', 'Community']],
+      contact: 'Contact',
       langLabel: 'Language', menu: 'Menu', search: 'Search', searchTitle: 'Search the site', close: 'Close',
       searchUnavailable: 'Search becomes available once the site is published.',
       footerBrand: 'Liferay Community APAC', footerLabel: 'Footer', marketplace: 'Liferay Community on Liferay Marketplace', 
@@ -45,8 +46,9 @@
     },
     ja: {
       home: 'ja/', brandName: 'Liferay Community APAC', navLabel: 'メイン',
-      nav: [['#resources', 'チュートリアル'], ['#marketplace-apps', 'Marketplace アプリ'], ['#knowledge-base', 'ナレッジベース'],
-            ['#contact', 'お問い合わせ']],
+      nav: [['marketplace-apps', 'ja/marketplace-apps/', 'Marketplace アプリ'], ['solution-recipes', 'solution-recipes/', 'レシピ'],
+            ['tutorials', 'ja/tutorials/', 'チュートリアル'], ['community', 'ja/community/', 'コミュニティ']],
+      contact: 'お問い合わせ',
       langLabel: '言語', menu: 'メニュー', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
       searchUnavailable: '検索はサイトの公開後に利用できます。',
       footerBrand: 'Liferay Community APAC', footerLabel: 'フッター', marketplace: 'Liferay Marketplace の Liferay Community', 
@@ -56,8 +58,9 @@
     },
     zh: {
       home: 'zh/', brandName: 'Liferay Community APAC', navLabel: '主导航',
-      nav: [['#resources', '教程与代码'], ['#marketplace-apps', 'Marketplace 应用'], ['#knowledge-base', '知识库'],
-            ['#contact', '联系我们']],
+      nav: [['marketplace-apps', 'zh/marketplace-apps/', 'Marketplace 应用'], ['solution-recipes', 'solution-recipes/', '实践方案'],
+            ['tutorials', 'zh/tutorials/', '教程与工具'], ['community', 'zh/community/', '社区']],
+      contact: '联系我们',
       langLabel: '语言', menu: '菜单', search: '搜索', searchTitle: '搜索本站', close: '关闭',
       searchUnavailable: '网站发布后即可使用搜索。',
       footerBrand: 'Liferay Community APAC', footerLabel: '页脚', marketplace: 'Liferay Marketplace 上的 Liferay Community', 
@@ -80,13 +83,18 @@
     return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
   }
 
-  // A menu entry is a section of this language's homepage ("#…") or a page under the site root.
-  function navHref(target) {
-    return target.charAt(0) === '#' ? homeUrl + target : ROOT + target;
+  // The site's section this page belongs to: <body data-section="…">. App docs published before
+  // sections existed mark <body data-kb-page>; they belong to Marketplace Apps, or to Solution Recipes.
+  function pageSection() {
+    var b = document.body;
+    if (b.getAttribute('data-section')) return b.getAttribute('data-section');
+    if (b.hasAttribute('data-kb-page')) return location.pathname.indexOf('/solution-recipes/') !== -1 ? 'solution-recipes' : 'marketplace-apps';
+    return '';
   }
+  var SECTION_PAGES = { 'marketplace-apps': 1, tutorials: 1, community: 1 }; // sections with a page in every language
 
   // The same page in another language: the page's own <link rel="alternate" hreflang> if it has one,
-  // otherwise that language's homepage (its knowledge base section, from an English-only page).
+  // otherwise that language's page for the same section (from an English-only page, such as an app's docs).
   function altHref(code) {
     var link = document.querySelector('link[rel="alternate"][hreflang="' + HREFLANG[code] + '"]');
     if (link) {
@@ -94,16 +102,17 @@
       var href = new URL(link.getAttribute('href'), location.href).href;
       return href.indexOf(SITE) === 0 ? ROOT + href.slice(SITE.length) : href;
     }
-    var onKb = location.pathname.indexOf('/knowledge-base/') !== -1 || document.querySelector('[data-kb-page]');
-    return ROOT + STRINGS[code].home + (onKb && code !== 'en' ? '#knowledge-base' : '');
+    // An English-only page, such as an app's docs: that language's page for the same section, or its homepage.
+    var sec = pageSection();
+    return ROOT + STRINGS[code].home + (SECTION_PAGES[sec] ? sec + '/' : '');
   }
 
   function renderHeader(el) {
+    var sec = pageSection();
     var nav = t.nav.map(function (item) {
-      var href = navHref(item[0]);
-      // App docs published from their own repositories mark <body data-kb-page>: they belong to the knowledge base.
-      var current = item[0].charAt(0) !== '#' && (here.indexOf(href) === 0 || (item[0] === 'knowledge-base/' && !!document.querySelector('[data-kb-page]')));
-      return '<a href="' + esc(href) + '"' + (current ? ' aria-current="page"' : '') + '>' + esc(item[1]) + '</a>';
+      var href = ROOT + item[1];
+      var current = item[0] === sec || here.indexOf(href) === 0;
+      return '<a href="' + esc(href) + '"' + (current ? ' aria-current="page"' : '') + '>' + esc(item[2]) + '</a>';
     }).join('');
     var langs = LANGS.map(function (l) {
       return l[0] === lang
@@ -139,7 +148,7 @@
   }
 
   function renderFooter(el) {
-    var links = t.footerLinks.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('');
+    var links = '<a href="' + esc(homeUrl + '#contact') + '">' + esc(t.contact) + '</a>' + t.footerLinks.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('');
     LANGS.forEach(function (l) {
       if (l[0] !== lang) links += '<a href="' + esc(altHref(l[0])) + '" hreflang="' + HREFLANG[l[0]] + '" lang="' + l[2] + '">' + (l[0] === 'en' ? 'English' : esc(l[1])) + '</a>';
     });
@@ -204,7 +213,7 @@
         mergeIndex: apps.filter(function (a) {
           return (a.docsLanguages || ['en']).indexOf(lang) !== -1;
         }).map(function (a) {
-          return { bundlePath: ROOT + a.search, mergeFilter: { app: a.name } };
+          return { bundlePath: ROOT + a.search, mergeFilter: { app: typeof a.name === 'object' ? a.name[lang] || a.name.en : a.name } };
         })
       });
       searchReady = true;
