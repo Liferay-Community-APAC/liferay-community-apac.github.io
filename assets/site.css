@@ -80,15 +80,17 @@ img, svg { display: block; }
 .eyebrow { margin: 0 0 14px; font-size: 14px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #9fc0ff; }
 .hero h1 { margin: 0 0 18px; font-size: clamp(40px, 6vw, 64px); line-height: 1.08; font-weight: 700; }
 .hero p.lead { margin: 0 0 32px; max-width: 34em; font-size: 20px; color: #d6e3ff; }
-.tiles { display: grid; grid-template-columns: repeat(3, 96px); grid-auto-rows: 96px; gap: 16px; justify-content: end; }
-.tiles span { border-radius: 16px; background: rgba(255, 255, 255, .12); }
-.tiles span:nth-child(1) { background: var(--blue); }
-.tiles span:nth-child(3) { background: rgba(76, 139, 255, .7); }
-.tiles span:nth-child(4) { background: rgba(255, 255, 255, .07); }
-.tiles span:nth-child(5) { background: #fff; }
-.tiles span:nth-child(6) { background: rgba(11, 95, 255, .6); }
-.tiles span:nth-child(7), .tiles span:nth-child(9) { visibility: hidden; }
-.tiles span:nth-child(8) { height: 40px; background: rgba(76, 139, 255, .45); }
+/* Hero mark: the Liferay logo's pattern of squares (4 x 4, the anti-diagonal empty) on a brand-blue tile */
+.hero-mark {
+  --mark: 240px;
+  justify-self: end; width: var(--mark); height: var(--mark); box-sizing: border-box;
+  padding: calc(var(--mark) * 24 / 162);
+  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: calc(var(--mark) * 7 / 162);
+  background: var(--blue); border-radius: calc(var(--mark) * 20 / 162);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(255, 255, 255, .12);
+}
+.hero-mark span { border-radius: 12%; background: #fff; }
+.hero-mark span:nth-child(4), .hero-mark span:nth-child(7), .hero-mark span:nth-child(10), .hero-mark span:nth-child(13) { visibility: hidden; }
 
 /* Buttons */
 .btns { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -203,7 +205,7 @@ section.alt { background: var(--bg-alt); }
 /* Responsive */
 @media (max-width: 960px) {
   .hero .wrap { grid-template-columns: 1fr; padding-top: 64px; padding-bottom: 72px; }
-  .tiles { display: none; }
+  .hero-mark { display: none; }
   .concepts { grid-template-columns: repeat(2, 1fr); }
   .concepts li, .concepts li:nth-child(4) { grid-column: auto; }
   .concepts li:nth-child(5) { grid-column: 1 / -1; }
@@ -483,3 +485,72 @@ section.alt { background: var(--bg-alt); }
 }
 .notice p + p { margin-top: 8px; }
 .support-note { max-width: 860px; margin: 20px 0 0; font-size: 15px; color: var(--muted); }
+
+/* ------------------------------------------------------------------
+   Compact layout: tighter spacing and type across every page
+   (homepages, knowledge base, Marketplace apps, 404 and app docs).
+   ------------------------------------------------------------------ */
+body { font-size: 16px; line-height: 1.6; }
+section { padding: 44px 0; scroll-margin-top: 64px; }
+.hero { padding: 0; } /* a hero is a <section>: use only its own spacing */
+.hero .wrap { padding-top: 56px; padding-bottom: 60px; gap: 32px; }
+.hero h1 { font-size: clamp(32px, 4.2vw, 46px); margin-bottom: 12px; }
+.hero p.lead { font-size: 18px; margin-bottom: 22px; }
+.eyebrow { margin-bottom: 10px; font-size: 13px; }
+.hero-mark { --mark: 200px; }
+.hero.page .wrap { padding-top: 40px; padding-bottom: 44px; }
+.hero.page h1 { font-size: clamp(28px, 3.6vw, 38px); }
+.crumbs { margin-bottom: 12px; }
+.section-head { margin-bottom: 22px; max-width: 760px; }
+.section-head h2 { font-size: clamp(24px, 2.6vw, 30px); margin-bottom: 6px; }
+.section-head p { font-size: 16px; }
+.kicker { margin-bottom: 6px; font-size: 12px; }
+.card { padding: 20px; }
+.card h3 { font-size: 18px; margin: 2px 0 6px; }
+.icon { width: 40px; height: 40px; margin-bottom: 12px; border-radius: 10px; }
+.icon svg { width: 24px; height: 24px; }
+.concepts, .resources, .groups, .steps, .doc-cards { gap: 14px; }
+.resource .tag { margin-bottom: 10px; }
+.resource .meta { margin-top: 10px; font-size: 13px; }
+.resource a.more { margin-top: 12px; }
+.resource.app .app-shot { width: calc(100% + 40px); margin: -20px -20px 16px; }
+.subhead { margin: 30px 0 12px; }
+.subhead h3 { font-size: 20px; }
+.notice { margin: -6px 0 20px; padding: 14px 18px; }
+.notice strong { font-size: 16px; }
+.notice p { font-size: 15px; }
+.kb-cat { gap: 24px; }
+.kb-cat + .kb-cat { margin-top: 36px; padding-top: 36px; }
+.showcases { gap: 20px; }
+.showcase { padding: 22px; gap: 26px; }
+.showcase-body h3 { font-size: 26px; }
+.showcase-body .showcase-tagline { font-size: 17px; }
+.showcase-points { gap: 4px; }
+.showcase-features, .showcase-gallery { padding-top: 20px; }
+.gallery { gap: 18px; }
+.support-note { margin-top: 14px; font-size: 14px; }
+.steps { margin-bottom: 22px; }
+.steps .card::before { width: 30px; height: 30px; margin-bottom: 10px; }
+.card.events { margin-top: 14px; }
+.cta { padding: 32px 36px; }
+.cta h2 { font-size: 26px; }
+.cta p { font-size: 16px; }
+.btn { padding: 10px 18px; font-size: 15px; }
+.site-footer { padding: 24px 0; }
+/* App docs */
+.docs { padding-top: 24px; padding-bottom: 48px; gap: 36px; }
+.docs-nav { top: 80px; }
+.prose h1 { font-size: clamp(28px, 3.4vw, 36px); margin-bottom: 14px; }
+.prose h2 { margin: 32px 0 10px; font-size: 24px; }
+.prose h3 { margin: 24px 0 6px; font-size: 19px; }
+.toc, .prose #markdown-toc { margin-bottom: 22px; padding-top: 12px; padding-bottom: 12px; }
+.pager { margin-top: 36px; padding-top: 18px; }
+@media (max-width: 960px) {
+  .hero .wrap { padding-top: 44px; padding-bottom: 48px; }
+  .cta { padding: 26px 22px; }
+}
+@media (max-width: 720px) {
+  section { padding: 36px 0; }
+  .hero h1 { font-size: clamp(30px, 8vw, 38px); }
+  .hero p.lead { font-size: 17px; }
+}
