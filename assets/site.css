@@ -481,3 +481,5 @@ section.alt { background: var(--bg-alt); }
   .showcase-body .showcase-tagline, .showcase-features h4, .showcase-gallery h4 { color: #9fc0ff; }
   .showcase-body .tag { background: rgba(76, 139, 255, .18); color: #cfe0ff; }
 }
+.notice p + p { margin-top: 8px; }
+.support-note { max-width: 860px; margin: 20px 0 0; font-size: 15px; color: var(--muted); }
