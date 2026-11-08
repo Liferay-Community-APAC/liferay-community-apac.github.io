@@ -103,7 +103,9 @@ function card(a, page, indent) {
   lines.push(`  <h3>${esc(a.name)}</h3>`);
   lines.push(`  <p>${esc(a.summary[page.lang])}</p>`);
   if (meta) lines.push(`  <span class="meta">${esc(meta)}</span>`);
-  lines.push(`  <a class="more" href="${esc(href(a.docs, page))}">${esc(translated ? t.more : t.moreOther)}</a>`);
+  // A category can name its own button, for example "Browse the recipes →"; otherwise "Read the guide →".
+  const more = cat.more?.[page.lang] || (translated ? t.more : t.moreOther);
+  lines.push(`  <a class="more" href="${esc(href(a.docs, page))}">${esc(more)}</a>`);
   if (a.marketplace) lines.push(`  <a class="more" href="${esc(a.marketplace)}">${esc(t.marketplace)}</a>`);
   lines.push('</article>');
   return lines.map((l) => indent + l).join('\n');

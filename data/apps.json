@@ -14,6 +14,25 @@
         "zh": "Marketplace 应用"
       },
       "comingSoon": true
+    },
+    {
+      "id": "solution-recipes",
+      "name": {
+        "en": "Solution recipes",
+        "ja": "ソリューションレシピ",
+        "zh": "解决方案实践指南"
+      },
+      "tag": {
+        "en": "Recipes",
+        "ja": "レシピ",
+        "zh": "实践方案"
+      },
+      "comingSoon": false,
+      "more": {
+        "en": "Browse the recipes →",
+        "ja": "レシピを見る（英語）→",
+        "zh": "浏览实践指南（英文）→"
+      }
     }
   ],
   "apps": [
@@ -172,6 +191,25 @@
       "search": "liferay-forums/pagefind/",
       "sitemap": "liferay-forums/sitemap.xml",
       "docsRepo": "https://github.com/Liferay-Community-APAC/liferay-forums"
+    },
+    {
+      "id": "solution-recipes",
+      "category": "solution-recipes",
+      "name": "Solution Recipes",
+      "summary": {
+        "en": "Step-by-step recipes that combine apps, tutorials and Liferay DXP features into a complete use case. The first recipes are on the way.",
+        "ja": "アプリ、チュートリアル、Liferay DXP の機能を組み合わせて、ひとつのユースケースを実現するステップバイステップのレシピです。最初のレシピを準備中です。",
+        "zh": "将应用、教程和 Liferay DXP 功能组合成完整用例的分步实践指南。首批指南正在准备中。"
+      },
+      "docsLanguages": [
+        "en"
+      ],
+      "docs": "solution-recipes/",
+      "repo": "https://github.com/Liferay-Community-APAC/solution-recipes",
+      "marketplace": null,
+      "search": "solution-recipes/pagefind/",
+      "sitemap": "solution-recipes/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/solution-recipes"
     }
   ]
 }
