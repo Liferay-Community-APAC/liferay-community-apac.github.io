@@ -80,17 +80,31 @@ img, svg { display: block; }
 .eyebrow { margin: 0 0 14px; font-size: 14px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #9fc0ff; }
 .hero h1 { margin: 0 0 18px; font-size: clamp(40px, 6vw, 64px); line-height: 1.08; font-weight: 700; }
 .hero p.lead { margin: 0 0 32px; max-width: 34em; font-size: 20px; color: #d6e3ff; }
-/* Hero mark: the Liferay logo's pattern of squares (4 x 4, the anti-diagonal empty) on a brand-blue tile */
+/* Hero mark: the Liferay logo's pattern of squares (4 x 4, the anti-diagonal empty) on a translucent tile that
+   fades from brand blue to clear; the squares fade from white (top left) to faint (bottom right). */
 .hero-mark {
   --mark: 240px;
   justify-self: end; width: var(--mark); height: var(--mark); box-sizing: border-box;
   padding: calc(var(--mark) * 24 / 162);
   display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: calc(var(--mark) * 7 / 162);
-  background: var(--blue); border-radius: calc(var(--mark) * 20 / 162);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(255, 255, 255, .12);
+  border-radius: calc(var(--mark) * 20 / 162);
+  background: linear-gradient(135deg, rgba(11, 95, 255, .95) 0%, rgba(11, 95, 255, .55) 55%, rgba(76, 139, 255, .15) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16), 0 24px 60px rgba(0, 0, 0, .25);
 }
-.hero-mark span { border-radius: 12%; background: #fff; }
+.hero-mark span { border-radius: 12%; }
 .hero-mark span:nth-child(4), .hero-mark span:nth-child(7), .hero-mark span:nth-child(10), .hero-mark span:nth-child(13) { visibility: hidden; }
+.hero-mark span:nth-child(1){background:rgba(255,255,255,0.95)}
+.hero-mark span:nth-child(2){background:rgba(255,255,255,0.75)}
+.hero-mark span:nth-child(3){background:rgba(255,255,255,0.55)}
+.hero-mark span:nth-child(5){background:rgba(255,255,255,0.75)}
+.hero-mark span:nth-child(6){background:rgba(255,255,255,0.55)}
+.hero-mark span:nth-child(8){background:rgba(255,255,255,0.28)}
+.hero-mark span:nth-child(9){background:rgba(255,255,255,0.55)}
+.hero-mark span:nth-child(11){background:rgba(255,255,255,0.28)}
+.hero-mark span:nth-child(12){background:rgba(255,255,255,0.2)}
+.hero-mark span:nth-child(14){background:rgba(255,255,255,0.28)}
+.hero-mark span:nth-child(15){background:rgba(255,255,255,0.2)}
+.hero-mark span:nth-child(16){background:rgba(255,255,255,0.14)}
 
 /* Buttons */
 .btns { display: flex; flex-wrap: wrap; gap: 12px; }
