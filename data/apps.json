@@ -1,15 +1,15 @@
 {
-  "$comment": "One entry per app. scripts/build-apps.mjs turns this list into the app showcases (homepages and the Marketplace apps page), the app cards (homepages and the knowledge base), the sitemap lines in robots.txt, and the list of search indexes the site search merges. tagline, highlights, screenshots and download feed the showcases. Run `node scripts/build-apps.mjs` after editing; the publishing workflow also runs it.",
+  "$comment": "One entry per app. scripts/build-apps.mjs turns this list into the app showcases (homepages and the Marketplace Apps page), the app cards (homepages and the knowledge base), the sitemap lines in robots.txt, and the list of search indexes the site search merges. tagline, highlights, screenshots and download feed the showcases. Run `node scripts/build-apps.mjs` after editing; the publishing workflow also runs it.",
   "categories": [
     {
       "id": "marketplace-apps",
       "name": {
-        "en": "Marketplace apps",
+        "en": "Marketplace Apps",
         "ja": "Marketplace アプリ",
         "zh": "Marketplace 应用"
       },
       "tag": {
-        "en": "Marketplace app",
+        "en": "Marketplace App",
         "ja": "Marketplace アプリ",
         "zh": "Marketplace 应用"
       },
@@ -197,7 +197,7 @@
       "category": "solution-recipes",
       "name": "Solution Recipes",
       "summary": {
-        "en": "Step-by-step recipes that combine apps, tutorials and Liferay DXP features into a complete use case. The first recipes are on the way.",
+        "en": "Step-by-step recipes that combine Marketplace Apps, tutorials and Liferay DXP features into a complete use case. The first recipes are on the way.",
         "ja": "アプリ、チュートリアル、Liferay DXP の機能を組み合わせて、ひとつのユースケースを実現するステップバイステップのレシピです。最初のレシピを準備中です。",
         "zh": "将应用、教程和 Liferay DXP 功能组合成完整用例的分步实践指南。首批指南正在准备中。"
       },

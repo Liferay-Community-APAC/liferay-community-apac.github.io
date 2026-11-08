@@ -34,33 +34,33 @@
   var STRINGS = {
     en: {
       home: '', brandName: 'Liferay Community APAC', navLabel: 'Main',
-      nav: [['#resources', 'Tutorials & code'], ['marketplace-apps/', 'Apps'], ['knowledge-base/', 'Knowledge base'],
+      nav: [['#resources', 'Tutorials & code'], ['marketplace-apps/', 'Marketplace Apps'], ['knowledge-base/', 'Knowledge base'],
             ['#contact', 'Contact']],
       langLabel: 'Language', menu: 'Menu', search: 'Search', searchTitle: 'Search the site', close: 'Close',
       searchUnavailable: 'Search becomes available once the site is published.',
-      footerBrand: 'Liferay Community APAC', footerLabel: 'Footer', marketplace: 'Liferay Community apps on Liferay Marketplace', 
+      footerBrand: 'Liferay Community APAC', footerLabel: 'Footer', marketplace: 'Liferay Community on Liferay Marketplace', 
       footerLinks: [['https://www.liferay.com/', 'liferay.com'], ['https://learn.liferay.com/', 'Liferay Learn'],
                     ['https://github.com/Liferay-Community-APAC', 'GitHub']],
-      disclaimer: 'Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.'
+      disclaimer: 'Marketplace Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.'
     },
     ja: {
       home: 'ja/', brandName: 'Liferay Community APAC', navLabel: 'メイン',
-      nav: [['#resources', 'チュートリアル'], ['#marketplace-apps', 'アプリ'], ['#knowledge-base', 'ナレッジベース'],
+      nav: [['#resources', 'チュートリアル'], ['#marketplace-apps', 'Marketplace アプリ'], ['#knowledge-base', 'ナレッジベース'],
             ['#contact', 'お問い合わせ']],
       langLabel: '言語', menu: 'メニュー', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
       searchUnavailable: '検索はサイトの公開後に利用できます。',
-      footerBrand: 'Liferay Community APAC', footerLabel: 'フッター', marketplace: 'Liferay Marketplace の Liferay Community アプリ', 
+      footerBrand: 'Liferay Community APAC', footerLabel: 'フッター', marketplace: 'Liferay Marketplace の Liferay Community', 
       footerLinks: [['https://www.liferay.co.jp/', 'liferay.co.jp'], ['https://learn.liferay.com/', 'Liferay Learn'],
                     ['https://github.com/Liferay-Community-APAC', 'GitHub']],
       disclaimer: '本サイトのアプリ、チュートリアル、サンプルコード、ガイドは非公式のものであり、現状のまま提供されます。ご利用は自己責任でお願いします。'
     },
     zh: {
       home: 'zh/', brandName: 'Liferay Community APAC', navLabel: '主导航',
-      nav: [['#resources', '教程与代码'], ['#marketplace-apps', '应用'], ['#knowledge-base', '知识库'],
+      nav: [['#resources', '教程与代码'], ['#marketplace-apps', 'Marketplace 应用'], ['#knowledge-base', '知识库'],
             ['#contact', '联系我们']],
       langLabel: '语言', menu: '菜单', search: '搜索', searchTitle: '搜索本站', close: '关闭',
       searchUnavailable: '网站发布后即可使用搜索。',
-      footerBrand: 'Liferay Community APAC', footerLabel: '页脚', marketplace: 'Liferay Marketplace 上的 Liferay Community 应用', 
+      footerBrand: 'Liferay Community APAC', footerLabel: '页脚', marketplace: 'Liferay Marketplace 上的 Liferay Community', 
       footerLinks: [['https://www.liferay.com.cn/', 'liferay.com.cn'], ['https://learn.liferay.com/', 'Liferay Learn'],
                     ['https://github.com/Liferay-Community-APAC', 'GitHub']],
       disclaimer: '本网站上的应用、教程、示例代码和指南均为非官方内容，按“原样”提供，使用风险自负。'

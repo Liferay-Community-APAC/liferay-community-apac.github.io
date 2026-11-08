@@ -4,7 +4,7 @@
  *   - the app cards on the English, Japanese and Chinese homepages and on the knowledge base page,
  *     between <!-- apps:cards CATEGORY --> and <!-- /apps:cards --> markers;
  *   - the app showcases that promote each app: compact on the homepages, between
- *     <!-- apps:showcase CATEGORY --> and <!-- /apps:showcase -->, and in full on the Marketplace apps page,
+ *     <!-- apps:showcase CATEGORY --> and <!-- /apps:showcase -->, and in full on the Marketplace Apps page,
  *     between <!-- apps:showcase CATEGORY full --> and <!-- /apps:showcase -->;
  *   - the "Sitemap:" lines for app docs sites in robots.txt, between "# apps:sitemaps" and "# /apps:sitemaps".
  * The site search reads data/apps.json itself to find each app's search index.
@@ -32,7 +32,7 @@ const PAGES = [
   { file: 'knowledge-base/index.html', lang: 'en' },
   { file: 'marketplace-apps/index.html', lang: 'en' }
 ];
-// The Marketplace apps page (English): the homepages' showcases link to it.
+// The Marketplace Apps page (English): the homepages' showcases link to it.
 const APPS_PAGE = 'marketplace-apps/';
 const COMPACT_HIGHLIGHTS = 4;
 
@@ -40,15 +40,15 @@ const STRINGS = {
   en: { more: 'Read the guide →', moreOther: 'Read the guide →', marketplace: 'Marketplace listing →',
         guide: 'Read the guide', guideOther: 'Read the guide', download: 'Download', details: 'All features and screenshots →',
         features: 'Features', screenshots: 'Screenshots', versions: 'Works with', version: 'Version',
-        soonTag: 'Coming soon', soonTitle: 'More apps coming soon', soonText: 'More Marketplace apps and their guides are on the way.' },
+        soonTag: 'Coming soon', soonTitle: 'More Marketplace Apps coming soon', soonText: 'More Marketplace Apps and their guides are on the way.' },
   ja: { more: 'ガイドを読む →', moreOther: 'ガイドを読む（英語）→', marketplace: 'Marketplace で見る →',
         guide: 'ガイドを読む', guideOther: 'ガイドを読む（英語）', download: 'ダウンロード', details: 'すべての機能とスクリーンショット（英語）→',
         features: '機能', screenshots: 'スクリーンショット', versions: '対応製品', version: 'バージョン',
-        soonTag: '近日公開', soonTitle: 'その他のアプリも近日公開', soonText: '新しい Marketplace アプリとガイドを準備中です。' },
+        soonTag: '近日公開', soonTitle: 'その他の Marketplace アプリも近日公開', soonText: '新しい Marketplace アプリとガイドを準備中です。' },
   zh: { more: '阅读指南 →', moreOther: '阅读指南（英文）→', marketplace: '在 Marketplace 查看 →',
         guide: '阅读指南', guideOther: '阅读指南（英文）', download: '下载', details: '全部功能与截图（英文）→',
         features: '功能', screenshots: '截图', versions: '适用于', version: '版本',
-        soonTag: '即将推出', soonTitle: '更多应用即将推出', soonText: '更多 Marketplace 应用及其指南正在准备中。' }
+        soonTag: '即将推出', soonTitle: '更多 Marketplace 应用即将推出', soonText: '更多 Marketplace 应用及其指南正在准备中。' }
 };
 
 const fail = (msg) => { console.error('apps.json: ' + msg); process.exit(1); };
@@ -123,7 +123,7 @@ function soonCard(page, indent) {
 }
 
 // A promotional block for one app. compact: the homepages (a few highlights and a link to the apps page);
-// full: the Marketplace apps page (every highlight, screenshots, versions).
+// full: the Marketplace Apps page (every highlight, screenshots, versions).
 function showcase(a, page, indent, full) {
   const t = STRINGS[page.lang], L = page.lang;
   const cat = categories.get(a.category);
