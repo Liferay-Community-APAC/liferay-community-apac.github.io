@@ -568,3 +568,10 @@ section { padding: 44px 0; scroll-margin-top: 64px; }
   .hero h1 { font-size: clamp(30px, 8vw, 38px); }
   .hero p.lead { font-size: 17px; }
 }
+/* "Liferay Community APAC" is one name: the header shows the Liferay mark followed by the whole name
+   (on the narrowest phones, the mark alone), and the homepage heading never breaks it across lines. */
+.brand { gap: 10px; }
+.brand-mark { width: 30px; height: 30px; flex: none; }
+.brand-name { color: #fff; font-size: 19px; font-weight: 600; letter-spacing: .1px; white-space: nowrap; line-height: 1; }
+@media (max-width: 519px) { .brand-name { display: none; } }
+.hero:not(.page) h1, :root[lang] .hero:not(.page) h1 { white-space: nowrap; font-size: clamp(21px, 6.4vw, 46px); }
