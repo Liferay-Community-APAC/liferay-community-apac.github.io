@@ -1,0 +1,71 @@
+name: Report a problem
+description: Something in a Marketplace App, tutorial, recipe or tool is broken or wrong.
+title: "[Problem] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tell us what's broken and how to make it happen again. **This is a public page:** leave out anything confidential.
+
+        Found a security vulnerability? Don't report it here: see [Report a security issue](https://github.com/Liferay-Community-APAC/liferay-community-apac.github.io/security/advisories/new).
+  - type: dropdown
+    id: about
+    attributes:
+      label: Which one has the problem?
+      options:
+        - Liferay Forums (Marketplace App)
+        - Solution Recipes
+        - "Tutorial: Native iOS app on Liferay DXP"
+        - "Tutorial: SharePoint Online to Liferay DXP migration"
+        - "Tutorial: Liferay DXP self-hosted on Amazon EC2"
+        - "Sample code: Sample workspace for Liferay DXP on EC2"
+        - "Tool: Liferay upgrade report script"
+        - The Liferay Community APAC website
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or link
+      description: The Marketplace App version, or a link to the guide page or file with the problem.
+      placeholder: e.g. Liferay Forums 1.0.0, or a link to the page
+    validations:
+      required: true
+  - type: input
+    id: dxp
+    attributes:
+      label: Liferay DXP version
+      placeholder: e.g. 2026.Q1.3 LTS
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to …
+        2. Click …
+        3. See …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log lines
+      render: shell
+  - type: checkboxes
+    id: public
+    attributes:
+      label: Before you submit
+      description: Everything you post here is public, and community help is best effort.
+      options:
+        - label: I removed passwords, keys, tokens, customer data, internal hostnames and anything else confidential from this request, including logs and screenshots.
+          required: true
+        - label: I understand this is community help on a best-effort basis, not official Liferay support.
+          required: true

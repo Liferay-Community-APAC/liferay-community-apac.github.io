@@ -1,0 +1,35 @@
+name: Suggest an idea
+description: Ask for a feature, a tutorial, a Solution Recipe or a Marketplace App you'd find useful.
+title: "[Idea] "
+labels: ["idea", "triage"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of idea?
+      options:
+        - A feature for an existing Marketplace App or tool
+        - A new tutorial or sample code
+        - A new Solution Recipe
+        - A new Marketplace App
+        - Something about this community or website
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would it solve?
+      description: Who needs it and why. Real use cases help us prioritise.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: What it would do. Rough is fine.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: How do you handle it today?

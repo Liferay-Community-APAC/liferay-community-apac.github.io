@@ -16,6 +16,6 @@ jobs:
       id-token: write
     with:
       builder: static
-      exclude: scripts README.md
+      exclude: scripts README.md SECURITY.md
       # Regenerate the app cards and sitemap lines from data/apps.json, so the live site always matches it.
       prebuild: node scripts/build-apps.mjs "$SITE_DIR"
