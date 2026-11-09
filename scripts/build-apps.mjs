@@ -9,6 +9,9 @@
  *       A promotional block per entry: compact on the homepages, in full on the Marketplace Apps pages.
  *   <!-- site:sections -->  <!-- /site:sections -->
  *       The homepage's cards for the site's four sections, with counts from the catalogue.
+ *   <!-- site:help-topics -->  <!-- /site:help-topics -->
+ *       The <option>s of the "Get help" form's topic list: every entry, then "Something else".
+ *       Each option's value is the English name, which goes into the forum post.
  *   "# apps:sitemaps" ... "# /apps:sitemaps" in robots.txt
  *       A Sitemap line for every entry published from its own repository.
  *
@@ -34,7 +37,8 @@ const HOME = { en: '', ja: 'ja/', zh: 'zh/' };
 const PAGES = LANGS.flatMap((l) => [
   { file: `${HOME[l]}index.html`, lang: l },
   { file: `${HOME[l]}marketplace-apps/index.html`, lang: l },
-  { file: `${HOME[l]}tutorials/index.html`, lang: l }
+  { file: `${HOME[l]}tutorials/index.html`, lang: l },
+  { file: `${HOME[l]}community/index.html`, lang: l }
 ]);
 const COMPACT_HIGHLIGHTS = 4;
 
@@ -201,6 +205,15 @@ function sectionCards(page, indent) {
 
 const SHOWCASE_RE = /([ \t]*)<!-- apps:showcase ([\w-]+)( full)? -->[\s\S]*?<!-- \/apps:showcase -->/g;
 const CARDS_RE = /([ \t]*)<!-- apps:cards ([\w,-]+)( limit=\d+)? -->[\s\S]*?<!-- \/apps:cards -->/g;
+function helpTopics(page, indent) {
+  const lang = page.lang;
+  const other = { en: 'Something else', ja: 'その他', zh: '其他' };
+  const lines = data.apps.map((a) => `<option value="${esc(L(a.name, 'en'))}">${esc(L(a.name, lang))}</option>`);
+  lines.push(`<option value="">${esc(other[lang])}</option>`);
+  return indentAll(lines, indent);
+}
+
+const HELP_RE = /([ \t]*)<!-- site:help-topics -->[\s\S]*?<!-- \/site:help-topics -->/g;
 const SECTIONS_RE = /([ \t]*)<!-- site:sections -->[\s\S]*?<!-- \/site:sections -->/g;
 let changed = 0;
 
@@ -238,7 +251,11 @@ for (const page of PAGES) {
       found++;
       return `${indent}<!-- site:sections -->\n${sectionCards(page, indent)}\n${indent}<!-- /site:sections -->`;
     });
-    if (!found) fail(`${page.file} has no generated parts (apps:cards, apps:showcase or site:sections markers)`);
+    html = html.replace(HELP_RE, (_, indent) => {
+      found++;
+      return `${indent}<!-- site:help-topics -->\n${helpTopics(page, indent)}\n${indent}<!-- /site:help-topics -->`;
+    });
+    if (!found) fail(`${page.file} has no generated parts (apps:cards, apps:showcase, site:sections or site:help-topics markers)`);
     return html;
   });
 }

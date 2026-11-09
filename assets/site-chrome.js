@@ -36,7 +36,7 @@
       home: '', brandName: 'Liferay Community APAC', navLabel: 'Main',
       nav: [['marketplace-apps', 'marketplace-apps/', 'Marketplace Apps'], ['solution-recipes', 'solution-recipes/', 'Solution Recipes'],
             ['tutorials', 'tutorials/', 'Tutorials & Tools'], ['community', 'community/', 'Community']],
-      contact: 'Contact', help: 'Get help',
+      contact: 'Contact',
       langLabel: 'Language', menu: 'Menu', search: 'Search', searchTitle: 'Search the site', close: 'Close',
       searchUnavailable: 'Search becomes available once the site is published.',
       footerBrand: 'Liferay Community APAC', footerLabel: 'Footer', marketplace: 'Liferay Community on Liferay Marketplace', 
@@ -48,7 +48,7 @@
       home: 'ja/', brandName: 'Liferay Community APAC', navLabel: 'メイン',
       nav: [['marketplace-apps', 'ja/marketplace-apps/', 'Marketplace アプリ'], ['solution-recipes', 'solution-recipes/', 'レシピ'],
             ['tutorials', 'ja/tutorials/', 'チュートリアル'], ['community', 'ja/community/', 'コミュニティ']],
-      contact: 'お問い合わせ', help: 'サポート',
+      contact: 'お問い合わせ',
       langLabel: '言語', menu: 'メニュー', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
       searchUnavailable: '検索はサイトの公開後に利用できます。',
       footerBrand: 'Liferay Community APAC', footerLabel: 'フッター', marketplace: 'Liferay Marketplace の Liferay Community', 
@@ -60,7 +60,7 @@
       home: 'zh/', brandName: 'Liferay Community APAC', navLabel: '主导航',
       nav: [['marketplace-apps', 'zh/marketplace-apps/', 'Marketplace 应用'], ['solution-recipes', 'solution-recipes/', '实践方案'],
             ['tutorials', 'zh/tutorials/', '教程与工具'], ['community', 'zh/community/', '社区']],
-      contact: '联系我们', help: '获取帮助',
+      contact: '联系我们',
       langLabel: '语言', menu: '菜单', search: '搜索', searchTitle: '搜索本站', close: '关闭',
       searchUnavailable: '网站发布后即可使用搜索。',
       footerBrand: 'Liferay Community APAC', footerLabel: '页脚', marketplace: 'Liferay Marketplace 上的 Liferay Community', 
@@ -149,7 +149,7 @@
 
   function renderFooter(el) {
     var links = '<a href="' + esc(homeUrl + '#contact') + '">' + esc(t.contact) + '</a>' +
-      '<a href="' + esc(homeUrl + 'community/#get-help') + '">' + esc(t.help) + '</a>' + t.footerLinks.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('');
+      t.footerLinks.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('');
     LANGS.forEach(function (l) {
       if (l[0] !== lang) links += '<a href="' + esc(altHref(l[0])) + '" hreflang="' + HREFLANG[l[0]] + '" lang="' + l[2] + '">' + (l[0] === 'en' ? 'English' : esc(l[1])) + '</a>';
     });
@@ -238,7 +238,26 @@
     }
   });
 
+  // "Get help" form: opens a new topic in the Development category on Liferay Discuss, with the
+  // question template (and the mentions in it) filled in. Without JavaScript the form still opens the
+  // same new topic, just without the chosen topic filled in.
+  function initHelpForms() {
+    [].forEach.call(document.querySelectorAll('form[data-discuss-form]'), function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var about = form.elements.about.value;
+        var title = form.elements.title.value.trim();
+        if (about && title) title = about + ': ' + title;
+        var body = form.elements.body.value.replace('**About:** ', '**About:** ' + (about || ''));
+        var url = form.action + '?category=' + encodeURIComponent(form.elements.category.value) +
+          '&body=' + encodeURIComponent(body) + (title ? '&title=' + encodeURIComponent(title) : '');
+        window.open(url, '_blank', 'noopener');
+      });
+    });
+  }
+
   function init() {
+    initHelpForms();
     var h = document.querySelector('[data-site-header]');
     var f = document.querySelector('[data-site-footer]');
     if (h) renderHeader(h);

@@ -55,22 +55,3 @@ Then open <http://localhost:8000/>. Search only works on the published site, whe
 ## Publishing
 
 Pushing to `main` publishes the site with GitHub Actions. In **Settings → Pages**, **Source** must be **GitHub Actions**.
-
-## Help requests
-
-People ask the community for help through this repository's issues: **Ask for help**, **Report a problem**
-and **Suggest an idea** ([open a request](https://github.com/Liferay-Community-APAC/liferay-community-apac.github.io/issues/new/choose)).
-The forms are in `.github/ISSUE_TEMPLATE/`; the website links to them from the Community pages (`#get-help`) and the footer.
-Security issues are reported privately: see [SECURITY.md](SECURITY.md).
-
-Handling requests:
-
-1. New requests get the `triage` label. Read them within a few working days, remove `triage`, and add a label for what
-   they're about (`liferay-forums`, `solution-recipes`, `tutorials`, `tools`, `website`).
-2. If you need more detail, ask and add `waiting for reply`. Requests waiting 30 days can be closed.
-3. A problem that belongs to one repository, such as a bug in Liferay Forums, can be moved there with **Transfer issue**.
-4. Close a request once it's answered. Questions that come up often are worth adding to the guides.
-
-Labels to create once: `triage`, `help wanted`, `bug`, `idea`, `waiting for reply`, and one per topic as above.
-When you add an entry to `data/apps.json`, add it to the "What do you need help with?" list in
-`1-ask-for-help.yml` and `2-report-a-problem.yml` too.

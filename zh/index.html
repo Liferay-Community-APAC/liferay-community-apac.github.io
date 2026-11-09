@@ -75,8 +75,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=c5">
-  <script src="../assets/site-chrome.js?v=15" defer></script>
+  <link rel="stylesheet" href="../assets/site.css?v=c6">
+  <script src="../assets/site-chrome.js?v=16" defer></script>
 </head>
 <body data-section="home">
 
@@ -256,12 +256,48 @@
 
   <section id="contact" class="alt">
     <div class="wrap">
-      <div class="cta">
-        <div>
-          <h2>有问题？欢迎联系我们</h2>
-          <p>如有任何问题，或希望进一步了解相关内容，请随时与我们联系。</p>
+      <div class="cta help-routes">
+        <div class="help-head">
+          <h2>我们能为您做什么？</h2>
+          <p>请选择适合您问题的渠道。</p>
         </div>
-        <a class="btn" href="https://www.liferay.com.cn/contact">联系我们</a>
+        <div class="help-route help-community" id="get-help">
+          <h3>社区帮助</h3>
+          <p>关于我们的 Marketplace 应用、解决方案实践指南、教程和工具的问题，请在 Liferay Discuss 的 Development 分类中提问。社区成员会尽力解答。</p>
+          <form class="help-form" action="https://discuss.liferay.com/new-topic" method="get" target="_blank" data-discuss-form>
+            <input type="hidden" name="category" value="development">
+            <input type="hidden" name="body" value="@tonylim @Hong_Sheng&#10;&#10;**About:** &#10;**Liferay DXP version:** &#10;**Where it runs (Self-Hosted, PaaS, SaaS or local):** &#10;&#10;**What I&#x27;m trying to do:**&#10;&#10;&#10;**What happened, and what I expected:**&#10;&#10;&#10;**What I&#x27;ve tried:**&#10;&#10;&#10;**Relevant log lines:**&#10;```&#10;(paste here)&#10;```&#10;&#10;_This forum is public: please leave out passwords, keys, customer data and anything else confidential._">
+            <label>主题
+              <select name="about">
+                <!-- site:help-topics -->
+                <option value="Liferay Forums">Liferay Forums</option>
+                <option value="Solution Recipes">Solution Recipes</option>
+                <option value="Native iOS app on Liferay DXP">基于 Liferay DXP 的原生 iOS 应用</option>
+                <option value="SharePoint Online to Liferay DXP migration">从 SharePoint Online 迁移到 Liferay DXP</option>
+                <option value="Liferay DXP self-hosted on Amazon EC2">在 Amazon EC2 上自托管 Liferay DXP</option>
+                <option value="Sample workspace for Liferay DXP on EC2">EC2 上 Liferay DXP 的示例工作区</option>
+                <option value="Liferay upgrade report script">Liferay 升级报告脚本</option>
+                <option value="">其他</option>
+                <!-- /site:help-topics -->
+              </select>
+            </label>
+            <label>用几个字概括您的问题
+              <input type="text" name="title" placeholder="例如：论坛通知邮件未发送">
+            </label>
+            <button class="btn" type="submit">在 Liferay Discuss 上发帖 →</button>
+          </form>
+          <p class="help-note">需要登录 Liferay Discuss。帖子是公开的，请勿包含任何机密信息。请使用英文发帖。</p>
+        </div>
+        <div class="help-route">
+          <h3>订阅支持</h3>
+          <p>拥有 Liferay DXP 订阅？请提交工单获取官方支持。</p>
+          <a class="btn" href="https://help.liferay.com/">Liferay 帮助中心</a>
+        </div>
+        <div class="help-route">
+          <h3>销售咨询</h3>
+          <p>关于许可、价格或 Liferay DXP 演示，请联系 Liferay 团队。</p>
+          <a class="btn" href="https://www.liferay.com.cn/contact">联系 Liferay</a>
+        </div>
       </div>
     </div>
   </section>

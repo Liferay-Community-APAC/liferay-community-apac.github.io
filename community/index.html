@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=c5">
-  <script src="../assets/site-chrome.js?v=15" defer></script>
+  <link rel="stylesheet" href="../assets/site.css?v=c6">
+  <script src="../assets/site-chrome.js?v=16" defer></script>
 </head>
 <body data-section="community">
 
@@ -115,32 +115,50 @@
     </div>
   </section>
 
-  <section id="get-help">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="kicker">Get help</span>
-        <h2>Need help? Ask the community</h2>
-        <p>Ask a question, report a problem or suggest an idea on GitHub. Members of the community answer on a best-effort basis.</p>
-      </div>
-      <div class="card events">
-        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/><path d="M9.8 9.6a2.3 2.3 0 0 1 4.4.9c0 1.6-2.2 2-2.2 3.2"/><circle cx="12" cy="16.6" r=".5"/></svg></div>
-        <div>
-          <h3>Open a request on GitHub</h3>
-          <p>Choose Ask for help, Report a problem or Suggest an idea. Requests are public, so leave out anything confidential. For official support with a Liferay subscription, use the <a href="https://help.liferay.com/">Liferay Help Center</a>.</p>
-        </div>
-        <a class="btn" href="https://github.com/Liferay-Community-APAC/liferay-community-apac.github.io/issues/new/choose">Ask for help →</a>
-      </div>
-    </div>
-  </section>
-
   <section id="contact" class="alt">
     <div class="wrap">
-      <div class="cta">
-        <div>
-          <h2>Questions? Let's talk.</h2>
-          <p>If you have questions, or would like more detail on anything here, please get in touch with us.</p>
+      <div class="cta help-routes">
+        <div class="help-head">
+          <h2>How can we help?</h2>
+          <p>Pick the route that fits your question.</p>
         </div>
-        <a class="btn" href="https://www.liferay.com/contact-us">Contact Liferay</a>
+        <div class="help-route help-community" id="get-help">
+          <h3>Community help</h3>
+          <p>Questions about our Marketplace Apps, Solution Recipes, tutorials and tools: ask in the Development category on Liferay Discuss. Community members answer on a best-effort basis.</p>
+          <form class="help-form" action="https://discuss.liferay.com/new-topic" method="get" target="_blank" data-discuss-form>
+            <input type="hidden" name="category" value="development">
+            <input type="hidden" name="body" value="@tonylim @Hong_Sheng&#10;&#10;**About:** &#10;**Liferay DXP version:** &#10;**Where it runs (Self-Hosted, PaaS, SaaS or local):** &#10;&#10;**What I&#x27;m trying to do:**&#10;&#10;&#10;**What happened, and what I expected:**&#10;&#10;&#10;**What I&#x27;ve tried:**&#10;&#10;&#10;**Relevant log lines:**&#10;```&#10;(paste here)&#10;```&#10;&#10;_This forum is public: please leave out passwords, keys, customer data and anything else confidential._">
+            <label>About
+              <select name="about">
+                <!-- site:help-topics -->
+                <option value="Liferay Forums">Liferay Forums</option>
+                <option value="Solution Recipes">Solution Recipes</option>
+                <option value="Native iOS app on Liferay DXP">Native iOS app on Liferay DXP</option>
+                <option value="SharePoint Online to Liferay DXP migration">SharePoint Online to Liferay DXP migration</option>
+                <option value="Liferay DXP self-hosted on Amazon EC2">Liferay DXP self-hosted on Amazon EC2</option>
+                <option value="Sample workspace for Liferay DXP on EC2">Sample workspace for Liferay DXP on EC2</option>
+                <option value="Liferay upgrade report script">Liferay upgrade report script</option>
+                <option value="">Something else</option>
+                <!-- /site:help-topics -->
+              </select>
+            </label>
+            <label>Your question in a few words
+              <input type="text" name="title" placeholder="e.g. Forum email notifications aren&#x27;t sent">
+            </label>
+            <button class="btn" type="submit">Post on Liferay Discuss →</button>
+          </form>
+          <p class="help-note">You'll need to sign in to Liferay Discuss. The post is public, so leave out anything confidential.</p>
+        </div>
+        <div class="help-route">
+          <h3>Subscription support</h3>
+          <p>Have a Liferay DXP subscription? Open a ticket for official support with Liferay DXP itself.</p>
+          <a class="btn" href="https://help.liferay.com/">Liferay Help Center</a>
+        </div>
+        <div class="help-route">
+          <h3>Sales</h3>
+          <p>Licensing, pricing or a demo of Liferay DXP? Talk to the Liferay team.</p>
+          <a class="btn" href="https://www.liferay.com/contact-us">Contact Liferay</a>
+        </div>
       </div>
     </div>
   </section>

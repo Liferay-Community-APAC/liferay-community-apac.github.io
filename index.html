@@ -75,8 +75,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=c5">
-  <script src="assets/site-chrome.js?v=15" defer></script>
+  <link rel="stylesheet" href="assets/site.css?v=c6">
+  <script src="assets/site-chrome.js?v=16" defer></script>
 </head>
 <body data-section="home">
 
@@ -256,12 +256,48 @@
 
   <section id="contact" class="alt">
     <div class="wrap">
-      <div class="cta">
-        <div>
-          <h2>Questions? Let's talk.</h2>
-          <p>If you have questions, or would like more detail on anything here, please get in touch with us.</p>
+      <div class="cta help-routes">
+        <div class="help-head">
+          <h2>How can we help?</h2>
+          <p>Pick the route that fits your question.</p>
         </div>
-        <a class="btn" href="https://www.liferay.com/contact-us">Contact Liferay</a>
+        <div class="help-route help-community" id="get-help">
+          <h3>Community help</h3>
+          <p>Questions about our Marketplace Apps, Solution Recipes, tutorials and tools: ask in the Development category on Liferay Discuss. Community members answer on a best-effort basis.</p>
+          <form class="help-form" action="https://discuss.liferay.com/new-topic" method="get" target="_blank" data-discuss-form>
+            <input type="hidden" name="category" value="development">
+            <input type="hidden" name="body" value="@tonylim @Hong_Sheng&#10;&#10;**About:** &#10;**Liferay DXP version:** &#10;**Where it runs (Self-Hosted, PaaS, SaaS or local):** &#10;&#10;**What I&#x27;m trying to do:**&#10;&#10;&#10;**What happened, and what I expected:**&#10;&#10;&#10;**What I&#x27;ve tried:**&#10;&#10;&#10;**Relevant log lines:**&#10;```&#10;(paste here)&#10;```&#10;&#10;_This forum is public: please leave out passwords, keys, customer data and anything else confidential._">
+            <label>About
+              <select name="about">
+                <!-- site:help-topics -->
+                <option value="Liferay Forums">Liferay Forums</option>
+                <option value="Solution Recipes">Solution Recipes</option>
+                <option value="Native iOS app on Liferay DXP">Native iOS app on Liferay DXP</option>
+                <option value="SharePoint Online to Liferay DXP migration">SharePoint Online to Liferay DXP migration</option>
+                <option value="Liferay DXP self-hosted on Amazon EC2">Liferay DXP self-hosted on Amazon EC2</option>
+                <option value="Sample workspace for Liferay DXP on EC2">Sample workspace for Liferay DXP on EC2</option>
+                <option value="Liferay upgrade report script">Liferay upgrade report script</option>
+                <option value="">Something else</option>
+                <!-- /site:help-topics -->
+              </select>
+            </label>
+            <label>Your question in a few words
+              <input type="text" name="title" placeholder="e.g. Forum email notifications aren&#x27;t sent">
+            </label>
+            <button class="btn" type="submit">Post on Liferay Discuss →</button>
+          </form>
+          <p class="help-note">You'll need to sign in to Liferay Discuss. The post is public, so leave out anything confidential.</p>
+        </div>
+        <div class="help-route">
+          <h3>Subscription support</h3>
+          <p>Have a Liferay DXP subscription? Open a ticket for official support with Liferay DXP itself.</p>
+          <a class="btn" href="https://help.liferay.com/">Liferay Help Center</a>
+        </div>
+        <div class="help-route">
+          <h3>Sales</h3>
+          <p>Licensing, pricing or a demo of Liferay DXP? Talk to the Liferay team.</p>
+          <a class="btn" href="https://www.liferay.com/contact-us">Contact Liferay</a>
+        </div>
       </div>
     </div>
   </section>

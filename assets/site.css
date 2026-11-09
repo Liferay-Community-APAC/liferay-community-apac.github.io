@@ -588,3 +588,17 @@ section { padding: 44px 0; scroll-margin-top: 64px; }
 #resources .subhead:first-of-type, #apps .notice + .showcases { margin-top: 28px; }
 @media (max-width: 960px) { .sections { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .sections { grid-template-columns: 1fr; } }
+/* "How can we help?": community help on Liferay Discuss, subscription support and sales, in one blue block. */
+.cta.help-routes { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px 24px; align-items: stretch; }
+.help-community { grid-row: span 2; }
+.help-head { grid-column: 1 / -1; }
+.help-route { display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 22px; border-radius: 14px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); }
+.help-route h3 { margin: 0; font-size: 20px; color: #fff; }
+.cta .help-route p { margin: 0; font-size: 15px; }
+.help-route > .btn { align-self: flex-start; margin-top: auto; }
+.help-form { display: grid; gap: 10px; margin-top: 4px; }
+.help-form label { display: grid; gap: 4px; font-size: 14px; font-weight: 600; color: #fff; }
+.help-form select, .help-form input { font: inherit; font-size: 15px; font-weight: 400; padding: 9px 11px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, .35); background: #fff; color: #10172a; width: 100%; box-sizing: border-box; }
+.help-form .btn { justify-self: start; font: inherit; font-weight: 600; cursor: pointer; }
+.cta .help-note { font-size: 13px; color: #b9cdf5; }
+@media (max-width: 860px) { .cta.help-routes { grid-template-columns: 1fr; } .help-community { grid-row: auto; } }
