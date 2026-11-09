@@ -33,6 +33,7 @@
 
   var STRINGS = {
     en: {
+      homeLabel: 'Home', englishOnly: 'This page is only available in English.',
       home: '', brandName: 'Liferay Community APAC', navLabel: 'Main',
       nav: [['marketplace-apps', 'marketplace-apps/', 'Marketplace Apps'], ['solution-recipes', 'solution-recipes/', 'Solution Recipes'],
             ['tutorials', 'tutorials/', 'Tutorials & Tools'], ['community', 'community/', 'Community'],
@@ -46,6 +47,7 @@
       disclaimer: 'Marketplace Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.'
     },
     ja: {
+      homeLabel: 'ホーム', englishOnly: 'このページは英語のみで提供しています。',
       home: 'ja/', brandName: 'Liferay Community APAC', navLabel: 'メイン',
       nav: [['marketplace-apps', 'ja/marketplace-apps/', 'Marketplace アプリ'], ['solution-recipes', 'solution-recipes/', 'レシピ'],
             ['tutorials', 'ja/tutorials/', 'チュートリアル'], ['community', 'ja/community/', 'コミュニティ'],
@@ -59,6 +61,7 @@
       disclaimer: '本サイトのアプリ、チュートリアル、サンプルコード、ガイドは非公式のものであり、現状のまま提供されます。ご利用は自己責任でお願いします。'
     },
     zh: {
+      homeLabel: '首页', englishOnly: '本页面仅提供英文版。',
       home: 'zh/', brandName: 'Liferay Community APAC', navLabel: '主导航',
       nav: [['marketplace-apps', 'zh/marketplace-apps/', 'Marketplace 应用'], ['solution-recipes', 'solution-recipes/', '实践方案'],
             ['tutorials', 'zh/tutorials/', '教程与工具'], ['community', 'zh/community/', '社区'],
@@ -72,6 +75,7 @@
       disclaimer: '本网站上的应用、教程、示例代码和指南均为非官方内容，按“原样”提供，使用风险自负。'
     },
     id: {
+      homeLabel: 'Beranda', englishOnly: 'Halaman ini hanya tersedia dalam bahasa Inggris.',
       home: 'id/', brandName: 'Liferay Community APAC', navLabel: 'Utama',
       nav: [['marketplace-apps', 'id/marketplace-apps/', 'Marketplace App'], ['solution-recipes', 'solution-recipes/', 'Solution Recipes'],
             ['tutorials', 'id/tutorials/', 'Tutorial & Alat'], ['community', 'id/community/', 'Komunitas'],
@@ -89,9 +93,22 @@
   // [code, short label on the button, lang attribute, full name in the menu]
   var LANGS = [['en', 'EN', 'en', 'English'], ['ja', '日本語', 'ja', '日本語'], ['zh', '中文', 'zh-CN', '中文'], ['id', 'ID', 'id', 'Bahasa Indonesia']];
   var HREFLANG = { en: 'en', ja: 'ja', zh: 'zh-Hans', id: 'id' };
+  var LANG_BY_HREFLANG = { en: 'en', ja: 'ja', 'zh-Hans': 'zh', id: 'id' };
 
   var htmlLang = (document.documentElement.lang || 'en').toLowerCase();
-  var lang = htmlLang.indexOf('ja') === 0 ? 'ja' : htmlLang.indexOf('zh') === 0 ? 'zh' : htmlLang.indexOf('id') === 0 ? 'id' : 'en';
+  var pageLang = htmlLang.indexOf('ja') === 0 ? 'ja' : htmlLang.indexOf('zh') === 0 ? 'zh' : htmlLang.indexOf('id') === 0 ? 'id' : 'en';
+
+  // The visitor's language: remembered when they choose one in the language menu or open a page in
+  // Japanese, Chinese or Indonesian. A page that has no version in that language (such as docs available
+  // only in English) keeps the header, footer and breadcrumbs in it and says the page itself is in English.
+  var STORE = 'lca-lang';
+  function remembered() { try { return localStorage.getItem(STORE); } catch (e) { return null; } }
+  function remember(code) { try { localStorage.setItem(STORE, code); } catch (e) { /* private mode */ } }
+  var wanted = remembered();
+  var fallback = !!(wanted && STRINGS[wanted] && wanted !== pageLang &&
+    !document.querySelector('link[rel="alternate"][hreflang="' + { en: 'en', ja: 'ja', zh: 'zh-Hans', id: 'id' }[wanted] + '"]'));
+  var lang = fallback ? wanted : pageLang;
+  if (!fallback && (pageLang !== 'en' || !wanted)) remember(pageLang);
   var t = STRINGS[lang];
   var homeUrl = ROOT + t.home;
   var here = location.href.split('#')[0];
@@ -113,6 +130,7 @@
   // The same page in another language: the page's own <link rel="alternate" hreflang> if it has one,
   // otherwise that language's page for the same section (from an English-only page, such as an app's docs).
   function altHref(code) {
+    if (fallback && code === pageLang) return location.href;
     var link = document.querySelector('link[rel="alternate"][hreflang="' + HREFLANG[code] + '"]');
     if (link) {
       // hreflang links name the live address; keep visitors on whichever copy they're viewing (preview, local).
@@ -161,6 +179,7 @@
     var langBtn = el.querySelector('.lang-btn'), langList = el.querySelector('.lang-list');
     function setLangs(open) { langList.hidden = !open; langBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
     langBtn.addEventListener('click', function (e) { e.stopPropagation(); setLangs(langList.hidden); });
+    langList.addEventListener('click', function (e) { var a = e.target.closest('a[hreflang]'); if (a) remember(LANG_BY_HREFLANG[a.getAttribute('hreflang')]); });
     document.addEventListener('click', function (e) { if (!el.querySelector('.lang').contains(e.target)) setLangs(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !langList.hidden) { setLangs(false); langBtn.focus(); } });
 
@@ -245,7 +264,7 @@
         mergeIndex: apps.filter(function (a) {
           // Indonesian is written in Latin script, so English-only docs can join its search too.
           var langs = a.docsLanguages || ['en'];
-          return langs.indexOf(lang) !== -1 || (lang === 'id' && langs.indexOf('en') !== -1);
+          return langs.indexOf(pageLang) !== -1 || (pageLang === 'id' && langs.indexOf('en') !== -1);
         }).map(function (a) {
           return { bundlePath: ROOT + a.search, mergeFilter: { app: typeof a.name === 'object' ? a.name[lang] || a.name.en : a.name } };
         })
@@ -289,8 +308,36 @@
     });
   }
 
+  // Docs breadcrumbs ("Home / Marketplace Apps / …") come from each docs site in English; point them at the
+  // main site's pages in the visitor's language.
+  function localizeCrumbs() {
+    var crumbs = document.querySelector('.docs-crumbs');
+    if (!crumbs) return;
+    var code = LANGS.filter(function (l) { return l[0] === lang; })[0][2];
+    var links = crumbs.querySelectorAll('a');
+    if (links[0]) { links[0].href = homeUrl; links[0].textContent = t.homeLabel; links[0].setAttribute('lang', code); }
+    var sec = pageSection();
+    t.nav.forEach(function (item) {
+      if (item[0] !== sec || item[0] === 'solution-recipes' || !links[1]) return;
+      links[1].href = ROOT + item[1]; links[1].textContent = item[2]; links[1].setAttribute('lang', code);
+    });
+  }
+
+  // On a page shown in the remembered language: the header and footer are marked with it, and a short
+  // note says the page itself is in English.
+  function noteEnglishOnly() {
+    var code = LANGS.filter(function (l) { return l[0] === lang; })[0][2];
+    [].forEach.call(document.querySelectorAll('[data-site-header], [data-site-footer]'), function (el) { el.setAttribute('lang', code); });
+    var note = document.createElement('p');
+    note.className = 'lang-note'; note.setAttribute('lang', code); note.textContent = t.englishOnly;
+    var where = document.querySelector('.docs-main, main');
+    if (where) where.insertBefore(note, where.firstChild);
+  }
+
   function init() {
     initHelpForms();
+    localizeCrumbs();
+    if (fallback) noteEnglishOnly();
     var h = document.querySelector('[data-site-header]');
     var f = document.querySelector('[data-site-footer]');
     if (h) renderHeader(h);

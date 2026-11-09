@@ -622,3 +622,6 @@ section { padding: 44px 0; scroll-margin-top: 64px; }
 .site-header .lang .lang-list a:hover { background: rgba(255, 255, 255, .08); color: #fff; }
 .site-header .lang .lang-list [aria-current] { color: #fff; font-weight: 600; background: var(--blue); }
 @media (max-width: 374px) { .lang-btn { padding: 0 8px; gap: 4px; } .lang-btn .chev { display: none; } }
+/* Shown on a page available only in English, when the visitor chose another language. */
+.lang-note { margin: 0 0 16px; padding: 8px 12px; border-radius: 8px; background: var(--bg-alt); border: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+main > .lang-note { margin: 16px auto; max-width: var(--max); width: calc(100% - 48px); box-sizing: border-box; }

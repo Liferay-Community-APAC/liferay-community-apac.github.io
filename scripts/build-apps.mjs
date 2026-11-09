@@ -125,6 +125,12 @@ for (const a of data.apps || []) {
 }
 
 // ---------- render ----------
+// An entry's docs in the page's language: translations live in a folder named after the language
+// (my-app/ja/), listed in "docsLanguages". Otherwise the English docs.
+function docsFor(a, lang) {
+  return lang !== 'en' && (a.docsLanguages || []).includes(lang) && !isUrl(a.docs) ? a.docs.replace(/\/?$/, '/') + lang + '/' : a.docs;
+}
+
 function href(path, page) {
   if (isUrl(path)) return path;
   const from = posix.dirname(page.file);
@@ -146,7 +152,7 @@ function card(a, page, indent) {
   else {
     // A category can name its own button, for example "Browse the recipes →"; otherwise "Read the guide →".
     const more = cat.more?.[lang] || (translated ? t.more : t.moreOther);
-    lines.push(`  <a class="more" href="${esc(href(a.docs, page))}">${esc(more)}</a>`);
+    lines.push(`  <a class="more" href="${esc(href(docsFor(a, lang), page))}">${esc(more)}</a>`);
   }
   if (a.marketplace) lines.push(`  <a class="more" href="${esc(a.marketplace)}">${esc(t.marketplace)}</a>`);
   lines.push('</article>');
@@ -170,14 +176,14 @@ function showcase(a, page, indent, full) {
   const hl = a.highlights || [];
   const points = (full ? hl : hl.slice(0, COMPACT_HIGHLIGHTS)).map((h) => `      <li><strong>${esc(h.title[lang])}.</strong> ${esc(h.text[lang])}</li>`);
   const lines = [`<article class="showcase${full ? ' full' : ''}" id="${esc(a.id)}">`];
-  if (a.image) lines.push(`  <a class="showcase-shot" href="${esc(href(a.docs, page))}" tabindex="-1" aria-hidden="true">`,
+  if (a.image) lines.push(`  <a class="showcase-shot" href="${esc(href(docsFor(a, lang), page))}" tabindex="-1" aria-hidden="true">`,
     `    <img src="${esc(href(a.image.src, page))}" alt="" width="${a.image.width}" height="${a.image.height}" loading="lazy">`, '  </a>');
   lines.push('  <div class="showcase-body">', `    <span class="tag">${esc(cat.tag[lang])}</span>`, `    <h3>${esc(L(a.name, lang))}</h3>`);
   if (a.tagline) lines.push(`    <p class="showcase-tagline">${esc(a.tagline[lang])}</p>`);
   lines.push(`    <p>${esc(a.summary[lang])}</p>`);
   if (points.length && !full) lines.push('    <ul class="showcase-points">', ...points, '    </ul>');
   if (meta) lines.push(`    <p class="meta">${esc(full ? fullMeta : meta)}</p>`);
-  lines.push('    <div class="btns">', `      <a class="btn" href="${esc(href(a.docs, page))}">${esc(translated ? t.guide : t.guideOther)} →</a>`);
+  lines.push('    <div class="btns">', `      <a class="btn" href="${esc(href(docsFor(a, lang), page))}">${esc(translated ? t.guide : t.guideOther)} →</a>`);
   if (a.download) lines.push(`      <a class="btn outline" href="${esc(a.download)}">${esc(t.download)}</a>`);
   if (a.marketplace) lines.push(`      <a class="btn outline" href="${esc(a.marketplace)}">${esc(t.marketplace.replace(/ →$/, ''))}</a>`);
   lines.push('    </div>');
