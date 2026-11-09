@@ -436,10 +436,10 @@
       "category": "solution-recipes",
       "name": "Solution Recipes",
       "summary": {
-        "en": "Step-by-step recipes that combine Marketplace Apps, tutorials and Liferay DXP features into a complete use case. The first recipe adds an AI assistant to Liferay Forums, powered by Liferay AI Hub.",
-        "ja": "アプリ、チュートリアル、Liferay DXP の機能を組み合わせて、ひとつのユースケースを実現するステップバイステップのレシピです。最初のレシピでは、Liferay AI Hub を活用した AI アシスタントを Liferay Forums に追加します。",
-        "zh": "将应用、教程和 Liferay DXP 功能组合成完整用例的分步实践指南。第一个实践指南介绍如何为 Liferay Forums 添加由 Liferay AI Hub 提供支持的 AI 助手。",
-        "id": "Recipe langkah demi langkah yang menggabungkan Marketplace App, tutorial, dan fitur Liferay DXP menjadi use case yang lengkap. Recipe pertama menambahkan asisten AI ke Liferay Forums, didukung oleh Liferay AI Hub."
+        "en": "Step-by-step recipes that combine Marketplace Apps, tutorials and Liferay DXP features into a complete use case. Recipes so far: an AI assistant and AI discussion summaries for Liferay Forums, powered by Liferay AI Hub, and moving SharePoint discussion boards into Liferay Forums.",
+        "ja": "アプリ、チュートリアル、Liferay DXP の機能を組み合わせて、ひとつのユースケースを実現するステップバイステップのレシピです。現在のレシピ: Liferay AI Hub を活用した Liferay Forums の AI アシスタントと AI 要約、そして SharePoint のディスカッション掲示板から Liferay Forums への移行。",
+        "zh": "将应用、教程和 Liferay DXP 功能组合成完整用例的分步实践指南。现有实践指南：由 Liferay AI Hub 提供支持的 Liferay Forums AI 助手和 AI 讨论摘要，以及将 SharePoint 讨论板迁移到 Liferay Forums。",
+        "id": "Recipe langkah demi langkah yang menggabungkan Marketplace App, tutorial, dan fitur Liferay DXP menjadi use case yang lengkap. Recipe yang tersedia: asisten AI dan ringkasan diskusi AI untuk Liferay Forums, didukung oleh Liferay AI Hub, serta pemindahan papan diskusi SharePoint ke Liferay Forums."
       },
       "docsLanguages": [
         "en"

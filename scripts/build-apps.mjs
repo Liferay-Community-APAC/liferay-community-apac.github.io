@@ -81,7 +81,7 @@ const SECTIONS = [
   { icon: 'recipes', href: () => 'solution-recipes/', categories: [],
     title: { en: 'Solution Recipes', ja: 'ソリューションレシピ', zh: '解决方案实践指南', id: 'Solution Recipes' },
     text: { en: 'Step-by-step recipes that combine Marketplace Apps, tutorials and DXP features into a complete use case.', ja: 'Marketplace アプリ、チュートリアル、DXP の機能を組み合わせてユースケースを実現するレシピ。', zh: '将 Marketplace 应用、教程和 DXP 功能组合成完整用例的分步指南。', id: 'Recipe langkah demi langkah yang menggabungkan Marketplace App, tutorial, dan fitur DXP menjadi use case yang lengkap.' },
-    count: { en: () => 'Forums Assistant · Powered by Liferay AI Hub', ja: () => 'Forums Assistant · Liferay AI Hub を活用', zh: () => 'Forums Assistant · 由 Liferay AI Hub 提供支持', id: () => 'Forums Assistant · Didukung oleh Liferay AI Hub' } },
+    count: { en: () => '3 recipes · 2 powered by Liferay AI Hub', ja: () => '3 件のレシピ · うち 2 件は Liferay AI Hub を活用', zh: () => '3 个实践指南 · 其中 2 个由 Liferay AI Hub 提供支持', id: () => '3 recipe · 2 didukung oleh Liferay AI Hub' } },
   { icon: 'tutorials', href: (l) => `${HOME[l]}tutorials/`, categories: ['tutorials', 'sample-code', 'tools'],
     title: { en: 'Tutorials & Tools', ja: 'チュートリアルとツール', zh: '教程与工具', id: 'Tutorial & Alat' },
     text: { en: 'Step-by-step tutorials, sample code and tools for implementation, upgrade and migration tasks.', ja: '実装、アップグレード、移行に役立つチュートリアル、サンプルコード、ツール。', zh: '用于实施、升级和迁移任务的分步教程、示例代码和工具。', id: 'Tutorial langkah demi langkah, kode contoh, dan alat untuk tugas implementasi, upgrade, dan migrasi.' },
