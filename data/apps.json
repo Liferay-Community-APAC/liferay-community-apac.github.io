@@ -6,12 +6,14 @@
       "name": {
         "en": "Marketplace Apps",
         "ja": "Marketplace アプリ",
-        "zh": "Marketplace 应用"
+        "zh": "Marketplace 应用",
+        "id": "Marketplace App"
       },
       "tag": {
         "en": "Marketplace App",
         "ja": "Marketplace アプリ",
-        "zh": "Marketplace 应用"
+        "zh": "Marketplace 应用",
+        "id": "Marketplace App"
       },
       "comingSoon": true
     },
@@ -20,18 +22,21 @@
       "name": {
         "en": "Solution recipes",
         "ja": "ソリューションレシピ",
-        "zh": "解决方案实践指南"
+        "zh": "解决方案实践指南",
+        "id": "Solution Recipe"
       },
       "tag": {
         "en": "Recipes",
         "ja": "レシピ",
-        "zh": "实践方案"
+        "zh": "实践方案",
+        "id": "Recipe"
       },
       "comingSoon": false,
       "more": {
         "en": "Browse the recipes →",
         "ja": "レシピを見る（英語）→",
-        "zh": "浏览实践指南（英文）→"
+        "zh": "浏览实践指南（英文）→",
+        "id": "Lihat recipe (bahasa Inggris) →"
       }
     },
     {
@@ -39,12 +44,14 @@
       "name": {
         "en": "Tutorials",
         "ja": "チュートリアル",
-        "zh": "教程"
+        "zh": "教程",
+        "id": "Tutorial"
       },
       "tag": {
         "en": "Tutorial",
         "ja": "チュートリアル",
-        "zh": "教程"
+        "zh": "教程",
+        "id": "Tutorial"
       },
       "comingSoon": false
     },
@@ -53,12 +60,14 @@
       "name": {
         "en": "Sample code",
         "ja": "サンプルコード",
-        "zh": "示例代码"
+        "zh": "示例代码",
+        "id": "Kode contoh"
       },
       "tag": {
         "en": "Sample code",
         "ja": "サンプルコード",
-        "zh": "示例代码"
+        "zh": "示例代码",
+        "id": "Kode contoh"
       },
       "comingSoon": false
     },
@@ -67,12 +76,14 @@
       "name": {
         "en": "Tools",
         "ja": "ツール",
-        "zh": "工具"
+        "zh": "工具",
+        "id": "Alat"
       },
       "tag": {
         "en": "Tool",
         "ja": "ツール",
-        "zh": "工具"
+        "zh": "工具",
+        "id": "Alat"
       },
       "comingSoon": false
     }
@@ -85,108 +96,126 @@
       "tagline": {
         "en": "Modern discussion forums for Liferay DXP",
         "ja": "Liferay DXP のためのモダンなディスカッションフォーラム",
-        "zh": "面向 Liferay DXP 的现代讨论论坛"
+        "zh": "面向 Liferay DXP 的现代讨论论坛",
+        "id": "Forum diskusi modern untuk Liferay DXP"
       },
       "summary": {
         "en": "Discussion forums for Liferay DXP. Members ask questions, share answers and follow topics, while moderators keep the community healthy.",
         "ja": "Liferay DXP 向けのディスカッションフォーラムです。メンバーは質問や回答を共有し、トピックをフォローできます。モデレーターはコミュニティを健全に保ちます。",
-        "zh": "面向 Liferay DXP 的讨论论坛。成员可以提问、分享答案并关注话题，版主负责维护社区秩序。"
+        "zh": "面向 Liferay DXP 的讨论论坛。成员可以提问、分享答案并关注话题，版主负责维护社区秩序。",
+        "id": "Forum diskusi untuk Liferay DXP. Anggota bertanya, berbagi jawaban, dan mengikuti topik, sementara moderator menjaga komunitas tetap sehat."
       },
       "highlights": [
         {
           "title": {
             "en": "Discussions and questions",
             "ja": "ディスカッションと質問",
-            "zh": "讨论与提问"
+            "zh": "讨论与提问",
+            "id": "Diskusi dan pertanyaan"
           },
           "text": {
             "en": "Post a topic as an open discussion, or as a question members can mark as solved.",
             "ja": "トピックを自由なディスカッションとして、または解決済みにできる質問として投稿できます。",
-            "zh": "可将话题发布为开放讨论，或发布为可标记为已解决的问题。"
+            "zh": "可将话题发布为开放讨论，或发布为可标记为已解决的问题。",
+            "id": "Kirim topik sebagai diskusi terbuka, atau sebagai pertanyaan yang dapat ditandai terjawab oleh anggota."
           }
         },
         {
           "title": {
             "en": "Mentions and subscriptions",
             "ja": "メンションと購読",
-            "zh": "提及与订阅"
+            "zh": "提及与订阅",
+            "id": "Mention dan langganan"
           },
           "text": {
             "en": "Mention members with @, and get web and email notifications for the topics you follow.",
             "ja": "@ でメンバーにメンションでき、フォローしているトピックの Web 通知とメール通知を受け取れます。",
-            "zh": "使用 @ 提及成员，并接收所关注话题的网页和邮件通知。"
+            "zh": "使用 @ 提及成员，并接收所关注话题的网页和邮件通知。",
+            "id": "Sebut anggota dengan @, dan dapatkan notifikasi web dan email untuk topik yang Anda ikuti."
           }
         },
         {
           "title": {
             "en": "Moderation",
             "ja": "モデレーション",
-            "zh": "内容审核"
+            "zh": "内容审核",
+            "id": "Moderasi"
           },
           "text": {
             "en": "Members report content; moderators validate reports, lock or delete topics, and ban authors per site.",
             "ja": "メンバーがコンテンツを報告し、モデレーターが報告の確認、トピックのロックや削除、サイトごとの投稿者の利用停止を行えます。",
-            "zh": "成员可以举报内容，版主可以审核举报、锁定或删除话题，并按站点封禁作者。"
+            "zh": "成员可以举报内容，版主可以审核举报、锁定或删除话题，并按站点封禁作者。",
+            "id": "Anggota melaporkan konten; moderator memvalidasi laporan, mengunci atau menghapus topik, dan memblokir penulis per situs."
           }
         },
         {
           "title": {
             "en": "Search",
             "ja": "検索",
-            "zh": "搜索"
+            "zh": "搜索",
+            "id": "Pencarian"
           },
           "text": {
             "en": "Find topics with facets for category, tag, author and date.",
             "ja": "カテゴリー、タグ、投稿者、日付のファセットでトピックを検索できます。",
-            "zh": "按类别、标签、作者和日期等维度筛选查找话题。"
+            "zh": "按类别、标签、作者和日期等维度筛选查找话题。",
+            "id": "Temukan topik dengan filter kategori, tag, penulis, dan tanggal."
           }
         },
         {
           "title": {
             "en": "Categories",
             "ja": "カテゴリー",
-            "zh": "类别"
+            "zh": "类别",
+            "id": "Kategori"
           },
           "text": {
             "en": "Organize topics into categories, with one level of subcategories.",
             "ja": "トピックをカテゴリーと 1 階層のサブカテゴリーで整理できます。",
-            "zh": "将话题按类别和一级子类别进行组织。"
+            "zh": "将话题按类别和一级子类别进行组织。",
+            "id": "Kelompokkan topik ke dalam kategori, dengan satu tingkat subkategori."
           }
         },
         {
           "title": {
             "en": "Voting",
             "ja": "投票",
-            "zh": "投票"
+            "zh": "投票",
+            "id": "Voting"
           },
           "text": {
             "en": "Upvote or downvote topics and replies.",
             "ja": "トピックと返信に賛成票・反対票を投じられます。",
-            "zh": "可以对话题和回复点赞或点踩。"
+            "zh": "可以对话题和回复点赞或点踩。",
+            "id": "Beri upvote atau downvote pada topik dan balasan."
           }
         },
         {
           "title": {
             "en": "Several sites",
             "ja": "複数サイト",
-            "zh": "多个站点"
+            "zh": "多个站点",
+            "id": "Beberapa situs"
           },
           "text": {
             "en": "Run separate forums, each with its own categories, topics and bans.",
             "ja": "カテゴリー、トピック、利用停止をそれぞれ持つ独立したフォーラムを運営できます。",
-            "zh": "运行多个独立论坛，每个论坛都有自己的类别、话题和封禁设置。"
+            "zh": "运行多个独立论坛，每个论坛都有自己的类别、话题和封禁设置。",
+            "id": "Jalankan forum terpisah, masing-masing dengan kategori, topik, dan blokirnya sendiri."
           }
         },
         {
           "title": {
             "en": "13 languages",
             "ja": "13 言語",
-            "zh": "13 种语言"
+            "zh": "13 种语言",
+            "id": "13 bahasa"
           },
           "text": {
             "en": "Labels ship in 13 languages, including Japanese and Chinese.",
             "ja": "日本語と中国語を含む 13 言語の表示ラベルが用意されています。",
-            "zh": "界面标签提供 13 种语言，包括日语和中文。"
+            "zh": "界面标签提供 13 种语言，包括日语和中文。",
+            "id": "Label tersedia dalam 13 bahasa, termasuk Jepang dan Mandarin."
           }
         }
       ],
@@ -241,7 +270,8 @@
       "summary": {
         "en": "Step-by-step recipes that combine Marketplace Apps, tutorials and Liferay DXP features into a complete use case. The first recipes are on the way.",
         "ja": "アプリ、チュートリアル、Liferay DXP の機能を組み合わせて、ひとつのユースケースを実現するステップバイステップのレシピです。最初のレシピを準備中です。",
-        "zh": "将应用、教程和 Liferay DXP 功能组合成完整用例的分步实践指南。首批指南正在准备中。"
+        "zh": "将应用、教程和 Liferay DXP 功能组合成完整用例的分步实践指南。首批指南正在准备中。",
+        "id": "Recipe langkah demi langkah yang menggabungkan Marketplace App, tutorial, dan fitur Liferay DXP menjadi use case yang lengkap. Recipe pertama sedang disiapkan."
       },
       "docsLanguages": [
         "en"
@@ -259,17 +289,20 @@
       "name": {
         "en": "Native iOS app on Liferay DXP",
         "ja": "Liferay DXP で作るネイティブ iOS アプリ",
-        "zh": "基于 Liferay DXP 的原生 iOS 应用"
+        "zh": "基于 Liferay DXP 的原生 iOS 应用",
+        "id": "Aplikasi iOS native di Liferay DXP"
       },
       "summary": {
         "en": "A step-by-step tutorial and reference SwiftUI app built on Liferay DXP 2026.Q1's headless REST APIs. Users sign in with OAuth 2.0 and PKCE, then manage their profile, addresses and a custom Liferay Object, with no third-party dependencies. Partly tested.",
         "ja": "Liferay DXP 2026.Q1 のヘッドレス REST API だけで構築する SwiftUI アプリの、ステップバイステップのチュートリアルとリファレンス実装です。OAuth 2.0 と PKCE でサインインし、プロフィール、住所、カスタム Liferay オブジェクトを管理します。サードパーティのライブラリは使用しません。一部のみ検証済みです。",
-        "zh": "一套分步教程和 SwiftUI 参考应用，仅使用 Liferay DXP 2026.Q1 的无头 REST API 构建。用户通过 OAuth 2.0 和 PKCE 登录，然后管理个人资料、地址和自定义 Liferay 对象，无需任何第三方依赖。目前仅部分内容已测试。"
+        "zh": "一套分步教程和 SwiftUI 参考应用，仅使用 Liferay DXP 2026.Q1 的无头 REST API 构建。用户通过 OAuth 2.0 和 PKCE 登录，然后管理个人资料、地址和自定义 Liferay 对象，无需任何第三方依赖。目前仅部分内容已测试。",
+        "id": "Tutorial langkah demi langkah dan aplikasi SwiftUI referensi yang dibangun di atas headless REST API Liferay DXP 2026.Q1. Pengguna masuk dengan OAuth 2.0 dan PKCE, lalu mengelola profil, alamat, dan Liferay Object kustom, tanpa dependensi pihak ketiga. Sebagian sudah diuji."
       },
       "meta": {
         "en": "12 chapters · Swift · SwiftUI · OAuth 2.0",
         "ja": "全 12 章 · Swift · SwiftUI · OAuth 2.0",
-        "zh": "共 12 章 · Swift · SwiftUI · OAuth 2.0"
+        "zh": "共 12 章 · Swift · SwiftUI · OAuth 2.0",
+        "id": "12 bab · Swift · SwiftUI · OAuth 2.0"
       },
       "docs": "https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap",
       "links": [
@@ -278,7 +311,8 @@
           "label": {
             "en": "Start the tutorial →",
             "ja": "チュートリアルを始める →",
-            "zh": "开始学习教程 →"
+            "zh": "开始学习教程 →",
+            "id": "Mulai tutorial →"
           }
         }
       ]
@@ -289,17 +323,20 @@
       "name": {
         "en": "SharePoint Online to Liferay DXP migration",
         "ja": "SharePoint Online から Liferay DXP への移行",
-        "zh": "从 SharePoint Online 迁移到 Liferay DXP"
+        "zh": "从 SharePoint Online 迁移到 Liferay DXP",
+        "id": "Migrasi SharePoint Online ke Liferay DXP"
       },
       "summary": {
         "en": "A 14-chapter hands-on tutorial, with working tooling, for migrating a live SharePoint Online site, or SharePoint Server on premises, to Liferay DXP 2026.Q3 and its new CMS. MCP servers let an AI agent help inventory the source, plan the mapping and check the result, and a mock SharePoint lets you try it without a tenant.",
         "ja": "稼働中の SharePoint Online サイト（またはオンプレミスの SharePoint Server）を Liferay DXP 2026.Q3 と新しい CMS へ移行する、全 14 章のハンズオンチュートリアルと実用ツールです。MCP サーバーを使い、AI エージェントが移行元の棚卸し、マッピングの計画、移行結果の確認を支援します。",
-        "zh": "一套共 14 章的实践教程，附带可用的工具，指导您将正在运行的 SharePoint Online 站点（或本地部署的 SharePoint Server）迁移到 Liferay DXP 2026.Q3 及其新 CMS。借助 MCP 服务器，AI 助手可以帮助盘点源站点、规划映射并检查迁移结果。"
+        "zh": "一套共 14 章的实践教程，附带可用的工具，指导您将正在运行的 SharePoint Online 站点（或本地部署的 SharePoint Server）迁移到 Liferay DXP 2026.Q3 及其新 CMS。借助 MCP 服务器，AI 助手可以帮助盘点源站点、规划映射并检查迁移结果。",
+        "id": "Tutorial praktik 14 bab, dengan alat yang berfungsi, untuk memigrasikan situs SharePoint Online yang aktif, atau SharePoint Server on-premises, ke Liferay DXP 2026.Q3 dan CMS barunya. Server MCP memungkinkan agen AI membantu menginventarisasi sumber, merencanakan pemetaan, dan memeriksa hasilnya, dan SharePoint tiruan memungkinkan Anda mencobanya tanpa tenant."
       },
       "meta": {
         "en": "14 chapters · Python · MCP",
         "ja": "全 14 章 · Python · MCP",
-        "zh": "共 14 章 · Python · MCP"
+        "zh": "共 14 章 · Python · MCP",
+        "id": "14 bab · Python · MCP"
       },
       "docs": "https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial",
       "links": [
@@ -308,7 +345,8 @@
           "label": {
             "en": "Start the tutorial →",
             "ja": "チュートリアルを始める →",
-            "zh": "开始学习教程 →"
+            "zh": "开始学习教程 →",
+            "id": "Mulai tutorial →"
           }
         }
       ]
@@ -319,17 +357,20 @@
       "name": {
         "en": "Liferay DXP self-hosted on Amazon EC2",
         "ja": "Amazon EC2 上でのセルフホスト型 Liferay DXP",
-        "zh": "在 Amazon EC2 上自托管 Liferay DXP"
+        "zh": "在 Amazon EC2 上自托管 Liferay DXP",
+        "id": "Liferay DXP self-hosted di Amazon EC2"
       },
       "summary": {
         "en": "A step-by-step guide to running Liferay DXP on Amazon EC2, as a single instance or in high availability, with Docker or the Tomcat bundle. Terraform builds the infrastructure and GitHub Actions deploys your code. Draft, partly tested on AWS.",
         "ja": "Liferay DXP を Amazon EC2 上で、シングル構成または高可用性構成、Docker または Tomcat バンドルで構築するステップバイステップガイドです。インフラは Terraform で構築し、コードは GitHub Actions でデプロイします。ドラフト版で、AWS での検証は一部のみ完了しています。",
-        "zh": "一份分步指南，介绍如何在 Amazon EC2 上以单实例或高可用模式、使用 Docker 或 Tomcat 包运行 Liferay DXP。使用 Terraform 构建基础设施，并通过 GitHub Actions 部署代码。目前为草稿版，仅部分内容已在 AWS 上测试。"
+        "zh": "一份分步指南，介绍如何在 Amazon EC2 上以单实例或高可用模式、使用 Docker 或 Tomcat 包运行 Liferay DXP。使用 Terraform 构建基础设施，并通过 GitHub Actions 部署代码。目前为草稿版，仅部分内容已在 AWS 上测试。",
+        "id": "Panduan langkah demi langkah untuk menjalankan Liferay DXP di Amazon EC2, sebagai satu instance atau dengan high availability, menggunakan Docker atau bundle Tomcat. Terraform membangun infrastrukturnya dan GitHub Actions men-deploy kode Anda. Draf, sebagian sudah diuji di AWS."
       },
       "meta": {
         "en": "18 sections · Terraform · Docker · GitHub Actions",
         "ja": "全 18 セクション · Terraform · Docker · GitHub Actions",
-        "zh": "共 18 节 · Terraform · Docker · GitHub Actions"
+        "zh": "共 18 节 · Terraform · Docker · GitHub Actions",
+        "id": "18 bagian · Terraform · Docker · GitHub Actions"
       },
       "docs": "https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-tutorial",
       "links": [
@@ -338,7 +379,8 @@
           "label": {
             "en": "Start the tutorial →",
             "ja": "チュートリアルを始める →",
-            "zh": "开始学习教程 →"
+            "zh": "开始学习教程 →",
+            "id": "Mulai tutorial →"
           }
         }
       ]
@@ -349,17 +391,20 @@
       "name": {
         "en": "Sample workspace for Liferay DXP on EC2",
         "ja": "EC2 向け Liferay DXP サンプルワークスペース",
-        "zh": "EC2 上 Liferay DXP 的示例工作区"
+        "zh": "EC2 上 Liferay DXP 的示例工作区",
+        "id": "Contoh workspace untuk Liferay DXP di EC2"
       },
       "summary": {
         "en": "The companion to the EC2 guide: a Liferay Workspace for DXP 2026.Q3 with an OSGi module, a CSS client extension and a React client extension, plus GitHub Actions that build an image, push it to Amazon ECR and deploy it to your EC2 instances. Draft.",
         "ja": "EC2 ガイドと対になるサンプルです。OSGi モジュール、CSS クライアントエクステンション、React クライアントエクステンションを含む DXP 2026.Q3 の Liferay Workspace と、イメージをビルドして Amazon ECR にプッシュし、EC2 インスタンスへデプロイする GitHub Actions を備えています。ドラフト版です。",
-        "zh": "EC2 指南的配套示例：一个 DXP 2026.Q3 的 Liferay Workspace，包含 OSGi 模块、CSS 客户端扩展和 React 客户端扩展，并通过 GitHub Actions 构建镜像、推送到 Amazon ECR 并部署到 EC2 实例。草稿版。"
+        "zh": "EC2 指南的配套示例：一个 DXP 2026.Q3 的 Liferay Workspace，包含 OSGi 模块、CSS 客户端扩展和 React 客户端扩展，并通过 GitHub Actions 构建镜像、推送到 Amazon ECR 并部署到 EC2 实例。草稿版。",
+        "id": "Pendamping panduan EC2: Liferay Workspace untuk DXP 2026.Q3 dengan modul OSGi, client extension CSS, dan client extension React, ditambah GitHub Actions yang membangun image, mengirimnya ke Amazon ECR, dan men-deploy-nya ke instance EC2 Anda. Draf."
       },
       "meta": {
         "en": "Liferay Workspace · React · GitHub Actions",
         "ja": "Liferay Workspace · React · GitHub Actions",
-        "zh": "Liferay Workspace · React · GitHub Actions"
+        "zh": "Liferay Workspace · React · GitHub Actions",
+        "id": "Liferay Workspace · React · GitHub Actions"
       },
       "docs": "https://github.com/Liferay-Community-APAC/lfrgs-sh-aws-ec2-sample-workspace",
       "links": [
@@ -368,7 +413,8 @@
           "label": {
             "en": "View on GitHub →",
             "ja": "GitHub で見る →",
-            "zh": "在 GitHub 上查看 →"
+            "zh": "在 GitHub 上查看 →",
+            "id": "Lihat di GitHub →"
           }
         }
       ]
@@ -379,17 +425,20 @@
       "name": {
         "en": "Liferay upgrade report script",
         "ja": "Liferay アップグレードレポートスクリプト",
-        "zh": "Liferay 升级报告脚本"
+        "zh": "Liferay 升级报告脚本",
+        "id": "Skrip laporan upgrade Liferay"
       },
       "summary": {
         "en": "A web page that finds the right read-only Groovy script for your version, from Liferay Portal CE 6.1 to DXP 2026.Q3, and walks you through collecting an upgrade-readiness report from the Script Console. In seven languages.",
         "ja": "お使いのバージョン（Liferay Portal CE 6.1 から DXP 2026.Q3 まで）に合った読み取り専用の Groovy スクリプトを選び、スクリプトコンソールでアップグレード準備状況レポートを取得する手順を案内する Web ページです。日本語を含む 7 言語に対応しています。",
-        "zh": "一个网页工具：为您的版本（Liferay Portal CE 6.1 至 DXP 2026.Q3）找到合适的只读 Groovy 脚本，并引导您在脚本控制台中生成升级就绪报告。支持 7 种语言。"
+        "zh": "一个网页工具：为您的版本（Liferay Portal CE 6.1 至 DXP 2026.Q3）找到合适的只读 Groovy 脚本，并引导您在脚本控制台中生成升级就绪报告。支持 7 种语言。",
+        "id": "Halaman web yang menemukan skrip Groovy read-only yang tepat untuk versi Anda, dari Liferay Portal CE 6.1 hingga DXP 2026.Q3, dan memandu Anda mengumpulkan laporan kesiapan upgrade dari Script Console. Tersedia dalam tujuh bahasa (belum termasuk bahasa Indonesia)."
       },
       "meta": {
         "en": "CE 6.1 to DXP 2026.Q3 · Groovy · 7 languages",
         "ja": "CE 6.1〜DXP 2026.Q3 · Groovy · 7 言語",
-        "zh": "CE 6.1 至 DXP 2026.Q3 · Groovy · 7 种语言"
+        "zh": "CE 6.1 至 DXP 2026.Q3 · Groovy · 7 种语言",
+        "id": "CE 6.1 hingga DXP 2026.Q3 · Groovy · 7 bahasa"
       },
       "docs": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/",
       "links": [
@@ -397,12 +446,14 @@
           "href": {
             "en": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/",
             "ja": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/?lang=ja",
-            "zh": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/"
+            "zh": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/",
+            "id": "https://liferay-community-apac.github.io/liferay-upgrade-report-script/"
           },
           "label": {
             "en": "Open the tool →",
             "ja": "ツールを開く →",
-            "zh": "打开工具 →"
+            "zh": "打开工具 →",
+            "id": "Buka alat →"
           }
         },
         {
@@ -410,7 +461,8 @@
           "label": {
             "en": "View on GitHub →",
             "ja": "GitHub で見る →",
-            "zh": "在 GitHub 上查看 →"
+            "zh": "在 GitHub 上查看 →",
+            "id": "Lihat di GitHub →"
           }
         }
       ]

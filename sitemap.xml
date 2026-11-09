@@ -2,98 +2,146 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://liferay-community-apac.github.io/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/ja/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/zh/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/marketplace-apps/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/ja/marketplace-apps/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/zh/marketplace-apps/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/marketplace-apps/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/tutorials/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/tutorials/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/tutorials/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/ja/tutorials/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/tutorials/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/tutorials/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/zh/tutorials/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/tutorials/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/tutorials/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/tutorials/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/tutorials/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/tutorials/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/tutorials/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/tutorials/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/tutorials/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/tutorials/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/community/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/community/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/community/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/community/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/community/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/community/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/ja/community/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/community/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/community/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/community/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/community/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/community/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/zh/community/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/community/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/community/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/community/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/community/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/community/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/community/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/community/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/community/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/community/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/community/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/community/"/>
   </url>
   <url>
@@ -102,6 +150,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/get-help/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/get-help/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/get-help/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/get-help/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/get-help/"/>
   </url>
   <url>
@@ -110,6 +159,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/get-help/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/get-help/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/get-help/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/get-help/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/get-help/"/>
   </url>
   <url>
@@ -118,6 +168,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/get-help/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/get-help/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/get-help/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/get-help/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/get-help/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/get-help/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/get-help/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/get-help/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/get-help/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/get-help/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/get-help/"/>
   </url>
 </urlset>

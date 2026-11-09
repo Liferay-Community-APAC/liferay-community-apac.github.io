@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * Turns the site's catalogue, data/apps.json, into the parts of the pages that list its entries
- * (Marketplace Apps, Solution Recipes, tutorials, sample code and tools), in English, Japanese and Chinese:
+ * (Marketplace Apps, Solution Recipes, tutorials, sample code and tools), in English, Japanese, Chinese and Indonesian:
  *
  *   <!-- apps:cards CATEGORY[,CATEGORY...] [limit=N] -->  <!-- /apps:cards -->
  *       Cards for the entries of one or more categories, in catalogue order (the first N with a limit).
@@ -29,9 +29,9 @@ import { fileURLToPath } from 'node:url';
 const args = process.argv.slice(2);
 const check = args.includes('--check');
 const siteDir = args.find((a) => !a.startsWith('--')) || join(dirname(fileURLToPath(import.meta.url)), '..');
-const LANGS = ['en', 'ja', 'zh'];
+const LANGS = ['en', 'ja', 'zh', 'id'];
 const SITE = 'https://liferay-community-apac.github.io/';
-const HOME = { en: '', ja: 'ja/', zh: 'zh/' };
+const HOME = { en: '', ja: 'ja/', zh: 'zh/', id: 'id/' };
 
 // Pages with generated parts, and their language.
 const PAGES = LANGS.flatMap((l) => [
@@ -55,7 +55,11 @@ const STRINGS = {
   zh: { more: '阅读指南 →', moreOther: '阅读指南（英文）→', marketplace: '在 Marketplace 查看 →',
         guide: '阅读指南', guideOther: '阅读指南（英文）', download: '下载', details: '全部功能与截图 →',
         features: '功能', screenshots: '截图', versions: '适用于', version: '版本',
-        soonTag: '即将推出', soonTitle: '更多 Marketplace 应用即将推出', soonText: '更多 Marketplace 应用及其指南正在准备中。' }
+        soonTag: '即将推出', soonTitle: '更多 Marketplace 应用即将推出', soonText: '更多 Marketplace 应用及其指南正在准备中。' },
+  id: { more: 'Baca panduan →', moreOther: 'Baca panduan (bahasa Inggris) →', marketplace: 'Lihat di Marketplace →',
+        guide: 'Baca panduan', guideOther: 'Baca panduan (bahasa Inggris)', download: 'Unduh', details: 'Semua fitur dan screenshot →',
+        features: 'Fitur', screenshots: 'Screenshot', versions: 'Untuk', version: 'Versi',
+        soonTag: 'Segera hadir', soonTitle: 'Marketplace App lainnya segera hadir', soonText: 'Marketplace App lainnya beserta panduannya sedang disiapkan.' }
 };
 
 // The homepage's section cards. count(n) receives the number of catalogue entries in the section's categories.
@@ -67,21 +71,21 @@ const ICONS = {
 };
 const SECTIONS = [
   { icon: 'apps', href: (l) => `${HOME[l]}marketplace-apps/`, categories: ['marketplace-apps'],
-    title: { en: 'Marketplace Apps', ja: 'Marketplace アプリ', zh: 'Marketplace 应用' },
-    text: { en: 'Apps that add features to Liferay DXP, each with a full user guide.', ja: 'Liferay DXP に機能を追加するアプリと、そのユーザーガイド。', zh: '为 Liferay DXP 增加功能的应用及其用户指南。' },
-    count: { en: (n) => `${n} Marketplace App${n === 1 ? '' : 's'}`, ja: (n) => `${n} 件の Marketplace アプリ`, zh: (n) => `${n} 个 Marketplace 应用` } },
+    title: { en: 'Marketplace Apps', ja: 'Marketplace アプリ', zh: 'Marketplace 应用', id: 'Marketplace App' },
+    text: { en: 'Apps that add features to Liferay DXP, each with a full user guide.', ja: 'Liferay DXP に機能を追加するアプリと、そのユーザーガイド。', zh: '为 Liferay DXP 增加功能的应用及其用户指南。', id: 'Aplikasi yang menambahkan fitur ke Liferay DXP, masing-masing dengan panduan pengguna lengkap.' },
+    count: { en: (n) => `${n} Marketplace App${n === 1 ? '' : 's'}`, ja: (n) => `${n} 件の Marketplace アプリ`, zh: (n) => `${n} 个 Marketplace 应用`, id: (n) => `${n} Marketplace App` } },
   { icon: 'recipes', href: () => 'solution-recipes/', categories: [],
-    title: { en: 'Solution Recipes', ja: 'ソリューションレシピ', zh: '解决方案实践指南' },
-    text: { en: 'Step-by-step recipes that combine Marketplace Apps, tutorials and DXP features into a complete use case.', ja: 'Marketplace アプリ、チュートリアル、DXP の機能を組み合わせてユースケースを実現するレシピ。', zh: '将 Marketplace 应用、教程和 DXP 功能组合成完整用例的分步指南。' },
-    count: { en: () => 'First recipes coming soon', ja: () => '最初のレシピを準備中', zh: () => '首批指南即将推出' } },
+    title: { en: 'Solution Recipes', ja: 'ソリューションレシピ', zh: '解决方案实践指南', id: 'Solution Recipes' },
+    text: { en: 'Step-by-step recipes that combine Marketplace Apps, tutorials and DXP features into a complete use case.', ja: 'Marketplace アプリ、チュートリアル、DXP の機能を組み合わせてユースケースを実現するレシピ。', zh: '将 Marketplace 应用、教程和 DXP 功能组合成完整用例的分步指南。', id: 'Recipe langkah demi langkah yang menggabungkan Marketplace App, tutorial, dan fitur DXP menjadi use case yang lengkap.' },
+    count: { en: () => 'First recipes coming soon', ja: () => '最初のレシピを準備中', zh: () => '首批指南即将推出', id: () => 'Recipe pertama segera hadir' } },
   { icon: 'tutorials', href: (l) => `${HOME[l]}tutorials/`, categories: ['tutorials', 'sample-code', 'tools'],
-    title: { en: 'Tutorials & Tools', ja: 'チュートリアルとツール', zh: '教程与工具' },
-    text: { en: 'Step-by-step tutorials, sample code and tools for implementation, upgrade and migration tasks.', ja: '実装、アップグレード、移行に役立つチュートリアル、サンプルコード、ツール。', zh: '用于实施、升级和迁移任务的分步教程、示例代码和工具。' },
-    count: { en: (n) => `${n} tutorials, samples and tools`, ja: (n) => `${n} 件のチュートリアル、サンプル、ツール`, zh: (n) => `${n} 个教程、示例和工具` } },
+    title: { en: 'Tutorials & Tools', ja: 'チュートリアルとツール', zh: '教程与工具', id: 'Tutorial & Alat' },
+    text: { en: 'Step-by-step tutorials, sample code and tools for implementation, upgrade and migration tasks.', ja: '実装、アップグレード、移行に役立つチュートリアル、サンプルコード、ツール。', zh: '用于实施、升级和迁移任务的分步教程、示例代码和工具。', id: 'Tutorial langkah demi langkah, kode contoh, dan alat untuk tugas implementasi, upgrade, dan migrasi.' },
+    count: { en: (n) => `${n} tutorials, samples and tools`, ja: (n) => `${n} 件のチュートリアル、サンプル、ツール`, zh: (n) => `${n} 个教程、示例和工具`, id: (n) => `${n} tutorial, contoh, dan alat` } },
   { icon: 'community', href: (l) => `${HOME[l]}community/`, categories: [],
-    title: { en: 'Community', ja: 'コミュニティ', zh: '社区' },
-    text: { en: 'Local user groups, events and ways to stay updated.', ja: '地域のユーザーグループ、イベント、最新情報の受け取り方。', zh: '各地用户组、活动以及获取最新信息的方式。' },
-    count: { en: () => 'India · Japan · Australia · Southeast Asia', ja: () => 'インド · 日本 · オーストラリア · 東南アジア', zh: () => '印度 · 日本 · 澳大利亚 · 东南亚' } }
+    title: { en: 'Community', ja: 'コミュニティ', zh: '社区', id: 'Komunitas' },
+    text: { en: 'Local user groups, events and ways to stay updated.', ja: '地域のユーザーグループ、イベント、最新情報の受け取り方。', zh: '各地用户组、活动以及获取最新信息的方式。', id: 'Grup pengguna lokal, acara, dan cara mendapatkan kabar terbaru.' },
+    count: { en: () => 'India · Japan · Australia · Southeast Asia', ja: () => 'インド · 日本 · オーストラリア · 東南アジア', zh: () => '印度 · 日本 · 澳大利亚 · 东南亚', id: () => 'India · Jepang · Australia · Asia Tenggara' } }
 ];
 
 const fail = (msg) => { console.error('apps.json: ' + msg); process.exit(1); };
@@ -208,7 +212,7 @@ const SHOWCASE_RE = /([ \t]*)<!-- apps:showcase ([\w-]+)( full)? -->[\s\S]*?<!--
 const CARDS_RE = /([ \t]*)<!-- apps:cards ([\w,-]+)( limit=\d+)? -->[\s\S]*?<!-- \/apps:cards -->/g;
 function helpTopics(page, indent) {
   const lang = page.lang;
-  const other = { en: 'Something else', ja: 'その他', zh: '其他' };
+  const other = { en: 'Something else', ja: 'その他', zh: '其他', id: 'Lainnya' };
   const lines = data.apps.map((a) => `<option value="${esc(L(a.name, 'en'))}">${esc(L(a.name, lang))}</option>`);
   lines.push(`<option value="">${esc(other[lang])}</option>`);
   return indentAll(lines, indent);

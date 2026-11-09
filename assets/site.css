@@ -602,3 +602,23 @@ section { padding: 44px 0; scroll-margin-top: 64px; }
 .help-form .btn { justify-self: start; font: inherit; font-weight: 600; cursor: pointer; }
 .cta .help-note { font-size: 13px; color: #b9cdf5; }
 @media (max-width: 860px) { .cta.help-routes { grid-template-columns: 1fr; } .help-community { grid-row: auto; } }
+/* Language menu (shared header): a globe button with the current language, opening a list of the others. */
+.site-header .lang { position: relative; display: block; border: 0; border-radius: 0; overflow: visible; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px 0 11px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .06); color: #d6e3ff;
+  font: inherit; font-size: 13px; font-weight: 600; white-space: nowrap; cursor: pointer;
+}
+.lang-btn:hover, .lang-btn[aria-expanded="true"] { background: rgba(255, 255, 255, .14); color: #fff; }
+.lang-btn:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 2px; }
+.lang-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lang-btn .chev { width: 14px; height: 14px; }
+.lang-list {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 30; display: flex; flex-direction: column; min-width: 180px; padding: 6px;
+  background: rgba(3, 15, 44, .98); border: 1px solid rgba(255, 255, 255, .12); border-radius: 12px; box-shadow: 0 16px 32px rgba(3, 15, 44, .35);
+}
+.lang-list[hidden] { display: none; }
+.site-header .lang .lang-list a, .site-header .lang .lang-list span { padding: 9px 12px; border-radius: 8px; color: #d6e3ff; font-size: 15px; text-decoration: none; background: none; }
+.site-header .lang .lang-list a:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+.site-header .lang .lang-list [aria-current] { color: #fff; font-weight: 600; background: var(--blue); }
+@media (max-width: 374px) { .lang-btn { padding: 0 8px; gap: 4px; } .lang-btn .chev { display: none; } }
