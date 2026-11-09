@@ -42,6 +42,20 @@ The website for Liferay Community APAC: <https://liferay-community-apac.github.i
 
     `image`, `marketplace`, `search`, `sitemap` and `docsRepo` are optional. Leave `search` and `sitemap` as
     `null` for an app whose docs are part of this site rather than published from their own repository.
+
+    To feature a Liferay product that extends the app, such as Liferay AI Hub, add `poweredBy`. The app's showcase
+    then shows a **Powered by** panel with the product's logo, the `text`, and links to the recipe and the product's
+    official page. `url` can be one address or one per language; languages without one use `en`.
+
+    ```json
+    "poweredBy": {
+      "name": "Liferay AI Hub",
+      "logo": "assets/products/ai-hub.png",
+      "url": { "en": "https://www.liferay.com/capabilities/ai-hub", "ja": "https://www.liferay.co.jp/capabilities/ai-hub" },
+      "text": { "en": "…", "ja": "…", "zh": "…", "id": "…" },
+      "recipe": "solution-recipes/forums-ai-assistant/"
+    }
+    ```
 3. Run `node scripts/build-apps.mjs` and commit the updated pages. (Publishing runs it too, so the live site always matches the list.)
 
 ## Preview locally

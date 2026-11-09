@@ -44,19 +44,23 @@ const PAGES = LANGS.flatMap((l) => [
 const COMPACT_HIGHLIGHTS = 4;
 
 const STRINGS = {
-  en: { more: 'Read the guide →', moreOther: 'Read the guide →', marketplace: 'Marketplace listing →',
+  en: { poweredBy: 'Powered by {name}. ', recipe: 'Read the recipe →', about: 'About {name}',
+        more: 'Read the guide →', moreOther: 'Read the guide →', marketplace: 'Marketplace listing →',
         guide: 'Read the guide', guideOther: 'Read the guide', download: 'Download', details: 'All features and screenshots →',
         features: 'Features', screenshots: 'Screenshots', versions: 'Works with', version: 'Version',
         soonTag: 'Coming soon', soonTitle: 'More Marketplace Apps coming soon', soonText: 'More Marketplace Apps and their guides are on the way.' },
-  ja: { more: 'ガイドを読む →', moreOther: 'ガイドを読む（英語）→', marketplace: 'Marketplace で見る →',
+  ja: { poweredBy: '{name} を活用。', recipe: 'レシピを見る（英語）→', about: '{name} について',
+        more: 'ガイドを読む →', moreOther: 'ガイドを読む（英語）→', marketplace: 'Marketplace で見る →',
         guide: 'ガイドを読む', guideOther: 'ガイドを読む（英語）', download: 'ダウンロード', details: 'すべての機能とスクリーンショット →',
         features: '機能', screenshots: 'スクリーンショット', versions: '対応製品', version: 'バージョン',
         soonTag: '近日公開', soonTitle: 'その他の Marketplace アプリも近日公開', soonText: '新しい Marketplace アプリとガイドを準備中です。' },
-  zh: { more: '阅读指南 →', moreOther: '阅读指南（英文）→', marketplace: '在 Marketplace 查看 →',
+  zh: { poweredBy: '由 {name} 提供支持。', recipe: '查看实践指南（英文）→', about: '了解 {name}（英文）',
+        more: '阅读指南 →', moreOther: '阅读指南（英文）→', marketplace: '在 Marketplace 查看 →',
         guide: '阅读指南', guideOther: '阅读指南（英文）', download: '下载', details: '全部功能与截图 →',
         features: '功能', screenshots: '截图', versions: '适用于', version: '版本',
         soonTag: '即将推出', soonTitle: '更多 Marketplace 应用即将推出', soonText: '更多 Marketplace 应用及其指南正在准备中。' },
-  id: { more: 'Baca panduan →', moreOther: 'Baca panduan (bahasa Inggris) →', marketplace: 'Lihat di Marketplace →',
+  id: { poweredBy: 'Didukung oleh {name}. ', recipe: 'Baca recipe (bahasa Inggris) →', about: 'Tentang {name} (bahasa Inggris)',
+        more: 'Baca panduan →', moreOther: 'Baca panduan (bahasa Inggris) →', marketplace: 'Lihat di Marketplace →',
         guide: 'Baca panduan', guideOther: 'Baca panduan (bahasa Inggris)', download: 'Unduh', details: 'Semua fitur dan screenshot →',
         features: 'Fitur', screenshots: 'Screenshot', versions: 'Untuk', version: 'Versi',
         soonTag: 'Segera hadir', soonTitle: 'Marketplace App lainnya segera hadir', soonText: 'Marketplace App lainnya beserta panduannya sedang disiapkan.' }
@@ -77,7 +81,7 @@ const SECTIONS = [
   { icon: 'recipes', href: () => 'solution-recipes/', categories: [],
     title: { en: 'Solution Recipes', ja: 'ソリューションレシピ', zh: '解决方案实践指南', id: 'Solution Recipes' },
     text: { en: 'Step-by-step recipes that combine Marketplace Apps, tutorials and DXP features into a complete use case.', ja: 'Marketplace アプリ、チュートリアル、DXP の機能を組み合わせてユースケースを実現するレシピ。', zh: '将 Marketplace 应用、教程和 DXP 功能组合成完整用例的分步指南。', id: 'Recipe langkah demi langkah yang menggabungkan Marketplace App, tutorial, dan fitur DXP menjadi use case yang lengkap.' },
-    count: { en: () => 'First recipes coming soon', ja: () => '最初のレシピを準備中', zh: () => '首批指南即将推出', id: () => 'Recipe pertama segera hadir' } },
+    count: { en: () => 'Forums Assistant · Powered by Liferay AI Hub', ja: () => 'Forums Assistant · Liferay AI Hub を活用', zh: () => 'Forums Assistant · 由 Liferay AI Hub 提供支持', id: () => 'Forums Assistant · Didukung oleh Liferay AI Hub' } },
   { icon: 'tutorials', href: (l) => `${HOME[l]}tutorials/`, categories: ['tutorials', 'sample-code', 'tools'],
     title: { en: 'Tutorials & Tools', ja: 'チュートリアルとツール', zh: '教程与工具', id: 'Tutorial & Alat' },
     text: { en: 'Step-by-step tutorials, sample code and tools for implementation, upgrade and migration tasks.', ja: '実装、アップグレード、移行に役立つチュートリアル、サンプルコード、ツール。', zh: '用于实施、升级和迁移任务的分步教程、示例代码和工具。', id: 'Tutorial langkah demi langkah, kode contoh, dan alat untuk tugas implementasi, upgrade, dan migrasi.' },
@@ -110,6 +114,12 @@ for (const a of data.apps || []) {
   for (const l of LANGS) if (!a.summary?.[l]) fail(`${where} needs a summary in "${l}"`);
   needsAll(where, 'name', a.name); needsAll(where, 'meta', a.meta); needsAll(where, 'tagline', a.tagline);
   (a.links || []).forEach((k, i) => { if (!k.href || !k.label) fail(`${where}: link ${i + 1} needs href and label`); needsAll(where, `link ${i + 1} label`, k.label); });
+  if (a.poweredBy) {
+    const pb = a.poweredBy;
+    if (!(pb.name && pb.logo && pb.url && pb.text)) fail(`${where}: poweredBy needs name, logo, url and text`);
+    for (const l of LANGS) if (!pb.text[l]) fail(`${where}: poweredBy text needs "${l}"`);
+    if (!isUrl(pb.logo) && !existsSync(join(siteDir, pb.logo))) fail(`${where}: poweredBy logo ${pb.logo} not found`);
+  }
   if (a.image && !(a.image.src && a.image.width && a.image.height)) fail(`${where}: image needs src, width and height`);
   if (a.image && !isUrl(a.image.src) && !existsSync(join(siteDir, a.image.src))) fail(`${where}: image ${a.image.src} not found`);
   (a.highlights || []).forEach((h, i) => {
@@ -165,6 +175,17 @@ function soonCard(page, indent) {
     `  <h3>${esc(t.soonTitle)}</h3>`, `  <p>${esc(t.soonText)}</p>`, '</article>'], indent);
 }
 
+// A "Powered by" panel for a Liferay product that extends an app, such as Liferay AI Hub: its logo, what it adds,
+// and links to the recipe that shows how and to the product's official page.
+function poweredBy(pb, page, indent) {
+  const t = STRINGS[page.lang], lang = page.lang, url = L(pb.url, lang), name = esc(pb.name);
+  const links = [pb.recipe && `<a href="${esc(href(pb.recipe, page))}">${esc(t.recipe)}</a>`,
+    `<a href="${esc(url)}">${t.about.replace('{name}', name)}</a>`].filter(Boolean).join(' · ');
+  return indentAll(['<div class="showcase-powered">',
+    `  <a href="${esc(url)}" tabindex="-1" aria-hidden="true"><img src="${esc(href(pb.logo, page))}" alt="" width="64" height="64" loading="lazy"></a>`,
+    `  <p><strong>${t.poweredBy.replace('{name}', name).trim()}</strong>${/ $/.test(t.poweredBy) ? ' ' : ''}${esc(L(pb.text, lang))}<br>${links}</p>`, '</div>'], indent);
+}
+
 // A promotional block for one app. compact: the homepages (a few highlights and a link to the apps page);
 // full: the Marketplace Apps pages (every highlight, screenshots, versions).
 function showcase(a, page, indent, full) {
@@ -187,6 +208,7 @@ function showcase(a, page, indent, full) {
   if (a.download) lines.push(`      <a class="btn outline" href="${esc(a.download)}">${esc(t.download)}</a>`);
   if (a.marketplace) lines.push(`      <a class="btn outline" href="${esc(a.marketplace)}">${esc(t.marketplace.replace(/ →$/, ''))}</a>`);
   lines.push('    </div>');
+  if (a.poweredBy) lines.push(poweredBy(a.poweredBy, page, '    '));
   if (!full && hl.length) lines.push(`    <a class="more" href="${esc(href(`${HOME[lang]}marketplace-apps/`, page))}#${esc(a.id)}">${esc(t.details)}</a>`);
   lines.push('  </div>');
   if (full && points.length) lines.push('  <div class="showcase-features">', `    <h4>${esc(t.features)}</h4>`, '    <ul class="features">', ...points, '    </ul>', '  </div>');
