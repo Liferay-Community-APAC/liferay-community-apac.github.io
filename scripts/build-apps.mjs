@@ -88,7 +88,7 @@ const SECTIONS = [
     count: { en: (n) => `${n} tutorials, samples and tools`, ja: (n) => `${n} 件のチュートリアル、サンプル、ツール`, zh: (n) => `${n} 个教程、示例和工具`, id: (n) => `${n} tutorial, contoh, dan alat` } },
   { icon: 'community', href: (l) => `${HOME[l]}community/`, categories: [],
     title: { en: 'Community', ja: 'コミュニティ', zh: '社区', id: 'Komunitas' },
-    text: { en: 'Local user groups, events and ways to stay updated.', ja: '地域のユーザーグループ、イベント、最新情報の受け取り方。', zh: '各地用户组、活动以及获取最新信息的方式。', id: 'Grup pengguna lokal, acara, dan cara mendapatkan kabar terbaru.' },
+    text: { en: 'Local user groups, events and the wider Liferay community online.', ja: '地域のユーザーグループ、イベント、オンラインの Liferay コミュニティ。', zh: '各地用户组、活动以及全球 Liferay 在线社区。', id: 'Grup pengguna lokal, acara, dan komunitas Liferay global secara online.' },
     count: { en: () => 'India · Japan · Australia · Southeast Asia', ja: () => 'インド · 日本 · オーストラリア · 東南アジア', zh: () => '印度 · 日本 · 澳大利亚 · 东南亚', id: () => 'India · Jepang · Australia · Asia Tenggara' } }
 ];
 
