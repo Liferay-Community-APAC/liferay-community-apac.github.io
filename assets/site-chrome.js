@@ -36,7 +36,7 @@
       home: '', brandName: 'Liferay Community APAC', navLabel: 'Main',
       nav: [['marketplace-apps', 'marketplace-apps/', 'Marketplace Apps'], ['solution-recipes', 'solution-recipes/', 'Solution Recipes'],
             ['tutorials', 'tutorials/', 'Tutorials & Tools'], ['community', 'community/', 'Community']],
-      contact: 'Contact',
+      contact: 'Contact', help: 'Get help',
       langLabel: 'Language', menu: 'Menu', search: 'Search', searchTitle: 'Search the site', close: 'Close',
       searchUnavailable: 'Search becomes available once the site is published.',
       footerBrand: 'Liferay Community APAC', footerLabel: 'Footer', marketplace: 'Liferay Community on Liferay Marketplace', 
@@ -48,7 +48,7 @@
       home: 'ja/', brandName: 'Liferay Community APAC', navLabel: 'メイン',
       nav: [['marketplace-apps', 'ja/marketplace-apps/', 'Marketplace アプリ'], ['solution-recipes', 'solution-recipes/', 'レシピ'],
             ['tutorials', 'ja/tutorials/', 'チュートリアル'], ['community', 'ja/community/', 'コミュニティ']],
-      contact: 'お問い合わせ',
+      contact: 'お問い合わせ', help: 'サポート',
       langLabel: '言語', menu: 'メニュー', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
       searchUnavailable: '検索はサイトの公開後に利用できます。',
       footerBrand: 'Liferay Community APAC', footerLabel: 'フッター', marketplace: 'Liferay Marketplace の Liferay Community', 
@@ -60,7 +60,7 @@
       home: 'zh/', brandName: 'Liferay Community APAC', navLabel: '主导航',
       nav: [['marketplace-apps', 'zh/marketplace-apps/', 'Marketplace 应用'], ['solution-recipes', 'solution-recipes/', '实践方案'],
             ['tutorials', 'zh/tutorials/', '教程与工具'], ['community', 'zh/community/', '社区']],
-      contact: '联系我们',
+      contact: '联系我们', help: '获取帮助',
       langLabel: '语言', menu: '菜单', search: '搜索', searchTitle: '搜索本站', close: '关闭',
       searchUnavailable: '网站发布后即可使用搜索。',
       footerBrand: 'Liferay Community APAC', footerLabel: '页脚', marketplace: 'Liferay Marketplace 上的 Liferay Community', 
@@ -148,7 +148,8 @@
   }
 
   function renderFooter(el) {
-    var links = '<a href="' + esc(homeUrl + '#contact') + '">' + esc(t.contact) + '</a>' + t.footerLinks.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('');
+    var links = '<a href="' + esc(homeUrl + '#contact') + '">' + esc(t.contact) + '</a>' +
+      '<a href="' + esc(homeUrl + 'community/#get-help') + '">' + esc(t.help) + '</a>' + t.footerLinks.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('');
     LANGS.forEach(function (l) {
       if (l[0] !== lang) links += '<a href="' + esc(altHref(l[0])) + '" hreflang="' + HREFLANG[l[0]] + '" lang="' + l[2] + '">' + (l[0] === 'en' ? 'English' : esc(l[1])) + '</a>';
     });
