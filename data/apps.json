@@ -281,6 +281,149 @@
       "docsRepo": "https://github.com/Liferay-Community-APAC/liferay-forums"
     },
     {
+      "id": "liferay-migration-studio",
+      "category": "marketplace-apps",
+      "name": "Liferay Migration Studio",
+      "tagline": {
+        "en": "Coming soon: move content from any system with an API into Liferay DXP",
+        "ja": "近日公開：API を持つあらゆるシステムから Liferay DXP へコンテンツを移行",
+        "zh": "即将推出：将任何提供 API 的系统中的内容迁移到 Liferay DXP",
+        "id": "Segera hadir: pindahkan konten dari sistem apa pun yang memiliki API ke Liferay DXP"
+      },
+      "summary": {
+        "en": "Migrate content into Liferay DXP 2026.Q1 and later from older Liferay versions and other systems with an API. Map in a web UI, dry-run every request, load at scale, then validate the result against the source.",
+        "ja": "旧バージョンの Liferay や API を持つ他のシステムから、Liferay DXP 2026.Q1 以降へコンテンツを移行します。Web UI でマッピングし、すべてのリクエストをドライランで確認してから大量のデータを読み込み、移行元と照らし合わせて結果を検証します。",
+        "zh": "将内容从旧版 Liferay 及其他提供 API 的系统迁移到 Liferay DXP 2026.Q1 及更高版本。在 Web 界面中配置映射，通过试运行检查每个请求，再大规模加载数据，最后对照源系统验证结果。",
+        "id": "Migrasikan konten ke Liferay DXP 2026.Q1 dan yang lebih baru dari versi Liferay lama dan sistem lain yang memiliki API. Petakan di UI web, uji setiap permintaan dengan dry run, muat dalam skala besar, lalu validasi hasilnya terhadap sumber."
+      },
+      "highlights": [
+        {
+          "title": {
+            "en": "Map in a web UI",
+            "ja": "Web UI でマッピング",
+            "zh": "在 Web 界面中映射",
+            "id": "Pemetaan di UI web"
+          },
+          "text": {
+            "en": "Connect a source and Liferay DXP, map entities and fields, and preview the exact requests for real records before anything is written.",
+            "ja": "移行元と Liferay DXP に接続し、エンティティとフィールドをマッピングして、書き込む前に実際のレコードで送信されるリクエストをプレビューできます。",
+            "zh": "连接源系统和 Liferay DXP，映射实体和字段，并在写入任何数据之前用真实记录预览将要发送的请求。",
+            "id": "Hubungkan sumber dan Liferay DXP, petakan entitas dan field, lalu pratinjau permintaan untuk record nyata sebelum apa pun ditulis."
+          }
+        },
+        {
+          "title": {
+            "en": "Run order worked out",
+            "ja": "実行順序を自動で判断",
+            "zh": "自动确定执行顺序",
+            "id": "Urutan dijalankan otomatis"
+          },
+          "text": {
+            "en": "The order comes from the mappings: vocabularies before categories, parents before children, authors before their posts.",
+            "ja": "実行順序はマッピングから決まります。カテゴリーの前にボキャブラリー、子の前に親、投稿の前に作成者を移行します。",
+            "zh": "执行顺序由映射决定：先词汇表后分类，先父项后子项，先作者后帖子。",
+            "id": "Urutan ditentukan dari pemetaan: kosakata sebelum kategori, induk sebelum anak, penulis sebelum postingannya."
+          }
+        },
+        {
+          "title": {
+            "en": "Dry run and re-runnable loads",
+            "ja": "ドライランと再実行可能な読み込み",
+            "zh": "试运行与可重复加载",
+            "id": "Dry run dan muat ulang yang aman"
+          },
+          "text": {
+            "en": "See every request first. Loads run in parallel batches, can stop and resume, and running them again updates records instead of duplicating them.",
+            "ja": "まずすべてのリクエストを確認できます。読み込みは並列バッチで実行され、中断して再開でき、再実行してもレコードは重複せず更新されます。",
+            "zh": "先查看每个请求。加载以并行批次运行，可以暂停和继续，重复运行只会更新记录而不会产生重复。",
+            "id": "Lihat setiap permintaan terlebih dahulu. Pemuatan berjalan dalam batch paralel, dapat dihentikan dan dilanjutkan, dan menjalankannya lagi memperbarui record tanpa menduplikasinya."
+          }
+        },
+        {
+          "title": {
+            "en": "Validation",
+            "ja": "検証",
+            "zh": "验证",
+            "id": "Validasi"
+          },
+          "text": {
+            "en": "Record counts, a field-by-field comparison of migrated records read back from Liferay, and the records whose related records weren't migrated.",
+            "ja": "レコード数、Liferay から読み戻した移行済みレコードとのフィールドごとの比較、関連レコードが移行されなかったレコードの一覧を確認できます。",
+            "zh": "检查记录数量，将从 Liferay 读回的已迁移记录逐字段比较，并列出其关联记录未被迁移的记录。",
+            "id": "Jumlah record, perbandingan per field dari record yang dibaca kembali dari Liferay, dan record yang record terkaitnya tidak dimigrasikan."
+          }
+        },
+        {
+          "title": {
+            "en": "Ready-made migrations",
+            "ja": "すぐに使える移行",
+            "zh": "现成的迁移方案",
+            "id": "Migrasi siap pakai"
+          },
+          "text": {
+            "en": "Liferay Web Content from 2024.Q1 to the new CMS in 2026.Q3, tested on real Liferay. SharePoint discussion boards to Liferay Forums are next.",
+            "ja": "Liferay 2024.Q1 以降の Web コンテンツを 2026.Q3 の新しい CMS へ移行（実環境の Liferay で検証済み）。SharePoint のディスカッション掲示板から Liferay Forums への移行も準備中です。",
+            "zh": "将 Liferay 2024.Q1 及更高版本的 Web 内容迁移到 2026.Q3 的新 CMS（已在真实 Liferay 环境中测试）。SharePoint 讨论板到 Liferay Forums 的迁移即将推出。",
+            "id": "Web Content Liferay dari 2024.Q1 ke CMS baru di 2026.Q3, diuji pada Liferay sungguhan. Papan diskusi SharePoint ke Liferay Forums menyusul."
+          }
+        },
+        {
+          "title": {
+            "en": "Optional AI",
+            "ja": "オプションの AI",
+            "zh": "可选的 AI 功能",
+            "id": "AI opsional"
+          },
+          "text": {
+            "en": "Mapping suggestions, explanations of validation problems, and a chat that can dry-run but only proposes loads. Use a hosted model or one you run yourself.",
+            "ja": "マッピングの提案、検証で見つかった問題の説明、ドライランは実行できても読み込みは提案のみ行うチャットを利用できます。ホスト型のモデルも、自分で運用するモデルも使えます。",
+            "zh": "提供映射建议、解释验证中发现的问题，以及一个可以执行试运行但只会提议加载的聊天助手。可使用托管模型，也可使用自行部署的模型。",
+            "id": "Saran pemetaan, penjelasan masalah validasi, dan chat yang dapat menjalankan dry run tetapi hanya mengusulkan pemuatan. Gunakan model yang di-host atau model yang Anda jalankan sendiri."
+          }
+        }
+      ],
+      "dxp": "Liferay DXP 2026.Q1 or later",
+      "docsLanguages": [
+        "en"
+      ],
+      "image": {
+        "src": "assets/apps/liferay-migration-studio/dry-run.png",
+        "width": 1600,
+        "height": 1075
+      },
+      "screenshots": [
+        {
+          "src": "assets/apps/liferay-migration-studio/run-order.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "The run order, worked out from the mappings: users and categories first, replies after the posts they answer."
+        },
+        {
+          "src": "assets/apps/liferay-migration-studio/validation.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "Validation lists records whose related records weren't migrated, such as posts by a user without an email address."
+        },
+        {
+          "src": "assets/apps/liferay-migration-studio/connections.png",
+          "width": 1280,
+          "height": 604,
+          "caption": "Test each connection. The target must be Liferay DXP: loads into Community Edition are refused."
+        },
+        {
+          "src": "assets/apps/liferay-migration-studio/forum-result.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "The result: a SharePoint 2016 discussion in Liferay Forums, with its author, date and accepted answer."
+        }
+      ],
+      "docs": "liferay-migration-studio/",
+      "marketplace": null,
+      "search": "liferay-migration-studio/pagefind/",
+      "sitemap": "liferay-migration-studio/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/liferay-migration-studio"
+    },
+    {
       "id": "solution-recipes",
       "category": "solution-recipes",
       "name": "Solution Recipes",
