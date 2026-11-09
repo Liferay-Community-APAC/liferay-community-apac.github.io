@@ -632,3 +632,6 @@ section { padding: 44px 0; scroll-margin-top: 64px; }
 /* Shown on a page available only in English, when the visitor chose another language. */
 .lang-note { margin: 0 0 16px; padding: 8px 12px; border-radius: 8px; background: var(--bg-alt); border: 1px solid var(--border); color: var(--muted); font-size: 14px; }
 main > .lang-note { margin: 16px auto; max-width: var(--max); width: calc(100% - 48px); box-sizing: border-box; }
+/* An app's logo next to its name in its showcase: half the size of a "Powered by" product logo. */
+.showcase h3.with-logo { display: flex; align-items: center; gap: 10px; }
+.app-logo { width: 32px; height: 32px; flex: none; }

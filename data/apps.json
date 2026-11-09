@@ -93,6 +93,11 @@
       "id": "liferay-forums",
       "category": "marketplace-apps",
       "name": "Liferay Forums",
+      "logo": {
+        "src": "assets/apps/liferay-forums/logo.png",
+        "width": 64,
+        "height": 64
+      },
       "tagline": {
         "en": "Modern discussion forums for Liferay DXP",
         "ja": "Liferay DXP のためのモダンなディスカッションフォーラム",

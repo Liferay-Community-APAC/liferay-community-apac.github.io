@@ -121,6 +121,8 @@ for (const a of data.apps || []) {
     if (!isUrl(pb.logo) && !existsSync(join(siteDir, pb.logo))) fail(`${where}: poweredBy logo ${pb.logo} not found`);
   }
   if (a.image && !(a.image.src && a.image.width && a.image.height)) fail(`${where}: image needs src, width and height`);
+  if (a.logo && !(a.logo.src && a.logo.width && a.logo.height)) fail(`${where}: logo needs src, width and height`);
+  if (a.logo && !isUrl(a.logo.src) && !existsSync(join(siteDir, a.logo.src))) fail(`${where}: logo ${a.logo.src} not found`);
   if (a.image && !isUrl(a.image.src) && !existsSync(join(siteDir, a.image.src))) fail(`${where}: image ${a.image.src} not found`);
   (a.highlights || []).forEach((h, i) => {
     for (const l of LANGS) if (!h.title?.[l] || !h.text?.[l]) fail(`${where}: highlight ${i + 1} needs a title and text in "${l}"`);
@@ -199,7 +201,9 @@ function showcase(a, page, indent, full) {
   const lines = [`<article class="showcase${full ? ' full' : ''}" id="${esc(a.id)}">`];
   if (a.image) lines.push(`  <a class="showcase-shot" href="${esc(href(docsFor(a, lang), page))}" tabindex="-1" aria-hidden="true">`,
     `    <img src="${esc(href(a.image.src, page))}" alt="" width="${a.image.width}" height="${a.image.height}" loading="lazy">`, '  </a>');
-  lines.push('  <div class="showcase-body">', `    <span class="tag">${esc(cat.tag[lang])}</span>`, `    <h3>${esc(L(a.name, lang))}</h3>`);
+  // An app's own logo sits next to its name, at half the size of a "Powered by" product logo.
+  const logo = a.logo ? `<img class="app-logo" src="${esc(href(a.logo.src, page))}" alt="" width="32" height="32">` : '';
+  lines.push('  <div class="showcase-body">', `    <span class="tag">${esc(cat.tag[lang])}</span>`, `    <h3${logo ? ' class="with-logo"' : ''}>${logo}${esc(L(a.name, lang))}</h3>`);
   if (a.tagline) lines.push(`    <p class="showcase-tagline">${esc(a.tagline[lang])}</p>`);
   lines.push(`    <p>${esc(a.summary[lang])}</p>`);
   if (points.length && !full) lines.push('    <ul class="showcase-points">', ...points, '    </ul>');

@@ -40,7 +40,10 @@ The website for Liferay Community APAC: <https://liferay-community-apac.github.i
     }
     ```
 
-    `image`, `marketplace`, `search`, `sitemap` and `docsRepo` are optional. Leave `search` and `sitemap` as
+    `image`, `marketplace`, `search`, `sitemap` and `docsRepo` are optional. An app can also have a `logo`
+    (`{ "src": "assets/apps/my-app/logo.png", "width": 64, "height": 64 }`), shown at 32px next to its name
+    in its showcase: half the size of a **Powered by** logo. Use a 64px PNG so it stays sharp on high-density screens.
+    Leave `search` and `sitemap` as
     `null` for an app whose docs are part of this site rather than published from their own repository.
 
     To feature a Liferay product that extends the app, such as Liferay AI Hub, add `poweredBy`. The app's showcase
