@@ -44,22 +44,22 @@ const PAGES = LANGS.flatMap((l) => [
 const COMPACT_HIGHLIGHTS = 4;
 
 const STRINGS = {
-  en: { poweredBy: 'Powered by {name}. ', recipe: 'Read the recipe →', about: 'About {name}',
+  en: { poweredBy: 'Powered by {name}. ', recipe: 'Read the recipe →', recipeNamed: '{title} →', about: 'About {name}',
         more: 'Read the guide →', moreOther: 'Read the guide →', marketplace: 'Marketplace listing →',
         guide: 'Read the guide', guideOther: 'Read the guide', download: 'Download', details: 'All features and screenshots →',
         features: 'Features', screenshots: 'Screenshots', versions: 'Works with', version: 'Version',
         soonTag: 'Coming soon', soonTitle: 'More Marketplace Apps coming soon', soonText: 'More Marketplace Apps and their guides are on the way.' },
-  ja: { poweredBy: '{name} を活用。', recipe: 'レシピを見る（英語）→', about: '{name} について',
+  ja: { poweredBy: '{name} を活用。', recipe: 'レシピを見る（英語）→', recipeNamed: '{title}（英語）→', about: '{name} について',
         more: 'ガイドを読む →', moreOther: 'ガイドを読む（英語）→', marketplace: 'Marketplace で見る →',
         guide: 'ガイドを読む', guideOther: 'ガイドを読む（英語）', download: 'ダウンロード', details: 'すべての機能とスクリーンショット →',
         features: '機能', screenshots: 'スクリーンショット', versions: '対応製品', version: 'バージョン',
         soonTag: '近日公開', soonTitle: 'その他の Marketplace アプリも近日公開', soonText: '新しい Marketplace アプリとガイドを準備中です。' },
-  zh: { poweredBy: '由 {name} 提供支持。', recipe: '查看实践指南（英文）→', about: '了解 {name}（英文）',
+  zh: { poweredBy: '由 {name} 提供支持。', recipe: '查看实践指南（英文）→', recipeNamed: '{title}（英文）→', about: '了解 {name}（英文）',
         more: '阅读指南 →', moreOther: '阅读指南（英文）→', marketplace: '在 Marketplace 查看 →',
         guide: '阅读指南', guideOther: '阅读指南（英文）', download: '下载', details: '全部功能与截图 →',
         features: '功能', screenshots: '截图', versions: '适用于', version: '版本',
         soonTag: '即将推出', soonTitle: '更多 Marketplace 应用即将推出', soonText: '更多 Marketplace 应用及其指南正在准备中。' },
-  id: { poweredBy: 'Didukung oleh {name}. ', recipe: 'Baca recipe (bahasa Inggris) →', about: 'Tentang {name} (bahasa Inggris)',
+  id: { poweredBy: 'Didukung oleh {name}. ', recipe: 'Baca recipe (bahasa Inggris) →', recipeNamed: '{title} (bahasa Inggris) →', about: 'Tentang {name} (bahasa Inggris)',
         more: 'Baca panduan →', moreOther: 'Baca panduan (bahasa Inggris) →', marketplace: 'Lihat di Marketplace →',
         guide: 'Baca panduan', guideOther: 'Baca panduan (bahasa Inggris)', download: 'Unduh', details: 'Semua fitur dan screenshot →',
         features: 'Fitur', screenshots: 'Screenshot', versions: 'Untuk', version: 'Versi',
@@ -178,10 +178,12 @@ function soonCard(page, indent) {
 }
 
 // A "Powered by" panel for a Liferay product that extends an app, such as Liferay AI Hub: its logo, what it adds,
-// and links to the recipe that shows how and to the product's official page.
+// and links to the recipes that show how and to the product's official page. `recipe` is one recipe's path, linked
+// as "Read the recipe"; `recipes` is a list of { title, path }, each linked by its title.
 function poweredBy(pb, page, indent) {
   const t = STRINGS[page.lang], lang = page.lang, url = L(pb.url, lang), name = esc(pb.name);
-  const links = [pb.recipe && `<a href="${esc(href(pb.recipe, page))}">${esc(t.recipe)}</a>`,
+  const recipes = (pb.recipes || []).map((r) => `<a href="${esc(href(r.path, page))}">${esc(t.recipeNamed.replace('{title}', r.title))}</a>`);
+  const links = [pb.recipe && `<a href="${esc(href(pb.recipe, page))}">${esc(t.recipe)}</a>`, ...recipes,
     `<a href="${esc(url)}">${t.about.replace('{name}', name)}</a>`].filter(Boolean).join(' · ');
   return indentAll(['<div class="showcase-powered">',
     `  <a href="${esc(url)}" tabindex="-1" aria-hidden="true"><img src="${esc(href(pb.logo, page))}" alt="" width="64" height="64" loading="lazy"></a>`,

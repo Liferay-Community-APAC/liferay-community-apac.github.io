@@ -48,7 +48,8 @@ The website for Liferay Community APAC: <https://liferay-community-apac.github.i
 
     To feature a Liferay product that extends the app, such as Liferay AI Hub, add `poweredBy`. The app's showcase
     then shows a **Powered by** panel with the product's logo, the `text`, and links to the recipe and the product's
-    official page. `url` can be one address or one per language; languages without one use `en`.
+    official page. For several recipes, use `recipes` instead of `recipe`: a list of `{ "title": "…", "path": "…" }`,
+    each linked by its title. `url` can be one address or one per language; languages without one use `en`.
 
     ```json
     "poweredBy": {

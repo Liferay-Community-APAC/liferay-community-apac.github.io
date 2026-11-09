@@ -272,12 +272,15 @@
           "ja": "https://www.liferay.co.jp/capabilities/ai-hub"
         },
         "text": {
-          "en": "Add an AI assistant that tells members where to find the discussions they're looking for, searching only what each member can see.",
-          "ja": "メンバーが探しているディスカッションの場所を教える AI アシスタントを追加できます。検索するのは、各メンバーが閲覧できる内容だけです。",
-          "zh": "添加一个 AI 助手，告诉成员他们要找的讨论在哪里，并且只搜索每位成员有权查看的内容。",
-          "id": "Tambahkan asisten AI yang memberi tahu anggota di mana diskusi yang mereka cari, dengan hanya mencari konten yang dapat dilihat setiap anggota."
+          "en": "Add an AI assistant that tells members where to find the discussions they're looking for, searching only what each member can see, and an AI summary at the top of busy discussions.",
+          "ja": "メンバーが探しているディスカッションの場所を教える AI アシスタントを追加できます。検索するのは、各メンバーが閲覧できる内容だけです。活発なディスカッションの冒頭には AI による要約も表示できます。",
+          "zh": "添加一个 AI 助手，告诉成员他们要找的讨论在哪里，并且只搜索每位成员有权查看的内容；还可以在热门讨论的顶部显示 AI 摘要。",
+          "id": "Tambahkan asisten AI yang memberi tahu anggota di mana diskusi yang mereka cari, dengan hanya mencari konten yang dapat dilihat setiap anggota, serta ringkasan AI di bagian atas diskusi yang ramai."
         },
-        "recipe": "solution-recipes/forums-ai-assistant/"
+        "recipes": [
+          { "title": "Forums Assistant", "path": "solution-recipes/forums-ai-assistant/" },
+          { "title": "AI Discussion Summaries", "path": "solution-recipes/forums-ai-summaries/" }
+        ]
       },
       "repo": "https://github.com/LGSAPAC/lfrgs-liferay-forums",
       "marketplace": null,
