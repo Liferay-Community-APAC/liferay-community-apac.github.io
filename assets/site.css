@@ -59,7 +59,7 @@ img, svg { display: block; }
 .brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 700; letter-spacing: .2px; }
 .brand-logo { height: 28px; width: auto; }
 .brand small { font-weight: 400; color: #9fc0ff; padding-left: 12px; border-left: 1px solid rgba(255, 255, 255, .25); }
-.nav { display: flex; gap: 22px; margin-left: auto; }
+.nav { display: flex; gap: 18px; margin-left: auto; }
 .nav a { color: #d6e3ff; text-decoration: none; font-size: 15px; }
 .nav a:hover { color: #fff; }
 .lang { display: flex; border: 1px solid rgba(255, 255, 255, .25); border-radius: 999px; overflow: hidden; font-size: 13px; }

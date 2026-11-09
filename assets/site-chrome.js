@@ -35,7 +35,8 @@
     en: {
       home: '', brandName: 'Liferay Community APAC', navLabel: 'Main',
       nav: [['marketplace-apps', 'marketplace-apps/', 'Marketplace Apps'], ['solution-recipes', 'solution-recipes/', 'Solution Recipes'],
-            ['tutorials', 'tutorials/', 'Tutorials & Tools'], ['community', 'community/', 'Community']],
+            ['tutorials', 'tutorials/', 'Tutorials & Tools'], ['community', 'community/', 'Community'],
+            ['get-help', 'get-help/', 'Get help']],
       contact: 'Contact',
       langLabel: 'Language', menu: 'Menu', search: 'Search', searchTitle: 'Search the site', close: 'Close',
       searchUnavailable: 'Search becomes available once the site is published.',
@@ -47,7 +48,8 @@
     ja: {
       home: 'ja/', brandName: 'Liferay Community APAC', navLabel: 'メイン',
       nav: [['marketplace-apps', 'ja/marketplace-apps/', 'Marketplace アプリ'], ['solution-recipes', 'solution-recipes/', 'レシピ'],
-            ['tutorials', 'ja/tutorials/', 'チュートリアル'], ['community', 'ja/community/', 'コミュニティ']],
+            ['tutorials', 'ja/tutorials/', 'チュートリアル'], ['community', 'ja/community/', 'コミュニティ'],
+            ['get-help', 'ja/get-help/', 'サポート']],
       contact: 'お問い合わせ',
       langLabel: '言語', menu: 'メニュー', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
       searchUnavailable: '検索はサイトの公開後に利用できます。',
@@ -59,7 +61,8 @@
     zh: {
       home: 'zh/', brandName: 'Liferay Community APAC', navLabel: '主导航',
       nav: [['marketplace-apps', 'zh/marketplace-apps/', 'Marketplace 应用'], ['solution-recipes', 'solution-recipes/', '实践方案'],
-            ['tutorials', 'zh/tutorials/', '教程与工具'], ['community', 'zh/community/', '社区']],
+            ['tutorials', 'zh/tutorials/', '教程与工具'], ['community', 'zh/community/', '社区'],
+            ['get-help', 'zh/get-help/', '获取帮助']],
       contact: '联系我们',
       langLabel: '语言', menu: '菜单', search: '搜索', searchTitle: '搜索本站', close: '关闭',
       searchUnavailable: '网站发布后即可使用搜索。',
@@ -91,7 +94,7 @@
     if (b.hasAttribute('data-kb-page')) return location.pathname.indexOf('/solution-recipes/') !== -1 ? 'solution-recipes' : 'marketplace-apps';
     return '';
   }
-  var SECTION_PAGES = { 'marketplace-apps': 1, tutorials: 1, community: 1 }; // sections with a page in every language
+  var SECTION_PAGES = { 'marketplace-apps': 1, tutorials: 1, community: 1, 'get-help': 1 }; // sections with a page in every language
 
   // The same page in another language: the page's own <link rel="alternate" hreflang> if it has one,
   // otherwise that language's page for the same section (from an English-only page, such as an app's docs).
@@ -148,7 +151,7 @@
   }
 
   function renderFooter(el) {
-    var links = '<a href="' + esc(homeUrl + '#contact') + '">' + esc(t.contact) + '</a>' +
+    var links = '<a href="' + esc(homeUrl + 'get-help/') + '">' + esc(t.contact) + '</a>' +
       t.footerLinks.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('');
     LANGS.forEach(function (l) {
       if (l[0] !== lang) links += '<a href="' + esc(altHref(l[0])) + '" hreflang="' + HREFLANG[l[0]] + '" lang="' + l[2] + '">' + (l[0] === 'en' ? 'English' : esc(l[1])) + '</a>';

@@ -38,7 +38,8 @@ const PAGES = LANGS.flatMap((l) => [
   { file: `${HOME[l]}index.html`, lang: l },
   { file: `${HOME[l]}marketplace-apps/index.html`, lang: l },
   { file: `${HOME[l]}tutorials/index.html`, lang: l },
-  { file: `${HOME[l]}community/index.html`, lang: l }
+  { file: `${HOME[l]}community/index.html`, lang: l },
+  { file: `${HOME[l]}get-help/index.html`, lang: l }
 ]);
 const COMPACT_HIGHLIGHTS = 4;
 
