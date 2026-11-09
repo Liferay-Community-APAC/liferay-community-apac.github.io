@@ -88,7 +88,7 @@ const SECTIONS = [
     count: { en: (n) => `${n} tutorials, samples and tools`, ja: (n) => `${n} 件のチュートリアル、サンプル、ツール`, zh: (n) => `${n} 个教程、示例和工具`, id: (n) => `${n} tutorial, contoh, dan alat` } },
   { icon: 'community', href: (l) => `${HOME[l]}community/`, categories: [],
     title: { en: 'Community', ja: 'コミュニティ', zh: '社区', id: 'Komunitas' },
-    text: { en: 'Local user groups, events and ways to stay updated.', ja: '地域のユーザーグループ、イベント、最新情報の受け取り方。', zh: '各地用户组、活动以及获取最新信息的方式。', id: 'Grup pengguna lokal, acara, dan cara mendapatkan kabar terbaru.' },
+    text: { en: 'Local user groups, events and the wider Liferay community online.', ja: '地域のユーザーグループ、イベント、オンラインの Liferay コミュニティ。', zh: '各地用户组、活动以及全球 Liferay 在线社区。', id: 'Grup pengguna lokal, acara, dan komunitas Liferay global secara online.' },
     count: { en: () => 'India · Japan · Australia · Southeast Asia', ja: () => 'インド · 日本 · オーストラリア · 東南アジア', zh: () => '印度 · 日本 · 澳大利亚 · 东南亚', id: () => 'India · Jepang · Australia · Asia Tenggara' } }
 ];
 
@@ -121,6 +121,8 @@ for (const a of data.apps || []) {
     if (!isUrl(pb.logo) && !existsSync(join(siteDir, pb.logo))) fail(`${where}: poweredBy logo ${pb.logo} not found`);
   }
   if (a.image && !(a.image.src && a.image.width && a.image.height)) fail(`${where}: image needs src, width and height`);
+  if (a.logo && !(a.logo.src && a.logo.width && a.logo.height)) fail(`${where}: logo needs src, width and height`);
+  if (a.logo && !isUrl(a.logo.src) && !existsSync(join(siteDir, a.logo.src))) fail(`${where}: logo ${a.logo.src} not found`);
   if (a.image && !isUrl(a.image.src) && !existsSync(join(siteDir, a.image.src))) fail(`${where}: image ${a.image.src} not found`);
   (a.highlights || []).forEach((h, i) => {
     for (const l of LANGS) if (!h.title?.[l] || !h.text?.[l]) fail(`${where}: highlight ${i + 1} needs a title and text in "${l}"`);
@@ -199,7 +201,9 @@ function showcase(a, page, indent, full) {
   const lines = [`<article class="showcase${full ? ' full' : ''}" id="${esc(a.id)}">`];
   if (a.image) lines.push(`  <a class="showcase-shot" href="${esc(href(docsFor(a, lang), page))}" tabindex="-1" aria-hidden="true">`,
     `    <img src="${esc(href(a.image.src, page))}" alt="" width="${a.image.width}" height="${a.image.height}" loading="lazy">`, '  </a>');
-  lines.push('  <div class="showcase-body">', `    <span class="tag">${esc(cat.tag[lang])}</span>`, `    <h3>${esc(L(a.name, lang))}</h3>`);
+  // An app's own logo sits next to its name, at half the size of a "Powered by" product logo.
+  const logo = a.logo ? `<img class="app-logo" src="${esc(href(a.logo.src, page))}" alt="" width="32" height="32">` : '';
+  lines.push('  <div class="showcase-body">', `    <span class="tag">${esc(cat.tag[lang])}</span>`, `    <h3${logo ? ' class="with-logo"' : ''}>${logo}${esc(L(a.name, lang))}</h3>`);
   if (a.tagline) lines.push(`    <p class="showcase-tagline">${esc(a.tagline[lang])}</p>`);
   lines.push(`    <p>${esc(a.summary[lang])}</p>`);
   if (points.length && !full) lines.push('    <ul class="showcase-points">', ...points, '    </ul>');

@@ -632,3 +632,17 @@ section { padding: 44px 0; scroll-margin-top: 64px; }
 /* Shown on a page available only in English, when the visitor chose another language. */
 .lang-note { margin: 0 0 16px; padding: 8px 12px; border-radius: 8px; background: var(--bg-alt); border: 1px solid var(--border); color: var(--muted); font-size: 14px; }
 main > .lang-note { margin: 16px auto; max-width: var(--max); width: calc(100% - 48px); box-sizing: border-box; }
+/* Community page: Liferay Discuss and liferay.dev */
+.online { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.card.online-card { display: flex; flex-direction: column; gap: 14px; }
+.online-head { display: flex; align-items: center; gap: 14px; }
+.online-head .icon { margin: 0; flex: none; }
+.online-head h3 { margin: 0; }
+.online-url { color: var(--blue); font-size: 14px; font-weight: 600; }
+.online-card .features { grid-template-columns: 1fr; gap: 10px; }
+.online-card .online-tip { font-size: 14px; padding: 10px 12px; border-radius: 8px; background: var(--bg-alt); }
+.online-card > .btn { align-self: flex-start; margin-top: auto; }
+@media (max-width: 860px) { .online { grid-template-columns: 1fr; } }
+/* An app's logo next to its name in its showcase: half the size of a "Powered by" product logo. */
+.showcase h3.with-logo { display: flex; align-items: center; gap: 10px; }
+.app-logo { width: 32px; height: 32px; flex: none; }
