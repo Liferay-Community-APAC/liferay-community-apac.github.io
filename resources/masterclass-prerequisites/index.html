@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liferay Masterclass prerequisites · Liferay Community APAC</title>
+  <meta name="description" content="Get ready for the Liferay Masterclass: prepare your computer, install VS Code and Claude Code, create your ngrok and Liferay Marketplace accounts, accept your AI Hub, LDP and GitHub invitations, and open the workbook.">
+  <meta property="og:title" content="Liferay Masterclass prerequisites · Liferay Community APAC">
+  <meta property="og:description" content="Get ready for the Liferay Masterclass: prepare your computer, install VS Code and Claude Code, create your ngrok and Liferay Marketplace accounts, accept your AI Hub, LDP and GitHub invitations, and open the workbook.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/">
+  <meta property="og:url" content="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/">
+  <meta property="og:site_name" content="Liferay Community APAC">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://liferay-community-apac.github.io/assets/og-image.png?v=7">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../assets/site.css?v=c13">
+  <script src="../../assets/site-chrome.js?v=21" defer></script>
+</head>
+<body data-section="resources">
+
+<header class="site-header" data-site-header>
+  <div class="wrap">
+    <a class="brand" href="../../"><img class="brand-mark" src="../../assets/liferay-mark-white.png" alt="" width="30" height="30"><span class="brand-name">Liferay Community APAC</span></a>
+  </div>
+</header>
+
+<main data-pagefind-body>
+  <section class="hero page">
+    <div class="wrap">
+      <div>
+        <p class="crumbs"><a href="../../">Home</a><span>/</span><a href="../">Resources</a><span>/</span>Liferay Masterclass prerequisites</p>
+        <p class="eyebrow">Workshop</p>
+        <h1>Liferay Masterclass prerequisites</h1>
+        <p class="lead">Five steps to get your computer, tools and accounts ready before the workshop. Tick each item as you go: your progress is saved in this browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mc">
+    <div class="wrap mc-layout">
+      <aside class="mc-side">
+        <div class="mc-progress" aria-live="polite">
+          <div class="mc-bar"><span style="width:0%"></span></div>
+          <p><strong class="mc-done">0</strong> of <span class="mc-total">0</span> done</p>
+        </div>
+        <nav aria-label="Steps">
+          <ol class="mc-toc"><li><a href="#computer">Prepare your computer</a></li><li><a href="#tools">Install your tools</a></li><li><a href="#accounts">Create your accounts</a></li><li><a href="#invitations">Accept your invitations</a></li><li><a href="#workbook">Open the workbook</a></li></ol>
+        </nav>
+        <button type="button" class="mc-reset">Clear my checklist</button>
+      </aside>
+      <div class="mc-main">
+      <section class="mc-step" id="computer" aria-labelledby="computer-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">1</span>
+          <div>
+            <h2 id="computer-h">Prepare your computer</h2>
+            <p>Follow Liferay's official <a href="https://www.liferay.com/classroom-training/classroom-prerequisites">classroom training prerequisites</a>. They explain how to install and check each item below. Do this before you travel, so you don't depend on the venue's Wi-Fi.</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-git" data-key="git">
+            <div>
+              <label for="mc-git" class="check-title">Git</label>
+              <p>Any recent version. You don't need a GitHub account for this part.</p>
+              <pre class="cmd"><code>git version</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-jdk" data-key="jdk">
+            <div>
+              <label for="mc-jdk" class="check-title">Java JDK 21</label>
+              <p>A JDK, not just a JRE, reporting a 21.x version.</p>
+              <pre class="cmd"><code>java -version</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-blade" data-key="blade">
+            <div>
+              <label for="mc-blade" class="check-title">Liferay Blade CLI</label>
+              <p>Version 6.0 or later. Run <code>blade update</code> if yours is older.</p>
+              <pre class="cmd"><code>blade version</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-space" data-key="space">
+            <div>
+              <label for="mc-space" class="check-title">4 GB of free memory and 10 GB of free disk space</label>
+              <p>Enough to run Liferay DXP on your computer during the workshop.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-learn" data-key="learn">
+            <div>
+              <label for="mc-learn" class="check-title">Recommended: the Learning Path on Liferay Learn</label>
+              <p>Working through the matching <a href="https://learn.liferay.com/">Liferay Learn</a> Learning Path first lets the workshop move faster and go deeper.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="tools" aria-labelledby="tools-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">2</span>
+          <div>
+            <h2 id="tools-h">Install your tools</h2>
+            <p>You'll work in your Liferay Workspace with an AI assistant at your side.</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-vscode" data-key="vscode">
+            <div>
+              <label for="mc-vscode" class="check-title"><a href="https://code.visualstudio.com/">Visual Studio Code</a></label>
+              <p>VS Code makes it easy to work with your Liferay Workspace.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-claude" data-key="claude">
+            <div>
+              <label for="mc-claude" class="check-title"><a href="https://code.claude.com/docs/en/vs-code">Claude Code extension for VS Code</a></label>
+              <p>With the extension installed, you've got Claude at your fingertips in VS Code.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="accounts" aria-labelledby="accounts-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">3</span>
+          <div>
+            <h2 id="accounts-h">Create your accounts</h2>
+            <p>Sign up with the email address you registered for the workshop with.</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-ngrok" data-key="ngrok">
+            <div>
+              <label for="mc-ngrok" class="check-title"><a href="https://ngrok.com/">ngrok</a> account</label>
+              <p>AI Hub and LDP both need to reach your Liferay DXP instance on a public URL, and ngrok provides it. Create an account with your email address so we can add you to our Liferay Enablement ngrok account.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-marketplace" data-key="marketplace">
+            <div>
+              <label for="mc-marketplace" class="check-title"><a href="https://marketplace.liferay.com/">Liferay Marketplace</a> account</label>
+              <p>You'll need it to download new product license files for CMP/DSR.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="invitations" aria-labelledby="invitations-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">4</span>
+          <div>
+            <h2 id="invitations-h">Accept your invitations</h2>
+            <p>You should receive these invitations before the workshop. Accept each one when it arrives, and check your spam folder if one is missing.</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-aihub" data-key="aihub">
+            <div>
+              <label for="mc-aihub" class="check-title"><a href="http://ai.hub.liferay.com/">AI Hub</a> account</label>
+              <p>An invitation to join AI Hub for the training.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-ldp" data-key="ldp">
+            <div>
+              <label for="mc-ldp" class="check-title"><a href="https://ldp-internal.liferay.com/">LDP workspace</a> access</label>
+              <p>An invitation to join an LDP workspace for the training.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-github" data-key="github">
+            <div>
+              <label for="mc-github" class="check-title"><a href="https://github.com/liferay/liferay-course-masterclass">Workshop repository</a> on GitHub</label>
+              <p>An invitation to the repository with the workbook you'll be testing and its context source materials. Until you accept it, the link shows "Page not found". Once you've accepted, clone it:</p>
+              <pre class="cmd"><code>git clone https://github.com/liferay/liferay-course-masterclass.git</code></pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="workbook" aria-labelledby="workbook-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">5</span>
+          <div>
+            <h2 id="workbook-h">Open the workbook</h2>
+            <p>The workbook is the step-by-step guide you'll follow during the workshop.</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-workbook" data-key="workbook">
+            <div>
+              <label for="mc-workbook" class="check-title"><a href="https://github.com/liferay/liferay-course-masterclass/blob/master/context-source/liferay-skills-learning-path.html">Workbook</a></label>
+              <p>It's in the workshop repository, at <code>context-source/liferay-skills-learning-path.html</code>. Open it from your clone, or on GitHub once you have access.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+        <div class="mc-ready" hidden>
+          <strong>You're all set.</strong> See you at the workshop.
+        </div>
+        <p class="mc-help">Something not working, or an invitation hasn't arrived? Contact the workshop organizers, or see <a href="../../get-help/">Get help</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Checklist: progress is kept in this browser only.
+    (function () {
+      var KEY = 'lca-masterclass-checklist';
+      var boxes = [].slice.call(document.querySelectorAll('.checklist input[type=checkbox]'));
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+      function update() {
+        var done = boxes.filter(function (b) { return b.checked; }).length;
+        document.querySelector('.mc-done').textContent = done;
+        document.querySelector('.mc-total').textContent = boxes.length;
+        document.querySelector('.mc-bar span').style.width = Math.round(done / boxes.length * 100) + '%';
+        document.querySelector('.mc-ready').hidden = done !== boxes.length;
+        [].forEach.call(document.querySelectorAll('.mc-step'), function (s) {
+          var b = s.querySelectorAll('input[type=checkbox]'), c = s.querySelectorAll('input:checked');
+          s.classList.toggle('complete', b.length > 0 && b.length === c.length);
+        });
+      }
+      boxes.forEach(function (b) {
+        b.checked = !!saved[b.dataset.key];
+        b.addEventListener('change', function () {
+          saved[b.dataset.key] = b.checked;
+          try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+          update();
+        });
+      });
+      document.querySelector('.mc-reset').addEventListener('click', function () {
+        saved = {}; boxes.forEach(function (b) { b.checked = false; });
+        try { localStorage.removeItem(KEY); } catch (e) {}
+        update();
+      });
+      update();
+    })();
+  </script>
+</main>
+
+<footer class="site-footer" data-site-footer>
+  <p class="wrap disclaimer">Marketplace Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>

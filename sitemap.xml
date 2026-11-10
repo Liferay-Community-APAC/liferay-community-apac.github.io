@@ -180,4 +180,12 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/get-help/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/get-help/"/>
   </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/resources/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/resources/masterclass-prerequisites/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
 </urlset>
