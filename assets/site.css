@@ -686,3 +686,14 @@ a.card.resource-link h3, a.card.resource-link p { margin: 0; }
   .site-header .wrap { gap: 18px; }
   .nav { gap: 16px; }
 }
+/* Masterclass step 6: how to run the readiness check, the prompt, and the example result */
+.mc-howto { margin: 0 0 14px; padding-left: 22px; display: grid; gap: 6px; }
+.mc-howto ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.mc-prompt { margin: 0 0 14px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.mc-prompt-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: var(--bg-alt); border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 600; color: var(--muted); }
+.mc-copy { font: inherit; font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 8px; border: 1px solid var(--blue); background: var(--blue); color: #fff; cursor: pointer; }
+.mc-copy:hover { filter: brightness(1.1); }
+.mc-prompt pre { margin: 0; padding: 12px 14px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13.5px; line-height: 1.55; background: #0b1430; color: #e6eeff; }
+.mc-shot { margin: 0 0 14px; }
+.mc-shot img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(3, 15, 44, .12); }
+.mc-shot figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); }

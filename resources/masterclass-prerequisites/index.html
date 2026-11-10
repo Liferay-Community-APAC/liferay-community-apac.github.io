@@ -37,7 +37,7 @@
         <p class="crumbs"><a href="../../">Home</a><span>/</span><a href="../">Resources</a><span>/</span>Liferay Masterclass prerequisites</p>
         <p class="eyebrow">Workshop</p>
         <h1>Liferay Masterclass prerequisites</h1>
-        <p class="lead">Five steps to get your computer, tools and accounts ready before the workshop. Tick each item as you go: your progress is saved in this browser.</p>
+        <p class="lead">Six steps to get your computer, tools and accounts ready before the workshop. Tick each item as you go: your progress is saved in this browser.</p>
       </div>
     </div>
   </section>
@@ -50,7 +50,7 @@
           <p><strong class="mc-done">0</strong> of <span class="mc-total">0</span> done</p>
         </div>
         <nav aria-label="Steps">
-          <ol class="mc-toc"><li><a href="#computer">Prepare your computer</a></li><li><a href="#tools">Install your tools</a></li><li><a href="#accounts">Create your accounts</a></li><li><a href="#invitations">Accept your invitations</a></li><li><a href="#workbook">Open the workbook</a></li></ol>
+          <ol class="mc-toc"><li><a href="#computer">Prepare your computer</a></li><li><a href="#tools">Install your tools</a></li><li><a href="#accounts">Create your accounts</a></li><li><a href="#invitations">Accept your invitations</a></li><li><a href="#workbook">Open the workbook</a></li><li><a href="#check">Check with your AI assistant</a></li></ol>
         </nav>
         <button type="button" class="mc-reset">Clear my checklist</button>
       </aside>
@@ -224,6 +224,56 @@
         </ul>
       </section>
 
+      <section class="mc-step" id="check" aria-labelledby="check-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">6</span>
+          <div>
+            <h2 id="check-h">Check everything with your AI assistant</h2>
+            <p>Let the AI assistant you installed in step 2 check your setup for you. It runs the checks in a terminal and tells you what passes and what to fix.</p>
+          </div>
+        </div>
+        <ol class="mc-howto">
+          <li>In VS Code, open the folder with your clone of the workshop repository (<em>File</em> → <em>Open Folder</em>).</li>
+          <li>Open your AI assistant's chat:
+            <ul>
+              <li><strong>Claude Code:</strong> click the Claude icon, or run <em>Claude Code: Open</em> from the Command Palette.</li>
+              <li><strong>OpenAI Codex:</strong> click the Codex icon in the sidebar.</li>
+              <li><strong>GitHub Copilot:</strong> open the Chat view and switch the mode to <em>Agent</em>, so Copilot can run commands.</li>
+            </ul>
+          </li>
+          <li>Copy the prompt below, paste it into the chat and send it. When the assistant asks to run a command, allow it: the checks only read information.</li>
+        </ol>
+        <div class="mc-prompt">
+          <div class="mc-prompt-head"><span>Prompt</span><button type="button" class="mc-copy" data-copy="mc-prompt-text">Copy</button></div>
+          <pre id="mc-prompt-text">Check that my computer is ready for the Liferay Masterclass. Run each check in the terminal, one at a time. Don&#x27;t install or change anything.
+
+1. Git: run `git version`. PASS if Git is installed.
+2. Java: run `java -version` and `javac -version`. PASS if both report version 21.x (a JDK, not just a JRE).
+3. Blade: run `blade version`. PASS if it&#x27;s 6.0 or later.
+4. Memory: check the free RAM. PASS if at least 4 GB is available.
+5. Disk: check the free space on the drive with my home folder. PASS if at least 10 GB is free.
+6. Workshop repository: find my clone of github.com/liferay/liferay-course-masterclass (in the open folder or my home folder). PASS if it exists and contains context-source/liferay-skills-learning-path.html.
+7. ngrok: run `ngrok version` and `ngrok config check`. PASS if ngrok is installed and has an auth token; otherwise WARN.
+
+Then show the results as a table with the columns Check, Result (PASS, WARN or FAIL) and Details. For anything that isn&#x27;t PASS, tell me how to fix it.
+
+Finally, list what I need to confirm myself, because you can&#x27;t check it: my Liferay Marketplace account, and my AI Hub, LDP workspace and GitHub invitations.</pre>
+        </div>
+        <figure class="mc-shot">
+          <img src="../../assets/resources/masterclass-check-example.png" alt="Example: the AI assistant's chat in VS Code shows a table where Git, Java, Blade, memory, disk, the workshop repository and ngrok all show PASS, followed by the accounts and invitations to confirm yourself." width="1280" height="800" loading="lazy">
+          <figcaption>Example of the result when everything is ready. The wording, versions and layout differ by assistant and computer.</figcaption>
+        </figure>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-check" data-key="check">
+            <div>
+              <label for="mc-check" class="check-title">All checks show PASS</label>
+              <p>Run the check below, fix anything marked FAIL or WARN, and run it again until everything passes. Then confirm the accounts and invitations it lists.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
         <div class="mc-ready" hidden>
           <strong>You're all set.</strong> See you at the workshop.
         </div>
@@ -275,6 +325,14 @@
         update();
       });
       update();
+      [].forEach.call(document.querySelectorAll('.mc-copy'), function (btn) {
+        btn.addEventListener('click', function () {
+          var text = document.getElementById(btn.dataset.copy).textContent;
+          function done(ok) { btn.textContent = ok ? 'Copied' : 'Select and copy'; setTimeout(function () { btn.textContent = 'Copy'; }, 2000); }
+          if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+          else done(false);
+        });
+      });
     })();
   </script>
 </main>
