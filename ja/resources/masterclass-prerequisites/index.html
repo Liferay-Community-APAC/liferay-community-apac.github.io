@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liferay Masterclass の事前準備 · Liferay Community APAC</title>
+  <meta name="description" content="Liferay Masterclass の準備：パソコンの準備、VS Code と AI アシスタントのインストール、ngrok と Liferay Marketplace のアカウント作成、AI Hub・LDP・GitHub の招待の承認、ワークブックの確認、そして AI アシスタントによる最終チェック。">
+  <meta property="og:title" content="Liferay Masterclass の事前準備 · Liferay Community APAC">
+  <meta property="og:description" content="Liferay Masterclass の準備：パソコンの準備、VS Code と AI アシスタントのインストール、ngrok と Liferay Marketplace のアカウント作成、AI Hub・LDP・GitHub の招待の承認、ワークブックの確認、そして AI アシスタントによる最終チェック。">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/">
+  <meta property="og:url" content="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/">
+  <meta property="og:site_name" content="Liferay Community APAC">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:image" content="https://liferay-community-apac.github.io/assets/og-image.png?v=7">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/">
+  <link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/">
+  <link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/masterclass-prerequisites/">
+  <link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/">
+  <link rel="icon" href="../../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../../assets/site.css?v=c14">
+  <script src="../../../assets/site-chrome.js?v=22" defer></script>
+</head>
+<body data-section="resources">
+
+<header class="site-header" data-site-header>
+  <div class="wrap">
+    <a class="brand" href="../../../ja/"><img class="brand-mark" src="../../../assets/liferay-mark-white.png" alt="" width="30" height="30"><span class="brand-name">Liferay Community APAC</span></a>
+  </div>
+</header>
+
+<main data-pagefind-body>
+  <section class="hero page">
+    <div class="wrap">
+      <div>
+        <p class="crumbs"><a href="../../../ja/">ホーム</a><span>/</span><a href="../">リソース</a><span>/</span>Liferay Masterclass の事前準備</p>
+        <p class="eyebrow">ワークショップ</p>
+        <h1>Liferay Masterclass の事前準備</h1>
+        <p class="lead">ワークショップの前に、パソコン、ツール、アカウントを 6 つのステップで準備しましょう。完了した項目にチェックを入れてください。進捗はこのブラウザーに保存されます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mc">
+    <div class="wrap mc-layout">
+      <aside class="mc-side">
+        <div class="mc-progress" aria-live="polite">
+          <div class="mc-bar"><span style="width:0%"></span></div>
+          <p><strong class="mc-done">0</strong> / <span class="mc-total">0</span> 完了</p>
+        </div>
+        <nav aria-label="ステップ">
+          <ol class="mc-toc"><li><a href="#computer">パソコンを準備する</a></li><li><a href="#tools">ツールをインストールする</a></li><li><a href="#accounts">アカウントを作成する</a></li><li><a href="#invitations">招待を承認する</a></li><li><a href="#workbook">ワークブックを開く</a></li><li><a href="#check">AI アシスタントで確認する</a></li></ol>
+        </nav>
+        <button type="button" class="mc-reset">チェックをすべて外す</button>
+      </aside>
+      <div class="mc-main">
+      <section class="mc-step" id="computer" aria-labelledby="computer-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">1</span>
+          <div>
+            <h2 id="computer-h">パソコンを準備する</h2>
+            <p>Liferay 公式の<a href="https://www.liferay.com/classroom-training/classroom-prerequisites">クラスルームトレーニングの事前準備</a>（英語）に従ってください。以下の各項目のインストール方法と確認方法が説明されています。会場の Wi-Fi に頼らずに済むよう、出発前に済ませておきましょう。</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-git" data-key="git">
+            <div>
+              <label for="mc-git" class="check-title">Git</label>
+              <p>最近のバージョンであれば問題ありません。この手順では GitHub アカウントは不要です。</p>
+              <pre class="cmd"><code>git version</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-jdk" data-key="jdk">
+            <div>
+              <label for="mc-jdk" class="check-title">Java JDK 21</label>
+              <p>JRE ではなく JDK で、バージョン 21.x と表示されること。</p>
+              <pre class="cmd"><code>java -version</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-blade" data-key="blade">
+            <div>
+              <label for="mc-blade" class="check-title">Liferay Blade CLI</label>
+              <p>バージョン 6.0 以降。古い場合は <code>blade update</code> を実行してください。</p>
+              <pre class="cmd"><code>blade version</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-space" data-key="space">
+            <div>
+              <label for="mc-space" class="check-title">4 GB の空きメモリと 10 GB の空きディスク容量</label>
+              <p>ワークショップ中にパソコン上で Liferay DXP を実行するために必要です。</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-learn" data-key="learn">
+            <div>
+              <label for="mc-learn" class="check-title">推奨：Liferay Learn の Learning Path</label>
+              <p>事前に <a href="https://learn.liferay.com/">Liferay Learn</a> の該当する Learning Path を学習しておくと、ワークショップをよりスムーズに、より深く進められます。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="tools" aria-labelledby="tools-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">2</span>
+          <div>
+            <h2 id="tools-h">ツールをインストールする</h2>
+            <p>ワークショップでは、VS Code で Liferay Workspace を使い、AI アシスタントと一緒に作業します。VS Code をインストールしてから、利用できる AI アシスタントをインストールしてください。AI アシスタントは 1 つで十分で、いずれかにチェックを入れるとこのステップは完了します。</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-vscode" data-key="vscode">
+            <div>
+              <label for="mc-vscode" class="check-title"><a href="https://code.visualstudio.com/">Visual Studio Code</a></label>
+              <p>VS Code を使うと、Liferay Workspace での作業が簡単になります。</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-claude" data-key="claude" data-group="assistant">
+            <div>
+              <label for="mc-claude" class="check-title"><a href="https://code.claude.com/docs/en/vs-code">VS Code 用 Claude Code 拡張機能</a></label>
+              <p>拡張機能をインストールすると、VS Code の中ですぐに Claude を使えます。</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-codex" data-key="codex" data-group="assistant">
+            <div>
+              <label for="mc-codex" class="check-title"><a href="https://developers.openai.com/codex/ide">VS Code 用 OpenAI Codex 拡張機能</a></label>
+              <p>OpenAI のコーディングエージェント Codex は ChatGPT のプランに含まれています。拡張機能には ChatGPT のアカウントでサインインしてください。</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-copilot" data-key="copilot" data-group="assistant">
+            <div>
+              <label for="mc-copilot" class="check-title"><a href="https://code.visualstudio.com/docs/copilot/setup">VS Code の GitHub Copilot</a></label>
+              <p>Copilot を利用できる GitHub アカウントで VS Code にサインインしてください。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="accounts" aria-labelledby="accounts-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">3</span>
+          <div>
+            <h2 id="accounts-h">アカウントを作成する</h2>
+            <p>ワークショップに登録したメールアドレスで登録してください。</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-ngrok" data-key="ngrok">
+            <div>
+              <label for="mc-ngrok" class="check-title"><a href="https://ngrok.com/">ngrok</a> アカウント</label>
+              <p>AI Hub と LDP は、公開 URL からお使いの Liferay DXP にアクセスする必要があり、ngrok がその URL を提供します。Liferay Enablement の ngrok アカウントに追加できるよう、ご自身のメールアドレスでアカウントを作成してください。</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-marketplace" data-key="marketplace">
+            <div>
+              <label for="mc-marketplace" class="check-title"><a href="https://marketplace.liferay.com/">Liferay Marketplace</a> アカウント</label>
+              <p>CMP/DSR の新しい製品ライセンスファイルをダウンロードするために必要です。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="invitations" aria-labelledby="invitations-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">4</span>
+          <div>
+            <h2 id="invitations-h">招待を承認する</h2>
+            <p>ワークショップの前に、以下の招待が届きます。届いたらそれぞれ承認してください。届かない場合は迷惑メールフォルダーも確認してください。</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-aihub" data-key="aihub">
+            <div>
+              <label for="mc-aihub" class="check-title"><a href="http://ai.hub.liferay.com/">AI Hub</a> アカウント</label>
+              <p>トレーニング用の AI Hub への招待です。</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-ldp" data-key="ldp">
+            <div>
+              <label for="mc-ldp" class="check-title"><a href="https://ldp-internal.liferay.com/">LDP ワークスペース</a>へのアクセス</label>
+              <p>トレーニング用の LDP ワークスペースへの招待です。</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-github" data-key="github">
+            <div>
+              <label for="mc-github" class="check-title">GitHub の<a href="https://github.com/liferay/liferay-course-masterclass">ワークショップ用リポジトリ</a></label>
+              <p>テストするワークブックとその参考資料が入ったリポジトリへの招待です。承認するまでは、リンクを開くと「Page not found」と表示されます。承認したら、クローンしてください：</p>
+              <pre class="cmd"><code>git clone https://github.com/liferay/liferay-course-masterclass.git</code></pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="workbook" aria-labelledby="workbook-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">5</span>
+          <div>
+            <h2 id="workbook-h">ワークブックを開く</h2>
+            <p>ワークブックは、ワークショップ中に進めるステップごとのガイドです。</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-workbook" data-key="workbook">
+            <div>
+              <label for="mc-workbook" class="check-title"><a href="https://github.com/liferay/liferay-course-masterclass/blob/master/context-source/liferay-skills-learning-path.html">ワークブック</a></label>
+              <p>ワークショップ用リポジトリの <code>context-source/liferay-skills-learning-path.html</code> にあります。クローンしたフォルダーから開くか、アクセスできるようになったら GitHub 上で開いてください。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="check" aria-labelledby="check-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">6</span>
+          <div>
+            <h2 id="check-h">AI アシスタントですべてを確認する</h2>
+            <p>ステップ 2 でインストールした AI アシスタントに、準備ができているか確認してもらいましょう。ターミナルで確認を実行し、合格した項目と修正が必要な項目を教えてくれます。</p>
+          </div>
+        </div>
+        <ol class="mc-howto">
+          <li>VS Code で、クローンしたワークショップ用リポジトリのフォルダーを開きます（<em>File</em> → <em>Open Folder</em>）。</li>
+          <li>AI アシスタントのチャットを開きます：
+            <ul>
+              <li><strong>Claude Code:</strong> Claude のアイコンをクリックするか、コマンドパレットから <em>Claude Code: Open</em> を実行します。</li>
+              <li><strong>OpenAI Codex:</strong> サイドバーの Codex アイコンをクリックします。</li>
+              <li><strong>GitHub Copilot:</strong> チャットビューを開き、モードを <em>Agent</em> に切り替えます（Copilot がコマンドを実行できるようになります）。</li>
+            </ul>
+          </li>
+          <li>下のプロンプトをコピーしてチャットに貼り付け、送信します。アシスタントがコマンドの実行を求めたら許可してください。確認は情報を読み取るだけです。</li>
+        </ol>
+        <div class="mc-prompt">
+          <div class="mc-prompt-head"><span>プロンプト</span><button type="button" class="mc-copy" data-copy="mc-prompt-text" data-label="コピー" data-copied="コピーしました" data-fail="選択してコピー">コピー</button></div>
+          <pre id="mc-prompt-text">Liferay Masterclass に向けて、私のパソコンの準備ができているか確認してください。ターミナルで確認を 1 つずつ実行してください。何もインストールや変更をしないでください。
+
+1. Git：`git version` を実行。Git がインストールされていれば PASS。
+2. Java：`java -version` と `javac -version` を実行。どちらもバージョン 21.x（JRE ではなく JDK）なら PASS。
+3. Blade：`blade version` を実行。6.0 以降なら PASS。
+4. メモリ：空きメモリを確認。4 GB 以上あれば PASS。
+5. ディスク：ホームフォルダーがあるドライブの空き容量を確認。10 GB 以上あれば PASS。
+6. ワークショップ用リポジトリ：github.com/liferay/liferay-course-masterclass のクローンを（開いているフォルダーかホームフォルダーで）探す。存在し、context-source/liferay-skills-learning-path.html が含まれていれば PASS。
+7. ngrok：`ngrok version` と `ngrok config check` を実行。ngrok がインストールされ、認証トークンが設定されていれば PASS、そうでなければ WARN。
+
+結果を「確認項目」「結果」（PASS、WARN、FAIL）「詳細」の列の表で、日本語で示してください。PASS でない項目は、修正方法を教えてください。
+
+最後に、あなたが確認できないため私が自分で確認すべきこと（Liferay Marketplace のアカウント、AI Hub・LDP ワークスペース・GitHub の招待）を一覧にしてください。</pre>
+        </div>
+        <figure class="mc-shot">
+          <img src="../../../assets/resources/masterclass-check-example-ja.png" alt="例：VS Code の AI アシスタントのチャットに、Git、Java、Blade、メモリ、ディスク、ワークショップ用リポジトリ、ngrok がすべて PASS と表示された表があり、その後にご自身で確認するアカウントと招待の一覧が続きます。" width="1280" height="800" loading="lazy">
+          <figcaption>すべて準備ができている場合の結果の例です。表現、バージョン、レイアウトはアシスタントやパソコンによって異なります。</figcaption>
+        </figure>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="mc-check" data-key="check">
+            <div>
+              <label for="mc-check" class="check-title">すべての確認が PASS</label>
+              <p>下の確認を実行し、FAIL や WARN の項目を修正して、すべて合格するまで再実行します。最後に、表示されたアカウントと招待をご自身で確認してください。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+        <div class="mc-ready" hidden>
+          <strong>準備完了です。</strong>ワークショップでお会いしましょう。
+        </div>
+        <p class="mc-help">うまくいかない場合や、招待が届かない場合は、ワークショップの主催者にご連絡いただくか、<a href="../../../ja/get-help/">サポート</a>をご覧ください。</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Checklist: progress is kept in this browser only.
+    (function () {
+      var KEY = 'lca-masterclass-checklist';
+      var boxes = [].slice.call(document.querySelectorAll('.checklist input[type=checkbox]'));
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+      // Items in a group (data-group, such as the AI assistants: you need one) count once, done when any is ticked.
+      function units(list) {
+        var seen = {}, total = 0, done = 0;
+        list.forEach(function (b) {
+          var g = b.dataset.group;
+          if (!g) { total++; if (b.checked) done++; return; }
+          if (!(g in seen)) { seen[g] = false; total++; }
+          if (b.checked && !seen[g]) { seen[g] = true; done++; }
+        });
+        return { total: total, done: done };
+      }
+      function update() {
+        var u = units(boxes);
+        document.querySelector('.mc-done').textContent = u.done;
+        document.querySelector('.mc-total').textContent = u.total;
+        document.querySelector('.mc-bar span').style.width = Math.round(u.done / u.total * 100) + '%';
+        document.querySelector('.mc-ready').hidden = u.done !== u.total;
+        [].forEach.call(document.querySelectorAll('.mc-step'), function (s) {
+          var su = units([].slice.call(s.querySelectorAll('input[type=checkbox]')));
+          s.classList.toggle('complete', su.total > 0 && su.done === su.total);
+        });
+      }
+      boxes.forEach(function (b) {
+        b.checked = !!saved[b.dataset.key];
+        b.addEventListener('change', function () {
+          saved[b.dataset.key] = b.checked;
+          try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+          update();
+        });
+      });
+      document.querySelector('.mc-reset').addEventListener('click', function () {
+        saved = {}; boxes.forEach(function (b) { b.checked = false; });
+        try { localStorage.removeItem(KEY); } catch (e) {}
+        update();
+      });
+      update();
+      [].forEach.call(document.querySelectorAll('.mc-copy'), function (btn) {
+        btn.addEventListener('click', function () {
+          var text = document.getElementById(btn.dataset.copy).textContent;
+          function done(ok) { btn.textContent = ok ? btn.dataset.copied : btn.dataset.fail; setTimeout(function () { btn.textContent = btn.dataset.label; }, 2000); }
+          if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+          else done(false);
+        });
+      });
+    })();
+  </script>
+</main>
+
+<footer class="site-footer" data-site-footer>
+  <p class="wrap disclaimer">本サイトのチュートリアル、サンプルコード、ガイドは非公式のものであり、現状のまま提供されます。ご利用は自己責任でお願いします。</p>
+</footer>
+
+</body>
+</html>

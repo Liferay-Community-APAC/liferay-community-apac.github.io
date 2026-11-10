@@ -51,7 +51,7 @@
       home: 'ja/', brandName: 'Liferay Community APAC', navLabel: 'メイン',
       nav: [['marketplace-apps', 'ja/marketplace-apps/', 'Marketplace アプリ'], ['solution-recipes', 'solution-recipes/', 'レシピ'],
             ['tutorials', 'ja/tutorials/', 'チュートリアル'], ['community', 'ja/community/', 'コミュニティ'],
-            ['resources', 'resources/', 'リソース'], ['get-help', 'ja/get-help/', 'サポート']],
+            ['resources', 'ja/resources/', 'リソース'], ['get-help', 'ja/get-help/', 'サポート']],
       contact: 'お問い合わせ',
       langLabel: '言語', menu: 'メニュー', search: '検索', searchTitle: 'サイト内を検索', close: '閉じる',
       searchUnavailable: '検索はサイトの公開後に利用できます。',
@@ -65,7 +65,7 @@
       home: 'zh/', brandName: 'Liferay Community APAC', navLabel: '主导航',
       nav: [['marketplace-apps', 'zh/marketplace-apps/', 'Marketplace 应用'], ['solution-recipes', 'solution-recipes/', '实践方案'],
             ['tutorials', 'zh/tutorials/', '教程与工具'], ['community', 'zh/community/', '社区'],
-            ['resources', 'resources/', '资源'], ['get-help', 'zh/get-help/', '获取帮助']],
+            ['resources', 'zh/resources/', '资源'], ['get-help', 'zh/get-help/', '获取帮助']],
       contact: '联系我们',
       langLabel: '语言', menu: '菜单', search: '搜索', searchTitle: '搜索本站', close: '关闭',
       searchUnavailable: '网站发布后即可使用搜索。',
@@ -79,7 +79,7 @@
       home: 'id/', brandName: 'Liferay Community APAC', navLabel: 'Utama',
       nav: [['marketplace-apps', 'id/marketplace-apps/', 'Marketplace App'], ['solution-recipes', 'solution-recipes/', 'Solution Recipes'],
             ['tutorials', 'id/tutorials/', 'Tutorial & Alat'], ['community', 'id/community/', 'Komunitas'],
-            ['resources', 'resources/', 'Sumber daya'], ['get-help', 'id/get-help/', 'Bantuan']],
+            ['resources', 'id/resources/', 'Sumber daya'], ['get-help', 'id/get-help/', 'Bantuan']],
       contact: 'Kontak',
       langLabel: 'Bahasa', menu: 'Menu', search: 'Cari', searchTitle: 'Cari di situs ini', close: 'Tutup',
       searchUnavailable: 'Pencarian tersedia setelah situs diterbitkan.',
@@ -125,7 +125,7 @@
     if (b.hasAttribute('data-kb-page')) return location.pathname.indexOf('/solution-recipes/') !== -1 ? 'solution-recipes' : 'marketplace-apps';
     return '';
   }
-  var SECTION_PAGES = { 'marketplace-apps': 1, tutorials: 1, community: 1, 'get-help': 1 }; // sections with a page in every language
+  var SECTION_PAGES = { 'marketplace-apps': 1, tutorials: 1, community: 1, 'get-help': 1, resources: 1 }; // sections with a page in every language
 
   // The same page in another language: the page's own <link rel="alternate" hreflang> if it has one,
   // otherwise that language's page for the same section (from an English-only page, such as an app's docs).

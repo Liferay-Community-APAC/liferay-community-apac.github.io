@@ -183,9 +183,73 @@
   <url>
     <loc>https://liferay-community-apac.github.io/resources/</loc>
     <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/ja/resources/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/zh/resources/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/resources/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/"/>
   </url>
   <url>
     <loc>https://liferay-community-apac.github.io/resources/masterclass-prerequisites/</loc>
     <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/resources/masterclass-prerequisites/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/masterclass-prerequisites/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
   </url>
 </urlset>

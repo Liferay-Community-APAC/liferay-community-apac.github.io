@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Liferay Masterclass prerequisites · Liferay Community APAC</title>
-  <meta name="description" content="Get ready for the Liferay Masterclass: prepare your computer, install VS Code and Claude Code, create your ngrok and Liferay Marketplace accounts, accept your AI Hub, LDP and GitHub invitations, and open the workbook.">
+  <meta name="description" content="Get ready for the Liferay Masterclass: prepare your computer, install VS Code and an AI assistant, create your ngrok and Liferay Marketplace accounts, accept your AI Hub, LDP and GitHub invitations, open the workbook, and check it all with your AI assistant.">
   <meta property="og:title" content="Liferay Masterclass prerequisites · Liferay Community APAC">
-  <meta property="og:description" content="Get ready for the Liferay Masterclass: prepare your computer, install VS Code and Claude Code, create your ngrok and Liferay Marketplace accounts, accept your AI Hub, LDP and GitHub invitations, and open the workbook.">
+  <meta property="og:description" content="Get ready for the Liferay Masterclass: prepare your computer, install VS Code and an AI assistant, create your ngrok and Liferay Marketplace accounts, accept your AI Hub, LDP and GitHub invitations, open the workbook, and check it all with your AI assistant.">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/">
   <meta property="og:url" content="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/">
@@ -14,13 +14,18 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://liferay-community-apac.github.io/assets/og-image.png?v=7">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/">
+  <link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/">
+  <link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/masterclass-prerequisites/">
+  <link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/">
   <link rel="icon" href="../../assets/liferay-mark.png" type="image/png">
   <link rel="apple-touch-icon" href="../../assets/liferay-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../assets/site.css?v=c13">
-  <script src="../../assets/site-chrome.js?v=21" defer></script>
+  <link rel="stylesheet" href="../../assets/site.css?v=c14">
+  <script src="../../assets/site-chrome.js?v=22" defer></script>
 </head>
 <body data-section="resources">
 
@@ -244,7 +249,7 @@
           <li>Copy the prompt below, paste it into the chat and send it. When the assistant asks to run a command, allow it: the checks only read information.</li>
         </ol>
         <div class="mc-prompt">
-          <div class="mc-prompt-head"><span>Prompt</span><button type="button" class="mc-copy" data-copy="mc-prompt-text">Copy</button></div>
+          <div class="mc-prompt-head"><span>Prompt</span><button type="button" class="mc-copy" data-copy="mc-prompt-text" data-label="Copy" data-copied="Copied" data-fail="Select and copy">Copy</button></div>
           <pre id="mc-prompt-text">Check that my computer is ready for the Liferay Masterclass. Run each check in the terminal, one at a time. Don&#x27;t install or change anything.
 
 1. Git: run `git version`. PASS if Git is installed.
@@ -260,7 +265,7 @@ Then show the results as a table with the columns Check, Result (PASS, WARN or F
 Finally, list what I need to confirm myself, because you can&#x27;t check it: my Liferay Marketplace account, and my AI Hub, LDP workspace and GitHub invitations.</pre>
         </div>
         <figure class="mc-shot">
-          <img src="../../assets/resources/masterclass-check-example.png" alt="Example: the AI assistant's chat in VS Code shows a table where Git, Java, Blade, memory, disk, the workshop repository and ngrok all show PASS, followed by the accounts and invitations to confirm yourself." width="1280" height="800" loading="lazy">
+          <img src="../../assets/resources/masterclass-check-example.png" alt="Example: the AI assistant&#x27;s chat in VS Code shows a table where Git, Java, Blade, memory, disk, the workshop repository and ngrok all show PASS, followed by the accounts and invitations to confirm yourself." width="1280" height="800" loading="lazy">
           <figcaption>Example of the result when everything is ready. The wording, versions and layout differ by assistant and computer.</figcaption>
         </figure>
         <ul class="checklist">
@@ -328,7 +333,7 @@ Finally, list what I need to confirm myself, because you can&#x27;t check it: my
       [].forEach.call(document.querySelectorAll('.mc-copy'), function (btn) {
         btn.addEventListener('click', function () {
           var text = document.getElementById(btn.dataset.copy).textContent;
-          function done(ok) { btn.textContent = ok ? 'Copied' : 'Select and copy'; setTimeout(function () { btn.textContent = 'Copy'; }, 2000); }
+          function done(ok) { btn.textContent = ok ? btn.dataset.copied : btn.dataset.fail; setTimeout(function () { btn.textContent = btn.dataset.label; }, 2000); }
           if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
           else done(false);
         });
@@ -338,7 +343,7 @@ Finally, list what I need to confirm myself, because you can&#x27;t check it: my
 </main>
 
 <footer class="site-footer" data-site-footer>
-  <p class="wrap disclaimer">Marketplace Apps, tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+  <p class="wrap disclaimer">Tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
 </footer>
 
 </body>
