@@ -110,7 +110,7 @@
           <span class="mc-num" aria-hidden="true">2</span>
           <div>
             <h2 id="tools-h">Install your tools</h2>
-            <p>You'll work in your Liferay Workspace with an AI assistant at your side.</p>
+            <p>You'll work in your Liferay Workspace in VS Code, with an AI assistant at your side. Install VS Code, then the AI assistant you have access to: one is enough, and ticking it completes this step.</p>
           </div>
         </div>
         <ul class="checklist">
@@ -122,10 +122,31 @@
             </div>
           </li>
           <li class="check-item">
-            <input type="checkbox" id="mc-claude" data-key="claude">
+            <input type="checkbox" id="mc-claude" data-key="claude" data-group="assistant">
             <div>
               <label for="mc-claude" class="check-title"><a href="https://code.claude.com/docs/en/vs-code">Claude Code extension for VS Code</a></label>
               <p>With the extension installed, you've got Claude at your fingertips in VS Code.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-codex" data-key="codex" data-group="assistant">
+            <div>
+              <label for="mc-codex" class="check-title"><a href="https://developers.openai.com/codex/ide">OpenAI Codex extension for VS Code</a></label>
+              <p>Codex, OpenAI's coding agent, in VS Code. Sign in with your ChatGPT account.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-copilot" data-key="copilot" data-group="assistant">
+            <div>
+              <label for="mc-copilot" class="check-title"><a href="https://code.visualstudio.com/docs/copilot/setup">GitHub Copilot in VS Code</a></label>
+              <p>Sign in to VS Code with the GitHub account that has your Copilot access.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="mc-chatgpt" data-key="chatgpt" data-group="assistant">
+            <div>
+              <label for="mc-chatgpt" class="check-title"><a href="https://chatgpt.com/download">ChatGPT</a></label>
+              <p>The ChatGPT app, for questions alongside your work. Use the Codex extension above for work in your Liferay Workspace.</p>
             </div>
           </li>
         </ul>
@@ -225,15 +246,26 @@
       var boxes = [].slice.call(document.querySelectorAll('.checklist input[type=checkbox]'));
       var saved = {};
       try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+      // Items in a group (data-group, such as the AI assistants: you need one) count once, done when any is ticked.
+      function units(list) {
+        var seen = {}, total = 0, done = 0;
+        list.forEach(function (b) {
+          var g = b.dataset.group;
+          if (!g) { total++; if (b.checked) done++; return; }
+          if (!(g in seen)) { seen[g] = false; total++; }
+          if (b.checked && !seen[g]) { seen[g] = true; done++; }
+        });
+        return { total: total, done: done };
+      }
       function update() {
-        var done = boxes.filter(function (b) { return b.checked; }).length;
-        document.querySelector('.mc-done').textContent = done;
-        document.querySelector('.mc-total').textContent = boxes.length;
-        document.querySelector('.mc-bar span').style.width = Math.round(done / boxes.length * 100) + '%';
-        document.querySelector('.mc-ready').hidden = done !== boxes.length;
+        var u = units(boxes);
+        document.querySelector('.mc-done').textContent = u.done;
+        document.querySelector('.mc-total').textContent = u.total;
+        document.querySelector('.mc-bar span').style.width = Math.round(u.done / u.total * 100) + '%';
+        document.querySelector('.mc-ready').hidden = u.done !== u.total;
         [].forEach.call(document.querySelectorAll('.mc-step'), function (s) {
-          var b = s.querySelectorAll('input[type=checkbox]'), c = s.querySelectorAll('input:checked');
-          s.classList.toggle('complete', b.length > 0 && b.length === c.length);
+          var su = units([].slice.call(s.querySelectorAll('input[type=checkbox]')));
+          s.classList.toggle('complete', su.total > 0 && su.done === su.total);
         });
       }
       boxes.forEach(function (b) {
