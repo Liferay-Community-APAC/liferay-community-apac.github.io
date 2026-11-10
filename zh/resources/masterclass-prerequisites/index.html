@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../assets/site.css?v=c14">
+  <link rel="stylesheet" href="../../../assets/site.css?v=c15">
   <script src="../../../assets/site-chrome.js?v=22" defer></script>
 </head>
 <body data-section="resources">
@@ -65,16 +65,26 @@
           <span class="mc-num" aria-hidden="true">1</span>
           <div>
             <h2 id="computer-h">准备电脑</h2>
-            <p>请按照 Liferay 官方的<a href="https://www.liferay.com/classroom-training/classroom-prerequisites">课堂培训准备事项</a>（英文）操作，其中说明了如何安装和检查以下各项。请在出发前完成，以免依赖会场的 Wi-Fi。</p>
+            <p>请安装并检查以下各项。请在出发前完成，以免依赖会场的 Wi-Fi。请在终端中运行命令：Mac 或 Linux 上使用“终端”，Windows 上使用命令提示符或 PowerShell。</p>
           </div>
         </div>
+        <p class="mc-source">依据 Liferay 的<a href="https://www.liferay.com/classroom-training/classroom-prerequisites">课堂培训准备事项</a>（英文）。</p>
         <ul class="checklist">
           <li class="check-item">
             <input type="checkbox" id="mc-git" data-key="git">
             <div>
               <label for="mc-git" class="check-title">Git</label>
               <p>任意较新版本即可。这一步不需要 GitHub 账户。</p>
+              <details class="howto">
+                <summary>安装方法</summary>
+                <div class="os"><h4>Windows</h4><p>从 <a href="https://git-scm.com/downloads/win">git-scm.com</a> 安装 Git for Windows，或运行下面的命令。安装时，请选择可从命令行及第三方软件中使用 Git。</p><pre class="cmd"><code>winget install --id Git.Git -e</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>运行下面的命令，在 macOS 提示时点击<em>安装</em>。如果使用 Homebrew，也可以运行 <code>brew install git</code>。</p><pre class="cmd"><code>xcode-select --install</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>Ubuntu 或 Debian：</p><pre class="cmd"><code>sudo apt install git</code></pre></div>
+              </details>
+              <p class="check-label">检查</p>
               <pre class="cmd"><code>git version</code></pre>
+              <p class="expect">应该看到类似以下内容：</p>
+              <pre class="cmd out"><code>git version 2.44.0</code></pre>
             </div>
           </li>
           <li class="check-item">
@@ -82,22 +92,43 @@
             <div>
               <label for="mc-jdk" class="check-title">Java JDK 21</label>
               <p>需要 JDK（不仅是 JRE），版本显示为 21.x。</p>
-              <pre class="cmd"><code>java -version</code></pre>
+              <details class="howto">
+                <summary>安装方法</summary>
+                <div class="os"><h4>Windows</h4><p>安装 Microsoft Build of OpenJDK 21：</p><pre class="cmd"><code>winget install Microsoft.OpenJDK.21</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>使用 Homebrew：</p><pre class="cmd"><code>brew install --cask microsoft-openjdk@21</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>Ubuntu 或 Debian：</p><pre class="cmd"><code>sudo apt install openjdk-21-jdk</code></pre></div><p class="note">想使用 ZIP 或 TAR.GZ？从 <a href="https://learn.microsoft.com/en-us/java/openjdk/download#openjdk-21">Microsoft</a> 下载 OpenJDK 21，解压到任意文件夹，并将环境变量 <code>JAVA_HOME</code> 设置为该文件夹，然后打开新的终端。如果 <code>java -version</code> 显示其他版本，请将 <code>JAVA_HOME</code> 设置为 JDK 21 文件夹，并把它的 <code>bin</code> 文件夹放在 <code>PATH</code> 的最前面。</p>
+              </details>
+              <p class="check-label">检查</p>
+              <pre class="cmd"><code>java -version
+javac -version</code></pre>
+              <p class="expect">应该看到类似以下内容：</p>
+              <pre class="cmd out"><code>openjdk version "21.0.5" 2024-10-15 LTS
+OpenJDK Runtime Environment Microsoft-10377968 (build 21.0.5+11-LTS)
+OpenJDK 64-Bit Server VM Microsoft-10377968 (build 21.0.5+11-LTS, mixed mode, sharing)
+javac 21.0.5</code></pre>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="mc-blade" data-key="blade">
             <div>
               <label for="mc-blade" class="check-title">Liferay Blade CLI</label>
-              <p>6.0 或更高版本。如果版本较旧，请运行 <code>blade update</code>。</p>
+              <p>7.0 或更高版本（在 JDK 21 上使用 Liferay DXP 所需）。请先安装 JDK。</p>
+              <details class="howto">
+                <summary>安装方法</summary>
+                <div class="os"><h4>macOS 和 Linux</h4><p>运行下面的命令。显示“Blade installed successfully”后，打开新的终端。如果找不到 <code>blade</code>，请将安装程序显示的文件夹添加到 <code>PATH</code>。</p><pre class="cmd"><code>curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh</code></pre></div>
+                <div class="os"><h4>Windows</h4><p>下载并运行 <a href="https://github.com/liferay/liferay-ide/releases/">Liferay Project SDK 安装程序</a>：它会自动检测 Java，并将 <code>blade</code> 添加到 <code>PATH</code>。如果使用 Git Bash，也可以运行 macOS 和 Linux 的命令。</p></div><p class="note">如果版本低于 7.0，请更新：</p><pre class="cmd"><code>blade update</code></pre>
+              </details>
+              <p class="check-label">检查</p>
               <pre class="cmd"><code>blade version</code></pre>
+              <p class="expect">应该看到类似以下内容：</p>
+              <pre class="cmd out"><code>blade version 7.0.3</code></pre>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="mc-space" data-key="space">
             <div>
               <label for="mc-space" class="check-title">4 GB 可用内存和 10 GB 可用磁盘空间</label>
-              <p>足以在研讨会期间在您的电脑上运行 Liferay DXP。</p>
+              <p>足以在研讨会期间在您的电脑上运行 Liferay DXP。当天请关闭其他占用资源较多的应用程序。</p>
             </div>
           </li>
           <li class="check-item">
@@ -254,7 +285,7 @@
 
 1. Git：运行 `git version`。已安装 Git 则为 PASS。
 2. Java：运行 `java -version` 和 `javac -version`。两者都显示 21.x 版本（是 JDK，而不只是 JRE）则为 PASS。
-3. Blade：运行 `blade version`。6.0 或更高版本则为 PASS。
+3. Blade：运行 `blade version`。7.0 或更高版本则为 PASS。
 4. 内存：检查可用内存。至少 4 GB 可用则为 PASS。
 5. 磁盘：检查我的主文件夹所在驱动器的可用空间。至少 10 GB 可用则为 PASS。
 6. 研讨会代码库：在打开的文件夹或我的主文件夹中查找 github.com/liferay/liferay-course-masterclass 的克隆。存在且包含 context-source/liferay-skills-learning-path.html 则为 PASS。

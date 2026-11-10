@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../assets/site.css?v=c14">
+  <link rel="stylesheet" href="../../../assets/site.css?v=c15">
   <script src="../../../assets/site-chrome.js?v=22" defer></script>
 </head>
 <body data-section="resources">
@@ -65,16 +65,26 @@
           <span class="mc-num" aria-hidden="true">1</span>
           <div>
             <h2 id="computer-h">パソコンを準備する</h2>
-            <p>Liferay 公式の<a href="https://www.liferay.com/classroom-training/classroom-prerequisites">クラスルームトレーニングの事前準備</a>（英語）に従ってください。以下の各項目のインストール方法と確認方法が説明されています。会場の Wi-Fi に頼らずに済むよう、出発前に済ませておきましょう。</p>
+            <p>以下の各項目をインストールして確認してください。会場の Wi-Fi に頼らずに済むよう、出発前に済ませておきましょう。コマンドはターミナルで実行します（Mac や Linux ではターミナル、Windows ではコマンドプロンプトまたは PowerShell）。</p>
           </div>
         </div>
+        <p class="mc-source">Liferay の<a href="https://www.liferay.com/classroom-training/classroom-prerequisites">クラスルームトレーニングの事前準備</a>（英語）に基づいています。</p>
         <ul class="checklist">
           <li class="check-item">
             <input type="checkbox" id="mc-git" data-key="git">
             <div>
               <label for="mc-git" class="check-title">Git</label>
               <p>最近のバージョンであれば問題ありません。この手順では GitHub アカウントは不要です。</p>
+              <details class="howto">
+                <summary>インストール方法</summary>
+                <div class="os"><h4>Windows</h4><p><a href="https://git-scm.com/downloads/win">git-scm.com</a> から Git for Windows をインストールするか、下のコマンドを実行します。セットアップでは、コマンドラインとサードパーティのソフトウェアの両方から Git を使う設定を選んでください。</p><pre class="cmd"><code>winget install --id Git.Git -e</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>下のコマンドを実行し、macOS に聞かれたら<em>インストール</em>をクリックします。Homebrew を使っている場合は <code>brew install git</code> でも構いません。</p><pre class="cmd"><code>xcode-select --install</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>Ubuntu または Debian の場合：</p><pre class="cmd"><code>sudo apt install git</code></pre></div>
+              </details>
+              <p class="check-label">確認する</p>
               <pre class="cmd"><code>git version</code></pre>
+              <p class="expect">次のように表示されれば OK です：</p>
+              <pre class="cmd out"><code>git version 2.44.0</code></pre>
             </div>
           </li>
           <li class="check-item">
@@ -82,22 +92,43 @@
             <div>
               <label for="mc-jdk" class="check-title">Java JDK 21</label>
               <p>JRE ではなく JDK で、バージョン 21.x と表示されること。</p>
-              <pre class="cmd"><code>java -version</code></pre>
+              <details class="howto">
+                <summary>インストール方法</summary>
+                <div class="os"><h4>Windows</h4><p>Microsoft Build of OpenJDK 21 をインストールします：</p><pre class="cmd"><code>winget install Microsoft.OpenJDK.21</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>Homebrew の場合：</p><pre class="cmd"><code>brew install --cask microsoft-openjdk@21</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>Ubuntu または Debian の場合：</p><pre class="cmd"><code>sudo apt install openjdk-21-jdk</code></pre></div><p class="note">ZIP や TAR.GZ を使いたい場合は、<a href="https://learn.microsoft.com/en-us/java/openjdk/download#openjdk-21">Microsoft</a> から OpenJDK 21 をダウンロードして任意のフォルダーに展開し、環境変数 <code>JAVA_HOME</code> にそのフォルダーを設定します。その後、新しいターミナルを開いてください。<code>java -version</code> で別のバージョンが表示される場合は、<code>JAVA_HOME</code> に JDK 21 のフォルダーを設定し、その <code>bin</code> フォルダーを <code>PATH</code> の先頭に追加してください。</p>
+              </details>
+              <p class="check-label">確認する</p>
+              <pre class="cmd"><code>java -version
+javac -version</code></pre>
+              <p class="expect">次のように表示されれば OK です：</p>
+              <pre class="cmd out"><code>openjdk version "21.0.5" 2024-10-15 LTS
+OpenJDK Runtime Environment Microsoft-10377968 (build 21.0.5+11-LTS)
+OpenJDK 64-Bit Server VM Microsoft-10377968 (build 21.0.5+11-LTS, mixed mode, sharing)
+javac 21.0.5</code></pre>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="mc-blade" data-key="blade">
             <div>
               <label for="mc-blade" class="check-title">Liferay Blade CLI</label>
-              <p>バージョン 6.0 以降。古い場合は <code>blade update</code> を実行してください。</p>
+              <p>バージョン 7.0 以降（JDK 21 で Liferay DXP を使うために必要です）。先に JDK をインストールしてください。</p>
+              <details class="howto">
+                <summary>インストール方法</summary>
+                <div class="os"><h4>macOS と Linux</h4><p>下のコマンドを実行します。「Blade installed successfully」と表示されたら、新しいターミナルを開きます。<code>blade</code> が見つからない場合は、インストーラーが表示したフォルダーを <code>PATH</code> に追加してください。</p><pre class="cmd"><code>curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh</code></pre></div>
+                <div class="os"><h4>Windows</h4><p><a href="https://github.com/liferay/liferay-ide/releases/">Liferay Project SDK インストーラー</a>をダウンロードして実行します。Java を自動で検出し、<code>blade</code> を <code>PATH</code> に追加します。Git Bash を使っている場合は、macOS・Linux 用のコマンドも使えます。</p></div><p class="note">7.0 より古い場合は更新してください：</p><pre class="cmd"><code>blade update</code></pre>
+              </details>
+              <p class="check-label">確認する</p>
               <pre class="cmd"><code>blade version</code></pre>
+              <p class="expect">次のように表示されれば OK です：</p>
+              <pre class="cmd out"><code>blade version 7.0.3</code></pre>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="mc-space" data-key="space">
             <div>
               <label for="mc-space" class="check-title">4 GB の空きメモリと 10 GB の空きディスク容量</label>
-              <p>ワークショップ中にパソコン上で Liferay DXP を実行するために必要です。</p>
+              <p>ワークショップ中にパソコン上で Liferay DXP を実行するために必要です。当日は他の重いアプリケーションを閉じておきましょう。</p>
             </div>
           </li>
           <li class="check-item">
@@ -254,7 +285,7 @@
 
 1. Git：`git version` を実行。Git がインストールされていれば PASS。
 2. Java：`java -version` と `javac -version` を実行。どちらもバージョン 21.x（JRE ではなく JDK）なら PASS。
-3. Blade：`blade version` を実行。6.0 以降なら PASS。
+3. Blade：`blade version` を実行。7.0 以降なら PASS。
 4. メモリ：空きメモリを確認。4 GB 以上あれば PASS。
 5. ディスク：ホームフォルダーがあるドライブの空き容量を確認。10 GB 以上あれば PASS。
 6. ワークショップ用リポジトリ：github.com/liferay/liferay-course-masterclass のクローンを（開いているフォルダーかホームフォルダーで）探す。存在し、context-source/liferay-skills-learning-path.html が含まれていれば PASS。

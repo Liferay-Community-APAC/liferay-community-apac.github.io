@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../assets/site.css?v=c14">
+  <link rel="stylesheet" href="../../assets/site.css?v=c15">
   <script src="../../assets/site-chrome.js?v=22" defer></script>
 </head>
 <body data-section="resources">
@@ -65,16 +65,26 @@
           <span class="mc-num" aria-hidden="true">1</span>
           <div>
             <h2 id="computer-h">Prepare your computer</h2>
-            <p>Follow Liferay's official <a href="https://www.liferay.com/classroom-training/classroom-prerequisites">classroom training prerequisites</a>. They explain how to install and check each item below. Do this before you travel, so you don't depend on the venue's Wi-Fi.</p>
+            <p>Install and check each item below. Do this before you travel, so you don't depend on the venue's Wi-Fi. Run the commands in a terminal: the Terminal app on a Mac or Linux, or Command Prompt or PowerShell on Windows.</p>
           </div>
         </div>
+        <p class="mc-source">Based on Liferay's <a href="https://www.liferay.com/classroom-training/classroom-prerequisites">classroom training prerequisites</a>.</p>
         <ul class="checklist">
           <li class="check-item">
             <input type="checkbox" id="mc-git" data-key="git">
             <div>
               <label for="mc-git" class="check-title">Git</label>
               <p>Any recent version. You don't need a GitHub account for this part.</p>
+              <details class="howto">
+                <summary>How to install</summary>
+                <div class="os"><h4>Windows</h4><p>Install Git for Windows from <a href="https://git-scm.com/downloads/win">git-scm.com</a>, or run the command below. During setup, choose to use Git from the command line and also from third-party software.</p><pre class="cmd"><code>winget install --id Git.Git -e</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>Run the command below and click <em>Install</em> when macOS asks. With Homebrew, you can run <code>brew install git</code> instead.</p><pre class="cmd"><code>xcode-select --install</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>On Ubuntu or Debian:</p><pre class="cmd"><code>sudo apt install git</code></pre></div>
+              </details>
+              <p class="check-label">Check it</p>
               <pre class="cmd"><code>git version</code></pre>
+              <p class="expect">You should see something like:</p>
+              <pre class="cmd out"><code>git version 2.44.0</code></pre>
             </div>
           </li>
           <li class="check-item">
@@ -82,22 +92,43 @@
             <div>
               <label for="mc-jdk" class="check-title">Java JDK 21</label>
               <p>A JDK, not just a JRE, reporting a 21.x version.</p>
-              <pre class="cmd"><code>java -version</code></pre>
+              <details class="howto">
+                <summary>How to install</summary>
+                <div class="os"><h4>Windows</h4><p>Install Microsoft Build of OpenJDK 21:</p><pre class="cmd"><code>winget install Microsoft.OpenJDK.21</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>With Homebrew:</p><pre class="cmd"><code>brew install --cask microsoft-openjdk@21</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>On Ubuntu or Debian:</p><pre class="cmd"><code>sudo apt install openjdk-21-jdk</code></pre></div><p class="note">Prefer a ZIP or TAR.GZ? Download OpenJDK 21 from <a href="https://learn.microsoft.com/en-us/java/openjdk/download#openjdk-21">Microsoft</a>, extract it to a folder of your choice and set the <code>JAVA_HOME</code> environment variable to that folder. Open a new terminal afterwards. If <code>java -version</code> shows another version, set <code>JAVA_HOME</code> to your JDK 21 folder and put its <code>bin</code> folder first in your <code>PATH</code>.</p>
+              </details>
+              <p class="check-label">Check it</p>
+              <pre class="cmd"><code>java -version
+javac -version</code></pre>
+              <p class="expect">You should see something like:</p>
+              <pre class="cmd out"><code>openjdk version "21.0.5" 2024-10-15 LTS
+OpenJDK Runtime Environment Microsoft-10377968 (build 21.0.5+11-LTS)
+OpenJDK 64-Bit Server VM Microsoft-10377968 (build 21.0.5+11-LTS, mixed mode, sharing)
+javac 21.0.5</code></pre>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="mc-blade" data-key="blade">
             <div>
               <label for="mc-blade" class="check-title">Liferay Blade CLI</label>
-              <p>Version 6.0 or later. Run <code>blade update</code> if yours is older.</p>
+              <p>Version 7.0 or later, which Liferay DXP needs to work with JDK 21. Install the JDK first.</p>
+              <details class="howto">
+                <summary>How to install</summary>
+                <div class="os"><h4>macOS and Linux</h4><p>Run the command below. When it says Blade installed successfully, open a new terminal. If <code>blade</code> isn't found, add the folder the installer shows to your <code>PATH</code>.</p><pre class="cmd"><code>curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh</code></pre></div>
+                <div class="os"><h4>Windows</h4><p>Download and run the <a href="https://github.com/liferay/liferay-ide/releases/">Liferay Project SDK installer</a>: it detects your Java and adds <code>blade</code> to your <code>PATH</code>. If you use Git Bash, you can run the macOS and Linux command instead.</p></div><p class="note">If your version is older than 7.0, update it:</p><pre class="cmd"><code>blade update</code></pre>
+              </details>
+              <p class="check-label">Check it</p>
               <pre class="cmd"><code>blade version</code></pre>
+              <p class="expect">You should see something like:</p>
+              <pre class="cmd out"><code>blade version 7.0.3</code></pre>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="mc-space" data-key="space">
             <div>
               <label for="mc-space" class="check-title">4 GB of free memory and 10 GB of free disk space</label>
-              <p>Enough to run Liferay DXP on your computer during the workshop.</p>
+              <p>Enough to run Liferay DXP on your computer during the workshop. Close other heavy applications on the day.</p>
             </div>
           </li>
           <li class="check-item">
@@ -254,7 +285,7 @@
 
 1. Git: run `git version`. PASS if Git is installed.
 2. Java: run `java -version` and `javac -version`. PASS if both report version 21.x (a JDK, not just a JRE).
-3. Blade: run `blade version`. PASS if it&#x27;s 6.0 or later.
+3. Blade: run `blade version`. PASS if it&#x27;s 7.0 or later.
 4. Memory: check the free RAM. PASS if at least 4 GB is available.
 5. Disk: check the free space on the drive with my home folder. PASS if at least 10 GB is free.
 6. Workshop repository: find my clone of github.com/liferay/liferay-course-masterclass (in the open folder or my home folder). PASS if it exists and contains context-source/liferay-skills-learning-path.html.

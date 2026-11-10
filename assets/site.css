@@ -697,3 +697,17 @@ a.card.resource-link h3, a.card.resource-link p { margin: 0; }
 .mc-shot { margin: 0 0 14px; }
 .mc-shot img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(3, 15, 44, .12); }
 .mc-shot figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); }
+/* Masterclass step 1: install instructions per operating system, the check and the expected output */
+.howto { margin: 10px 0 0; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-alt); }
+.howto summary { cursor: pointer; padding: 8px 12px; font-weight: 600; color: var(--blue); }
+.howto[open] summary { border-bottom: 1px solid var(--border); }
+.howto .os { padding: 10px 12px 2px; }
+.howto .os + .os { border-top: 1px dashed var(--border); }
+.howto h4 { margin: 0 0 4px; font-size: 14px; color: var(--text); }
+.howto .os p, .howto .note { margin: 0 0 6px; }
+.howto .note { padding: 8px 12px; font-size: 14px; }
+.howto .cmd { margin: 0 0 10px; }
+.check-item .check-label { margin: 10px 0 0; font-size: 13px; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: .04em; }
+.check-item .expect { margin: 8px 0 0; font-size: 14px; }
+.cmd.out { background: #152238; color: #b9cbe8; white-space: pre-wrap; overflow-wrap: anywhere; }
+.mc-source { margin: -4px 0 12px; font-size: 14px; color: var(--muted); }

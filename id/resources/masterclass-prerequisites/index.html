@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../assets/site.css?v=c14">
+  <link rel="stylesheet" href="../../../assets/site.css?v=c15">
   <script src="../../../assets/site-chrome.js?v=22" defer></script>
 </head>
 <body data-section="resources">
@@ -65,16 +65,26 @@
           <span class="mc-num" aria-hidden="true">1</span>
           <div>
             <h2 id="computer-h">Siapkan komputer Anda</h2>
-            <p>Ikuti <a href="https://www.liferay.com/classroom-training/classroom-prerequisites">persiapan pelatihan kelas</a> resmi dari Liferay (bahasa Inggris). Di sana dijelaskan cara memasang dan memeriksa setiap item di bawah. Lakukan sebelum berangkat, agar tidak bergantung pada Wi-Fi di lokasi.</p>
+            <p>Pasang dan periksa setiap item di bawah. Lakukan sebelum berangkat, agar tidak bergantung pada Wi-Fi di lokasi. Jalankan perintah di terminal: aplikasi Terminal di Mac atau Linux, atau Command Prompt atau PowerShell di Windows.</p>
           </div>
         </div>
+        <p class="mc-source">Berdasarkan <a href="https://www.liferay.com/classroom-training/classroom-prerequisites">persiapan pelatihan kelas</a> dari Liferay (bahasa Inggris).</p>
         <ul class="checklist">
           <li class="check-item">
             <input type="checkbox" id="mc-git" data-key="git">
             <div>
               <label for="mc-git" class="check-title">Git</label>
               <p>Versi terbaru apa pun. Anda tidak memerlukan akun GitHub untuk bagian ini.</p>
+              <details class="howto">
+                <summary>Cara memasang</summary>
+                <div class="os"><h4>Windows</h4><p>Pasang Git for Windows dari <a href="https://git-scm.com/downloads/win">git-scm.com</a>, atau jalankan perintah di bawah. Saat instalasi, pilih untuk menggunakan Git dari command line dan juga dari perangkat lunak pihak ketiga.</p><pre class="cmd"><code>winget install --id Git.Git -e</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>Jalankan perintah di bawah dan klik <em>Install</em> saat macOS bertanya. Jika memakai Homebrew, Anda bisa menjalankan <code>brew install git</code>.</p><pre class="cmd"><code>xcode-select --install</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>Di Ubuntu atau Debian:</p><pre class="cmd"><code>sudo apt install git</code></pre></div>
+              </details>
+              <p class="check-label">Periksa</p>
               <pre class="cmd"><code>git version</code></pre>
+              <p class="expect">Anda akan melihat sesuatu seperti ini:</p>
+              <pre class="cmd out"><code>git version 2.44.0</code></pre>
             </div>
           </li>
           <li class="check-item">
@@ -82,22 +92,43 @@
             <div>
               <label for="mc-jdk" class="check-title">Java JDK 21</label>
               <p>JDK, bukan hanya JRE, dengan versi 21.x.</p>
-              <pre class="cmd"><code>java -version</code></pre>
+              <details class="howto">
+                <summary>Cara memasang</summary>
+                <div class="os"><h4>Windows</h4><p>Pasang Microsoft Build of OpenJDK 21:</p><pre class="cmd"><code>winget install Microsoft.OpenJDK.21</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>Dengan Homebrew:</p><pre class="cmd"><code>brew install --cask microsoft-openjdk@21</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>Di Ubuntu atau Debian:</p><pre class="cmd"><code>sudo apt install openjdk-21-jdk</code></pre></div><p class="note">Lebih suka ZIP atau TAR.GZ? Unduh OpenJDK 21 dari <a href="https://learn.microsoft.com/en-us/java/openjdk/download#openjdk-21">Microsoft</a>, ekstrak ke folder pilihan Anda, lalu atur variabel lingkungan <code>JAVA_HOME</code> ke folder tersebut. Buka terminal baru setelahnya. Jika <code>java -version</code> menunjukkan versi lain, atur <code>JAVA_HOME</code> ke folder JDK 21 dan letakkan folder <code>bin</code>-nya paling depan di <code>PATH</code>.</p>
+              </details>
+              <p class="check-label">Periksa</p>
+              <pre class="cmd"><code>java -version
+javac -version</code></pre>
+              <p class="expect">Anda akan melihat sesuatu seperti ini:</p>
+              <pre class="cmd out"><code>openjdk version "21.0.5" 2024-10-15 LTS
+OpenJDK Runtime Environment Microsoft-10377968 (build 21.0.5+11-LTS)
+OpenJDK 64-Bit Server VM Microsoft-10377968 (build 21.0.5+11-LTS, mixed mode, sharing)
+javac 21.0.5</code></pre>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="mc-blade" data-key="blade">
             <div>
               <label for="mc-blade" class="check-title">Liferay Blade CLI</label>
-              <p>Versi 6.0 atau yang lebih baru. Jalankan <code>blade update</code> jika versi Anda lebih lama.</p>
+              <p>Versi 7.0 atau yang lebih baru, yang diperlukan Liferay DXP untuk bekerja dengan JDK 21. Pasang JDK terlebih dahulu.</p>
+              <details class="howto">
+                <summary>Cara memasang</summary>
+                <div class="os"><h4>macOS dan Linux</h4><p>Jalankan perintah di bawah. Setelah muncul Blade installed successfully, buka terminal baru. Jika <code>blade</code> tidak ditemukan, tambahkan folder yang ditampilkan installer ke <code>PATH</code>.</p><pre class="cmd"><code>curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh</code></pre></div>
+                <div class="os"><h4>Windows</h4><p>Unduh dan jalankan <a href="https://github.com/liferay/liferay-ide/releases/">installer Liferay Project SDK</a>: installer akan mendeteksi Java Anda dan menambahkan <code>blade</code> ke <code>PATH</code>. Jika memakai Git Bash, Anda juga bisa menjalankan perintah untuk macOS dan Linux.</p></div><p class="note">Jika versi Anda lebih lama dari 7.0, perbarui:</p><pre class="cmd"><code>blade update</code></pre>
+              </details>
+              <p class="check-label">Periksa</p>
               <pre class="cmd"><code>blade version</code></pre>
+              <p class="expect">Anda akan melihat sesuatu seperti ini:</p>
+              <pre class="cmd out"><code>blade version 7.0.3</code></pre>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="mc-space" data-key="space">
             <div>
               <label for="mc-space" class="check-title">Memori kosong 4 GB dan ruang disk kosong 10 GB</label>
-              <p>Cukup untuk menjalankan Liferay DXP di komputer Anda selama workshop.</p>
+              <p>Cukup untuk menjalankan Liferay DXP di komputer Anda selama workshop. Tutup aplikasi berat lainnya pada hari pelaksanaan.</p>
             </div>
           </li>
           <li class="check-item">
@@ -254,7 +285,7 @@
 
 1. Git: jalankan `git version`. PASS jika Git terpasang.
 2. Java: jalankan `java -version` dan `javac -version`. PASS jika keduanya menunjukkan versi 21.x (JDK, bukan hanya JRE).
-3. Blade: jalankan `blade version`. PASS jika versinya 6.0 atau lebih baru.
+3. Blade: jalankan `blade version`. PASS jika versinya 7.0 atau lebih baru.
 4. Memori: periksa RAM yang kosong. PASS jika tersedia minimal 4 GB.
 5. Disk: periksa ruang kosong di drive tempat folder home saya. PASS jika kosong minimal 10 GB.
 6. Repositori workshop: cari clone github.com/liferay/liferay-course-masterclass milik saya (di folder yang terbuka atau folder home saya). PASS jika ada dan berisi context-source/liferay-skills-learning-path.html.
