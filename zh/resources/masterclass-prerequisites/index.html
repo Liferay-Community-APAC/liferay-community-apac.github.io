@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../../../assets/site.css?v=c15">
+  <link rel="stylesheet" href="../../../assets/site.css?v=c16">
   <script src="../../../assets/site-chrome.js?v=22" defer></script>
 </head>
 <body data-section="resources">
@@ -157,22 +157,23 @@ javac 21.0.5</code></pre>
               <p>使用 VS Code 可以轻松处理您的 Liferay Workspace。</p>
             </div>
           </li>
-          <li class="check-item">
-            <input type="checkbox" id="mc-claude" data-key="claude" data-group="assistant">
+          <li class="check-group-label" aria-hidden="true">选择一个 AI 助手</li>
+          <li class="check-item choice">
+            <input type="radio" name="mc-assistant" data-group="assistant" id="mc-claude" data-key="claude">
             <div>
               <label for="mc-claude" class="check-title"><a href="https://code.claude.com/docs/en/vs-code">VS Code 的 Claude Code 扩展</a></label>
               <p>安装扩展后，您就可以在 VS Code 中随时使用 Claude。</p>
             </div>
           </li>
-          <li class="check-item">
-            <input type="checkbox" id="mc-codex" data-key="codex" data-group="assistant">
+          <li class="check-item choice">
+            <input type="radio" name="mc-assistant" data-group="assistant" id="mc-codex" data-key="codex">
             <div>
               <label for="mc-codex" class="check-title"><a href="https://developers.openai.com/codex/ide">VS Code 的 OpenAI Codex 扩展</a></label>
               <p>OpenAI 的编程智能体 Codex 包含在您的 ChatGPT 套餐中：请用您的 ChatGPT 账户登录扩展。</p>
             </div>
           </li>
-          <li class="check-item">
-            <input type="checkbox" id="mc-copilot" data-key="copilot" data-group="assistant">
+          <li class="check-item choice">
+            <input type="radio" name="mc-assistant" data-group="assistant" id="mc-copilot" data-key="copilot">
             <div>
               <label for="mc-copilot" class="check-title"><a href="https://code.visualstudio.com/docs/copilot/setup">VS Code 中的 GitHub Copilot</a></label>
               <p>请用拥有 Copilot 使用权限的 GitHub 账户登录 VS Code。</p>
@@ -322,7 +323,7 @@ javac 21.0.5</code></pre>
     // Checklist: progress is kept in this browser only.
     (function () {
       var KEY = 'lca-masterclass-checklist';
-      var boxes = [].slice.call(document.querySelectorAll('.checklist input[type=checkbox]'));
+      var boxes = [].slice.call(document.querySelectorAll('.checklist input[type=checkbox], .checklist input[type=radio]'));
       var saved = {};
       try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
       // Items in a group (data-group, such as the AI assistants: you need one) count once, done when any is ticked.
@@ -343,7 +344,7 @@ javac 21.0.5</code></pre>
         document.querySelector('.mc-bar span').style.width = Math.round(u.done / u.total * 100) + '%';
         document.querySelector('.mc-ready').hidden = u.done !== u.total;
         [].forEach.call(document.querySelectorAll('.mc-step'), function (s) {
-          var su = units([].slice.call(s.querySelectorAll('input[type=checkbox]')));
+          var su = units([].slice.call(s.querySelectorAll('input[type=checkbox], input[type=radio]')));
           s.classList.toggle('complete', su.total > 0 && su.done === su.total);
         });
       }
@@ -351,6 +352,8 @@ javac 21.0.5</code></pre>
         b.checked = !!saved[b.dataset.key];
         b.addEventListener('change', function () {
           saved[b.dataset.key] = b.checked;
+          // Choosing one alternative clears the others in its group.
+          if (b.dataset.group) boxes.forEach(function (o) { if (o !== b && o.dataset.group === b.dataset.group) saved[o.dataset.key] = false; });
           try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
           update();
         });
