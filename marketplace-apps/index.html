@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=c16">
+  <link rel="stylesheet" href="../assets/site.css?v=c17">
   <script src="../assets/site-chrome.js?v=22" defer></script>
 </head>
 <body data-section="marketplace-apps">
@@ -61,110 +61,23 @@
         </div>
       </div>
 
-      <div class="showcases">
-        <!-- apps:showcase marketplace-apps full -->
-        <article class="showcase full" id="liferay-forums">
-          <a class="showcase-shot" href="../liferay-forums/" tabindex="-1" aria-hidden="true">
-            <img src="../assets/kb/liferay-forums-home.png" alt="" width="1600" height="1075" loading="lazy">
-          </a>
-          <div class="showcase-body">
-            <span class="tag">Marketplace App</span>
-            <h3 class="with-logo"><img class="app-logo" src="../assets/apps/liferay-forums/logo.png" alt="" width="32" height="32">Liferay Forums</h3>
-            <p class="showcase-tagline">Modern discussion forums for Liferay DXP</p>
-            <p>Discussion forums for Liferay DXP. Members ask questions, share answers and follow topics, while moderators keep the community healthy.</p>
-            <p class="meta">Version 1.0.0 · Works with Liferay DXP 2026.Q1 LTS</p>
-            <div class="btns">
-              <a class="btn" href="../liferay-forums/">Read the guide →</a>
-              <a class="btn outline" href="https://github.com/Liferay-Community-APAC/liferay-forums/releases/latest">Download</a>
-            </div>
-            <div class="showcase-powered">
-      <a href="https://www.liferay.com/capabilities/ai-hub" tabindex="-1" aria-hidden="true"><img src="../assets/products/ai-hub.png" alt="" width="64" height="64" loading="lazy"></a>
-      <p><strong>Powered by Liferay AI Hub.</strong> Add an AI assistant that tells members where to find the discussions they're looking for, searching only what each member can see, and an AI summary at the top of busy discussions.<br><a href="../solution-recipes/forums-ai-assistant/">Forums Assistant →</a> · <a href="../solution-recipes/forums-ai-summaries/">AI Discussion Summaries →</a> · <a href="https://www.liferay.com/capabilities/ai-hub">About Liferay AI Hub</a></p>
-    </div>
-          </div>
-          <div class="showcase-features">
-            <h4>Features</h4>
-            <ul class="features">
-              <li><strong>Discussions and questions.</strong> Post a topic as an open discussion, or as a question members can mark as solved.</li>
-              <li><strong>Mentions and subscriptions.</strong> Mention members with @, and get web and email notifications for the topics you follow.</li>
-              <li><strong>Moderation.</strong> Members report content; moderators validate reports, lock or delete topics, and ban authors per site.</li>
-              <li><strong>Search.</strong> Find topics with facets for category, tag, author and date.</li>
-              <li><strong>Categories.</strong> Organize topics into categories, with one level of subcategories.</li>
-              <li><strong>Voting.</strong> Upvote or downvote topics and replies.</li>
-              <li><strong>Several sites.</strong> Run separate forums, each with its own categories, topics and bans.</li>
-              <li><strong>13 languages.</strong> Labels ship in 13 languages, including Japanese and Chinese.</li>
-            </ul>
-          </div>
-          <div class="showcase-gallery">
-            <h4>Screenshots</h4>
-            <div class="gallery">
-              <figure>
-                <img src="../assets/apps/liferay-forums/discussions.png" alt="Browse discussions, with announcements, tags and reply counts at a glance." width="1280" height="860" loading="lazy">
-                <figcaption>Browse discussions, with announcements, tags and reply counts at a glance.</figcaption>
-              </figure>
-              <figure>
-                <img src="../assets/apps/liferay-forums/topic-solved.png" alt="Mark the reply that answers a question as the solution." width="1280" height="860" loading="lazy">
-                <figcaption>Mark the reply that answers a question as the solution.</figcaption>
-              </figure>
-              <figure>
-                <img src="../assets/apps/liferay-forums/search.png" alt="Search topics and narrow the results by category, tag, author and date." width="1280" height="860" loading="lazy">
-                <figcaption>Search topics and narrow the results by category, tag, author and date.</figcaption>
-              </figure>
-              <figure>
-                <img src="../assets/apps/liferay-forums/moderation-pending.png" alt="Review reported content in the moderation queue, then validate or dismiss it." width="1280" height="860" loading="lazy">
-                <figcaption>Review reported content in the moderation queue, then validate or dismiss it.</figcaption>
-              </figure>
-            </div>
-          </div>
-        </article>
-        <article class="showcase full" id="liferay-migration-studio">
-          <a class="showcase-shot" href="../liferay-migration-studio/" tabindex="-1" aria-hidden="true">
-            <img src="../assets/apps/liferay-migration-studio/dry-run.png" alt="" width="1600" height="1075" loading="lazy">
-          </a>
-          <div class="showcase-body">
-            <span class="tag">Marketplace App</span>
-            <h3>Liferay Migration Studio</h3>
-            <p class="showcase-tagline">Coming soon: move content from any system with an API into Liferay DXP</p>
-            <p>Migrate content into Liferay DXP 2026.Q1 and later from older Liferay versions and other systems with an API. Map in a web UI, dry-run every request, load at scale, then validate the result against the source.</p>
-            <p class="meta">Works with Liferay DXP 2026.Q1 or later</p>
-            <div class="btns">
-              <a class="btn" href="../liferay-migration-studio/">Read the guide →</a>
-            </div>
-          </div>
-          <div class="showcase-features">
-            <h4>Features</h4>
-            <ul class="features">
-              <li><strong>Map in a web UI.</strong> Connect a source and Liferay DXP, map entities and fields, and preview the exact requests for real records before anything is written.</li>
-              <li><strong>Run order worked out.</strong> The order comes from the mappings: vocabularies before categories, parents before children, authors before their posts.</li>
-              <li><strong>Dry run and re-runnable loads.</strong> See every request first. Loads run in parallel batches, can stop and resume, and running them again updates records instead of duplicating them.</li>
-              <li><strong>Validation.</strong> Record counts, a field-by-field comparison of migrated records read back from Liferay, and the records whose related records weren't migrated.</li>
-              <li><strong>Ready-made migrations.</strong> Liferay Web Content from DXP 7.3 to the new CMS in 2026.Q3, tested on real Liferay. SharePoint discussion boards to Liferay Forums are next.</li>
-              <li><strong>Optional AI.</strong> Mapping suggestions, explanations of validation problems, and a chat that can dry-run but only proposes loads. Use a hosted model or one you run yourself.</li>
-            </ul>
-          </div>
-          <div class="showcase-gallery">
-            <h4>Screenshots</h4>
-            <div class="gallery">
-              <figure>
-                <img src="../assets/apps/liferay-migration-studio/run-order.png" alt="The run order, worked out from the mappings: users and categories first, replies after the posts they answer." width="1280" height="860" loading="lazy">
-                <figcaption>The run order, worked out from the mappings: users and categories first, replies after the posts they answer.</figcaption>
-              </figure>
-              <figure>
-                <img src="../assets/apps/liferay-migration-studio/validation.png" alt="Validation lists records whose related records weren't migrated, such as posts by a user without an email address." width="1280" height="860" loading="lazy">
-                <figcaption>Validation lists records whose related records weren't migrated, such as posts by a user without an email address.</figcaption>
-              </figure>
-              <figure>
-                <img src="../assets/apps/liferay-migration-studio/connections.png" alt="Test each connection. The target must be Liferay DXP: loads into Community Edition are refused." width="1280" height="604" loading="lazy">
-                <figcaption>Test each connection. The target must be Liferay DXP: loads into Community Edition are refused.</figcaption>
-              </figure>
-              <figure>
-                <img src="../assets/apps/liferay-migration-studio/forum-result.png" alt="The result: a SharePoint 2016 discussion in Liferay Forums, with its author, date and accepted answer." width="1280" height="860" loading="lazy">
-                <figcaption>The result: a SharePoint 2016 discussion in Liferay Forums, with its author, date and accepted answer.</figcaption>
-              </figure>
-            </div>
-          </div>
-        </article>
-        <!-- /apps:showcase -->
+      <div class="app-tiles">
+        <!-- apps:tiles marketplace-apps -->
+        <a class="card app-tile" href="liferay-forums/">
+          <img class="app-tile-shot" src="../assets/kb/liferay-forums-home.png" alt="" width="1600" height="1075" loading="lazy">
+          <h3 class="with-logo"><img class="app-logo" src="../assets/apps/liferay-forums/logo.png" alt="" width="28" height="28">Liferay Forums</h3>
+          <p>Modern discussion forums for Liferay DXP</p>
+          <span class="meta">v1.0.0 · Liferay DXP 2026.Q1 LTS</span>
+          <span class="more">View details →</span>
+        </a>
+        <a class="card app-tile" href="liferay-migration-studio/">
+          <img class="app-tile-shot" src="../assets/apps/liferay-migration-studio/dry-run.png" alt="" width="1600" height="1075" loading="lazy">
+          <h3>Liferay Migration Studio</h3>
+          <p>Coming soon: move content from any system with an API into Liferay DXP</p>
+          <span class="meta">Liferay DXP 2026.Q1 or later</span>
+          <span class="more">View details →</span>
+        </a>
+        <!-- /apps:tiles -->
       </div>
     </div>
   </section>
