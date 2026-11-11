@@ -45,6 +45,7 @@ const PAGES = LANGS.flatMap((l) => [
   { file: `${HOME[l]}index.html`, lang: l },
   { file: `${HOME[l]}marketplace-apps/index.html`, lang: l },
   { file: `${HOME[l]}tutorials/index.html`, lang: l },
+  { file: `${HOME[l]}resources/index.html`, lang: l },
   { file: `${HOME[l]}community/index.html`, lang: l },
   { file: `${HOME[l]}get-help/index.html`, lang: l }
 ]);
@@ -89,10 +90,10 @@ const SECTIONS = [
     title: { en: 'Solution Recipes', ja: 'ソリューションレシピ', zh: '解决方案实践指南', id: 'Solution Recipes' },
     text: { en: 'Step-by-step recipes that combine Marketplace Apps, tutorials and DXP features into a complete use case.', ja: 'Marketplace アプリ、チュートリアル、DXP の機能を組み合わせてユースケースを実現するレシピ。', zh: '将 Marketplace 应用、教程和 DXP 功能组合成完整用例的分步指南。', id: 'Recipe langkah demi langkah yang menggabungkan Marketplace App, tutorial, dan fitur DXP menjadi use case yang lengkap.' },
     count: { en: () => '3 recipes · 2 powered by Liferay AI Hub', ja: () => '3 件のレシピ · うち 2 件は Liferay AI Hub を活用', zh: () => '3 个实践指南 · 其中 2 个由 Liferay AI Hub 提供支持', id: () => '3 recipe · 2 didukung oleh Liferay AI Hub' } },
-  { icon: 'tutorials', href: (l) => `${HOME[l]}tutorials/`, categories: ['tutorials', 'sample-code', 'tools'],
+  { icon: 'tutorials', href: (l) => `${HOME[l]}tutorials/`, categories: ['tutorials', 'sample-code'],
     title: { en: 'Tutorials & Tools', ja: 'チュートリアルとツール', zh: '教程与工具', id: 'Tutorial & Alat' },
     text: { en: 'Step-by-step tutorials, sample code and tools for implementation, upgrade and migration tasks.', ja: '実装、アップグレード、移行に役立つチュートリアル、サンプルコード、ツール。', zh: '用于实施、升级和迁移任务的分步教程、示例代码和工具。', id: 'Tutorial langkah demi langkah, kode contoh, dan alat untuk tugas implementasi, upgrade, dan migrasi.' },
-    count: { en: (n) => `${n} tutorials, samples and tools`, ja: (n) => `${n} 件のチュートリアル、サンプル、ツール`, zh: (n) => `${n} 个教程、示例和工具`, id: (n) => `${n} tutorial, contoh, dan alat` } },
+    count: { en: (n) => `${n} tutorials and samples`, ja: (n) => `${n} 件のチュートリアルとサンプル`, zh: (n) => `${n} 个教程和示例`, id: (n) => `${n} tutorial dan contoh` } },
   { icon: 'community', href: (l) => `${HOME[l]}community/`, categories: [],
     title: { en: 'Community', ja: 'コミュニティ', zh: '社区', id: 'Komunitas' },
     text: { en: 'Local user groups, events and the wider Liferay community online.', ja: '地域のユーザーグループ、イベント、オンラインの Liferay コミュニティ。', zh: '各地用户组、活动以及全球 Liferay 在线社区。', id: 'Grup pengguna lokal, acara, dan komunitas Liferay global secara online.' },
