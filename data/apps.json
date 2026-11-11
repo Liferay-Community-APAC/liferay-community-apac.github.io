@@ -305,10 +305,10 @@
         "id": "Server MCP untuk Liferay DXP 7.4 U1–U92 dan 2024.Q1 hingga 2025.Q4"
       },
       "summary": {
-        "en": "Connect AI assistants such as Claude Code and the Claude desktop app to Liferay DXP releases with no MCP of their own. They find, read and change content in plain language, with Liferay's permissions and a preview you confirm before anything changes. A community app for experimental use.",
-        "ja": "独自の MCP を持たない Liferay DXP リリースに、Claude Code や Claude デスクトップアプリなどの AI アシスタントを接続します。Liferay の権限のもとで、自然な言葉でコンテンツを検索、閲覧、変更でき、変更の前には確認用のプレビューが表示されます。試験的な利用を想定したコミュニティアプリです。",
-        "zh": "将 Claude Code、Claude 桌面应用等 AI 助手连接到本身不提供 MCP 的 Liferay DXP 版本。它们可以用自然语言查找、阅读和修改内容，遵循 Liferay 的权限，并在任何更改之前显示供你确认的预览。这是一个供试验使用的社区应用。",
-        "id": "Hubungkan asisten AI seperti Claude Code dan aplikasi desktop Claude ke rilis Liferay DXP yang belum memiliki MCP sendiri. Asisten dapat mencari, membaca, dan mengubah konten dengan bahasa sehari-hari, sesuai izin Liferay, dengan pratinjau yang Anda konfirmasi sebelum ada perubahan. Aplikasi komunitas untuk penggunaan eksperimental."
+        "en": "Connect AI assistants such as Claude Code and the Claude desktop app to Liferay DXP releases with no MCP of their own. They find, read and change content in plain language, with Liferay's permissions and a preview you confirm before anything changes. A community app for experimental use, which requires a Liferay DXP Enterprise Subscription.",
+        "ja": "独自の MCP を持たない Liferay DXP リリースに、Claude Code や Claude デスクトップアプリなどの AI アシスタントを接続します。Liferay の権限のもとで、自然な言葉でコンテンツを検索、閲覧、変更でき、変更の前には確認用のプレビューが表示されます。試験的な利用を想定したコミュニティアプリで、利用には Liferay DXP Enterprise Subscription が必要です。",
+        "zh": "将 Claude Code、Claude 桌面应用等 AI 助手连接到本身不提供 MCP 的 Liferay DXP 版本。它们可以用自然语言查找、阅读和修改内容，遵循 Liferay 的权限，并在任何更改之前显示供你确认的预览。这是一个供试验使用的社区应用，需要 Liferay DXP Enterprise Subscription。",
+        "id": "Hubungkan asisten AI seperti Claude Code dan aplikasi desktop Claude ke rilis Liferay DXP yang belum memiliki MCP sendiri. Asisten dapat mencari, membaca, dan mengubah konten dengan bahasa sehari-hari, sesuai izin Liferay, dengan pratinjau yang Anda konfirmasi sebelum ada perubahan. Aplikasi komunitas untuk penggunaan eksperimental, yang memerlukan Liferay DXP Enterprise Subscription."
       },
       "highlights": [
         {
