@@ -436,10 +436,10 @@
       "category": "marketplace-apps",
       "name": "Liferay Legacy MCP",
       "tagline": {
-        "en": "An MCP server for Liferay DXP 2024.Q1 to 2025.Q4",
-        "ja": "Liferay DXP 2024.Q1〜2025.Q4 向けの MCP サーバー",
-        "zh": "面向 Liferay DXP 2024.Q1 至 2025.Q4 的 MCP 服务器",
-        "id": "Server MCP untuk Liferay DXP 2024.Q1 hingga 2025.Q4"
+        "en": "An MCP server for Liferay DXP 7.4 U1–U92 and 2024.Q1 to 2025.Q4",
+        "ja": "Liferay DXP 7.4 U1〜U92 と 2024.Q1〜2025.Q4 向けの MCP サーバー",
+        "zh": "面向 Liferay DXP 7.4 U1 至 U92 及 2024.Q1 至 2025.Q4 的 MCP 服务器",
+        "id": "Server MCP untuk Liferay DXP 7.4 U1–U92 dan 2024.Q1 hingga 2025.Q4"
       },
       "summary": {
         "en": "Connect AI assistants such as Claude Code and the Claude desktop app to Liferay DXP releases with no MCP of their own. They find, read and change content in plain language, with Liferay's permissions and a preview you confirm before anything changes. A community app for experimental use.",
@@ -456,10 +456,10 @@
             "id": "Untuk rilis tanpa MCP"
           },
           "text": {
-            "en": "Liferay DXP 2024.Q1 to 2025.Q4 and the 7.4 update releases, without changing Liferay.",
-            "ja": "Liferay DXP 2024.Q1〜2025.Q4 と 7.4 アップデートリリースに、Liferay を変更せずに対応します。",
-            "zh": "支持 Liferay DXP 2024.Q1 至 2025.Q4 以及 7.4 更新版本，无需修改 Liferay。",
-            "id": "Liferay DXP 2024.Q1 hingga 2025.Q4 dan rilis pembaruan 7.4, tanpa mengubah Liferay."
+            "en": "Liferay DXP 7.4 U1–U92 and 2024.Q1 to 2025.Q4, without changing Liferay.",
+            "ja": "Liferay DXP 7.4 U1〜U92 と 2024.Q1〜2025.Q4 に、Liferay を変更せずに対応します。",
+            "zh": "支持 Liferay DXP 7.4 U1 至 U92 以及 2024.Q1 至 2025.Q4，无需修改 Liferay。",
+            "id": "Liferay DXP 7.4 U1–U92 dan 2024.Q1 hingga 2025.Q4, tanpa mengubah Liferay."
           }
         },
         {
@@ -534,7 +534,7 @@
         }
       ],
       "version": "1.1.0",
-      "dxp": "Liferay DXP 2024.Q1 to 2025.Q4",
+      "dxp": "Liferay DXP 7.4 U1–U92 and 2024.Q1 to 2025.Q4",
       "docsLanguages": [
         "en"
       ],
