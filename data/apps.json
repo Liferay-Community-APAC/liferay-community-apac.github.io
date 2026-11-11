@@ -278,8 +278,14 @@
           "id": "Tambahkan asisten AI yang memberi tahu anggota di mana diskusi yang mereka cari, dengan hanya mencari konten yang dapat dilihat setiap anggota, serta ringkasan AI di bagian atas diskusi yang ramai."
         },
         "recipes": [
-          { "title": "Forums Assistant", "path": "solution-recipes/forums-ai-assistant/" },
-          { "title": "AI Discussion Summaries", "path": "solution-recipes/forums-ai-summaries/" }
+          {
+            "title": "Forums Assistant",
+            "path": "solution-recipes/forums-ai-assistant/"
+          },
+          {
+            "title": "AI Discussion Summaries",
+            "path": "solution-recipes/forums-ai-summaries/"
+          }
         ]
       },
       "repo": "https://github.com/LGSAPAC/lfrgs-liferay-forums",
@@ -287,6 +293,150 @@
       "search": "liferay-forums/pagefind/",
       "sitemap": "liferay-forums/sitemap.xml",
       "docsRepo": "https://github.com/Liferay-Community-APAC/liferay-forums"
+    },
+    {
+      "id": "liferay-legacy-mcp",
+      "category": "marketplace-apps",
+      "name": "Liferay Legacy MCP",
+      "tagline": {
+        "en": "Connect AI assistants to Liferay DXP releases with no MCP server of their own",
+        "ja": "MCP サーバーを持たない Liferay DXP のリリースに AI アシスタントを接続",
+        "zh": "将 AI 助手连接到没有自带 MCP 服务器的 Liferay DXP 版本",
+        "id": "Hubungkan asisten AI ke rilis Liferay DXP yang belum memiliki server MCP sendiri"
+      },
+      "summary": {
+        "en": "An MCP server for Liferay DXP 2024.Q1 to 2025.Q4 and the 7.4 update releases. AI assistants such as Claude Code can find, read and change your Liferay's content in plain language, with Liferay's own permissions and a preview you confirm before anything changes. For experimental use on a test or development copy.",
+        "ja": "Liferay DXP 2024.Q1〜2025.Q4 と 7.4 のアップデートリリース向けの MCP サーバーです。Claude Code などの AI アシスタントが、Liferay の権限のもとで、自然な言葉で Liferay のコンテンツを検索、参照、変更できます。変更は必ずプレビューを確認してから実行されます。テスト環境や開発環境での試用向けです。",
+        "zh": "适用于 Liferay DXP 2024.Q1 至 2025.Q4 以及 7.4 更新版本的 MCP 服务器。Claude Code 等 AI 助手可以用自然语言查找、读取和修改 Liferay 中的内容，遵循 Liferay 自身的权限，并且在任何更改之前都会先显示预览供您确认。适用于在测试或开发环境中试用。",
+        "id": "Server MCP untuk Liferay DXP 2024.Q1 hingga 2025.Q4 dan rilis pembaruan 7.4. Asisten AI seperti Claude Code dapat menemukan, membaca, dan mengubah konten Liferay Anda dengan bahasa sehari-hari, mengikuti izin Liferay, dengan pratinjau yang Anda konfirmasi sebelum ada perubahan. Untuk penggunaan eksperimental di salinan uji atau pengembangan."
+      },
+      "highlights": [
+        {
+          "title": {
+            "en": "For releases with no MCP",
+            "ja": "MCP がないリリース向け",
+            "zh": "面向没有 MCP 的版本",
+            "id": "Untuk rilis tanpa MCP"
+          },
+          "text": {
+            "en": "Brings AI access to 2024.Q1 to 2025.Q4 and the 7.4 update releases, without changing Liferay. 2026.Q1 and later have it built in.",
+            "ja": "Liferay を変更せずに、2024.Q1〜2025.Q4 と 7.4 のアップデートリリースから AI を利用できるようにします。2026.Q1 以降は標準で備えています。",
+            "zh": "无需修改 Liferay，即可让 2024.Q1 至 2025.Q4 以及 7.4 更新版本支持 AI 访问。2026.Q1 及更高版本已内置此功能。",
+            "id": "Menghadirkan akses AI ke 2024.Q1 hingga 2025.Q4 dan rilis pembaruan 7.4, tanpa mengubah Liferay. 2026.Q1 dan yang lebih baru sudah memilikinya bawaan."
+          }
+        },
+        {
+          "title": {
+            "en": "Content tools",
+            "ja": "コンテンツツール",
+            "zh": "内容工具",
+            "id": "Alat konten"
+          },
+          "text": {
+            "en": "Search, read, create and update web content, documents, blogs, categories, tags, navigation menus, knowledge base articles and translations, and run review workflows.",
+            "ja": "Web コンテンツ、ドキュメント、ブログ、カテゴリー、タグ、ナビゲーションメニュー、ナレッジベース記事、翻訳を検索、参照、作成、更新し、レビューのワークフローを実行できます。",
+            "zh": "搜索、读取、创建和更新 Web 内容、文档、博客、分类、标签、导航菜单、知识库文章和翻译，并运行审核工作流。",
+            "id": "Cari, baca, buat, dan perbarui konten web, dokumen, blog, kategori, tag, menu navigasi, artikel basis pengetahuan, dan terjemahan, serta jalankan alur kerja peninjauan."
+          }
+        },
+        {
+          "title": {
+            "en": "Every API, when you need it",
+            "ja": "必要なときはすべての API",
+            "zh": "需要时可用所有 API",
+            "id": "Semua API, saat dibutuhkan"
+          },
+          "text": {
+            "en": "Generic tools reach all of Liferay's Headless REST APIs and JSON web services, beyond the dedicated tools.",
+            "ja": "汎用ツールで、専用ツールの範囲を超えて Liferay のすべての Headless REST API と JSON Web サービスにアクセスできます。",
+            "zh": "通用工具可以访问 Liferay 的所有 Headless REST API 和 JSON Web 服务，不限于专用工具。",
+            "id": "Alat generik menjangkau semua Headless REST API dan layanan web JSON Liferay, melampaui alat khusus."
+          }
+        },
+        {
+          "title": {
+            "en": "Safe writes",
+            "ja": "安全な書き込み",
+            "zh": "安全写入",
+            "id": "Penulisan yang aman"
+          },
+          "text": {
+            "en": "Writes are off by default. When on, every change is shown as a preview and runs only once confirmed, and every attempt is written to an audit log.",
+            "ja": "書き込みは既定でオフです。オンにすると、すべての変更がプレビューとして表示され、確認後にのみ実行されます。すべての操作は監査ログに記録されます。",
+            "zh": "写入默认关闭。开启后，每项更改都会先显示预览，确认后才会执行，所有操作都会记录在审计日志中。",
+            "id": "Penulisan nonaktif secara default. Jika diaktifkan, setiap perubahan ditampilkan sebagai pratinjau dan hanya dijalankan setelah dikonfirmasi, dan setiap percobaan dicatat di log audit."
+          }
+        },
+        {
+          "title": {
+            "en": "Least privilege",
+            "ja": "最小権限",
+            "zh": "最小权限",
+            "id": "Hak akses minimum"
+          },
+          "text": {
+            "en": "The server acts as one service user, through an OAuth 2 application whose scopes limit what it can reach.",
+            "ja": "サーバーは 1 人のサービスユーザーとして、OAuth 2 アプリケーションを通じて動作します。アクセスできる範囲はそのスコープで制限されます。",
+            "zh": "服务器以一个服务用户的身份，通过 OAuth 2 应用运行，其作用域限制了可访问的范围。",
+            "id": "Server bertindak sebagai satu pengguna layanan, melalui aplikasi OAuth 2 yang cakupannya membatasi apa yang dapat dijangkau."
+          }
+        },
+        {
+          "title": {
+            "en": "Page inspection",
+            "ja": "ページの検査",
+            "zh": "页面检查",
+            "id": "Inspeksi halaman"
+          },
+          "text": {
+            "en": "See a page's headings, links, missing image descriptions and errors, and take screenshots, as a guest or a view-only user.",
+            "ja": "ゲストまたは閲覧のみのユーザーとして、ページの見出し、リンク、画像の説明の欠落、エラーを確認し、スクリーンショットを撮れます。",
+            "zh": "以访客或只读用户身份查看页面的标题、链接、缺失的图片说明和错误，并截取屏幕截图。",
+            "id": "Lihat judul, tautan, deskripsi gambar yang hilang, dan error di sebuah halaman, serta ambil tangkapan layar, sebagai tamu atau pengguna hanya-lihat."
+          }
+        }
+      ],
+      "version": "1.1.0",
+      "dxp": "Liferay DXP 2024.Q1 to 2025.Q4 and 7.4",
+      "docsLanguages": [
+        "en"
+      ],
+      "image": {
+        "src": "assets/apps/liferay-legacy-mcp/claude-code-write-preview.png",
+        "width": 1280,
+        "height": 957
+      },
+      "screenshots": [
+        {
+          "src": "assets/apps/liferay-legacy-mcp/claude-code-search.png",
+          "width": 1280,
+          "height": 474,
+          "caption": "Ask in plain language: Claude Code finds the most recently modified articles in a site."
+        },
+        {
+          "src": "assets/apps/liferay-legacy-mcp/claude-code-write-preview.png",
+          "width": 1280,
+          "height": 957,
+          "caption": "Every change is previewed first, and nothing is written until you confirm."
+        },
+        {
+          "src": "assets/apps/liferay-legacy-mcp/claude-desktop-tool-permissions.png",
+          "width": 1280,
+          "height": 991,
+          "caption": "Connected to the Claude desktop app, with a permission setting per tool."
+        },
+        {
+          "src": "assets/apps/liferay-legacy-mcp/service-user-roles.png",
+          "width": 1280,
+          "height": 974,
+          "caption": "The server acts as one service user, with only the roles it needs."
+        }
+      ],
+      "docs": "marketplace-app-docs/liferay-legacy-mcp/",
+      "marketplace": null,
+      "search": "marketplace-app-docs/pagefind/",
+      "sitemap": "marketplace-app-docs/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/marketplace-app-docs"
     },
     {
       "id": "liferay-migration-studio",
