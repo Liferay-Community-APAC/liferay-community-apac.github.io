@@ -327,6 +327,34 @@
         },
         {
           "title": {
+            "en": "Runs outside Liferay",
+            "ja": "Liferay の外で動作",
+            "zh": "在 Liferay 之外运行",
+            "id": "Berjalan di luar Liferay"
+          },
+          "text": {
+            "en": "A separate container that uses Liferay's public Headless and JSON web service APIs. Nothing is installed into Liferay's code, so a Liferay update doesn't need a new server version unless an API it uses changes.",
+            "ja": "Liferay の公開 Headless API と JSON Web サービスを使う、独立したコンテナです。Liferay のコードには何もインストールしないため、使用している API が変わらない限り、Liferay を更新してもサーバーの新しいバージョンは必要ありません。",
+            "zh": "一个独立的容器，使用 Liferay 公开的 Headless API 和 JSON Web 服务。不会在 Liferay 的代码中安装任何内容，因此只要所用的 API 没有变化，更新 Liferay 时就不需要新版本的服务器。",
+            "id": "Kontainer terpisah yang menggunakan Headless API dan layanan web JSON publik Liferay. Tidak ada yang dipasang ke dalam kode Liferay, sehingga pembaruan Liferay tidak memerlukan versi server baru kecuali API yang digunakannya berubah."
+          }
+        },
+        {
+          "title": {
+            "en": "Only configuration in Liferay",
+            "ja": "Liferay には設定のみ",
+            "zh": "在 Liferay 中仅有配置",
+            "id": "Hanya konfigurasi di Liferay"
+          },
+          "text": {
+            "en": "The OAuth 2 client extension creates an OAuth application and adds no code to Liferay, so it isn't tied to a Liferay version.",
+            "ja": "OAuth 2 クライアント拡張は OAuth アプリケーションを作成するだけで、Liferay にコードを追加しません。そのため、特定の Liferay バージョンに依存しません。",
+            "zh": "OAuth 2 客户端扩展只创建一个 OAuth 应用程序，不会向 Liferay 添加任何代码，因此不依赖于特定的 Liferay 版本。",
+            "id": "Ekstensi klien OAuth 2 membuat aplikasi OAuth dan tidak menambahkan kode apa pun ke Liferay, sehingga tidak terikat pada versi Liferay tertentu."
+          }
+        },
+        {
+          "title": {
             "en": "Content tools",
             "ja": "コンテンツ用ツール",
             "zh": "内容工具",

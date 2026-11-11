@@ -66,6 +66,8 @@
             <h4>功能</h4>
             <ul class="features">
               <li><strong>适用于没有 MCP 的版本.</strong> 支持 Liferay DXP 7.4 U1 至 U92 以及 2024.Q1 至 2025.Q4，无需修改 Liferay。</li>
+              <li><strong>在 Liferay 之外运行.</strong> 一个独立的容器，使用 Liferay 公开的 Headless API 和 JSON Web 服务。不会在 Liferay 的代码中安装任何内容，因此只要所用的 API 没有变化，更新 Liferay 时就不需要新版本的服务器。</li>
+              <li><strong>在 Liferay 中仅有配置.</strong> OAuth 2 客户端扩展只创建一个 OAuth 应用程序，不会向 Liferay 添加任何代码，因此不依赖于特定的 Liferay 版本。</li>
               <li><strong>内容工具.</strong> 搜索、阅读、创建和更新 Web 内容、文档、博客、类别和标签、导航菜单及翻译，并处理审核工作流。</li>
               <li><strong>所有 API.</strong> 通用工具可以访问 Liferay 的所有 Headless REST API 和 JSON Web 服务。</li>
               <li><strong>安全的写入.</strong> 写入默认关闭。开启后，每项更改都会先显示预览，确认后才会执行，所有操作都会记录在审计日志中。</li>
