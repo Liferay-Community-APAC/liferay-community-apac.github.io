@@ -252,4 +252,102 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/resources/masterclass-prerequisites/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/"/>
   </url>
+  <!-- apps:pages -->
+  <url>
+    <loc>https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-forums/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-forums/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/marketplace-apps/liferay-forums/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-forums/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-forums/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-legacy-mcp/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-legacy-mcp/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/marketplace-apps/liferay-legacy-mcp/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-legacy-mcp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-legacy-mcp/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-migration-studio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-migration-studio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/"/>
+  </url>
+  <url>
+    <loc>https://liferay-community-apac.github.io/id/marketplace-apps/liferay-migration-studio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://liferay-community-apac.github.io/id/marketplace-apps/liferay-migration-studio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/marketplace-apps/liferay-migration-studio/"/>
+  </url>
+  <!-- /apps:pages -->
 </urlset>

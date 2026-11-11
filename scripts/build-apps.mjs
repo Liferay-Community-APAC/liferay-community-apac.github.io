@@ -7,11 +7,18 @@
  *       Cards for the entries of one or more categories, in catalogue order (the first N with a limit).
  *   <!-- apps:showcase CATEGORY [full] -->  <!-- /apps:showcase -->
  *       A promotional block per entry: compact on the homepages, in full on the Marketplace Apps pages.
+ *   <!-- apps:tiles CATEGORY -->  <!-- /apps:tiles -->
+ *       A light square per entry, linking to the entry's own page (the Marketplace Apps pages).
  *   <!-- site:sections -->  <!-- /site:sections -->
  *       The homepage's cards for the site's four sections, with counts from the catalogue.
  *   <!-- site:help-topics -->  <!-- /site:help-topics -->
  *       The <option>s of the "Get help" form's topic list: every entry, then "Something else".
  *       Each option's value is the English name, which goes into the forum post.
+ *   marketplace-apps/<id>/index.html, in every language
+ *       A page per Marketplace App with everything about it: features, screenshots, guide and download. Its
+ *       header, footer and notice come from that language's Marketplace Apps page.
+ *   <!-- apps:pages --> ... <!-- /apps:pages --> in sitemap.xml
+ *       The sitemap entries of those pages.
  *   "# apps:sitemaps" ... "# /apps:sitemaps" in robots.txt
  *       A Sitemap line for every entry published from its own repository.
  *
@@ -22,7 +29,7 @@
  *   node scripts/build-apps.mjs [site-dir] --check  fail if any generated part is out of date
  * No dependencies beyond Node.js 18 or later.
  */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -44,22 +51,22 @@ const PAGES = LANGS.flatMap((l) => [
 const COMPACT_HIGHLIGHTS = 4;
 
 const STRINGS = {
-  en: { poweredBy: 'Powered by {name}. ', recipe: 'Read the recipe →', recipeNamed: '{title} →', about: 'About {name}',
+  en: { viewDetails: 'View details →', otherApps: 'Other Marketplace Apps', poweredBy: 'Powered by {name}. ', recipe: 'Read the recipe →', recipeNamed: '{title} →', about: 'About {name}',
         more: 'Read the guide →', moreOther: 'Read the guide →', marketplace: 'Marketplace listing →',
         guide: 'Read the guide', guideOther: 'Read the guide', download: 'Download', details: 'All features and screenshots →',
         features: 'Features', screenshots: 'Screenshots', versions: 'Works with', version: 'Version',
         soonTag: 'Coming soon', soonTitle: 'More Marketplace Apps coming soon', soonText: 'More Marketplace Apps and their guides are on the way.' },
-  ja: { poweredBy: '{name} を活用。', recipe: 'レシピを見る（英語）→', recipeNamed: '{title}（英語）→', about: '{name} について',
+  ja: { viewDetails: '詳細を見る →', otherApps: 'その他の Marketplace アプリ', poweredBy: '{name} を活用。', recipe: 'レシピを見る（英語）→', recipeNamed: '{title}（英語）→', about: '{name} について',
         more: 'ガイドを読む →', moreOther: 'ガイドを読む（英語）→', marketplace: 'Marketplace で見る →',
         guide: 'ガイドを読む', guideOther: 'ガイドを読む（英語）', download: 'ダウンロード', details: 'すべての機能とスクリーンショット →',
         features: '機能', screenshots: 'スクリーンショット', versions: '対応製品', version: 'バージョン',
         soonTag: '近日公開', soonTitle: 'その他の Marketplace アプリも近日公開', soonText: '新しい Marketplace アプリとガイドを準備中です。' },
-  zh: { poweredBy: '由 {name} 提供支持。', recipe: '查看实践指南（英文）→', recipeNamed: '{title}（英文）→', about: '了解 {name}（英文）',
+  zh: { viewDetails: '查看详情 →', otherApps: '其他 Marketplace 应用', poweredBy: '由 {name} 提供支持。', recipe: '查看实践指南（英文）→', recipeNamed: '{title}（英文）→', about: '了解 {name}（英文）',
         more: '阅读指南 →', moreOther: '阅读指南（英文）→', marketplace: '在 Marketplace 查看 →',
         guide: '阅读指南', guideOther: '阅读指南（英文）', download: '下载', details: '全部功能与截图 →',
         features: '功能', screenshots: '截图', versions: '适用于', version: '版本',
         soonTag: '即将推出', soonTitle: '更多 Marketplace 应用即将推出', soonText: '更多 Marketplace 应用及其指南正在准备中。' },
-  id: { poweredBy: 'Didukung oleh {name}. ', recipe: 'Baca recipe (bahasa Inggris) →', recipeNamed: '{title} (bahasa Inggris) →', about: 'Tentang {name} (bahasa Inggris)',
+  id: { viewDetails: 'Lihat detail →', otherApps: 'Marketplace App lainnya', poweredBy: 'Didukung oleh {name}. ', recipe: 'Baca recipe (bahasa Inggris) →', recipeNamed: '{title} (bahasa Inggris) →', about: 'Tentang {name} (bahasa Inggris)',
         more: 'Baca panduan →', moreOther: 'Baca panduan (bahasa Inggris) →', marketplace: 'Lihat di Marketplace →',
         guide: 'Baca panduan', guideOther: 'Baca panduan (bahasa Inggris)', download: 'Unduh', details: 'Semua fitur dan screenshot →',
         features: 'Fitur', screenshots: 'Screenshot', versions: 'Untuk', version: 'Versi',
@@ -192,7 +199,7 @@ function poweredBy(pb, page, indent) {
 
 // A promotional block for one app. compact: the homepages (a few highlights and a link to the apps page);
 // full: the Marketplace Apps pages (every highlight, screenshots, versions).
-function showcase(a, page, indent, full) {
+function showcase(a, page, indent, full, detail) {
   const t = STRINGS[page.lang], lang = page.lang;
   const cat = categories.get(a.category);
   const translated = (a.docsLanguages || ['en']).includes(lang);
@@ -205,8 +212,10 @@ function showcase(a, page, indent, full) {
     `    <img src="${esc(href(a.image.src, page))}" alt="" width="${a.image.width}" height="${a.image.height}" loading="lazy">`, '  </a>');
   // An app's own logo sits next to its name, at half the size of a "Powered by" product logo.
   const logo = a.logo ? `<img class="app-logo" src="${esc(href(a.logo.src, page))}" alt="" width="32" height="32">` : '';
-  lines.push('  <div class="showcase-body">', `    <span class="tag">${esc(cat.tag[lang])}</span>`, `    <h3${logo ? ' class="with-logo"' : ''}>${logo}${esc(L(a.name, lang))}</h3>`);
-  if (a.tagline) lines.push(`    <p class="showcase-tagline">${esc(a.tagline[lang])}</p>`);
+  lines.push('  <div class="showcase-body">');
+  // On the app's own page its name and tagline are in the page heading already.
+  if (!detail) lines.push(`    <span class="tag">${esc(cat.tag[lang])}</span>`, `    <h3${logo ? ' class="with-logo"' : ''}>${logo}${esc(L(a.name, lang))}</h3>`);
+  if (a.tagline && !detail) lines.push(`    <p class="showcase-tagline">${esc(a.tagline[lang])}</p>`);
   lines.push(`    <p>${esc(a.summary[lang])}</p>`);
   if (points.length && !full) lines.push('    <ul class="showcase-points">', ...points, '    </ul>');
   if (meta) lines.push(`    <p class="meta">${esc(full ? fullMeta : meta)}</p>`);
@@ -215,7 +224,7 @@ function showcase(a, page, indent, full) {
   if (a.marketplace) lines.push(`      <a class="btn outline" href="${esc(a.marketplace)}">${esc(t.marketplace.replace(/ →$/, ''))}</a>`);
   lines.push('    </div>');
   if (a.poweredBy) lines.push(poweredBy(a.poweredBy, page, '    '));
-  if (!full && hl.length) lines.push(`    <a class="more" href="${esc(href(`${HOME[lang]}marketplace-apps/`, page))}#${esc(a.id)}">${esc(t.details)}</a>`);
+  if (!full && hl.length) lines.push(`    <a class="more" href="${esc(href(appPage(a, lang), page))}">${esc(t.details)}</a>`);
   lines.push('  </div>');
   if (full && points.length) lines.push('  <div class="showcase-features">', `    <h4>${esc(t.features)}</h4>`, '    <ul class="features">', ...points, '    </ul>', '  </div>');
   if (full && (a.screenshots || []).length) {
@@ -226,6 +235,26 @@ function showcase(a, page, indent, full) {
     lines.push('    </div>', '  </div>');
   }
   lines.push('</article>');
+  return indentAll(lines, indent);
+}
+
+// The address of a Marketplace App's own page.
+const appPage = (a, lang) => `${HOME[lang]}marketplace-apps/${a.id}/`;
+
+// A light square per entry, linking to its own page. skip: an entry to leave out (the page's own app).
+function tiles(catIds, page, indent, skip) {
+  const t = STRINGS[page.lang], lang = page.lang;
+  const lines = [];
+  for (const a of data.apps.filter((x) => catIds.includes(x.category) && x.id !== skip)) {
+    const meta = [a.version && 'v' + a.version, a.dxp].filter(Boolean).join(' · ');
+    const logo = a.logo ? `<img class="app-logo" src="${esc(href(a.logo.src, page))}" alt="" width="28" height="28">` : '';
+    lines.push(`<a class="card app-tile" href="${esc(href(appPage(a, lang), page))}">`);
+    if (a.image) lines.push(`  <img class="app-tile-shot" src="${esc(href(a.image.src, page))}" alt="" width="${a.image.width}" height="${a.image.height}" loading="lazy">`);
+    lines.push(`  <h3${logo ? ' class="with-logo"' : ''}>${logo}${esc(L(a.name, lang))}</h3>`,
+      `  <p>${esc(a.tagline ? a.tagline[lang] : a.summary[lang])}</p>`);
+    if (meta) lines.push(`  <span class="meta">${esc(meta)}</span>`);
+    lines.push(`  <span class="more">${esc(t.viewDetails)}</span>`, '</a>');
+  }
   return indentAll(lines, indent);
 }
 
@@ -253,6 +282,7 @@ function helpTopics(page, indent) {
 }
 
 const HELP_RE = /([ \t]*)<!-- site:help-topics -->[\s\S]*?<!-- \/site:help-topics -->/g;
+const TILES_RE = /([ \t]*)<!-- apps:tiles ([\w,-]+) -->[\s\S]*?<!-- \/apps:tiles -->/g;
 const SECTIONS_RE = /([ \t]*)<!-- site:sections -->[\s\S]*?<!-- \/site:sections -->/g;
 let changed = 0;
 
@@ -286,6 +316,12 @@ for (const page of PAGES) {
       if (cats.length === 1 && !limit && categories.get(cats[0]).comingSoon) cards.push(soonCard(page, indent));
       return `${indent}<!-- apps:cards ${catList}${limit || ''} -->\n${cards.join('\n')}\n${indent}<!-- /apps:cards -->`;
     });
+    html = html.replace(TILES_RE, (_, indent, catList) => {
+      found++;
+      const cats = catList.split(',');
+      for (const c of cats) if (!categories.get(c)) fail(`${page.file} has tiles for unknown category "${c}"`);
+      return `${indent}<!-- apps:tiles ${catList} -->\n${tiles(cats, page, indent)}\n${indent}<!-- /apps:tiles -->`;
+    });
     html = html.replace(SECTIONS_RE, (_, indent) => {
       found++;
       return `${indent}<!-- site:sections -->\n${sectionCards(page, indent)}\n${indent}<!-- /site:sections -->`;
@@ -294,10 +330,90 @@ for (const page of PAGES) {
       found++;
       return `${indent}<!-- site:help-topics -->\n${helpTopics(page, indent)}\n${indent}<!-- /site:help-topics -->`;
     });
-    if (!found) fail(`${page.file} has no generated parts (apps:cards, apps:showcase, site:sections or site:help-topics markers)`);
+    if (!found) fail(`${page.file} has no generated parts (apps:cards, apps:showcase, apps:tiles, site:sections or site:help-topics markers)`);
     return html;
   });
 }
+
+// ---------- a page per Marketplace App ----------
+// Built from the language's Marketplace Apps page: its head, header, footer and notice, one folder deeper.
+function write(file, content) {
+  const path = join(siteDir, file);
+  const prev = existsSync(path) ? readFileSync(path, 'utf8') : null;
+  if (prev === content) return;
+  changed++;
+  if (check) { console.error(`out of date: ${file}`); return; }
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, content);
+  console.log(`${prev === null ? 'created' : 'updated'} ${file}`);
+}
+
+const marketplaceApps = data.apps.filter((a) => a.category === 'marketplace-apps');
+for (const lang of LANGS) {
+  const listFile = `${HOME[lang]}marketplace-apps/index.html`;
+  const list = readFileSync(join(siteDir, listFile), 'utf8');
+  const head = list.slice(0, list.indexOf('<main'));
+  const tail = list.slice(list.indexOf('</main>'));
+  const crumbs = list.match(/<p class="crumbs"><a href="([^"]*)">([^<]*)<\/a><span>\/<\/span>([^<]*)<\/p>/);
+  const notice = (list.match(/<div class="notice" role="note">[\s\S]*?<\/div>\s*<\/div>/) || [''])[0];
+  if (!crumbs) fail(`${listFile}: no breadcrumbs to build the app pages from`);
+  const deeper = (html) => html.replace(/((?:href|src)=")((?:\.\.\/)+)/g, '$1../$2');
+  for (const a of marketplaceApps) {
+    const page = { file: `${appPage(a, lang)}index.html`, lang };
+    const t = STRINGS[lang], cat = categories.get(a.category);
+    const name = esc(L(a.name, lang)), summary = esc(a.summary[lang]);
+    let h = deeper(head)
+      .replace(/<title>[^<]*<\/title>/, `<title>${name} · ${esc(cat.name[lang])} · Liferay Community APAC</title>`)
+      .replace(/(<meta (?:name="description"|property="og:description") content=")[^"]*/g, `$1${summary}`)
+      .replace(/(<meta property="og:title" content=")[^"]*/, `$1${name} · Liferay Community APAC`)
+      .replace(/marketplace-apps\/"/g, `marketplace-apps/${a.id}/"`);
+    if (a.image && !isUrl(a.image.src)) h = h.replace(/(<meta property="og:image" content=")[^"]*/, `$1${SITE}${a.image.src}`);
+    const logo = a.logo ? `<img class="app-logo" src="${esc(href(a.logo.src, page))}" alt="" width="40" height="40">` : '';
+    const others = marketplaceApps.length > 1 ? `
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head"><h2>${esc(t.otherApps)}</h2></div>
+      <div class="app-tiles">
+${tiles(['marketplace-apps'], page, '        ', a.id)}
+      </div>
+    </div>
+  </section>
+` : '';
+    write(page.file, `${h}<main data-pagefind-body>
+  <section class="hero page">
+    <div class="wrap">
+      <div>
+        <p class="crumbs"><a href="../${crumbs[1]}">${crumbs[2]}</a><span>/</span><a href="../">${crumbs[3]}</a><span>/</span>${name}</p>
+        <p class="eyebrow">${esc(cat.tag[lang])}</p>
+        <h1${logo ? ' class="with-logo"' : ''}>${logo}${name}</h1>
+        ${a.tagline ? `<p class="lead">${esc(a.tagline[lang])}</p>` : ''}
+      </div>
+    </div>
+  </section>
+
+  <section id="app">
+    <div class="wrap">
+      <div class="showcases">
+${showcase(a, page, '        ', true, true)}
+      </div>
+      ${deeper(notice)}
+    </div>
+  </section>
+${others}${tail}`);
+  }
+}
+
+// The app pages' sitemap entries, with their other languages.
+update('sitemap.xml', (xml) => {
+  const entries = marketplaceApps.flatMap((a) => LANGS.map((lang) => [
+    '  <url>', `    <loc>${SITE}${appPage(a, lang)}</loc>`,
+    ...LANGS.map((l) => `    <xhtml:link rel="alternate" hreflang="${{ en: 'en', ja: 'ja', zh: 'zh-Hans', id: 'id' }[l]}" href="${SITE}${appPage(a, l)}"/>`),
+    `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${appPage(a, 'en')}"/>`, '  </url>'].join('\n')));
+  const block = ['  <!-- apps:pages -->', ...entries, '  <!-- /apps:pages -->'].join('\n');
+  return /  <!-- apps:pages -->[\s\S]*?<!-- \/apps:pages -->/.test(xml)
+    ? xml.replace(/  <!-- apps:pages -->[\s\S]*?<!-- \/apps:pages -->/, block)
+    : xml.replace('</urlset>', block + '\n</urlset>');
+});
 
 update('robots.txt', (txt) => {
   // Several apps can share one sitemap (the marketplace-app-docs repository holds many apps' docs): list each once.
