@@ -14,11 +14,13 @@ The website for Liferay Community APAC: <https://liferay-community-apac.github.i
 | Link checker | `scripts/check-links.mjs` | Fails the publish if a link or `#anchor` is broken. |
 | Publishing | `.github/workflows/publish-site.yml` | The shared publishing workflow: build, link check, search index (Pagefind), publish. This site and every app's docs repository use it. |
 
-`scripts/` and this README aren't published. App docs live in their own repositories, started from the [app docs template](https://github.com/Liferay-Community-APAC/app-docs-template), such as [liferay-forums](https://github.com/Liferay-Community-APAC/liferay-forums).
+`scripts/` and this README aren't published. App docs are published from other repositories: an app with its own code repository keeps its docs there, started from the [app docs template](https://github.com/Liferay-Community-APAC/app-docs-template), such as [liferay-forums](https://github.com/Liferay-Community-APAC/liferay-forums); an app without one gets a folder in the shared [marketplace-app-docs](https://github.com/Liferay-Community-APAC/marketplace-app-docs) repository.
+
+Each of those repositories is published at `/<repository-name>/` on this site's address. Never give one the name of one of this site's own folders (such as `marketplace-apps`, `tutorials`, `community`, `resources`, `get-help`, `ja`, `zh` or `id`): GitHub would serve that repository there instead of this site's page.
 
 ## Add an app
 
-1. Give the app docs in its own repository, created from the [app docs template](https://github.com/Liferay-Community-APAC/app-docs-template) (**Use this template**).
+1. Give the app docs: in its own repository, created from the [app docs template](https://github.com/Liferay-Community-APAC/app-docs-template) (**Use this template**), or as a folder in [marketplace-app-docs](https://github.com/Liferay-Community-APAC/marketplace-app-docs) (see its README). For the shared repository, use `"docs": "marketplace-app-docs/<app>/"`, `"search": "marketplace-app-docs/pagefind/"` and `"sitemap": "marketplace-app-docs/sitemap.xml"` below: apps that share a search index or sitemap are merged and listed only once.
 2. Add an entry for it to `data/apps.json`:
 
     ```json

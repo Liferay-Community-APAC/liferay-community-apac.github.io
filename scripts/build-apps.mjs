@@ -300,7 +300,8 @@ for (const page of PAGES) {
 }
 
 update('robots.txt', (txt) => {
-  const lines = data.apps.filter((a) => a.sitemap).map((a) => `Sitemap: ${SITE}${a.sitemap}`);
+  // Several apps can share one sitemap (the marketplace-app-docs repository holds many apps' docs): list each once.
+  const lines = [...new Set(data.apps.filter((a) => a.sitemap).map((a) => `Sitemap: ${SITE}${a.sitemap}`))];
   const block = ['# apps:sitemaps', ...lines, '# /apps:sitemaps'].join('\n');
   return /# apps:sitemaps[\s\S]*?# \/apps:sitemaps/.test(txt)
     ? txt.replace(/# apps:sitemaps[\s\S]*?# \/apps:sitemaps/, block)

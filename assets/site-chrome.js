@@ -261,13 +261,26 @@
         // Merge each app's own index when its docs are in the page's language. Pagefind fails when a search
         // in Japanese or Chinese characters reaches an index built in another language, so an app with
         // English-only docs appears in English search; list more languages in data/apps.json "docsLanguages".
-        mergeIndex: apps.filter(function (a) {
-          // Indonesian is written in Latin script, so English-only docs can join its search too.
-          var langs = a.docsLanguages || ['en'];
-          return langs.indexOf(pageLang) !== -1 || (pageLang === 'id' && langs.indexOf('en') !== -1);
-        }).map(function (a) {
-          return { bundlePath: ROOT + a.search, mergeFilter: { app: typeof a.name === 'object' ? a.name[lang] || a.name.en : a.name } };
-        })
+        mergeIndex: (function () {
+          var usable = apps.filter(function (a) {
+            // Indonesian is written in Latin script, so English-only docs can join its search too.
+            var langs = a.docsLanguages || ['en'];
+            return langs.indexOf(pageLang) !== -1 || (pageLang === 'id' && langs.indexOf('en') !== -1);
+          });
+          // Several apps can share one index (the marketplace-app-docs repository holds many apps' docs):
+          // merge each index once, labelled with the app's name, or "Marketplace Apps" when it is shared.
+          var byIndex = {}, order = [];
+          usable.forEach(function (a) {
+            if (!byIndex[a.search]) { byIndex[a.search] = []; order.push(a.search); }
+            byIndex[a.search].push(a);
+          });
+          var shared = (t.nav.filter(function (n) { return n[0] === 'marketplace-apps'; })[0] || [])[2] || 'Marketplace Apps';
+          return order.map(function (path) {
+            var a = byIndex[path][0];
+            var name = byIndex[path].length > 1 ? shared : (typeof a.name === 'object' ? a.name[lang] || a.name.en : a.name);
+            return { bundlePath: ROOT + path, mergeFilter: { app: name } };
+          });
+        })()
       });
       searchReady = true;
     }).catch(function () {
