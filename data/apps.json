@@ -432,6 +432,151 @@
       "docsRepo": "https://github.com/Liferay-Community-APAC/liferay-migration-studio"
     },
     {
+      "id": "liferay-legacy-mcp",
+      "category": "marketplace-apps",
+      "name": "Liferay Legacy MCP",
+      "tagline": {
+        "en": "An MCP server for Liferay DXP 2024.Q1 to 2025.Q4",
+        "ja": "Liferay DXP 2024.Q1〜2025.Q4 向けの MCP サーバー",
+        "zh": "面向 Liferay DXP 2024.Q1 至 2025.Q4 的 MCP 服务器",
+        "id": "Server MCP untuk Liferay DXP 2024.Q1 hingga 2025.Q4"
+      },
+      "summary": {
+        "en": "Connect AI assistants such as Claude Code and the Claude desktop app to Liferay DXP releases with no MCP of their own. They find, read and change content in plain language, with Liferay's permissions and a preview you confirm before anything changes. A community app for experimental use.",
+        "ja": "独自の MCP を持たない Liferay DXP リリースに、Claude Code や Claude デスクトップアプリなどの AI アシスタントを接続します。Liferay の権限のもとで、自然な言葉でコンテンツを検索、閲覧、変更でき、変更の前には確認用のプレビューが表示されます。試験的な利用を想定したコミュニティアプリです。",
+        "zh": "将 Claude Code、Claude 桌面应用等 AI 助手连接到本身不提供 MCP 的 Liferay DXP 版本。它们可以用自然语言查找、阅读和修改内容，遵循 Liferay 的权限，并在任何更改之前显示供你确认的预览。这是一个供试验使用的社区应用。",
+        "id": "Hubungkan asisten AI seperti Claude Code dan aplikasi desktop Claude ke rilis Liferay DXP yang belum memiliki MCP sendiri. Asisten dapat mencari, membaca, dan mengubah konten dengan bahasa sehari-hari, sesuai izin Liferay, dengan pratinjau yang Anda konfirmasi sebelum ada perubahan. Aplikasi komunitas untuk penggunaan eksperimental."
+      },
+      "highlights": [
+        {
+          "title": {
+            "en": "For releases with no MCP",
+            "ja": "MCP のないリリースに対応",
+            "zh": "适用于没有 MCP 的版本",
+            "id": "Untuk rilis tanpa MCP"
+          },
+          "text": {
+            "en": "Liferay DXP 2024.Q1 to 2025.Q4 and the 7.4 update releases, without changing Liferay.",
+            "ja": "Liferay DXP 2024.Q1〜2025.Q4 と 7.4 アップデートリリースに、Liferay を変更せずに対応します。",
+            "zh": "支持 Liferay DXP 2024.Q1 至 2025.Q4 以及 7.4 更新版本，无需修改 Liferay。",
+            "id": "Liferay DXP 2024.Q1 hingga 2025.Q4 dan rilis pembaruan 7.4, tanpa mengubah Liferay."
+          }
+        },
+        {
+          "title": {
+            "en": "Content tools",
+            "ja": "コンテンツ用ツール",
+            "zh": "内容工具",
+            "id": "Alat konten"
+          },
+          "text": {
+            "en": "Search, read, create and update web content, documents, blogs, categories and tags, navigation menus and translations, and run review workflows.",
+            "ja": "Web コンテンツ、ドキュメント、ブログ、カテゴリーとタグ、ナビゲーションメニュー、翻訳の検索・閲覧・作成・更新と、レビューワークフローの操作ができます。",
+            "zh": "搜索、阅读、创建和更新 Web 内容、文档、博客、类别和标签、导航菜单及翻译，并处理审核工作流。",
+            "id": "Cari, baca, buat, dan perbarui konten web, dokumen, blog, kategori dan tag, menu navigasi, serta terjemahan, dan jalankan alur kerja peninjauan."
+          }
+        },
+        {
+          "title": {
+            "en": "Every API",
+            "ja": "すべての API",
+            "zh": "所有 API",
+            "id": "Semua API"
+          },
+          "text": {
+            "en": "Generic tools reach all of Liferay's Headless REST APIs and its JSON web services.",
+            "ja": "汎用ツールで、Liferay のすべての Headless REST API と JSON Web サービスを利用できます。",
+            "zh": "通用工具可以访问 Liferay 的所有 Headless REST API 和 JSON Web 服务。",
+            "id": "Alat generik menjangkau semua Headless REST API Liferay dan layanan web JSON-nya."
+          }
+        },
+        {
+          "title": {
+            "en": "Safe writes",
+            "ja": "安全な書き込み",
+            "zh": "安全的写入",
+            "id": "Penulisan yang aman"
+          },
+          "text": {
+            "en": "Writes are off by default. When on, every change is previewed and runs only once it's confirmed, and every attempt is audited.",
+            "ja": "書き込みは既定でオフです。オンにすると、すべての変更がプレビューされ、確認後にのみ実行されます。すべての操作は監査ログに記録されます。",
+            "zh": "写入默认关闭。开启后，每项更改都会先显示预览，确认后才会执行，所有操作都会记录在审计日志中。",
+            "id": "Penulisan nonaktif secara bawaan. Jika diaktifkan, setiap perubahan ditampilkan sebagai pratinjau dan hanya dijalankan setelah dikonfirmasi, dan setiap percobaan dicatat dalam log audit."
+          }
+        },
+        {
+          "title": {
+            "en": "Least privilege",
+            "ja": "最小権限",
+            "zh": "最小权限",
+            "id": "Hak akses minimum"
+          },
+          "text": {
+            "en": "One service user, through an OAuth 2 application whose scopes limit what it can reach. Liferay enforces both.",
+            "ja": "1 人のサービスユーザーとして、スコープで到達範囲を制限した OAuth 2 アプリケーションを通じて動作します。どちらも Liferay が適用します。",
+            "zh": "以一个服务用户的身份，通过 OAuth 2 应用程序运行，其作用域限制了可访问的范围。两者都由 Liferay 强制执行。",
+            "id": "Satu pengguna layanan, melalui aplikasi OAuth 2 yang cakupannya membatasi apa yang dapat dijangkau. Liferay menegakkan keduanya."
+          }
+        },
+        {
+          "title": {
+            "en": "Claude Code and desktop",
+            "ja": "Claude Code とデスクトップ",
+            "zh": "Claude Code 与桌面应用",
+            "id": "Claude Code dan desktop"
+          },
+          "text": {
+            "en": "Add it with one claude mcp add command, or to the Claude desktop app's chats and Code tab.",
+            "ja": "claude mcp add コマンド 1 つで追加するか、Claude デスクトップアプリのチャットと Code タブに追加できます。",
+            "zh": "只需一条 claude mcp add 命令即可添加，也可以添加到 Claude 桌面应用的聊天和 Code 标签页中。",
+            "id": "Tambahkan dengan satu perintah claude mcp add, atau ke obrolan dan tab Code di aplikasi desktop Claude."
+          }
+        }
+      ],
+      "version": "1.1.0",
+      "dxp": "Liferay DXP 2024.Q1 to 2025.Q4",
+      "docsLanguages": [
+        "en"
+      ],
+      "image": {
+        "src": "assets/apps/liferay-legacy-mcp/card.png",
+        "width": 1600,
+        "height": 1075
+      },
+      "screenshots": [
+        {
+          "src": "assets/apps/liferay-legacy-mcp/server-info.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "Claude Code asked which Liferay it's connected to: the release, the OAuth 2 connection, the write mode and the tools."
+        },
+        {
+          "src": "assets/apps/liferay-legacy-mcp/write-preview.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "A draft article previewed in Claude Code. Nothing changes until you confirm it."
+        },
+        {
+          "src": "assets/apps/liferay-legacy-mcp/desktop-tools.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "The server's tools in the Claude desktop app, each needing approval until you allow it."
+        },
+        {
+          "src": "assets/apps/liferay-legacy-mcp/oauth-application.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "The OAuth 2 application the client extension creates in Liferay, acting as one service user."
+        }
+      ],
+      "docs": "marketplace-app-docs/liferay-legacy-mcp/",
+      "download": "https://github.com/orgs/Liferay-Community-APAC/packages/container/package/liferay-legacy-mcp",
+      "marketplace": null,
+      "search": "marketplace-app-docs/pagefind/",
+      "sitemap": "marketplace-app-docs/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/marketplace-app-docs"
+    },
+    {
       "id": "solution-recipes",
       "category": "solution-recipes",
       "name": "Solution Recipes",
