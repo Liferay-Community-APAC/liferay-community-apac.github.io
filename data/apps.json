@@ -468,6 +468,151 @@
       "docsRepo": "https://github.com/Liferay-Community-APAC/marketplace-app-docs"
     },
     {
+      "id": "liferay-usage-intelligence",
+      "category": "marketplace-apps",
+      "name": "Liferay Usage Intelligence",
+      "tagline": {
+        "en": "A read-only health and upgrade-readiness dashboard for Liferay DXP 2024.Q1 to 2026.Q1",
+        "ja": "Liferay DXP 2024.Q1〜2026.Q1 向けの読み取り専用ヘルスチェック・アップグレード準備ダッシュボード",
+        "zh": "面向 Liferay DXP 2024.Q1 至 2026.Q1 的只读健康检查与升级准备仪表板",
+        "id": "Dasbor kesehatan dan kesiapan upgrade hanya-baca untuk Liferay DXP 2024.Q1 hingga 2026.Q1"
+      },
+      "summary": {
+        "en": "Scan your Liferay sites for broken links, unused and stale content, dormant accounts, and what will break when you upgrade. It runs inside Liferay with the signed-in administrator's permissions and read-only access, and every finding says how to fix it, with a link to Liferay's documentation. A community app for experimental use.",
+        "ja": "Liferay のサイトをスキャンし、リンク切れ、未使用・更新の止まったコンテンツ、長期間使われていないアカウント、そしてアップグレード時に影響を受ける箇所を見つけます。サインインした管理者の権限と読み取り専用のアクセスで Liferay の中で動作し、すべての指摘に修正方法と Liferay のドキュメントへのリンクが付きます。試験的な利用を想定したコミュニティアプリです。",
+        "zh": "扫描你的 Liferay 站点，找出失效链接、未使用和长期未更新的内容、长期未使用的账户，以及升级时会受影响的地方。它在 Liferay 内部运行，使用已登录管理员的权限和只读访问，每项发现都附有修复方法和指向 Liferay 文档的链接。这是一个供试验使用的社区应用。",
+        "id": "Pindai situs Liferay Anda untuk menemukan tautan rusak, konten yang tidak terpakai dan usang, akun yang lama tidak aktif, serta apa yang akan rusak saat Anda melakukan upgrade. Aplikasi ini berjalan di dalam Liferay dengan izin administrator yang sedang masuk dan akses hanya-baca, dan setiap temuan disertai cara memperbaikinya serta tautan ke dokumentasi Liferay. Aplikasi komunitas untuk penggunaan eksperimental."
+      },
+      "highlights": [
+        {
+          "title": {
+            "en": "Nothing to configure",
+            "ja": "設定は不要",
+            "zh": "无需配置",
+            "id": "Tanpa konfigurasi"
+          },
+          "text": {
+            "en": "Deploy one zip, and an administrator-only page with the dashboard is created for you.",
+            "ja": "zip を 1 つデプロイするだけで、管理者だけが開けるダッシュボードのページが作成されます。",
+            "zh": "只需部署一个 zip，就会自动创建一个只有管理员才能打开的仪表板页面。",
+            "id": "Deploy satu zip, dan halaman dasbor yang hanya bisa dibuka administrator dibuat untuk Anda."
+          }
+        },
+        {
+          "title": {
+            "en": "Read-only, enforced by Liferay",
+            "ja": "読み取り専用（Liferay が強制）",
+            "zh": "只读，由 Liferay 强制执行",
+            "id": "Hanya-baca, ditegakkan oleh Liferay"
+          },
+          "text": {
+            "en": "Its OAuth 2 application has read scopes only, so Liferay rejects any write, whatever the user's own permissions. No password is entered or stored.",
+            "ja": "OAuth 2 アプリケーションには読み取りスコープしかないため、ユーザー自身の権限にかかわらず、Liferay はすべての書き込みを拒否します。パスワードの入力や保存もありません。",
+            "zh": "其 OAuth 2 应用程序只有读取作用域，因此无论用户自身权限如何，Liferay 都会拒绝任何写入。无需输入或保存密码。",
+            "id": "Aplikasi OAuth 2-nya hanya memiliki cakupan baca, sehingga Liferay menolak setiap penulisan, apa pun izin pengguna itu sendiri. Tidak ada kata sandi yang dimasukkan atau disimpan."
+          }
+        },
+        {
+          "title": {
+            "en": "Site Health",
+            "ja": "サイトヘルス",
+            "zh": "站点健康",
+            "id": "Kesehatan Situs"
+          },
+          "text": {
+            "en": "Broken page links, images, videos and PDFs in pages, web content, blogs, knowledge base, message boards, wiki and navigation menus, each confirmed with Liferay, with a downloadable report.",
+            "ja": "ページ、Web コンテンツ、ブログ、ナレッジベース、掲示板、Wiki、ナビゲーションメニュー内の、リンク切れのページ・画像・動画・PDF を Liferay で確認して報告し、レポートとしてダウンロードできます。",
+            "zh": "找出页面、Web 内容、博客、知识库、留言板、Wiki 和导航菜单中失效的页面链接、图片、视频和 PDF，每项都经 Liferay 确认，并可下载报告。",
+            "id": "Tautan halaman, gambar, video, dan PDF yang rusak di halaman, konten web, blog, basis pengetahuan, papan pesan, wiki, dan menu navigasi, masing-masing dikonfirmasi ke Liferay, dengan laporan yang dapat diunduh."
+          }
+        },
+        {
+          "title": {
+            "en": "Upgrade Readiness",
+            "ja": "アップグレード準備",
+            "zh": "升级准备",
+            "id": "Kesiapan Upgrade"
+          },
+          "text": {
+            "en": "Liferay's breaking changes between your release and your target, checked against your own data, plus deprecated features that are in use.",
+            "ja": "現在のリリースから移行先までの Liferay の破壊的変更を、ご自身のデータと照らし合わせて確認し、使用中の非推奨機能も示します。",
+            "zh": "列出从当前版本到目标版本之间 Liferay 的破坏性变更，并对照你自己的数据进行检查，同时列出正在使用的已弃用功能。",
+            "id": "Perubahan yang merusak (breaking changes) Liferay antara rilis Anda dan rilis tujuan, diperiksa terhadap data Anda sendiri, ditambah fitur usang yang masih digunakan."
+          }
+        },
+        {
+          "title": {
+            "en": "Content and access hygiene",
+            "ja": "コンテンツとアクセスの整理",
+            "zh": "内容与访问整理",
+            "id": "Kebersihan konten dan akses"
+          },
+          "text": {
+            "en": "Unused, stale and duplicate content, empty folders, unused tags and categories, large files, dormant and never-used accounts, and stuck approvals.",
+            "ja": "未使用・更新停止・重複したコンテンツ、空のフォルダー、未使用のタグとカテゴリー、大きなファイル、長期間未使用または一度も使われていないアカウント、滞留している承認を見つけます。",
+            "zh": "找出未使用、长期未更新和重复的内容、空文件夹、未使用的标签和类别、大文件、长期未使用或从未使用的账户，以及停滞的审批。",
+            "id": "Konten yang tidak terpakai, usang, dan duplikat, folder kosong, tag dan kategori yang tidak terpakai, file besar, akun yang lama tidak aktif atau tidak pernah digunakan, serta persetujuan yang tertahan."
+          }
+        },
+        {
+          "title": {
+            "en": "Zip or Docker",
+            "ja": "zip または Docker",
+            "zh": "zip 或 Docker",
+            "id": "Zip atau Docker"
+          },
+          "text": {
+            "en": "Drop the zip into deploy, or add it to your Liferay image from its container image.",
+            "ja": "zip を deploy フォルダーに置くか、コンテナイメージから Liferay のイメージに追加できます。",
+            "zh": "将 zip 放入 deploy 文件夹，或通过其容器镜像添加到你的 Liferay 镜像中。",
+            "id": "Letakkan zip di folder deploy, atau tambahkan ke image Liferay Anda dari image kontainernya."
+          }
+        }
+      ],
+      "version": "1.3.2",
+      "dxp": "Liferay DXP 2024.Q1 to 2026.Q1",
+      "docsLanguages": [
+        "en"
+      ],
+      "image": {
+        "src": "assets/apps/liferay-usage-intelligence/card.png",
+        "width": 1600,
+        "height": 1075
+      },
+      "screenshots": [
+        {
+          "src": "assets/apps/liferay-usage-intelligence/overview.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "The overview after a scan: issues by severity, type and site, and the upgrade risk."
+        },
+        {
+          "src": "assets/apps/liferay-usage-intelligence/site-health.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "Site Health: broken links, images, videos and PDFs, each confirmed with Liferay, and where they were found."
+        },
+        {
+          "src": "assets/apps/liferay-usage-intelligence/upgrade-readiness.png",
+          "width": 1600,
+          "height": 1075,
+          "caption": "Upgrade Readiness: Liferay's breaking changes up to the target release, and which ones affect this instance."
+        },
+        {
+          "src": "assets/apps/liferay-usage-intelligence/issue-detail.png",
+          "width": 1280,
+          "height": 860,
+          "caption": "Every finding says how to fix it and links to the matching Liferay Learn article."
+        }
+      ],
+      "docs": "marketplace-app-docs/liferay-usage-intelligence/",
+      "download": "https://liferay-community-apac.github.io/marketplace-app-docs/liferay-usage-intelligence/assets/downloads/liferay-usage-intelligence-1.3.2.zip",
+      "marketplace": null,
+      "search": "marketplace-app-docs/pagefind/",
+      "sitemap": "marketplace-app-docs/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/marketplace-app-docs"
+    },
+    {
       "id": "liferay-migration-studio",
       "category": "marketplace-apps",
       "name": "Liferay Migration Studio",
