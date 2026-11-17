@@ -1,0 +1,2317 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Liferay Masterclass のハンズオンワークブックです。AI コーディングエージェントを使い、Objects や CMS からクライアント拡張、AI Hub まで、Liferay DXP 上に Aurelis Energy のプラットフォームをレベルごとに構築します。">
+<link rel="canonical" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/workbook/">
+<link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/workbook/">
+<link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/workbook/">
+<link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/workbook/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Liferay DXP + AI コーディングエージェント — ハンズオンチュートリアル">
+<meta property="og:description" content="Liferay Masterclass のハンズオンワークブックです。AI コーディングエージェントを使い、Objects や CMS からクライアント拡張、AI Hub まで、Liferay DXP 上に Aurelis Energy のプラットフォームをレベルごとに構築します。">
+<meta property="og:url" content="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/workbook/">
+<title>Liferay DXP + AI コーディングエージェント — ハンズオンチュートリアル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Source+Sans+3:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  /* Design tokens pulled from learn.liferay.com's own stylesheet
+     (https://liferaylearnglobalcss-exte5a2learn-extprd.lfr.cloud/global.css)
+     — the CSS custom-property fallback values there, e.g.
+     var(--color-brand-primary, #0b5fff), are learn.liferay.com's real
+     palette, not an approximation of it. */
+  --lf-brand: #0b5fff;
+  --lf-brand-hover: #0053f0;
+  --lf-brand-active: #004ad7;
+
+  --lf-neutral-0: #ffffff;
+  --lf-neutral-1: #f7f7f8;
+  --lf-neutral-2: #e2e2e4;
+  --lf-neutral-4: #b1b2b9;
+  --lf-neutral-6: #82828c;
+  --lf-neutral-8: #54555f;
+  --lf-neutral-9: #33343d;
+  --lf-neutral-10: #282934;
+
+  --lf-active-bg: #e6edfb;
+  --lf-hover-bg: #edf3fe;
+
+  --lf-warning-bg: #f7eae0;   --lf-warning-text: #944000;
+  --lf-success-bg: #e9f5e8;   --lf-success-text: #3b892f;
+  --lf-info-bg: #e6ebf5;      --lf-info-text: #25488a;
+
+  --lf-font-sans: 'Source Sans 3', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', Meiryo, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --lf-font-mono: 'Source Code Pro', Consolas, Menlo, "Liberation Mono", monospace;
+  --lf-radius: 0.5rem;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--lf-font-sans);
+  color: var(--lf-neutral-8);
+  background: var(--lf-neutral-0);
+  line-height: 1.6;
+}
+
+/* Top bar */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px;
+  background: var(--lf-neutral-0); color: var(--lf-neutral-10);
+  display: flex; align-items: center; gap: .75rem; padding: 0 1rem;
+  z-index: 50; border-bottom: 1px solid var(--lf-neutral-2);
+}
+.topbar .logo { font-weight: 700; font-size: 1.05rem; display: flex; align-items: center; gap: .45rem; letter-spacing: .01em; color: var(--lf-neutral-10); }
+.topbar .logo .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--lf-brand); }
+.topbar .doc-title {
+  color: var(--lf-neutral-6); font-size: .85rem; border-left: 1px solid var(--lf-neutral-2);
+  padding-left: .75rem; margin-left: .1rem; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; max-width: 55vw;
+}
+.topbar .spacer { flex: 1; }
+.topbar .lang-switch { color: inherit; font-size: .9rem; font-weight: 600; text-decoration: none; padding: .3rem .7rem; border: 1px solid var(--lf-neutral-2); border-radius: 999px; }
+.topbar .lang-switch:hover { background: var(--lf-hover-bg); }
+.menu-toggle {
+  display: none; background: transparent; border: 1px solid var(--lf-neutral-2);
+  color: var(--lf-neutral-10); border-radius: 6px; padding: .3rem .55rem; font-size: 1rem; cursor: pointer;
+}
+
+/* Layout */
+.layout { display: flex; padding-top: 60px; min-height: 100vh; }
+.sidebar {
+  position: fixed; top: 60px; bottom: 0; left: 0; width: 300px;
+  overflow-y: auto; background: var(--lf-neutral-1); border-right: 1px solid var(--lf-neutral-2);
+  padding: 1rem .85rem 2.5rem; z-index: 40;
+}
+.toc-filter {
+  width: 100%; padding: .5rem .65rem; border: 1px solid var(--lf-neutral-2);
+  border-radius: 6px; font-size: .85rem; margin-bottom: .85rem; background: var(--lf-neutral-0);
+  font-family: inherit; color: var(--lf-neutral-10);
+}
+.toc ul { list-style: none; margin: 0; padding-left: 1rem; }
+.toc > div > ul, .toc > ul { padding-left: 0; }
+.toc a {
+  display: block; padding: .32rem .55rem .32rem .65rem; color: var(--lf-neutral-8);
+  text-decoration: none; font-size: .86rem; line-height: 1.35; border-left: 2px solid transparent;
+}
+.toc li.toc-level-2 > a { font-weight: 700; color: var(--lf-neutral-10); font-size: .9rem; margin-top: .4rem; }
+.toc li.toc-level-3 > a { font-weight: 500; }
+.toc li.toc-level-4 > a { font-size: .8rem; color: var(--lf-neutral-6); }
+.toc a:hover { color: var(--lf-neutral-10); background: var(--lf-hover-bg); }
+.toc a.active { background: var(--lf-active-bg); border-left-color: var(--lf-brand); color: var(--lf-brand-active); font-weight: 700; }
+
+.content-wrap { margin-left: 300px; flex: 1; display: flex; justify-content: center; padding: 2.5rem 2rem 7rem; }
+.doc-content { max-width: 840px; width: 100%; }
+
+/* Headings — learn.liferay.com's article headings are plain, undecorated:
+   no colored rule under h1, just weight and the neutral-10 ink. */
+.doc-content h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 1rem; color: var(--lf-neutral-10); font-weight: 700; }
+.doc-content h1 + p { font-size: 1.1rem; color: var(--lf-neutral-6); margin-top: 0; }
+.doc-content h2 {
+  font-size: 1.5rem; margin: 2.75rem 0 1rem; padding-top: .75rem;
+  border-top: 1px solid var(--lf-neutral-2); color: var(--lf-neutral-10); font-weight: 700; scroll-margin-top: 78px;
+}
+.doc-content h2:first-of-type { border-top: 0; margin-top: 1.75rem; }
+.doc-content h3 { font-size: 1.2rem; margin: 2rem 0 .75rem; color: var(--lf-neutral-10); font-weight: 600; scroll-margin-top: 78px; }
+.doc-content h4 { font-size: 1rem; margin: 1.5rem 0 .6rem; color: var(--lf-neutral-10); font-weight: 600; scroll-margin-top: 78px; }
+.heading-anchor { margin-left: .45rem; opacity: 0; text-decoration: none; color: var(--lf-brand); font-weight: 400; font-size: .8em; }
+h2:hover .heading-anchor, h3:hover .heading-anchor, h4:hover .heading-anchor { opacity: 1; }
+
+/* Body text — learn.liferay.com renders article paragraphs in neutral-8,
+   reserving neutral-10 for headings and emphasis. */
+.doc-content p { margin: .85rem 0; color: var(--lf-neutral-8); }
+.doc-content strong { color: var(--lf-neutral-10); font-weight: 600; }
+.doc-content ul, .doc-content ol { padding-left: 1.4rem; }
+.doc-content li { margin: .3rem 0; color: var(--lf-neutral-8); }
+.doc-content hr { border: 0; border-top: 1px solid var(--lf-neutral-2); margin: 2.75rem 0; }
+.doc-content a { color: var(--lf-brand); }
+.doc-content a:hover { color: var(--lf-brand-active); text-decoration: underline; }
+.doc-content code {
+  font-family: var(--lf-font-mono); background: var(--lf-neutral-2); color: var(--lf-neutral-10);
+  padding: .125rem .4rem; border-radius: 4px; font-size: .88em;
+}
+em { color: inherit; }
+.doc-content img {
+  max-width: 100%; height: auto; display: block; margin: 1.1rem 0;
+  border: 1px solid var(--lf-neutral-2); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* Admonitions — learn.liferay.com's own "adm-*" callout vocabulary
+   (adm-warning / adm-note / adm-important), same background/text pairs. */
+.doc-content p.adm-block { padding: .75rem 1rem; border-radius: var(--lf-radius); margin: 1.1rem 0; }
+.doc-content p.adm-warning { background: var(--lf-warning-bg); color: var(--lf-warning-text); }
+.doc-content p.adm-note { background: var(--lf-success-bg); color: var(--lf-success-text); }
+.doc-content p.adm-important { background: var(--lf-info-bg); color: var(--lf-info-text); }
+.doc-content p.adm-block strong:first-child { color: inherit; }
+
+/* Blockquotes — learn.liferay.com's lightweight quoted style: a thin blue
+   rule and no filled background, used both for a short quoted prompt and
+   for a documentation aside that mixes prose with nested code examples. */
+.doc-content blockquote {
+  border-left: 2px solid var(--lf-brand); color: var(--lf-neutral-8);
+  font-size: 1.125rem; font-weight: 300; line-height: 1.5;
+  margin: 1.5rem 0; padding-left: 1.5rem;
+}
+.doc-content blockquote p { margin: .6rem 0; }
+.doc-content blockquote code { background: var(--lf-neutral-2); }
+.doc-content blockquote.aside { font-size: 1rem; font-weight: 400; }
+.doc-content blockquote.aside h3 { font-size: 1.1rem; margin-top: 0; }
+.doc-content blockquote.aside .copy-frame-code { margin: 1rem 0; }
+
+/* Prompt / copy frames: a dark "code" frame for fenced code (matching
+   learn.liferay.com's own pre[class*="language-"] surface) and a light
+   "quote" frame that leaves the blockquote's own thin-rule style intact. */
+.copy-frame { position: relative; margin: 1rem 0 1.6rem; }
+.copy-frame-code { border-radius: var(--lf-radius); overflow: hidden; background: var(--lf-neutral-9); }
+.copy-frame-code pre {
+  margin: 0; padding: 1em 3.4rem 1em 1.25rem; color: var(--lf-neutral-0);
+  background: transparent; border: 0; font-family: var(--lf-font-mono);
+  font-size: .9rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word;
+}
+.copy-frame-code pre code { background: transparent; color: inherit; padding: 0; border-radius: 0; }
+.copy-frame-quote blockquote { margin: 0; padding-right: 3.2rem; }
+
+.copy-btn {
+  position: absolute; top: .6rem; right: .6rem; z-index: 2;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: transparent;
+  cursor: pointer; transition: background .15s ease, color .15s ease;
+}
+.copy-btn .icon-check { display: none; }
+.copy-btn.copied .icon-copy { display: none; }
+.copy-btn.copied .icon-check { display: inline; }
+.copy-frame-code .copy-btn { color: rgba(255,255,255,.75); }
+.copy-frame-code .copy-btn:hover { background: rgba(255,255,255,.12); color: var(--lf-neutral-0); }
+.copy-frame-quote .copy-btn { top: .4rem; color: var(--lf-neutral-6); }
+.copy-frame-quote .copy-btn:hover { background: var(--lf-hover-bg); color: var(--lf-brand-active); }
+.copy-btn.copied { color: var(--lf-success-text) !important; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: 1.4rem 0; border: 1px solid var(--lf-neutral-2); border-radius: var(--lf-radius); }
+.doc-content table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+.doc-content th, .doc-content td { padding: .55rem .75rem; border-bottom: 1px solid var(--lf-neutral-2); text-align: left; vertical-align: top; color: var(--lf-neutral-8); }
+.doc-content thead th { background: var(--lf-neutral-1); color: var(--lf-neutral-10); font-weight: 600; position: sticky; top: 0; }
+.doc-content tbody tr:nth-child(even) { background: var(--lf-neutral-1); }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; right: 1.5rem; bottom: 1.5rem; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--lf-brand); color: #fff; border: 0; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; box-shadow: 0 2px 10px rgba(11,95,255,.35);
+  opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease, background .15s ease; z-index: 45; font-size: 1.1rem;
+}
+.back-to-top:hover { background: var(--lf-brand-active); transform: translateY(-2px); }
+.back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .sidebar { transform: translateX(-100%); transition: transform .2s ease; box-shadow: 2px 0 14px rgba(0,0,0,.12); }
+  body.sidebar-open .sidebar { transform: translateX(0); }
+  .content-wrap { margin-left: 0; padding: 2rem 1.15rem 5rem; }
+  body.sidebar-open::after {
+    content: ""; position: fixed; inset: 60px 0 0 0; background: rgba(40,41,52,.35); z-index: 39;
+  }
+}
+
+@media print {
+  .topbar, .sidebar, .copy-btn, .menu-toggle, .back-to-top { display: none !important; }
+  .content-wrap { margin-left: 0; padding: 0; }
+  .copy-frame-code { border: 1px solid #999; }
+  .copy-frame-code pre { color: #111; }
+  :root { --lf-neutral-9: #f4f4f4; }
+}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-toggle" type="button" aria-label="目次の表示を切り替え">&#9776;</button>
+  <div class="logo"><span class="dot"></span>Liferay Learn</div>
+  <div class="doc-title">Liferay DXP + AI コーディングエージェント — ハンズオンチュートリアル</div>
+  <div class="spacer"></div>
+  <a class="lang-switch" href="../../../../resources/masterclass-prerequisites/workbook/" hreflang="en" lang="en">English</a>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="目次">
+    <input class="toc-filter" type="search" placeholder="このガイドを絞り込む&hellip;" aria-label="目次を絞り込む">
+    <div class="toc"><ul><li class="toc-level-2"><a href="#what-youre-building">構築するもの</a></li><li class="toc-level-2"><a href="#how-to-use-this-tutorial">このチュートリアルの使い方</a></li><li class="toc-level-2"><a href="#baseline-what-already-exists">ベースライン — すでに存在するもの</a></li><li class="toc-level-2"><a href="#skills-used-in-this-tutorial">このチュートリアルで使用するスキル</a><ul><li class="toc-level-3"><a href="#where-these-skills-come-from">スキルの出所</a></li><li class="toc-level-3"><a href="#all-skills-by-origin">出所別のすべてのスキル</a></li><li class="toc-level-3"><a href="#skills-not-used-in-this-path">このコースで使用しないスキル</a></li></ul></li><li class="toc-level-2"><a href="#roadmap">ロードマップ</a></li><li class="toc-level-2"><a href="#setting-up-your-workstation">ワークステーションのセットアップ</a></li><li class="toc-level-2"><a href="#level-0-orientation-liferay-workspace-bladedocker-setup">レベル 0 — オリエンテーション（Liferay Workspace、Blade/Docker のセットアップ）</a><ul><li class="toc-level-3"><a href="#01-seed-the-project-context-files">0.1 — プロジェクトのコンテキストファイルを作成する</a></li><li class="toc-level-3"><a href="#02-stand-up-the-bundle-behind-a-public-tunnel">0.2 — 公開トンネルの背後でバンドルを起動する</a></li><li class="toc-level-3"><a href="#03-persist-and-validate-the-admin-login">0.3 — 管理者ログインを永続化して検証する</a></li><li class="toc-level-3"><a href="#04-read-the-terrain-before-touching-it">0.4 — 手を加える前に状況を把握する</a></li><li class="toc-level-3"><a href="#05-map-the-existing-site-initializer">0.5 — 既存のサイトイニシャライザーを把握する</a></li></ul></li><li class="toc-level-2"><a href="#level-1-foundations-mcp-server">レベル 1 — 基礎（MCP Server）</a><ul><li class="toc-level-3"><a href="#11-enable-and-query-the-mcp-server">1.1 — MCP サーバーを有効にしてクエリーする</a></li><li class="toc-level-3"><a href="#12-enable-the-flags-this-path-needs">1.2 — このコースで必要なフラグを有効にする</a></li><li class="toc-level-3"><a href="#13-first-deployverify-cycle">1.3 — 最初のデプロイと検証のサイクル</a></li><li class="toc-level-3"><a href="#14-make-aurelis-the-portal-home-and-name-your-instance">1.4 — Aurelis をポータルのホームにし、インスタンスに名前を付ける</a></li></ul></li><li class="toc-level-2"><a href="#level-2-business-data-modeling-liferay-objects">レベル 2 — ビジネスデータモデリング（Liferay Objects）</a><ul><li class="toc-level-3"><a href="#21-extend-the-native-account-system-object">2.1 — ネイティブの Account システムオブジェクトを拡張する</a></li><li class="toc-level-3"><a href="#22-accountintelligenceprofile-and-lead">2.2 — AccountIntelligenceProfile と Lead</a></li><li class="toc-level-3"><a href="#23-load-the-target-account-dataset">2.3 — ターゲットアカウントのデータセットを読み込む</a></li><li class="toc-level-3"><a href="#24-notify-on-a-qualified-lead">2.4 — 有望なリードを通知する</a></li></ul></li><li class="toc-level-2"><a href="#level-3-editorial-content-cms-cmp">レベル 3 — 編集コンテンツ（CMS、CMP）</a><ul><li class="toc-level-3"><a href="#31-four-cms-spaces-four-content-structures">3.1 — 4 つの CMS Spaces と 4 つの Content Structures</a></li><li class="toc-level-3"><a href="#32-tour-the-cms-admin-gui">3.2 — CMS 管理 GUI を見て回る</a></li><li class="toc-level-3"><a href="#33-ckeditor5s-native-ai-actions">3.3 — CKEditor5 のネイティブ AI アクション</a></li><li class="toc-level-3"><a href="#34-stand-up-a-cmp-campaign-for-white-paper-production">3.4 — ホワイトペーパー制作のための CMP キャンペーンを立ち上げる</a></li></ul></li><li class="toc-level-2"><a href="#level-4-page-composition-account-management-page-builder-data-sets-ldp">レベル 4 — ページ構成 &amp; アカウント管理（Page Builder、Data Sets、LDP）</a><ul><li class="toc-level-3"><a href="#41-gated-white-paper-funnel">4.1 — ゲート付きホワイトペーパーのファネル</a></li><li class="toc-level-3"><a href="#42-monitor-white-paper-downloads-in-liferay-data-platform">4.2 — Liferay Data Platform でホワイトペーパーのダウンロードを監視する</a></li><li class="toc-level-3"><a href="#43-account-intelligence-page-with-a-data-set">4.3 — Data Set を使った Account Intelligence ページ</a></li><li class="toc-level-3"><a href="#44-make-the-account-detail-app-editable">4.4 — アカウント詳細アプリを編集可能にする</a></li></ul></li><li class="toc-level-2"><a href="#level-5-visitor-interactions-form-containers-objects-integrations">レベル 5 — 訪問者とのインタラクション（Form Containers、Objects、外部連携）</a><ul><li class="toc-level-3"><a href="#51-become-an-aurelis-partner-form-with-a-live-company-lookup">5.1 — 企業情報をリアルタイムに検索する「Become an Aurelis Partner」フォーム</a></li></ul></li><li class="toc-level-2"><a href="#level-6-custom-development-client-extensions-client-extensions-object-actions-glowroot">レベル 6 — カスタム開発: Client Extensions（Client Extensions、Object Actions、Glowroot）</a><ul><li class="toc-level-3"><a href="#61-solar-battery-installation-simulator">6.1 — 太陽光 + 蓄電池設置シミュレーター</a></li><li class="toc-level-3"><a href="#62-opportunity-score-client-extension">6.2 — Opportunity Score クライアント拡張</a></li><li class="toc-level-3"><a href="#63-measure-what-a-lead-submission-costs-with-glowroot">6.3 — リード送信のコストを Glowroot で測定する</a></li></ul></li><li class="toc-level-2"><a href="#level-7-security-permissions-and-the-native-ai-hub-chatbot-ai-hub">レベル 7 — セキュリティと権限、ネイティブの AI Hub チャットボット（AI Hub）</a><ul><li class="toc-level-3"><a href="#71-restrict-partner-content-access-by-tier">7.1 — ティアに応じてパートナーコンテンツへのアクセスを制限する</a></li><li class="toc-level-3"><a href="#72-stand-up-the-energy-advisor-chatbot-public-product-knowledge">7.2 — 「Energy Advisor」チャットボットを構築する: 公開製品ナレッジ</a></li><li class="toc-level-3"><a href="#73-extend-the-energy-advisor-with-per-account-confidential-facts">7.3 — アカウントごとの機密情報で Energy Advisor を拡張する</a></li></ul></li><li class="toc-level-2"><a href="#level-8-digital-sales-room-dsr">レベル 8 — Digital Sales Room (DSR)</a><ul><li class="toc-level-3"><a href="#81-account-intelligence-digital-sales-room-end-to-end">8.1 — Account Intelligence から Digital Sales Room まで、エンドツーエンドで</a></li></ul></li><li class="toc-level-2"><a href="#level-9-from-native-to-custom-a-hand-built-chatbot-widget-client-extensions-ai-hub-segments-ldp">レベル 9 — ネイティブからカスタムへ: 手作りのチャットボットウィジェット（Client Extensions、AI Hub、Segments、LDP）</a><ul><li class="toc-level-3"><a href="#91-custom-widget-with-real-time-segment-context">9.1 — リアルタイムのセグメントコンテキストを持つカスタムウィジェット</a></li><li class="toc-level-3"><a href="#92-detect-buying-interest-mid-conversation">9.2 — 会話の途中で購買意欲を検出する</a></li></ul></li><li class="toc-level-2"><a href="#appendix-full-screenshot-checklist">付録 — スクリーンショットの完全なチェックリスト</a></li><li class="toc-level-2"><a href="#going-further-ai-hub-quick-starts">さらに先へ — AI Hub クイックスタート</a></li></ul></div>
+  </nav>
+  <div class="content-wrap">
+    <main class="doc-content" data-pagefind-body>
+<h1 id="liferay-dxp-ai-coding-agent-hands-on-tutorial">Liferay DXP + AI コーディングエージェント — ハンズオンチュートリアル</h1>
+<p><strong>プロジェクト：</strong> Aurelis Energy — 「Aurelis One」デジタルプラットフォーム（ロット 1）</p>
+<p><strong>対象者：</strong> このワークスペースのスキルセットで Claude Code を使用する Liferay インテグレーター</p>
+<p class="adm-block adm-warning">⚠️ <strong>重要：プロンプトは作業の始まりであって、終わりではありません。</strong> プロンプトを送信しただけで演習が完了するわけではありません。AI エージェントが確認や承認を求め、会話が始まるのは普通のことであり、むしろ想定どおりです。エージェントの返答は、途中経過のメッセージも含めて注意深く読み、できる限り方向を修正してください。誤った方向に進んでいる場合は停止させることも必要です。AI エージェントは入れ子になったタスクを連鎖的に処理するのが非常に得意ですが、その作業が役に立つものになるかどうかは、あなたの役割にかかっています。
+<strong>運転席に座っているのはあなたです！</strong></p>
+<hr/>
+<h2 id="what-youre-building">構築するもの<a aria-hidden="true" class="heading-anchor" href="#what-youre-building" tabindex="-1">#</a></h2>
+<p>このチュートリアルを終えると、Aurelis Energy のデジタルプラットフォームの一部が実際に動作する形で完成します。Liferay DXP 上にエンドツーエンドで構築し、入力作業の大部分はあなたの指示のもとで AI コーディングエージェントが行います。内容は、スコアリング付きのアカウントパイプライン、実際のコンテンツ運用（CMS + キャンペーン計画）、ゲート付きのリード獲得ファネル、独自の太陽光／蓄電池シミュレーター、2 つの AI Hub チャットボット（最初はネイティブ、次にカスタム）、ティアに基づくパートナー権限、そしてすべてを Digital Sales Room に統合する総仕上げの演習です。</p>
+<p>全 10 レベルで、各レベルは前のレベルの上に積み上げていきます。以前の内容をやり直すことはありません。以下の各演習では、構築するもの、それを担うスキル、実行する正確な手順またはプロンプト、スクリーンショットを撮る場所、そして実際に動作したことの検証方法（コマンドが終了コード 0 で終わったことだけではなく）を示します。</p>
+<p><strong>ここでの AI の位置付け。</strong> あなたが指示し、Claude が実行します。あなたが要件を伝え、Claude の提案をレビューし、結果を独自に検証します。すべての演習が独自の検証ステップで終わるのは、まさに架空のエンドポイントや誤った前提が次の演習の土台になる前に見つけるためです。</p>
+<p><strong>Claude が行き詰まった場合。</strong> これはこのワークショップ中の作業にも当てはまるかもしれませんが、今後のあなた自身の試行錯誤にこそ当てはまるでしょう。このワークスペースのスキルは充実していますが、完璧ではありません。簡単ではないステップでは、ときどき誤った方向に進むことを想定してください。ステップが明らかに空回りしている場合（同じ失敗する呼び出しを繰り返し、進展がない場合）は、停止させ、直前に何を試したかを尋ね、方向を修正してください。推測できない形式で本当に行き詰まっている場合は、目標を文章で説明するのではなく、まず Liferay UI で動作する例（ページ、フラグメント、オブジェクト）を自分で作成し、Claude にそれを調べさせてください（たとえば <code>.lar</code> をエクスポートする、API レスポンスを取得する、監視するなど）。残しておく価値のある解決策が見つかったら、そのステップを担当するスキル（<code>.claude/skills/&lt;skill&gt;/SKILL.md</code>）、または対応する <code>.claude/rules/*.md</code> リファレンスカードに、検証した DXP バージョンとともに書き戻してください。あるいは Claude に書き戻させれば、次のセッションで同じことを再発見する必要がなくなります。</p>
+<p>このワークブックは Claude Code を使用して作成しました。Claude Code は非常に有能なエージェントです。行き詰まった場合には、たとえば正しい JSON 構造を調べるために Liferay の jar を逆コンパイルすることもできます。しかし、その追加作業はかなりのトークンを消費します。だからこそ、有用な発見を文書化しておくことが重要です。そうすれば、次に同様の課題に直面したとき、すぐに使えるレシピが用意されていることになります。</p>
+<hr/>
+<h2 id="how-to-use-this-tutorial">このチュートリアルの使い方<a aria-hidden="true" class="heading-anchor" href="#how-to-use-this-tutorial" tabindex="-1">#</a></h2>
+<ul>
+<li><strong>演習ごとに短い Claude セッションを 1 つ</strong>（ときどき小さなまとまりで 1 つ）使用し、プロジェクト全体を 1 つの長いセッションで進めないでください。演習 0.1 では <code>solution-context.md</code> と <code>solution-index.yaml</code> の 2 つのファイルを用意します。これは、新しいセッションがすべてを読み直すことなく、すぐに立ち上がれるようにするためです。</li>
+<li><strong>新しい Claude Code セッションを開始する</strong>たびに、そのスキルはこれらのファイルを参照する方法を知っているため、Aurelis や進捗状況を一から説明し直す必要はありません。</li>
+<li><strong>各演習の最後に、スキルが <code>solution-index.yaml</code> を照合し</strong>、構築したものを <code>done</code> としてマークします。これにより、次のセッションでは「残りの作業」を正確に把握できます。</li>
+</ul>
+<p><strong>なぜ短い Claude セッションなのか？</strong> 私たちの観察では、（たとえば長い会話によって）コンテキストウィンドウが大きくなるにつれて、トークン使用量が増える一方で、精度は低下する傾向があります。そのため、知識と作業の進捗を整理する方法としてこの提案をまとめました。ご自身のプロジェクト環境では、Claude Code を Jira プロジェクトと連携させることもできます。</p>
+<ul>
+<li>
+<p><strong>コンテンツ、フォーム、ページ、オブジェクトを作成するすべてのプロンプトは「Access expectations」で終わります。</strong> これは、誰が何を読み書きできる必要があるか、ゲストが何をしてはいけ<em>ない</em>か、どのユーザーとして検証するかを Claude に伝えるものです。権限の不備は気付かれずに失敗します。ページは 200 を返し、フォームは保存され、管理者にはすべて正しく見えます。アクセス要件を最初に示しておくことで、後になってあなたが不備を発見するのではなく、Claude が最初から正しいアクセスを構築・テストできます。プロンプトを調整する際はこれらの行を残し、追加するプロンプトにも必ず記述してください。</p>
+</li>
+<li>
+<p><strong>全体で使用する凡例：</strong></p>
+</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>マーク</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🎯</td>
+<td>構築するもの</td>
+</tr>
+<tr>
+<td>🧩</td>
+<td>この演習を担うスキル（🆕 = このワークスペースで追加されたもので、Liferay 公式のスキルセットには含まれません）</td>
+</tr>
+<tr>
+<td>📋</td>
+<td>実行する手順</td>
+</tr>
+<tr>
+<td>💬</td>
+<td>Claude に貼り付けるプロンプト</td>
+</tr>
+<tr>
+<td>📸</td>
+<td>ここでスクリーンショットを撮影</td>
+</tr>
+<tr>
+<td>✅</td>
+<td>動作したことの検証方法</td>
+</tr>
+<tr>
+<td>⚠️</td>
+<td>開始前に知っておくべき注意点</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="baseline-what-already-exists">ベースライン — すでに存在するもの<a aria-hidden="true" class="heading-anchor" href="#baseline-what-already-exists" tabindex="-1">#</a></h2>
+<p>演習 0.1 の前の時点で、ワークスペースにはすでに以下が含まれています。</p>
+<ul>
+<li><strong>サイトイニシャライザー</strong>（<code>client-extensions/&lt;name&gt;/site-initializer/</code>）</li>
+<li>ベースラインの<strong>フラグメントライブラリー</strong></li>
+<li><strong>スタイルブック</strong></li>
+<li><strong>マスターページ</strong></li>
+<li><strong>ホームページ</strong></li>
+<li><strong>Glowroot</strong>（APM）はプリインストール済みです。エージェントは <code>configs/common/glowroot/</code> に含まれ、<code>configs/common/tomcat/bin/setenv.*</code> がそれを Tomcat にアタッチし（常時有効）、<code>.mcp.json</code> がその MCP サーバーを登録します。演習 6.3 で使用します。</li>
+<li>Liferay 用の<strong>4 GB のヒープ</strong>は、同じ <code>setenv.*</code> ファイルで設定されています（バンドルのデフォルトは 2.5 GB です）。</li>
+</ul>
+<p>これらはいずれも作り直しません。演習 0.5 はこれらを案内するツアーであり、再作成ではありません。</p>
+<hr/>
+<h2 id="skills-used-in-this-tutorial">このチュートリアルで使用するスキル<a aria-hidden="true" class="heading-anchor" href="#skills-used-in-this-tutorial" tabindex="-1">#</a></h2>
+<h3 id="where-these-skills-come-from">スキルの出所<a aria-hidden="true" class="heading-anchor" href="#where-these-skills-come-from" tabindex="-1">#</a></h3>
+<p>Liferay は、Liferay Portal リポジトリーで AI エージェント用スキルの公式セットを公開しています：<a href="https://github.com/liferay/liferay-portal/tree/master/workspaces/liferay-sample-workspace/.agents"><code>workspaces/liferay-sample-workspace/.agents</code></a>。ここには 24 のスキル（<code>skills/</code>）、8 つのリファレンスカード（<code>rules/</code>）、およびルールのエントリーポイント（<code>liferay-rules.md</code>）が含まれています。</p>
+<p>このワークブックで使用するワークスペースは、この公式セットを出発点とし、さらに拡張しています。</p>
+<ul>
+<li><strong>🆕 追加：</strong> 公式セットに存在しない 7 つのスキル。このワークブックで必要な製品とパターンをカバーします：CMS、CMP、Data Sets、Form Containers、AI Hub、Liferay Data Platform による分析、Glowroot によるパフォーマンス診断。</li>
+<li><strong>✏️ 拡充：</strong> このワークブックの作成中に実環境で検証した知見（気付かれない失敗、バージョン固有の動作、OpenAPI 仕様に記載されていない形式）で拡張した 18 の公式スキル。</li>
+<li><strong>⚪ 変更なし：</strong> 公開されたまま使用する 4 つの公式スキル。</li>
+<li>含まれないもの：公式の <code>author-skill</code> と <code>commit-skill</code>。これらは公式スキルセット自体を保守するためのものです。</li>
+</ul>
+<p>ここでは、すべてが <code>.claude/</code> の下にあります：<code>CLAUDE.md</code>（エントリーポイントおよびスキルルーター）、<code>skills/&lt;name&gt;/SKILL.md</code>、そして <code>rules/</code>（公式セットと同じ 8 つのリファレンスカード）。以下の比較は、2026-10-05 時点の公式リポジトリーの <code>master</code> ブランチに対して行ったものです。</p>
+<h3 id="all-skills-by-origin">出所別のすべてのスキル<a aria-hidden="true" class="heading-anchor" href="#all-skills-by-origin" tabindex="-1">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>スキル</th>
+<th>出所</th>
+<th>公式セットに対する追加内容</th>
+<th>演習</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>manage-cms</code></td>
+<td>🆕 追加</td>
+<td>CMS の Spaces、Content Structures、エントリー、フォルダー。Space をサイトに接続してそのコンテンツを表示する方法</td>
+<td>3.1, 7.2</td>
+</tr>
+<tr>
+<td><code>manage-cmp-campaigns</code></td>
+<td>🆕 追加</td>
+<td>CMP のプロジェクト（キャンペーン）とタスク、担当者、期限</td>
+<td>3.4</td>
+</tr>
+<tr>
+<td><code>manage-data-sets</code></td>
+<td>🆕 追加</td>
+<td>Data Set 定義（列、フィルター、並べ替え、行アクション）と Data Set フラグメントの配置</td>
+<td>4.3</td>
+</tr>
+<tr>
+<td><code>manage-form-containers</code></td>
+<td>🆕 追加</td>
+<td>オブジェクトのエントリーを作成・編集するネイティブの Form Containers、送信成功後のリダイレクト、非表示のコンテキストフィールド</td>
+<td>4.1, 5.1</td>
+</tr>
+<tr>
+<td><code>manage-ai-hub</code></td>
+<td>🆕 追加</td>
+<td>DXP と AI Hub の接続、DXP を呼び出すエージェント（HTTP Request、Search Blueprints による RAG）、ページ上のチャットボット、Cell の on-behalf-of 認証</td>
+<td>3.3, 7.2, 7.3, 9.1, 9.2</td>
+</tr>
+<tr>
+<td><code>manage-analytics</code></td>
+<td>🆕 追加</td>
+<td>DXP と Liferay Data Platform の接続、<code>Analytics.track()</code> によるカスタムイベント、リアルタイムセグメント、イベント到着の確認</td>
+<td>4.1, 4.2, 9.1, 9.2</td>
+</tr>
+<tr>
+<td><code>glowroot-performance</code></td>
+<td>🆕 追加</td>
+<td>Glowroot APM によるパフォーマンス診断</td>
+<td>6.3</td>
+</tr>
+<tr>
+<td><code>workspace-init</code></td>
+<td>✏️ 拡充</td>
+<td>最初にポート 8080 を解放すること。フィーチャーフラグと管理者の初回起動の関係</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td><code>mcp-server</code></td>
+<td>✏️ 拡充</td>
+<td>2026.Q3 の Instance Settings のトグル。MCP ツールの構成はリリースごとに異なること。Windows 上の Claude Code がゲストとして呼び出す問題</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td><code>feature-flags</code></td>
+<td>✏️ 拡充</td>
+<td>再起動なしのランタイム切り替え。Deprecation/Developer フラグは <code>portal-ext.properties</code> を無視すること</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td><code>deploy-and-verify</code></td>
+<td>✏️ 拡充</td>
+<td>再起動は <code>CLAUDE.md</code> のセッション再起動ポリシーに従うこと</td>
+<td>1.3 および以降のすべてのデプロイ</td>
+</tr>
+<tr>
+<td><code>manage-objects</code></td>
+<td>✏️ 拡充</td>
+<td>フィールドの ERC、選択リストのキーのルール、Account などの System Objects の拡張、Aggregation フィールド</td>
+<td>2.1, 2.2, 2.3, 7.3</td>
+</tr>
+<tr>
+<td><code>manage-object-logic</code></td>
+<td>✏️ 拡充</td>
+<td>実際に機能するワークフローのリンク、Single Approver のコピーの罠、ゲストによる送信、HSQLDB のデッドロック</td>
+<td>2.4</td>
+</tr>
+<tr>
+<td><code>manage-pages</code></td>
+<td>✏️ 拡充</td>
+<td>サイトイニシャライザーのツリーにおけるリンク、フォーム、メニュー（<code>displayPageURL</code>、オブジェクトをまたぐフォーム、送信成功後のリダイレクト、Menu Display）とマッピングの制限</td>
+<td>4.1, 4.3</td>
+</tr>
+<tr>
+<td><code>scaffold-fragment</code></td>
+<td>✏️ 拡充</td>
+<td>反復のループ、タイプごとの設定の癖、編集モードの検出、FreeMarker の角かっこと空値の罠</td>
+<td>4.1</td>
+</tr>
+<tr>
+<td><code>scaffold-client-extension</code></td>
+<td>✏️ 拡充</td>
+<td>フラグメント経由での CET の配置、<code>globalJS</code> と Senna、マイクロサービスの <code>Dockerfile</code>/<code>LCP.json</code>、<code>Liferay.fire</code>/<code>Liferay.on</code> によるメッセージング</td>
+<td>4.3, 4.4, 6.1, 6.2, 9.1, 9.2</td>
+</tr>
+<tr>
+<td><code>react-custom-elements</code></td>
+<td>✏️ 拡充</td>
+<td>Vite のライブラリーモードと <code>process.env.NODE_ENV</code>。OSGi の「deleted」ループに対して名前を変更しないこと</td>
+<td>4.3, 4.4, 9.1</td>
+</tr>
+<tr>
+<td><code>setup-oauth</code></td>
+<td>✏️ 拡充</td>
+<td><code>routes/</code> の下にある headless-server の認証情報が、再デプロイのたびにローテーションされること</td>
+<td>6.2</td>
+</tr>
+<tr>
+<td><code>manage-roles-permissions</code></td>
+<td>✏️ 拡充</td>
+<td>Depot（Space）のロール、エントリー権限のチェック、クライアント側でのスコープ付きロール</td>
+<td>3.4, 7.1, 7.2</td>
+</tr>
+<tr>
+<td><code>build-site</code></td>
+<td>✏️ 拡充</td>
+<td>再プロビジョニングのコストを最初に判断すること、themeCSS の判断、MCP ツールの検出</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>commerce-catalogs</code></td>
+<td>✏️ 拡充</td>
+<td>検証済みの Commerce REST の注意点（ERC の長さ、デフォルトの SKU、仕様のキー、オプション値）</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>integrate-external-data</code></td>
+<td>✏️ 拡充</td>
+<td><code>objectEntryManager</code> CET とそのストレージタイプのスキャフォールディング</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>manage-environments</code></td>
+<td>✏️ 拡充</td>
+<td>再起動ポリシー、環境設定におけるフィーチャーフラグ</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>scaffold-form-fragment</code></td>
+<td>✏️ 拡充</td>
+<td>ライブのページ API 経由で配置する場合は実際の <code>html</code> が必要であること</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>theme-and-design</code></td>
+<td>✏️ 拡充</td>
+<td>何にも適用されないのに気付かれない Style Book のトークン、Web フォント、コントラストのチェック</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>guided-client-extension</code></td>
+<td>⚪ 変更なし</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>initial-setup-guide</code></td>
+<td>⚪ 変更なし</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>manage-cloud-project</code></td>
+<td>⚪ 変更なし</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>production-standards</code></td>
+<td>⚪ 変更なし</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>各演習の 🧩 の行では、🆕 はこのワークスペースで追加されたスキルを示します。</p>
+<h3 id="skills-not-used-in-this-path">このコースで使用しないスキル<a aria-hidden="true" class="heading-anchor" href="#skills-not-used-in-this-path" tabindex="-1">#</a></h3>
+<p>ご自身のプロジェクトで適切に使えるよう、その理由を把握しておいてください。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>スキル</th>
+<th>このコースで使用しない理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>commerce-catalogs</code></td>
+<td>Aurelis には管理すべき e コマースのカタログがないため</td>
+</tr>
+<tr>
+<td><code>scaffold-form-fragment</code></td>
+<td>ここでのカスタムフィールドはすべて組み込みの <code>INPUTS-*</code> タイプに対応するため。フォームに本当に独自のピッカーが必要になったときには、このスキルの出番です</td>
+</tr>
+<tr>
+<td><code>theme-and-design</code></td>
+<td>ここでは UX デザインは人間の領域とし、ブランドの適用はこのコースに含まれないため</td>
+</tr>
+<tr>
+<td><code>build-site</code></td>
+<td>総仕上げの演習では、新しいサイトを一から組み立てるのではなく、すでに構築したものをすべて再利用するため</td>
+</tr>
+<tr>
+<td><code>manage-environments</code> / <code>production-standards</code></td>
+<td>クラウド環境の手配を避けるために省略しています。次に試してみてください</td>
+</tr>
+<tr>
+<td><code>integrate-external-data</code></td>
+<td><code>Account</code> はネイティブ優先で、プロキシや同期の対象となる外部システムがないため。ここでの 2 つの外部呼び出し（演習 5.1、6.1）は単純なクライアント側の読み取りであり、オブジェクトを裏付ける統合ではありません</td>
+</tr>
+<tr>
+<td><code>manage-cloud-project</code></td>
+<td>このチュートリアルはローカル／トンネル経由で実行し、マネージドの Cloud/LXC プロジェクトに対しては実行しないため</td>
+</tr>
+<tr>
+<td><code>guided-client-extension</code> / <code>initial-setup-guide</code></td>
+<td>初心者向けのラッパーであり、このチュートリアルは AI に指示を出すエキスパートのアーキテクトを想定しているため</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="roadmap">ロードマップ<a aria-hidden="true" class="heading-anchor" href="#roadmap" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>レベル</th>
+<th>成果物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>セットアップ</td>
+<td>クラスルームの前提条件に照らして確認済みのワークステーション、VS Code と Claude Code の準備完了</td>
+</tr>
+<tr>
+<td>0</td>
+<td>ワークスペースを開き、トンネルを起動し、認証情報を永続化し、コンテキストファイルを作成</td>
+</tr>
+<tr>
+<td>1</td>
+<td>MCP サーバーの稼働、フィーチャーフラグの有効化、最初のデプロイの検証、Aurelis をポータルのホームに設定し、インスタンスに一意の名前を付与</td>
+</tr>
+<tr>
+<td>2</td>
+<td>スコアリング付きのアカウントデータモデル（<code>Account</code>、<code>AccountIntelligenceProfile</code>、<code>Lead</code>）。共通の 6 アカウントのデータセットを読み込み</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4 つの CMS Spaces、CMP キャンペーン、CKEditor5 による AI ドラフト作成</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ゲート付きのホワイトペーパーファネル、Liferay Data Platform でのダウンロード監視、Account Intelligence ページ、編集可能なアカウント詳細</td>
+</tr>
+<tr>
+<td>5</td>
+<td>企業情報をライブで検索できる公開のパートナー申請フォーム</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Solar + Battery Simulator、Opportunity Score クライアント拡張（Fit × Value × Intent、Lead と Account の照合付き）、Glowroot による計測</td>
+</tr>
+<tr>
+<td>7</td>
+<td>パートナーのティア別権限、ネイティブの「Energy Advisor」AI Hub チャットボット</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Digital Sales Room — Account Intelligence → Digital Sales Room をエンドツーエンドで</td>
+</tr>
+<tr>
+<td>9</td>
+<td>セグメントのコンテキストと購買意欲の検出を備えたカスタムチャットボットウィジェット</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="setting-up-your-workstation">ワークステーションのセットアップ<a aria-hidden="true" class="heading-anchor" href="#setting-up-your-workstation" tabindex="-1">#</a></h2>
+<p>🎯 <a href="https://www.liferay.com/classroom-training/classroom-prerequisites">Liferay クラスルームトレーニングの前提条件</a>を満たし、このコースの残りを進めるための VS Code と Claude Code 拡張機能が準備されたワークステーション。</p>
+<p>🧩 なし — ワークショップの準備作業です。</p>
+<p>📋 <strong>手順：</strong></p>
+<ol>
+<li><a href="https://code.visualstudio.com/">VS Code</a> をインストールし、次に VS Code Marketplace から <strong>Claude Code</strong> 拡張機能をインストールして、サインインします。</li>
+<li>ファイル単体ではなく、<strong>ワークスペースのフォルダーを VS Code で開きます</strong>（File → Open Folder）。フォルダーを開くことで、拡張機能が <code>.claude</code> フォルダーとそのスキルを見つけられるようになります。</li>
+<li>そのフォルダーで Claude Code セッションを開始し、以下の監査プロンプトを実行します。これは何も変更せずに、公開されている前提条件（Git、JDK 21、Blade CLI、メモリー、ディスク容量）を確認します。</li>
+<li><strong>ngrok をセットアップします。</strong> 演習 0.2 では、バンドルを公開の ngrok トンネルの背後に配置します。<a href="https://ngrok.com/">ngrok.com</a> でアカウントを作成し、<a href="https://ngrok.com/download">エージェントをインストール</a>してから、ご自身のターミナルで authtoken（ngrok ダッシュボード → Your Authtoken から取得）を登録します。
+   <code>bash
+   ngrok config add-authtoken &lt;your-authtoken&gt;</code>
+   次に、動作することを確認します。
+   <code>bash
+   ngrok version
+   ngrok config check</code>
+   authtoken はご自身で入力し、決して Claude セッションに貼り付けないでください。<code>ngrok config check</code> は、トークンを表示せずに設定ファイルが有効であることを確認します。</li>
+</ol>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Check whether my workstation is ready for Liferay classroom training:
+https://www.liferay.com/classroom-training/classroom-prerequisites
+
+Perform a read-only audit. Do not install, update, delete, or change settings
+without asking me first.
+
+First identify my operating system, architecture, and shell. Confirm you are
+checking my actual training workstation, not a remote environment or
+container. If you cannot access the workstation, give me the appropriate
+commands to run and ask me to paste the results. Never invent results.
+
+Check the current requirements on the linked page. If you cannot access it,
+use the baseline below and clearly state that you could not verify the latest
+requirements:
+
+1. Git
+   Run git --version and verify it is accessible from the command line.
+   No specific Git version or GitHub account is required.
+2. Java JDK 21
+   Run java -version and javac -version.
+   Confirm both use major version 21 and that a full JDK is available, not
+   just a JRE. Inspect the resolved executable paths and JAVA_HOME, if set.
+   Flag conflicting Java installations or configuration separately.
+3. Liferay Blade CLI
+   Run blade version.
+   Confirm version 6.0.0.202404102137 or newer.
+   If outdated, suggest the update command but do not run it.
+4. Available memory
+   Check that at least 4 GB of RAM is currently available, not merely
+   installed. Report total and available memory separately. Use an
+   OS-appropriate measurement that accounts for reclaimable memory; if
+   uncertain, mark it as needing manual verification.
+5. Available storage
+   Check for at least 10 GB free on the drive where the training workspace
+   will be stored. State which drive/path you checked. Ask me for the
+   workspace location if it would change the result.
+6. ngrok (required by this workshop, not by the classroom page)
+   Run ngrok version and ngrok config check.
+   Confirm the agent is on the PATH and the config is valid. Then confirm
+   an authtoken is registered by checking that the config file has an
+   authtoken key, without printing its value or the file's contents.
+   Do not start a tunnel.
+
+Also ask whether I have reviewed the corresponding Liferay Learning Path and
+received any class-specific prerequisites. Treat the learning path as
+recommended preparation. Do not claim all class-specific requirements are
+satisfied unless I provide them for checking.
+
+Use only targeted checks; do not print credentials, tokens, or unrelated
+environment variables.
+
+Return:
+- A table with: Check | Requirement | Detected result | PASS / FAIL / UNVERIFIED.
+- A short overall verdict on the published workstation requirements.
+- Any class-specific requirements still awaiting confirmation.
+- Prioritized fixes for failed checks, with commands or official installation
+  links appropriate to my OS.
+
+Only mark a check PASS when supported by observed evidence. If a command is
+blocked or unavailable, distinguish an unverified result from a confirmed
+missing prerequisite. After any fixes I approve, rerun the affected checks.
+</code></pre></div>
+<p>✅ <strong>検証：</strong> 表のすべての行が PASS になっていること。FAIL があれば修正し、該当するチェックを再実行するよう Claude に依頼してください。UNVERIFIED の行は、チェックを実行できなかったことを意味します。提示されたコマンドをご自身で実行し、結果を貼り付けて返してください。ngrok については、<code>ngrok version</code> がバージョンを表示し、<code>ngrok config check</code> が設定を有効と報告すること。</p>
+<p class="adm-block adm-warning">⚠️ メモリーのチェックは、搭載量ではなく<strong>現在利用可能な</strong> RAM に関するものです。ワークショップの前に重いアプリケーションを閉じてください。Liferay バンドルだけで 4 GB のヒープで動作します（演習 0.2）。</p>
+<hr/>
+<h2 id="level-0-orientation-liferay-workspace-bladedocker-setup">レベル 0 — オリエンテーション（Liferay Workspace、Blade/Docker のセットアップ）<a aria-hidden="true" class="heading-anchor" href="#level-0-orientation-liferay-workspace-bladedocker-setup" tabindex="-1">#</a></h2>
+<h3 id="01-seed-the-project-context-files">0.1 — プロジェクトのコンテキストファイルを作成する<a aria-hidden="true" class="heading-anchor" href="#01-seed-the-project-context-files" tabindex="-1">#</a></h3>
+<p>🎯 今後のすべてのセッションがすぐに立ち上がれるよう、ワークスペースのルートに 2 つのファイルを用意します：<code>solution-context.md</code>（ビジネス上の背景）と <code>solution-index.yaml</code>（このコースで構築するすべての成果物の ToDo リスト）。</p>
+<p>🧩 なし — 以下のプロンプトだけで完結します。</p>
+<p>📋 0.2 と 0.3 の前に、最初にこれを実行してください。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>We're starting a training path implementing part of Aurelis Energy's 'Aurelis
+One' digital platform program on Liferay DXP. Seed two files at the workspace
+root: solution-context.md and solution-index.yaml.
+
+Confirm first that context-source/Aurelis_Energy_Company_Digital_Platform_Brief.md,
+context-source/step1-business-objectives.md, and context-source/liferay-skills-learning-path.md
+are present. Stop and tell me if any is missing — don't invent content.
+
+solution-context.md: read the Brief and step1-business-objectives.md and write
+a short, human-readable summary (not a copy-paste): Aurelis Energy's product
+lines, the Aurelis One program's purpose, the ten business objectives and six
+Critical Success Factors at summary level, and what's in scope (Lot 1) vs not.
+Cite the source files by name instead of inlining everything.
+
+solution-index.yaml: one entry per artifact this path builds — one row per
+Level-2-through-9 exercise in liferay-skills-learning-path.md (skip Level 0/1,
+which produce no lasting artifact). Each entry: exercise number, short
+identifier, kind (object-definition / cms-space / client-extension / page /
+permission-config / ai-hub-config, etc.), the REQ-XX it maps to, status todo.
+Also copy the 'Skills not used in this path' table into
+solution-context.md so it's clear what this project does NOT build.
+
+Confirm both files read back correctly with no other file open.
+</code></pre></div>
+<p>✅ <strong>検証：</strong> まったく新しい Claude セッションを開き、<code>solution-context.md</code> と <code>solution-index.yaml</code> だけを参照させて、Aurelis One の概要と残りの構築作業を要約するよう依頼します。他に何も貼り付けなくても正確に答えられれば、この演習は成功です。</p>
+<p class="adm-block adm-warning">⚠️ <code>solution-context.md</code> に情報を追加したくなるかもしれませんが、短く保つようにしてください。Brief のコピーではなく、1 ページ程度にとどめます。より詳しい内容については、<code>context-source/</code> をパスで参照してください。目的は、エージェントのコンテキストウィンドウがあふれるのを避け、トークン使用量を管理可能な範囲に保つことです。</p>
+<h3 id="02-stand-up-the-bundle-behind-a-public-tunnel">0.2 — 公開トンネルの背後でバンドルを起動する<a aria-hidden="true" class="heading-anchor" href="#02-stand-up-the-bundle-behind-a-public-tunnel" tabindex="-1">#</a></h3>
+<p>🎯 <code>localhost</code> と公開 HTTPS URL の両方からアクセスできる、稼働中の Liferay インスタンス。後で AI Hub（レベル 7）と Liferay Data Platform（レベル 4、9）が必要とします。</p>
+<p>🧩 <code>workspace-init</code></p>
+<p>📖 <strong>ngrok とは？</strong> ngrok は、通常は <code>localhost:8080</code> でしか応答しないローカルの Liferay の前に、公開 HTTPS アドレスを配置します。これにより、インターネット上のあらゆるものからアクセスできるようになります。</p>
+<p><strong>このコースで必要な理由：</strong> AI Hub はクラウドサービスであり、一部の演習では DXP を呼び出す必要があります：HTTP Request ノードと Liferay Search RAG です。AI Hub は <code>localhost</code> にアクセスできないため、AI Hub の「Environment URLs」設定はそれを受け付けず、代わりに公開 HTTPS URL が必要です。DXP から AI Hub への一方向の呼び出しだけであれば、トンネルなしでも動作します。</p>
+<p>ngrok ダッシュボードの <a href="https://dashboard.ngrok.com/get-started/gateway">Get started → Gateway</a> ページは、よい手順解説になっています。</p>
+<p class="adm-block adm-warning">⚠️ <strong>非常に重要：</strong> ステップ 2 で <code>web.server.host</code>（<code>portal-ext.properties</code> 内）を置き換える前に Liferay を起動しないでください。これを怠ると、Object Definitions が正しく作成されないため、Liferay の Data Set 機能が壊れてしまいます。</p>
+<p>📋 <strong>手順：</strong></p>
+<ol>
+<li><code>ngrok http 8080 --request-header-add "X-Forwarded-Port: 443"</code> を実行します。割り当てられた <code>https://&lt;random&gt;.ngrok-free.app</code> または <code>https://&lt;random&gt;.ngrok.app</code> のホスト名を控えておきます。追加のヘッダーは重要です：ngrok はプロトコルとホストは転送しますが、ポートは転送しません。そのため、このヘッダーがないと Liferay は <code>https://&lt;host&gt;:80/...</code> という URL を生成し、API Explorer（<code>/o/api</code>）が「Failed to fetch」で失敗します。ngrok はこのフラグが非推奨であるとログに出力しますが、引き続き動作します。</li>
+</ol>
+<p>トンネルが起動すると、ターミナルに <strong>Session Status: online</strong> と表示され、<strong>Forwarding</strong> の行で公開 <code>https://…</code> ホスト名が <code>http://localhost:8080</code> にマッピングされます。控えておくのはこのホスト名です。Liferay が起動すると（ステップ 4）、トンネルを通過する各リクエストが <strong>HTTP Requests</strong> の下に表示されます。</p>
+<p><img alt="ngrok が実行中" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ngrok-is-running.png"/></p>
+<p>💡 <strong>ngrok インスペクターを開いたままにしておいてください：<a href="http://localhost:4040">http://localhost:4040</a>。</strong> これはターミナルの <strong>Web Interface</strong> の行に表示されています。トンネルを通過したすべてのリクエストを、メソッド、URL、ステータス、ヘッダー、ボディとともに一覧表示し、任意のリクエストを再送できます。レベル 7 以降、<strong>AI Hub があなたの Liferay に対して行う呼び出し</strong>（Liferay Search RAG、HTTP Request ノード）を確認できる唯一の場所となります。これらはクラウドから送られてくるため、ブラウザーの DevTools にも表示されず、Liferay のログでもそれと分かる形では現れません。チャットボットの回答がおかしいと思ったら、まずここを確認してください：AI Hub はそもそも DXP を呼び出したか、どの URL を呼び出したか、どのステータスが返ってきたか。</p>
+<p class="adm-block adm-warning">⚠️ インスペクターには、<code>Authorization</code> トークンを含むリクエストヘッダーが平文で表示されます。スクリーンショットを共有する前に、それらを隠してください。</p>
+<ol start="2">
+<li><code>configs/local/portal-ext.properties</code> を編集します：<code>web.server.host=[YOUR HOSTNAME]</code> をそのホスト名に置き換えます（<code>https://</code> の接頭辞も末尾のスラッシュも付けません）。トンネルに関するその他の設定は、このワークスペースですでに用意されています。</li>
+<li><code>blade server init</code> を実行して Tomcat バンドルをダウンロードし、展開します。このコマンドは <code>configs/common/</code> をバンドルにコピーし、このワークスペースの <code>setenv.sh</code>/<code>setenv.bat</code>（4 GB のヒープ、Glowroot エージェントを常時有効）と、Glowroot エージェント本体を <code>bundles/glowroot/</code> にインストールします。<code>bundles/tomcat/bin/setenv.sh</code>（または <code>.bat</code>）に <code>-Xmx4096m</code> と <code>glowroot.jar</code> が含まれていることを確認します。</li>
+<li><strong>サーバーはご自身のターミナルから、ご自身で起動してください</strong>。Claude に <code>blade server start</code>/<code>stop</code> や、<code>catalina</code>/<code>startup</code>/<code>shutdown</code> のスクリプトを実行させないでください。<code>blade server start --tail</code> を実行し、<code>STARTED</code> が表示されるまで待ちます。</li>
+<li>（<code>localhost</code> ではなく）ngrok の URL からポータルを開き、転送ホストの設定が機能することを確認します。</li>
+<li>すぐに管理者のパスワードを変更します（My Account → Password）。インスタンスが公開された瞬間から、出荷時のデフォルトパスワードは実際のリスクになります。</li>
+</ol>
+<p>✅ <strong>検証：</strong> ご自身でブラウザーから ngrok の URL を開きます。プロキシエラー、中間ページ、試用期間切れのバナーが表示されないこと。次に、以前のデフォルトパスワードが使えなくなっていることを確認します。また、<code>http://localhost:4000/o/glowroot</code> を開きます（ローカルのみ、トンネル経由では決して開かないこと）：Glowroot の UI が読み込まれるはずです。</p>
+<p class="adm-block adm-warning">⚠️ 無料の ngrok トンネルでは、すべてのリクエストの前に対話型の「visit site」中間ページが挿入されることがあります。クリックして進む人間には気付かれませんが、無人の API 呼び出し（後で使用する AI Hub 自身の HTTP Request ノードを含む）にとっては、気付かれないまま致命的な問題になります。curl の呼び出しが JSON ではなく HTML を返した場合は、Liferay を疑う前にこの中間ページを疑ってください。有料の ngrok プランであれば、これを回避できます。</p>
+<p class="adm-block adm-warning">⚠️ エージェントとして起動／停止コマンドを実行することは絶対にしないでください。これは厳格なルールであり（<code>CLAUDE.md</code>）、同時に、ウイルス対策やエンドポイントセキュリティのソフトウェアがエージェントの起動したプロセスをブロックする問題も回避できます。あなた自身が同じコマンドを実行すれば問題がない場合でも、そうしたソフトウェアはエージェントのプロセスをブロックすることがよくあります。</p>
+<h3 id="03-persist-and-validate-the-admin-login">0.3 — 管理者ログインを永続化して検証する<a aria-hidden="true" class="heading-anchor" href="#03-persist-and-validate-the-admin-login" tabindex="-1">#</a></h3>
+<p>🎯 一度「Claude に渡して」忘れられるのではなく、今後のすべてのセッションが自分で見つけられる認証情報。</p>
+<p>🧩 なし — ワークショップの準備作業です。</p>
+<p>📋 <strong>手順：</strong></p>
+<ol>
+<li>チャットの外で、ご自身で <code>configs/local/admin.properties</code> を作成します。<code>ADMIN_EMAIL=...</code> / <code>ADMIN_PASSWORD=...</code> の 2 行です。</li>
+<li>このファイルが <code>.gitignore</code> に記載されていることを確認するよう Claude に依頼し（記載されていなければ追加させ）、実際の呼び出しで認証情報を検証させます。</li>
+</ol>
+<p>💬 <strong>プロンプト（ターン 1）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Confirm configs/local/admin.properties exists and is listed in .gitignore —
+add it there if it isn't. Then read the admin email and password from that
+file (never print the password back to me) and validate it works: call
+GET /o/headless-admin-user/v1.0/my-user-account with Basic Auth and show me
+the 200 response's own name/emailAddress field.
+</code></pre></div>
+<p>💬 <strong>プロンプト（ターン 2 — 今後のすべてのセッションがこれを自動的に見つけられるよう <code>CLAUDE.md</code> を修正）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Update CLAUDE.md's 'Establish Context First' section, point 4, to read:
+
+'Authentication. Look first for configs/local/admin.properties
+(git-ignored; ADMIN_EMAIL=... / ADMIN_PASSWORD=...), then
+LIFERAY_ADMIN_EMAIL/LIFERAY_ADMIN_PASSWORD environment variables. Use them
+for Basic Auth without ever printing, logging, or echoing the password into
+the conversation or any generated file. If neither exists, ask the user once
+for the admin account to use, then — with their explicit confirmation —
+write it to configs/local/admin.properties so no future session has to ask
+again. Never accept a password typed inline as part of a task description.'
+
+Confirm the edit was saved.
+</code></pre></div>
+<p>✅ <strong>検証：</strong> 本当に新しい Claude セッションを開き、認証が必要な通常のタスクを与えます。認証情報については一切触れないでください。セッションが自分で <code>configs/local/admin.properties</code> を見つけ、何も尋ねずに認証できるはずです。</p>
+<p class="adm-block adm-warning">⚠️ プロンプトやトランスクリプトにパスワードを直接入力するのは避けてください。後の演習で原因不明の 401/403 が発生した場合は、さらにデバッグする前に、まずこの演習のセットアップを再確認してください。</p>
+<h3 id="04-read-the-terrain-before-touching-it">0.4 — 手を加える前に状況を把握する<a aria-hidden="true" class="heading-anchor" href="#04-read-the-terrain-before-touching-it" tabindex="-1">#</a></h3>
+<p>🎯 実際の DXP バージョン、ポート、認証方法を確認します。決して推測しないでください。</p>
+<p>📋 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Read CLAUDE.md's 'Establish Context First' section, then walk me through this
+workspace: find the workspace root, read the DXP version from
+gradle.properties, check whether bundles/ exists and what port Tomcat is on,
+and tell me what authentication method is available. Don't touch anything yet.
+</code></pre></div>
+<p>✅ <strong>検証：</strong> ご自身で <code>gradle.properties</code> と <code>bundles/tomcat*/conf/server.xml</code> を開き、報告された 4 つの事実を独自に確認します。このワークスペースに記載されているいくつかの癖は、四半期リリースごとに変わります。毎回抜き取りで確認してください。</p>
+<h3 id="05-map-the-existing-site-initializer">0.5 — 既存のサイトイニシャライザーを把握する<a aria-hidden="true" class="heading-anchor" href="#05-map-the-existing-site-initializer" tabindex="-1">#</a></h3>
+<p>🎯 何かを追加する前に、ソースにすでに含まれているもの（フラグメント、ページ、マスターページの割り当て）の一覧を作成します。まだ何もデプロイされていません。デプロイは演習 1.3 で行います。</p>
+<p>📋 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Walk the site-initializer/ tree under client-extensions/ and list every
+fragment (directory name = fragment key), every page under layouts/, and
+which master page is assigned to the home page. This is a read of the source
+tree only — nothing has been deployed yet. Don't create, modify, or deploy
+anything, this is reconnaissance only.
+</code></pre></div>
+<p>✅ <strong>検証：</strong> ご自身で <code>ls client-extensions/*/site-initializer/fragments/group/*/fragments/</code> と <code>layouts/</code> フォルダーを照合します。</p>
+<p class="adm-block adm-important"><strong>注 — ここからは、短い Claude Code セッションで作業してください。</strong> 前の演習に直接基づかない演習に移るときは、新しいセッションを開始する（または <code>/clear</code> を入力する）ようにしてください。これによりコンテキストがリセットされます。会話に蓄積された内容がリクエストのたびに再送信されなくなるため、トークン消費量が抑えられ、エージェントは目の前のタスクに集中できます。新しいセッションは <code>solution-context.md</code> と <code>solution-index.yaml</code>（演習 0.1）からプロジェクトを引き継ぐため、何も失われません。複数の演習で同じセッションを使い続けるのは、構築の演習とそれに続く修正のように、演習同士が密接に関連している場合だけにしてください。</p>
+<hr/>
+<h2 id="level-1-foundations-mcp-server">レベル 1 — 基礎（MCP Server）<a aria-hidden="true" class="heading-anchor" href="#level-1-foundations-mcp-server" tabindex="-1">#</a></h2>
+<h3 id="11-enable-and-query-the-mcp-server">1.1 — MCP サーバーを有効にしてクエリーする<a aria-hidden="true" class="heading-anchor" href="#11-enable-and-query-the-mcp-server" tabindex="-1">#</a></h3>
+<p>🎯 Claude が推測するのではなく、MCP を通じてライブのオブジェクトスキーマを「見る」ことができることを確認します。</p>
+<p>🧩 <code>mcp-server</code></p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Check whether feature flag LPD-63311 (the Liferay MCP server) is enabled on
+this instance. If not, enable it using the feature-flags skill. Then connect
+over MCP, run tools/list, and use the tools it actually returns to list every
+object definition currently in this workspace. Don't assume tool names: on
+this release the server exposes a discovery chain (tool sets, then a set's
+operations, then an operation's schema, then invoke), not a single
+call-http-endpoint tool. Show me which tools you called, in order.
+</code></pre></div>
+<p>📸 <strong>スクリーンショット：</strong> MCP ツールの呼び出しと、オブジェクト定義を一覧表示するその JSON レスポンス。</p>
+<p>✅ <strong>検証：</strong> <code>GET /o/object-admin/v1.0/object-definitions</code> を直接呼び出し、MCP が報告した内容と一致することを確認します。</p>
+<h3 id="12-enable-the-flags-this-path-needs">1.2 — このコースで必要なフラグを有効にする<a aria-hidden="true" class="heading-anchor" href="#12-enable-the-flags-this-path-needs" tabindex="-1">#</a></h3>
+<p>🎯 <code>LPD-74328</code>（ライブのページ構成）、<code>LPS-164563</code>（Data Set の管理）、<code>LPD-17564</code> + <code>LPD-52006</code>（エントリー単位の権限）。すべて必要になる前に有効にしておきます。</p>
+<p>🧩 <code>feature-flags</code></p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Audit whether these feature flags are enabled: LPD-74328 (live page
+composition), LPS-164563 (Data Set admin), and LPD-17564 plus LPD-52006
+(per-entry permissions). Report the current state of each, then enable
+whichever are off.
+</code></pre></div>
+<p>📸 <strong>スクリーンショット：</strong> Control Panel → Instance Settings → Feature Flags で、有効になったトグルが表示されている画面。</p>
+<p>✅ <strong>検証：</strong> ご自身で Feature Flags パネルを開き、各トグルの現在の状態を確認します。</p>
+<h3 id="13-first-deployverify-cycle">1.3 — 最初のデプロイと検証のサイクル<a aria-hidden="true" class="heading-anchor" href="#13-first-deployverify-cycle" tabindex="-1">#</a></h3>
+<p>🎯 サイトイニシャライザーを初めてデプロイし、終了コードではなくランタイムの状態から成功を確認します。</p>
+<p>🧩 <code>deploy-and-verify</code></p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Deploy the site-initializer Client Extension for the first time in this
+workspace and confirm it actually started — don't just report that the
+command exited 0. Tail the log in the background and show me the STARTED
+line before calling this done.
+</code></pre></div>
+<p>✅ <strong>検証：</strong> ご自身で <code>STARTED</code> を grep します（対象は <code>bundles/tomcat*/logs/catalina.out</code>、または <code>bundles/logs/liferay.&lt;date&gt;.log</code>）。これが、このコースの残りを通じて使う、あなた自身の「デプロイ後に毎回確認すること」のチェックリストになります。</p>
+<h3 id="14-make-aurelis-the-portal-home-and-name-your-instance">1.4 — Aurelis をポータルのホームにし、インスタンスに名前を付ける<a aria-hidden="true" class="heading-anchor" href="#14-make-aurelis-the-portal-home-and-name-your-instance" tabindex="-1">#</a></h3>
+<p>🎯 サイトイニシャライザーによって Aurelis Energy サイトが作成されたので、ポータルのホームをそのサイトに向け、Liferay インスタンスにクラスの他の誰も使っていない名前を付けます。</p>
+<p>📋 <strong>手順（ブラウザーでの手作業、エージェントは使用しません）：</strong></p>
+<ol>
+<li><strong>Control Panel → Instance Settings → Instance Configuration → General</strong>（Virtual Instance Scope）を開きます。</li>
+<li>
+<p><strong>Name：</strong> デフォルト値を、あなた固有の名前に置き換えます。たとえば <code>Liferay &lt;YOUR LASTNAME&gt;</code> などです。
+   - これが重要な理由：このコースで使用する Liferay Data Platform 環境は<strong>すべての参加者で共有</strong>されています。あなたのインスタンスは、そこでこの名前で表示されます。全員がデフォルトの名前のままにしておくと、レベル 4（およびそれ以降）の Data Platform の演習で、どのデータが自分のものか区別できなくなります。</p>
+</li>
+<li>
+<p><strong>Navigation：</strong> 3 つのフィールドすべてを、Aurelis サイトの URL <code>/web/aurelis-energy</code> に設定します。
+   - <strong>Home URL</strong>
+   - <strong>Default Landing Page</strong>（サインイン後にユーザーが移動するページ）
+   - <strong>Default Logout Page</strong>（サインアウト後にユーザーが移動するページ）</p>
+</li>
+<li>
+<p><strong>Mail Domain</strong> と <strong>Virtual Host</strong> はそのままにしておきます。Virtual Host は、演習 0.2 で取得したご自身のトンネルのホスト名のままにしておく必要があります。</p>
+</li>
+<li><strong>Save</strong> をクリックします。</li>
+</ol>
+<p>📸 <strong>スクリーンショット：</strong> 一意の名前と 3 つのナビゲーションフィールドが設定された Instance Configuration → General の画面。</p>
+<p><img alt='Instance Configuration → General の画面。Name が "Liferay FABIAN" に設定され、Home URL、Default Landing Page、Default Logout Page がすべて /web/aurelis-energy に設定されている。' src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/virtual-instance.png"/></p>
+<p>✅ <strong>検証：</strong></p>
+<ul>
+<li>プライベートウィンドウでトンネルのルート URL（<code>https://&lt;your-tunnel-host&gt;/</code>）を開きます。デフォルトの Liferay ウェルカムページではなく、Aurelis Energy のホームページが表示されるはずです。</li>
+<li>サインインしてから、サインアウトします。どちらの場合も Aurelis サイトに戻るはずです。</li>
+<li><code>/web/aurelis-energy</code> が 404 を返す場合は、<strong>Site Settings → Site Configuration</strong> でサイトの実際のフレンドリー URL を確認し、代わりにその値を使用してください。</li>
+</ul>
+<hr/>
+<h2 id="level-2-business-data-modeling-liferay-objects">レベル 2 — ビジネスデータモデリング（Liferay Objects）<a aria-hidden="true" class="heading-anchor" href="#level-2-business-data-modeling-liferay-objects" tabindex="-1">#</a></h2>
+<p>Brief は Lot 1 に対し、外部システムから複製するのではなく、Target Account Intelligence Database を構築・維持することを求めています。そのため、このレベルでは Liferay ネイティブの <code>Account</code> システムオブジェクトを拡張し、最初からそれを記録システム（System of Record）として扱います。</p>
+<div class="copy-frame copy-frame-quote"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><blockquote>
+<p><strong>📖 アカウントスコアリングのストーリー — レベル 2 の前にお読みください</strong></p>
+<p><strong>ビジネス上の問い。</strong> Aurelis の営業チームは、すべての企業を追いかけることはできません。Brief はプラットフォームに対し、<em>どこに注力すべきか</em>を示すことを求めています。プラットフォームは、各ターゲットアカウントについて次の 3 つの問いに答えることでこれを実現します。</p>
+<ul>
+<li><strong>Fit</strong> — <em>当社が求めるタイプの企業か？</em> 業種、拠点数、エネルギー需要。<code>fitScore</code> として 0 から 100 の整数で保存します。</li>
+<li><strong>Value</strong> — <em>このアカウントにはどれだけの価値がありうるか？</em> Brief ではこれを「Opportunity Potential」と呼び、ユーロで表しています（Novacorp の場合は €8–12M）。ここでは Fit と組み合わせられるよう、0 から 100 の整数 <code>valueScore</code> に正規化します。</li>
+<li><strong>Intent</strong> — <em>今まさに購買の兆候を示しているか？</em> 閲覧したページ、ダウンロードしたホワイトペーパー、送信したフォーム、チャットボットとの会話。スコアにおいて、Intent は <code>numberOfLeads</code>、つまりアカウントに紐づくリード（フォーム送信）の数で測定します。</li>
+</ul>
+<p>この 3 つを組み合わせて、アカウントのランク付けに使う 1 つの数値、<strong>Aurelis Opportunity Score</strong>（<code>combinedOpportunityScore</code>）を算出します。</p>
+<p><code>combinedOpportunityScore = min(100, round(fitScore × valueScore / 100 × (1 + min(numberOfLeads, 5) / 10)))</code></p>
+<p>Fit × Value がアカウントの基本的なポテンシャルです。リード 1 件ごとに 10% の Intent ボーナスが加わり、上限は +50% です。スコア自体も Fit や Value と同様に 100 が上限です。多数のリードを持つ有力なアカウントでも、スケールを超えずに 100 で止まります。これを 3 つ目の乗数ではなくボーナスにしているのは、まだリードのないアカウントでも追う価値があるからです。単に、まだ Intent を示していないだけです。</p>
+<p><strong>本ワークブックで使う例。</strong> Novacorp（物流拠点 42 か所、車両の電動化を進行中、現時点では蓄電設備はわずか）は Fit 92、Value 90 なので、リードがまだない状態でのスコアは 83 となり、データセット内で最も高い値です。レベル 8 で Novacorp の Digital Sales Room を開くのはこのためです。Intent ボーナスを最大まで加えても、他のアカウントがこれを上回ることはありません（Solstice は最大 82 です）。</p>
+<p><strong>各要素の保存先と、それを構築するタイミング：</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>要素</th>
+<th>保存先</th>
+<th>入力者</th>
+<th>演習</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分類：<code>sector</code>、<code>size</code>、<code>priorityTier</code></td>
+<td><code>Account</code>（ネイティブ、拡張）</td>
+<td>スタッフ</td>
+<td>2.1、4.4 で編集</td>
+</tr>
+<tr>
+<td><code>fitScore</code>、<code>valueScore</code></td>
+<td><code>AccountIntelligenceProfile</code></td>
+<td>スタッフ（手入力。実際には Aurelis 独自のスコアリングモデル）</td>
+<td>2.2、2.3 で読み込み</td>
+</tr>
+<tr>
+<td><code>numberOfLeads</code>（スコアにおける Intent）</td>
+<td><code>Account</code>（Aggregation フィールド：紐づくリードをカウント）</td>
+<td>プラットフォーム（リードがアカウントに紐づくたびに）</td>
+<td>2.2、リードは 4.1 から、6.2 で自動的に紐づけ</td>
+</tr>
+<tr>
+<td><code>combinedOpportunityScore</code></td>
+<td><code>AccountIntelligenceProfile</code></td>
+<td>まずデータセットとともに読み込み、その後は自動計算</td>
+<td>2.3、6.2 で自動化</td>
+</tr>
+<tr>
+<td>より豊富な Intent シグナル</td>
+<td>Liferay Data Platform のイベント、チャットボットのシグナル</td>
+<td>プラットフォーム（訪問者の操作に応じて）</td>
+<td>4.1、9.1、9.2</td>
+</tr>
+<tr>
+<td>アカウントのランキングビュー</td>
+<td>Account Intelligence ページ</td>
+<td>プラットフォーム</td>
+<td>4.3</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>別の <code>AccountIntelligenceProfile</code> オブジェクトを使い、<code>Account</code> にフィールドを追加しないのはなぜか？</strong> <code>Account</code> 自体の API はカスタムフィールドでのソートができず、また <code>Account</code> は Display Page Template にも Form Container にも対応していません。<code>Account</code> に紐づく通常のカスタムオブジェクトにはこうした制限がないため、4.3 のランキングページでスコアによるソートが可能になります。</p>
+<p><strong>本コースでの簡略化。</strong> スコアにおける Intent は単なるリード数であり、新しさ（リーセンシー）の概念はありません。より豊富なシグナル（レベル 4 の Liferay Data Platform イベント、レベル 9 のチャットボットシグナル）は取得されますが、スコアには反映されません。Brief にある「Solution Affinity」指標（どの Aurelis 製品がそのアカウントに適しているか）はモデル化していません。</p>
+</blockquote></div>
+<h3 id="21-extend-the-native-account-system-object">2.1 — ネイティブの <code>Account</code> システムオブジェクトを拡張する<a aria-hidden="true" class="heading-anchor" href="#21-extend-the-native-account-system-object" tabindex="-1">#</a></h3>
+<p>🎯 <code>sector</code>（選択リスト）、<code>size</code>、<code>priorityTier</code>（選択リスト）を <code>Account</code> に追加します。</p>
+<p>🧩 <code>manage-objects</code></p>
+<p>📎 REQ-22 — 独自の Target Account Intelligence Database を構築・維持する。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-objects, extend the native Account System Object with a sector
+field (Picklist), a size field (Integer, number of employees), and a
+priorityTier field (Picklist). This is a System Object extension, not a new
+Custom Object — confirm the mechanics differ before publishing.
+Use exactly these picklist entry keys (they must match the dataset loaded
+later):
+- sector: logistics, manufacturing, foodDistribution, retail, hospitality
+- priorityTier: strategic, key, standard
+</code></pre></div>
+<p>📸 <strong>スクリーンショット：</strong> <code>Account</code> オブジェクト定義のフィールド一覧。組み込みフィールドと並んで、新しい 3 つのカスタムフィールドが表示されている状態。</p>
+<p><img alt="Account オブジェクト定義の Fields タブ。組み込みの System フィールドと並んで、Sector（Picklist）、Size (Employees)（Integer）、Priority Tier（Picklist）が Custom フィールドとして表示されている。" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/account-custom-fields.png"/></p>
+<p>✅ <strong>検証：</strong> <code>GET /o/object-admin/v1.0/object-definitions?filter=name eq 'Account'</code> で 3 つのフィールドが表示されること。実際のエントリーに対する <code>GET /o/headless-admin-user/v1.0/accounts</code> で、それらに値が入って返されること。</p>
+<h3 id="22-accountintelligenceprofile-and-lead">2.2 — <code>AccountIntelligenceProfile</code> と <code>Lead</code><a aria-hidden="true" class="heading-anchor" href="#22-accountintelligenceprofile-and-lead" tabindex="-1">#</a></h3>
+<p>🎯 <code>Account</code> に紐づき、Fit、Value、および Opportunity Score の合算値を保持するスコアリング用オブジェクト。そして、<code>Lead</code> オブジェクト。最初の Intent シグナルとして、<code>Account</code> に多対一で紐づきます。</p>
+<p>🧩 <code>manage-objects</code></p>
+<p>📎 REQ-24、REQ-27 — Strategic Fit Score、Opportunity Potential、および合算した Opportunity Score（上記「アカウントスコアリングのストーリー」を参照）。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Create an AccountIntelligenceProfile object with three Integer fields:
+fitScore (0-100), valueScore (0-100) and combinedOpportunityScore (0-100).
+Add a validation that rejects fitScore or valueScore outside 0-100. Relate it
+to the native Account object as a oneToMany relationship from Account
+(oneToOne is rejected server-side on this release — enforce
+single-profile-per-account as a business rule, not a schema constraint).
+Create a new Lead object with the fields a qualified lead would carry,
+including a company Text field and a qualificationStatus picklist
+(unqualified, qualified), and add a many-to-one relationship from Lead to
+Account. Finally, add an Aggregation field numberOfLeads on Account that
+counts its related Leads.
+
+Access expectations: grant Guest nothing on either object in this exercise.
+Leads will later come from anonymous form submissions, and
+they will then get Guest ADD_OBJECT_ENTRY only, never VIEW: Leads hold names
+and emails. AccountIntelligenceProfile is internal sales data and must never
+be readable anonymously.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ <code>numberOfLeads</code> は Account API から数値ではなく<strong>文字列</strong>（<code>"numberOfLeads": "1"</code>）として返され、これでソートやフィルターを行うことはできません。それで問題ありません。これはスコアの入力値にすぎず、それ自体がランキングのキーになることはないからです。これを読み取る処理では、必ず先に変換（<code>parseInt</code>）してください。</p>
+<p>📸 <strong>スクリーンショット：</strong> <code>Lead</code> と <code>Account Intelligence</code> のオブジェクト定義が作成され、Account との一対多のリレーションシップが設定されている状態。</p>
+<p><img alt="Lead と Account Intelligence のオブジェクト定義" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/account-intelligence-and-lead.png"/></p>
+<p>✅ <strong>検証：</strong> Control Panel → Objects で、両方の定義が公開されていること、<code>AccountIntelligenceProfile</code> に 3 つの Integer フィールドと 0–100 のバリデーションがあること、<code>Account</code> への両方のリレーションシップが存在すること、そして <code>Account</code> に <code>numberOfLeads</code> Aggregation フィールドが追加されていることを確認します。実際のデータは次の演習で投入します。</p>
+<h3 id="23-load-the-target-account-dataset">2.3 — ターゲットアカウントのデータセットを読み込む<a aria-hidden="true" class="heading-anchor" href="#23-load-the-target-account-dataset" tabindex="-1">#</a></h3>
+<p>🎯 それぞれ分類とスコアリングプロファイルを持つ、実在しそうなターゲットアカウント 6 件。これにより、以降のすべての演習（4.3 のランキングページ、6.2 のスコア自動化、8.1 の Digital Sales Room）が、全員同じデータで動作します。</p>
+<p>🧩 <code>manage-objects</code>（Headless API によるエントリー作成）</p>
+<p>📎 REQ-22 — データが投入された Target Account Intelligence Database。</p>
+<p>データセットは <code>context-source/target-accounts.csv</code> に含まれています。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>accountName</th>
+<th>sector</th>
+<th>size</th>
+<th>priorityTier</th>
+<th>fitScore</th>
+<th>valueScore</th>
+<th>combinedOpportunityScore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Novacorp</td>
+<td>logistics</td>
+<td>8500</td>
+<td>strategic</td>
+<td>92</td>
+<td>90</td>
+<td>83</td>
+</tr>
+<tr>
+<td>Solstice Manufacturing</td>
+<td>manufacturing</td>
+<td>2400</td>
+<td>key</td>
+<td>78</td>
+<td>70</td>
+<td>55</td>
+</tr>
+<tr>
+<td>Alderbrook Manufacturing</td>
+<td>manufacturing</td>
+<td>3200</td>
+<td>key</td>
+<td>85</td>
+<td>60</td>
+<td>51</td>
+</tr>
+<tr>
+<td>Norrland Foods</td>
+<td>foodDistribution</td>
+<td>1900</td>
+<td>key</td>
+<td>80</td>
+<td>55</td>
+<td>44</td>
+</tr>
+<tr>
+<td>Helix Retail Group</td>
+<td>retail</td>
+<td>12000</td>
+<td>standard</td>
+<td>55</td>
+<td>75</td>
+<td>41</td>
+</tr>
+<tr>
+<td>Brightwater Hospitality</td>
+<td>hospitality</td>
+<td>600</td>
+<td>standard</td>
+<td>40</td>
+<td>30</td>
+<td>12</td>
+</tr>
+</tbody>
+</table></div>
+<p>読み方：<code>combinedOpportunityScore</code> には、「アカウントスコアリングのストーリー」の計算式を使い、リードがまだない前提（つまり単に <code>round(fitScore × valueScore / 100)</code>）で計算した値がすでに入っています。現時点ではこれらの値は単なるデータです。演習 6.2 で、Intent ボーナスを含めてプラットフォームに計算させます。Helix Retail Group に注目してください。大企業（Value が高い）ですが、Aurelis との適合度が低い（Fit が低い）ため、規模は小さくても適合度の高いアカウントより下位になります。これこそが両方の軸を組み合わせる意義です。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Load context-source/target-accounts.csv into the platform. For each row,
+create (or update, if it already exists) an Account with that name, sector,
+size and priorityTier, and exactly one AccountIntelligenceProfile linked to
+it, carrying fitScore, valueScore and combinedOpportunityScore as given — do
+not recompute them. Give every Account and profile a readable external
+reference code derived from the account name (e.g. novacorp,
+novacorp-profile) so re-running this is idempotent. Don't create any Lead:
+every account must start with numberOfLeads = 0.
+</code></pre></div>
+<p>✅ <strong>検証：</strong></p>
+<ul>
+<li><code>GET /o/headless-admin-user/v1.0/accounts</code> が 6 件のアカウントを返し、<code>sector</code>、<code>size</code>、<code>priorityTier</code> に値が入っていること。</li>
+<li><code>GET /o/c/accountintelligenceprofiles</code> がアカウントごとに 1 件、ちょうど 6 件のプロファイルを返し、表のとおりのスコアが入っていること。</li>
+<li>各アカウントが <code>"numberOfLeads": "0"</code> を返すこと。</li>
+</ul>
+<h3 id="24-notify-on-a-qualified-lead">2.4 — 有望なリードを通知する<a aria-hidden="true" class="heading-anchor" href="#24-notify-on-a-qualified-lead" tabindex="-1">#</a></h3>
+<p>🎯 <code>Lead</code> が作成され、かつ有望（qualified）と判定されたときに、Liferay のアプリ内通知（メールではなく通知ベル）を送信する Object Action。</p>
+<p>🧩 <code>manage-object-logic</code></p>
+<p>📎 REQ-43 — ミーティングやリードが作成された時点で、営業担当者に評価（クオリフィケーション）のコンテキストを引き渡す。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Add an Object Action on Lead, triggered onAfterAdd, that notifies the
+salesperson when an entry is created. Use an in-app Liferay notification
+(a User Notification template, delivered to the notifications bell) — not
+an email. Send it to my own admin account, standing in for the salesperson,
+and include the lead's contact name and qualification status in the message.
+Leave the condition expression empty at first so I can see it fire on every
+write, then help me tighten it to only fire when qualificationStatus is
+qualified.
+</code></pre></div>
+<p>📸 <strong>スクリーンショット：</strong> <code>Lead</code> の Object Action と Notification テンプレートが作成された状態。</p>
+<p><img alt="Lead の Object Action" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/lead-object-action.png"/></p>
+<p><img alt="Lead の Notification テンプレート" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/lead-created-notification.png"/></p>
+<p>✅ <strong>検証：</strong> <code>Lead</code> を <code>qualificationStatus</code> が unqualified の状態で作成し（通知は発生しない）、次に qualified のものを作成します（上部バーのベルアイコンの下に新しい通知が表示され、フィールドが正しく埋め込まれている — <code>[%TOKEN%]</code> がそのまま表示されていないこと）。</p>
+<p>これらを作成する最も簡単な方法は、Claude に依頼することです。</p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Create two test Leads through the Lead API, both linked to the Brightwater
+Hospitality account loaded earlier, with a made-up contact name and
+company: the first with qualificationStatus unqualified, the second with
+qualificationStatus qualified. Show me the response of each call.
+</code></pre></div>
+<p>📖 リードを最もスコアの低いアカウントである Brightwater Hospitality に紐づけることで、アカウントを手作業で作成する必要がなくなり、また 2 件のリードが後でランキングを変えることもありません。演習 6.2 で Intent ボーナスが加わっても、そのスコアは 12 から 14 に上がるだけです。</p>
+<hr/>
+<h2 id="level-3-editorial-content-cms-cmp">レベル 3 — 編集コンテンツ（CMS、CMP）<a aria-hidden="true" class="heading-anchor" href="#level-3-editorial-content-cms-cmp" tabindex="-1">#</a></h2>
+<h3 id="31-four-cms-spaces-four-content-structures">3.1 — 4 つの CMS Spaces と 4 つの Content Structures<a aria-hidden="true" class="heading-anchor" href="#31-four-cms-spaces-four-content-structures" tabindex="-1">#</a></h3>
+<p>🎯 対象者ごとに Space と Content Structure を 1 つずつ作成します：<strong>Product Content</strong>、<strong>Customer Documentation</strong>、<strong>Partner Portal</strong>、<strong>White Papers</strong>。<code>context-source/</code> にあるすべてのドキュメントを、実際のエントリーとしてインポートします。</p>
+<p>🧩 <code>manage-cms</code> 🆕</p>
+<p>📎 REQ-08–REQ-11（CMS、再利用可能な構造、リッチな編集、DAM）、REQ-14（翻訳）。</p>
+<p>📋 ソースフォルダー — インポートの前に実際のファイル数を確認してください。以下の数値を前提にしないでください。</p>
+<ul>
+<li><code>context-source/products/</code>（約 5 ファイル）→ <strong>Product Content</strong></li>
+<li><code>context-source/customer-documentation/</code>（約 10 ファイル）→ <strong>Customer Documentation</strong></li>
+<li><code>context-source/partner-documentation/</code>（約 10 ファイル）→ <strong>Partner Portal</strong>（必ずこの名前にしてください — 演習 7.1 がこの名前で参照します）</li>
+<li><code>context-source/white-papers/</code>（3 ファイル、Novacorp/Alderbrook/Norrland）→ <strong>White Papers</strong></li>
+</ul>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-cms, read every file under context-source/products/,
+context-source/customer-documentation/, context-source/partner-documentation/,
+and context-source/white-papers/. For each of the four folders, design one
+Content Structure whose fields actually fit that folder's content, create a
+Space named appropriately for its audience (name the partner one 'Partner
+Portal'), connect each Space to [site], and import every document in that
+folder as a real entry using its own content. Don't skip any document, and
+don't force all four folders into one shared structure.
+
+Add a documentType Picklist on the Customer/Partner Documentation structures
+to capture sub-genre (user guide, release notes, SLA handbook, certification,
+technical manual, etc.) instead of splitting into a structure per sub-genre.
+
+Model minimumPartnerTier and any account-scoping-looking field as plain data
+only — no Role, permission grant, or scoping mechanism yet. That comes
+later.
+
+Access expectations: don't open anything to Guest in this exercise. Later
+exercises open exactly what must be public: the White Papers entries and
+the Product Content entries. Customer Documentation and Partner
+Portal must never become readable anonymously. If the import leaves Guest
+VIEW on any entry or folder, tell me rather than leaving it silently.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ この演習ではページや Collection Display を作成しないでください — それはレベル 4 の役割です。ここで使い捨てのページを作っても、その手順を重複させるだけで何のメリットもありません。</p>
+<p>📸 <strong>スクリーンショット：</strong> 4 つの CMS スペースが作成され、Content Structures とコンテンツも作成されている状態。</p>
+<p><img alt="CMS とその 4 つのスペース" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/cms.png"/></p>
+<p>✅ <strong>検証：</strong> 4 つの Space すべてについて、<code>GET .../asset-libraries/{spaceERC}/connected-sites</code> が対象サイトを返すこと。<code>GET /o/c/&lt;pluralLabel&gt;/scopes/{spaceScopeId}</code> が想定どおりの件数のエントリーを返し、すべて <code>status: approved</code> であること。</p>
+<p class="adm-block adm-warning">⚠️ CMS スペースや Content Structures の名前は、スクリーンショットと異なる場合があります。
+この演習では、AI エージェントがこのワークスペースに含まれるコンテンツから構造を推測することを前提としています。
+そのため、ある程度のランダム性が生じますが、これはまったく想定どおりです。隣に誰かが座っていれば、その人の画面をのぞいて比べてみてください。</p>
+<p>💡 <strong>この演習のねらい：</strong> ソースドキュメントは、レンダリングされた形でしか存在しない構造化コンテンツです。テンプレートはあっても、その背後にあるデータモデルはありません。これは、ソースデータが手元にない既存 Web サイトからの移行と同じ状況です。ここでのポイントは、LLM がそのレンダリング済みコンテンツを読み取り、背後にある構造を推測し、Liferay CMS のようなターゲットシステムに読み込めるようコンテンツを再構成できることを示すことです。上のプロンプトは、あえて構造をエージェントに任せています。実際のプロジェクトでは、ターゲットの構造を網羅的に記述したり、後でコンテンツをフィルタリングや仕分けするために切り出す必要がある特定のフィールドだけを指定したりと、より具体的に指示することができます。</p>
+<h3 id="32-tour-the-cms-admin-gui">3.2 — CMS 管理 GUI を見て回る<a aria-hidden="true" class="heading-anchor" href="#32-tour-the-cms-admin-gui" tabindex="-1">#</a></h3>
+<p>🎯 実際の作成者が日々行うコンテンツのライフサイクルをたどります：下書き、公開、バージョン履歴、公開スケジュール、ローカライズ、Basic Documents。あえて GUI のみで行います — スキルも API も使いません。</p>
+<p>📎 REQ-08–REQ-21 全体（ガバナンス、翻訳）。</p>
+<p>📋 <strong>手順</strong>：</p>
+<ol>
+<li>CMS を開きます。Global Menu → CMS → Contents。</li>
+<li>製品を含む CMS Space を特定します。</li>
+<li>製品を 1 つ編集します。たとえば <em>Aurelis GridMax</em> です。</li>
+<li>製品一覧に戻り、編集した製品のコンテキストメニューから *View history" を選択します。</li>
+<li>以前のバージョンを復元します（以前のバージョンは、コンテンツの新たなバージョンとして復元されます）。</li>
+<li>もう一度製品のいずれかを編集し、右側のメニューで *Schedule section" を確認します。ここでは、そのコンテンツを公開する日時や、有効期限を設定できます。</li>
+<li>製品一覧に戻り、今度は翻訳のコンテキストメニューを使います。Liferay CMS には、コンテンツの翻訳を支援する GUI が用意されています。他の言語に翻訳できなくても心配はいりません。まもなく AI Hub に手伝ってもらえるようになります！</li>
+</ol>
+<p>✅ <strong>検証：</strong> 公開済みバージョンが 2 つ以上あり、ロールバックを実演したエントリーが 1 つあること。将来の公開日がスケジュールされたエントリーが 1 つあること。製品シートに 2 つ目のロケールが入力され、切り替えられること。</p>
+<h3 id="33-ckeditor5s-native-ai-actions">3.3 — CKEditor5 のネイティブ AI アクション<a aria-hidden="true" class="heading-anchor" href="#33-ckeditor5s-native-ai-actions" tabindex="-1">#</a></h3>
+<p>🎯 AI Hub のネイティブな CKEditor5 AI メニューを使い、要約、対象読者に合わせた書き換え、トーンのバリエーション作成を行います — プラグインもカスタムコードも不要です。</p>
+<p>🧩 AI Hub との接続には <code>manage-ai-hub</code> 🆕（下記の前提条件）。編集作業自体は手動です。</p>
+<p>📎 REQ-33 — AI による下書き生成、タイトル・要約、対象読者への適応、書き換え、キャンペーンのバリエーション。</p>
+<p>📋 <strong>前提条件 — AI Hub を接続する（このパスでは初回）：</strong></p>
+<ol>
+<li>Control Panel → Instance Settings → Feature Flags → Release → <strong>AI Hub (LPD-62272)</strong> を有効にします。</li>
+<li>AI Hub で：Configurations → <strong>Environment URLs</strong> に演習 0.2 の ngrok URL（<code>localhost</code> ではありません）を設定 → Save → 生成された <strong>Client ID</strong> / <strong>Client Secret</strong> をコピーします。</li>
+<li>DXP に戻り：Control Panel → Instance Settings → <strong>AI Hub</strong> → Client ID/Secret を貼り付け、<strong>Service URL</strong> に <code>https://ai.hub.liferay.com</code> を設定 → Save。</li>
+</ol>
+<p>📸 <strong>スクリーンショット：</strong> AI Hub の Configurations 画面と DXP の AI Hub 接続画面。どちらも接続が保存された状態。</p>
+<p><img alt="AI Hub のインスタンス設定" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ai-hub-instance-settings.png"/></p>
+<p><img alt="AI Hub の設定" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ai-hub-configuration.png"/></p>
+<p>✅ <strong>検証：</strong> 正しく動作していることを確認するには、CMS で利用できるようになった
+チャットボットに <em>Hi!</em> と話しかけてみてください。</p>
+<p>📋 <strong>CMS で</strong>、3.1 で作成した製品エントリーのいずれかを選び、段落を選択して CKEditor5 の AI メニューを使います。</p>
+<ol>
+<li>リッチな本文の要約を生成します。</li>
+<li>段落を技術者以外の読者向けに書き換えます（例：設備エンジニアではなく住宅所有者向け）。</li>
+<li>段落の地域・トーンのバリエーションを作成します（言語の翻訳ではなく、言い回しの調整です）。</li>
+</ol>
+<h3 id="34-stand-up-a-cmp-campaign-for-white-paper-production">3.4 — ホワイトペーパー制作のための CMP キャンペーンを立ち上げる<a aria-hidden="true" class="heading-anchor" href="#34-stand-up-a-cmp-campaign-for-white-paper-production" tabindex="-1">#</a></h3>
+<p>🎯 Partner Portal/White Papers の CMS Space にそれぞれスコープされた 2 人の新規ユーザー（Elena Ruiz、Marcus Chen）と、作成者ごとに期日付きのタスクを 1 つずつ持つ CMP キャンペーン（"New White Papers"）。</p>
+<p>🧩 キャンペーンには <code>manage-cmp-campaigns</code> 🆕。ユーザーとロールは MCP/REST で直接作成します。</p>
+<p>📎 大規模なコンテンツガバナンス — ホワイトペーパーの担当割り当て・期日のライフサイクルは、CMS の下書き・公開ワークフローとは別のものです。</p>
+<p>📋 <strong>前提条件 — CMP を有効化する</strong>（ライセンス制のアドオン）：</p>
+<ol>
+<li>Liferay マーケットプレイスで CMP の <code>.lpkg</code> をダウンロードし、アクティベーションキーを作成します。</li>
+<li>アクティベーションキーをデプロイします</li>
+<li><code>.lpkg</code> をデプロイします</li>
+</ol>
+<p>次のように表示されるはずです。</p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>2026-09-15 12:13:26.406 INFO  [com.liferay.portal.kernel.deploy.auto.AutoDeployScanner][AutoDeployDir:274] Processing activation-key-content-marketing-platform-1-desktop-mj58ha2.xml
+2026-09-15 12:13:32.391 INFO  [fileinstall-directory-watcher][b:-1] Content Marketing Platform license validation passed
+2026-09-15 12:13:32.392 INFO  [fileinstall-directory-watcher][b:-1] License registered for Content Marketing Platform
+2026-09-15 12:14:11.547 INFO  [com.liferay.portal.kernel.deploy.auto.AutoDeployScanner][AutoDeployDir:274] Processing Liferay Content Marketing Platform.lpkg
+2026-09-15 12:14:21.131 INFO  [Start Level: Equinox Container: d5e96260-3dbf-4406-800d-a05f76184048][BundleStartStopLogger:66] STARTED com.liferay.headless.cmp.api_2.2.0 [1560]
+2026-09-15 12:14:21.135 INFO  [Start Level: Equinox Container: d5e96260-3dbf-4406-800d-a05f76184048][BundleStartStopLogger:66] STARTED Liferay Content Marketing Platform - API_26.3.0 [1559]
+2026-09-15 12:14:21.312 INFO  [fileinstall-directory-watcher][BundleStartStopLogger:66] STARTED com.liferay.site.initializer.cmp_1.0.10 [1565]
+2026-09-15 12:14:21.330 INFO  [fileinstall-directory-watcher][BundleStartStopLogger:66] STARTED com.liferay.site.cmp.site.initializer_1.0.12 [1564]
+2026-09-15 12:14:21.749 INFO  [fileinstall-directory-watcher][BundleStartStopLogger:66] STARTED com.liferay.headless.cmp.impl_1.0.8 [1563]
+2026-09-15 12:14:22.017 INFO  [Start Level: Equinox Container: d5e96260-3dbf-4406-800d-a05f76184048][BundleStartStopLogger:66] STARTED Liferay Content Marketing Platform - Impl_26.3.0 [1561]
+2026-09-15 12:14:22.169 INFO  [fileinstall-directory-watcher][BundleStartStopLogger:66] STARTED com.liferay.headless.cmp.client_1.0.6 [1562]
+</code></pre></div>
+<p>問題がなければ、Control Panel → Instance Settings → Feature Flags に移動し、CMP (LPD-58677) を有効にします。</p>
+<p class="adm-block adm-warning">⚠️ CMP が正しく有効化されなかった場合は、CMP のフィーチャーフラグを有効にしないでください。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using the Liferay MCP server (or the REST API directly if MCP isn't
+available), set up a campaign for a new white paper production effort in
+CMP, using the manage-cmp-campaigns skill.
+
+First, create two new users: Elena Ruiz (elena.ruiz@aurelis.com), who will
+author the ACME Corp white paper, and Marcus Chen (marcus.chen@aurelis.com),
+who will author the RayLife Ltd white paper. Both users must be active and
+able to sign in. Make each a member of the White Papers Space with a role
+that lets them add and edit white paper entries there, but not delete or
+publish them, and grants nothing in the other Spaces or in the Control
+Panel. Each must be able to see their own CMP task. Before calling it done,
+list exactly what the role grants.
+
+Then create a CMP campaign ('New White Papers') for two white papers: one
+for ACME Corp, one for RayLife Ltd. Add one task per white paper, each
+assigned to the corresponding author, with a due date.
+</code></pre></div>
+<p>📸 <strong>スクリーンショット：</strong> CMP キャンペーンボードに両方のタスクが表示され、担当者と期日が見える状態。</p>
+<p><img alt="新規ユーザーが CMS スペースに招待されている" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/invited-members.png"/></p>
+<p><img alt="タスクがユーザーに割り当てられている" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/cmp-tasks.png"/></p>
+<p>✅ <strong>検証：</strong> 各ユーザーのアカウントを <code>GET</code> し、付与されたロールの権限が要求どおりで、それ以上広くないことを確認します。キャンペーンを開き、両方のタスクに正しい担当者と期日が表示されていることを確認します。</p>
+<p><strong>アイデア：</strong> Liferay MCP Server を使って CMS を操作する AI ペルソナを作成し、CMP とその API を使って彼らの作業を調整してみてはいかがでしょうか？</p>
+<hr/>
+<h2 id="level-4-page-composition-account-management-page-builder-data-sets-ldp">レベル 4 — ページ構成 &amp; アカウント管理（Page Builder、Data Sets、LDP）<a aria-hidden="true" class="heading-anchor" href="#level-4-page-composition-account-management-page-builder-data-sets-ldp" tabindex="-1">#</a></h2>
+<h3 id="41-gated-white-paper-funnel">4.1 — ゲート付きホワイトペーパーのファネル<a aria-hidden="true" class="heading-anchor" href="#41-gated-white-paper-funnel" tabindex="-1">#</a></h3>
+<p>🎯 一覧ページ → ゲート付きエントリー（リード獲得フォーム）→ 送信時にリダイレクト → 全文 → Liferay Data Platform でトラッキングされたイベント。</p>
+<p>🧩 <code>manage-form-containers</code> 🆕、<code>manage-pages</code>、<code>scaffold-fragment</code>、<code>manage-analytics</code> 🆕</p>
+<p>📎 標準的なゲート付きコンテンツのパターン。<code>MutationObserver</code> → <code>Analytics.track()</code> ラッパーによる REQ-25（行動シグナルの取得）。</p>
+<p>📋 <strong>前提条件 — Liferay Data Platform（Analytics Cloud）を接続する：</strong></p>
+<ol>
+<li>LDP で、このインスタンスを新しい Data Source として追加します。</li>
+<li>生成されたトークンをコピーします。</li>
+<li>Liferay DXP で、Control Panel → Instance Settings → Analytics Cloud → トークンを貼り付け → Save。</li>
+<li>LDP で Aurelis サイトを選択し、トラッキング対象にします。</li>
+<li>LDP 上の Liferay データソースの名前を、汎用的でない名前に変更します。</li>
+</ol>
+<p class="adm-block adm-warning">⚠️ <strong>このワークスペースは、このセッションの参加者全員で共有されています。</strong> 全員の <code>Analytics.track()</code> 呼び出しが同じイベント名をそのまま送信すると、演習 4.2 のレポートは全員のダウンロードが混在した読めないものになります。下のプロンプトでは、エージェントが最初にあなた自身のイニシャル（3 文字）を尋ね、それをイベント名の末尾に付けます — この手順を飛ばさず、演習 4.2 のために自分のサフィックス付きイベント名を覚えておいてください。自分を識別できる 3 文字を選びます：名の頭文字 + 姓の最初の 2 文字（<em>Fabian Bouché</em> → <code>FBO</code>）、または 3 つの名前で呼ばれている場合は各名前の頭文字 1 文字ずつ（<em>Andrew Lloyd Webber</em> → <code>ALW</code>）。自分のものだとわかる 3 文字であれば、他の組み合わせでも構いません。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-pages, manage-form-containers and manage-analytics, build the Novacorp
+white paper's full funnel, bound to the WhitePaper Content Structure, entirely
+through the site-initializer tree.
+
+Before doing anything else, ask me for my three-letter initials and use them
+to suffix every custom event name below (e.g. whitePaperDownloaded_ABC for
+initials ABC) — this workspace is shared across every participant, so a
+bare, unsuffixed event name would collide with everyone else's.
+
+- A "White Papers" listing page with one card per white paper, each linking
+  into its own entry.
+- That entry's default page: a short teaser plus a lead-capture form (name,
+  email, company, role) writing into the existing Lead object, tagged with
+  source = 'whitepaper-novacorp'.
+- A second, non-default page for the same entry: the full write-up.
+- Once the form is submitted, take the visitor straight to that full write-up
+  page and record the visit as a tracked event, fired with a real
+  `Analytics.track()` call from the page, using my initials-suffixed event
+  name — not just a reachable page. The Liferay Analytics Cloud SDK is
+  already loaded site-wide once the prerequisite below is connected; don't
+  invent a separate tracking mechanism or fire the event from anywhere other
+  than the visitor's own browser session.
+- Access expectations. Guest must be able to browse the listing, read an
+  entry, and submit the form; nothing beyond that should be readable or
+  writable anonymously. Concretely:
+  - Guest gets VIEW on the WhitePaper entries and on the folders that hold
+    them (folders carry their own permissions), plus DOWNLOAD_FILE if an
+    entry renders a file or image.
+  - Guest gets ADD_OBJECT_ENTRY on Lead, and never VIEW: submitted names
+    and emails must not be readable anonymously.
+  - The form must not depend on a picklist fetched over REST (Guest can't
+    read picklists): ship any options in the markup.
+  - The gate is a user-experience gate, not a security boundary: the
+    write-up URL stays reachable by Guest. Say so in your summary rather
+    than presenting it as protected.
+  Verify every point as an unauthenticated visitor (curl with no
+  credentials, then a fresh browser context), never with admin credentials,
+  and show me that an anonymous GET on the Lead collection returns no
+  entries.
+</code></pre></div>
+<p>📸 <strong>スクリーンショット：</strong> 一覧ページ、リード獲得フォームのあるゲート付き（デフォルト）エントリーページ、全文ページ、そして Liferay Data Platform に表示されたトラッキング済みイベント。</p>
+<p><img alt="ホワイトペーパー一覧" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/white-papers-collection.png"/></p>
+<p><img alt="ホワイトペーパーのリード獲得フォーム" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/white-paper-form-dpt.png"/></p>
+<p><img alt="ホワイトペーパーの全文" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/white-paper-display-dpt.png"/></p>
+<p>✅ <strong>検証 — 管理者セッションではなく、実際の匿名訪問者として：</strong> 一覧 → Novacorp をクリック → ゲート付きテンプレートに遷移することを確認 → フォームを送信 → 実際の <code>Lead</code> エントリーが正しい <code>source</code> タグ付きで作成されたことを確認 → リダイレクト先が同じエントリーの全文であることを確認 → イベントが実際に Liferay Data Platform に表示されることを確認します。</p>
+<p>また、Chrome DevTools → Network タブを開き、<strong>"Preserve log" を有効にし</strong>（有効にしないと単純なリダイレクトでパネルがクリアされます）、Analytics Cloud のリクエストドメインでフィルターして、<code>Analytics.track()</code> の呼び出しが想定どおりのイベントペイロードを持つ実際の送信リクエストとして発行されていることを確認します。<code>Analytics.track()</code> はストア・アンド・フォワード方式です — イベントを直ちに <code>localStorage</code> にキューイングし、SDK が独自の約 2 秒間隔でそれを送出します。そのため、リダイレクトが発生する前にリクエストが出ることは期待せず、全文ページが読み込まれてから数秒以内に探してください。いずれにしても LDP ダッシュボードだけに頼らないでください。ダッシュボードへの反映が遅れていても、そもそもブラウザーから呼び出しが発行されたかどうかはわからないからです。</p>
+<p>📸 <strong>スクリーンショット：</strong> LDP に送信されたカスタムイベント。</p>
+<p><img alt="カスタムイベント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/custom-event.png"/></p>
+<p class="adm-block adm-warning">⚠️ これらのページのレンダリング方法について、エージェントに厳密なガイドラインを与えていないため、ルック＆フィールはスクリーンショットと多少異なる可能性があります。</p>
+<h3 id="42-monitor-white-paper-downloads-in-liferay-data-platform">4.2 — Liferay Data Platform でホワイトペーパーのダウンロードを監視する<a aria-hidden="true" class="heading-anchor" href="#42-monitor-white-paper-downloads-in-liferay-data-platform" tabindex="-1">#</a></h3>
+<p>🎯 <em>あなた自身の</em> <code>whitePaperDownloaded_&lt;your initials&gt;</code> イベントを、実際にダウンロードされたホワイトペーパーごとに分けてトラッキングする、LDP の保存済み Event Analysis。これは演習 4.1 でトラッキングしたイベントの「だから何？」にあたる後半部分です。イベントは取得するだけでは意味がなく、誰かが集計結果を見られるようになって初めて価値を生みます。</p>
+<p>🧩 構築するものはありません — Liferay Data Platform の GUI 操作のみです。<code>manage-analytics</code> 🆕 を使うと、イベントと Event Analysis の確認に役立ちます。</p>
+<p>📎 REQ-25（行動シグナルの取得）。</p>
+<p class="adm-block adm-warning">⚠️ 素の <code>whitePaperDownloaded</code> ではなく、演習 4.1 で作成した、自分のイニシャル付きのイベント名を分析してください — このワークスペースは共有されており、他の参加者も全員、同時にそれぞれのサフィックス付きイベントを送信しています。</p>
+<p>📋 <strong>手順（すべて LDP 上で — スキルは使いません）：</strong></p>
+<ol>
+<li>まず、少なくとも 1 件の実際のイベントを発生させます — 訪問者として演習 4.1 のファネル全体（一覧 → フォーム → リダイレクト → 全文）を自分でたどり、分析対象となる実際の <code>whitePaperDownloaded_&lt;your initials&gt;</code> イベントを作ります。空のレポートでは、トラッキングが正しく接続されているかどうかは何も証明できません。</li>
+<li>LDP で：<strong>Events → Event Analysis</strong>。</li>
+<li><strong>Analyze：</strong> <code>whitePaperDownloaded_&lt;your initials&gt;</code>。<strong>Breakdown：</strong> <code>pageTitle</code>（Event）を追加します — これにより、単なる合計ではなく、<em>どの</em>ホワイトペーパーの全文に実際に到達したかをレポートで区別できます。</li>
+<li><strong>Save Analysis</strong> を実行し、名前にもイニシャルを付けます（例："White paper download - ABC"）— 保存済みの分析も、他のすべてと同様にワークスペース全体で共有されます。</li>
+</ol>
+<p>📸 <strong>スクリーンショット：</strong> 保存済み Event Analysis の設定。</p>
+<p><img alt="Event Analysis" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/event-analysis.png"/></p>
+<ol start="5">
+<li>期間を <strong>Last 24 hours</strong> に設定し、表に実際の <code>pageTitle</code> 行が表示されること（"No Results" ではないこと）を確認してから、<strong>Download Reports</strong> を実行し、エクスポートされた Event Analysis Report を開きます。</li>
+</ol>
+<p>📸 <strong>スクリーンショット：</strong> ダウンロードした Event Analysis Report。実際の、空でない内訳が表示されている状態。</p>
+<p><img alt="Event Analysis Report" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/event-analysis-report.png"/></p>
+<p>✅ <strong>検証：</strong> レポートの <code>pageTitle</code> 行が実際にダウンロードしたホワイトペーパーと一致し、<code>Total Events</code> が 1 以上であること。そして、LDP のライブ画面だけでなく、ダウンロードしたレポートファイル自体にも同じ行が反映されていること。</p>
+<h3 id="43-account-intelligence-page-with-a-data-set">4.3 — Data Set を使った Account Intelligence ページ<a aria-hidden="true" class="heading-anchor" href="#43-account-intelligence-page-with-a-data-set" tabindex="-1">#</a></h3>
+<p>🎯 <code>AccountIntelligenceProfile</code> エントリーを <code>combinedOpportunityScore</code> でソートして表示するページ。各行から、対応するアカウントの小さな React アプリにリンクします。</p>
+<p>🧩 <code>manage-pages</code>、<code>manage-data-sets</code> 🆕、<code>scaffold-client-extension</code>、<code>react-custom-elements</code></p>
+<p>📎 REQ-27 — 合算した Opportunity Score でアカウントの優先順位を付ける。</p>
+<p>📖 <strong>この時点でのスコアの出どころ。</strong> ソートに使う <code>combinedOpportunityScore</code> の値は、演習 2.3 でデータセットとともに読み込んだものです。まだ何も計算していないため、今 <code>fitScore</code> を編集しても合算スコアは変わりません。この計算は演習 6.2 で自動化します。このページで想定される順序：Novacorp (83)、Solstice Manufacturing (55)、Alderbrook Manufacturing (51)、Norrland Foods (44)、Helix Retail Group (41)、Brightwater Hospitality (12)。</p>
+<p class="adm-block adm-warning">⚠️ Data Set のソースには <code>AccountIntelligenceProfile</code> を使い、<strong>決して</strong> <code>Account</code> を使わないでください — <code>Account</code> 自体の Headless モジュールは、ハードコードされた少数のフィールドでのソートしかサポートしておらず、カスタムフィールドや関連フィールドでのソートは拒否されます。また、<code>Account</code> は Display Page Template にも Form Container にも対応していないため、行アクションのリンク先は React アプリを配置した通常の Content Page になります。</p>
+<p class="adm-block adm-warning">⚠️ <strong>2026.Q3.6 以降が必要です（LPD-102157 の修正）。</strong> Data Set フラグメントは、<strong>外部参照コード（ERC）</strong>で Data Set を参照します。これはサイトイニシャライザーの <code>page-definition.json</code> から直接行われます。2026.Q3.2 ではホットフィックスが必要でした。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Create a Data Set of Account Intelligence Profiles, sorted by combined
+Opportunity Score (highest first, and sortable by users), showing each
+profile's account name, with a row action that opens /account-detail for
+that profile.
+
+Then add an 'Account Intelligence' page to the site initializer with this
+Data Set on it. Deploy it and confirm the page renders real rows without
+anyone touching the Page Editor.
+
+Separately, build the /account-detail page: a small React customElement
+Client Extension that reads profileId from the URL, fetches that
+AccountIntelligenceProfile entry, then follows its own relationship field to
+fetch the related Account — two Headless calls — and renders both live.
+
+Access expectations: both pages are for Aurelis sales staff only. Create a
+Regular Role 'Aurelis Sales' if it doesn't exist, with VIEW on
+AccountIntelligenceProfile entries and on Accounts (company-wide), and an
+active test user holding only that role (alex.moreau@aurelis.com). Remove
+Guest VIEW from both pages in their page.json (an empty actionIds for
+Guest), and give the Aurelis Sales role VIEW on them. Verify three ways: as
+alex.moreau the page shows the six rows and /account-detail resolves; as
+Guest both pages answer 404; as a signed-in user without the role the pages
+are not accessible either. Don't verify as admin only.
+</code></pre></div>
+<p>📸 <strong>スクリーンショット：</strong> スコアの降順でソートされた、公開中の "Account Intelligence" ページ。Page Editor では、フラグメントで Data Set がすでに選択されている状態（誰も手動で選択していない）。</p>
+<p><img alt="Account Intelligence の Data Set" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/account-dataset.png"/></p>
+<p>✅ <strong>検証：</strong> <code>layouts/&lt;page&gt;/page-definition.json</code> を開き、フラグメントの <code>itemSelector</code> が ERC で Data Set を指定していることを確認します。Page Editor で、誰も選択していないのにフラグメントにその Data Set が選択済みとして表示されていることを確認します。公開ページを読み込み、スコア列のヘッダーをクリックして実際に並べ替えが行われること、またアカウント名の列が逆方向のリレーションシップで解決されることを確認します。行アクションを実行し、<code>/account-detail</code> がプロファイルとそれに関連するアカウントの両方をライブで解決することを確認します。</p>
+<h3 id="44-make-the-account-detail-app-editable">4.4 — アカウント詳細アプリを編集可能にする<a aria-hidden="true" class="heading-anchor" href="#44-make-the-account-detail-app-editable" tabindex="-1">#</a></h3>
+<p>🎯 演習 4.3 の React アプリを拡張し、スタッフが同じページ上でアカウントの分類フィールドを直接編集できるようにします。</p>
+<p>🧩 <code>scaffold-client-extension</code>、<code>react-custom-elements</code></p>
+<p>📎 REQ-22 — これが Target Account Intelligence Database を実際に維持するための仕組みです。</p>
+<p>💬 <strong>プロンプト：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Extend the /account-detail React customElement built earlier so it
+can also update the Account it displays. Add editable fields for sector,
+size, country, and priorityTier, a Save button that PATCHes the change to
+Account's own Headless API (/o/headless-admin-user/v1.0/accounts/{id}), and
+re-fetch the entry afterward so the page reflects what was actually
+persisted.
+
+Access expectations: being signed in is not enough to edit. Grant the
+Aurelis Sales role (created earlier) UPDATE on Accounts, and let the server-side
+permission decide: hide the editor for users who can't update, but never
+rely on the hidden UI as the protection. Verify as alex.moreau (the save
+persists), as a signed-in user without the role (the PATCH is rejected), and
+anonymously (401/403, never a silent success).
+</code></pre></div>
+<p>📸 <strong>スクリーンショット：</strong> 編集モードのアカウント詳細ページ。</p>
+<p><img alt="Account Intelligence の Data Set" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/account-edit.png"/></p>
+<p>✅ <strong>検証：</strong> フィールドを変更して保存し、再読み込みして、新しい値が実際に保存されていることを確認します。同じ PATCH への未認証リクエストが、黙って成功するのではなく 401/403 を返すことを確認します。</p>
+<hr/>
+<h2 id="level-5-visitor-interactions-form-containers-objects-integrations">レベル 5 — 訪問者とのインタラクション（Form Containers、Objects、外部連携）<a aria-hidden="true" class="heading-anchor" href="#level-5-visitor-interactions-form-containers-objects-integrations" tabindex="-1">#</a></h2>
+<h3 id="51-become-an-aurelis-partner-form-with-a-live-company-lookup">5.1 — 企業情報をリアルタイムに検索する「Become an Aurelis Partner」フォーム<a aria-hidden="true" class="heading-anchor" href="#51-become-an-aurelis-partner-form-with-a-live-company-lookup" tabindex="-1">#</a></h3>
+<p>🎯 <code>PartnerApplication</code> エントリーを作成する公開 Form Container。フランスの公開企業登録簿のデータで事前入力されます。</p>
+<p>🧩 <code>manage-form-containers</code> 🆕</p>
+<p>📎 REQ-55 — パートナー登録と申請の受付。</p>
+<p>💬 <strong>プロンプト:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Build a public Form Container bound to a new PartnerApplication object:
+company registration number, company name, country, sector, message. When
+the registration number is entered, call France's public company registry
+(GET https://recherche-entreprises.api.gouv.fr/search?q=&lt;number&gt;) and
+prefill name/sector/country from the match. Keep every prefilled field
+editable — nothing submits automatically from the lookup.
+
+Access expectations: the page and the form are public. Guest gets
+ADD_OBJECT_ENTRY on PartnerApplication and nothing else: applications
+contain company details and must be readable only by the Aurelis Sales role
+(created earlier). Without ADD_OBJECT_ENTRY the Form Container renders nothing
+for a visitor, with no error. If sector or country is a picklist, ship its
+options in the markup: Guest can't read picklists over REST. Verify the
+submission as an unauthenticated visitor, and show me that an anonymous GET
+on the PartnerApplication collection returns no entries.
+</code></pre></div>
+<p>📸 <strong>スクリーンショット:</strong> 検索が成功した後のフォーム。事前入力されつつも編集可能なフィールドが表示されている状態。</p>
+<p><img alt="パートナー登録フォーム" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/become-a-partner.png"/></p>
+<p>✅ <strong>検証:</strong> <code>789 001 377</code>（Liferay France 自身の SIREN）で送信し、検索が実行されて名前・業種・国が事前入力されることを確認します。次に、一致する結果がない番号で再度送信し、すべてのフィールドを手動で入力できることを確認します。どちらの場合も実際の <code>PartnerApplication</code> エントリーが作成されること、また事前入力されたフィールドが送信前に編集可能であることを確認します。</p>
+<p class="adm-block adm-warning">⚠️ 対象はフランスで登録された企業（SIREN）のみです。CORS が許可されていることは確認済みのため、サーバー側のプロキシは不要です。登録簿はサーバー側で 7 req/s のレート制限がありますが、入力速度であれば問題ありません。</p>
+<hr/>
+<h2 id="level-6-custom-development-client-extensions-client-extensions-object-actions-glowroot">レベル 6 — カスタム開発: Client Extensions（Client Extensions、Object Actions、Glowroot）<a aria-hidden="true" class="heading-anchor" href="#level-6-custom-development-client-extensions-client-extensions-object-actions-glowroot" tabindex="-1">#</a></h2>
+<p>最も内容の濃いレベルです。Aurelis 向けに特定されたカスタム開発の中核部分にあたります。</p>
+<h3 id="61-solar-battery-installation-simulator">6.1 — 太陽光 + 蓄電池設置シミュレーター<a aria-hidden="true" class="heading-anchor" href="#61-solar-battery-installation-simulator" tabindex="-1">#</a></h3>
+<p>🎯 互いに独立した 2 つの <code>customElement</code> クライアント拡張（入力ウィジェットと結果ウィジェット）。両者は <code>Liferay.fire()</code>/<code>Liferay.on()</code> のみを介して連携します。</p>
+<p>🧩 <code>scaffold-client-extension</code>（×2。「Messaging Between Widgets: <code>Liferay.fire</code> / <code>Liferay.on</code>」セクションを含む）。</p>
+<p>📎 REQ-63〜REQ-66 — 住所、利用可能な面積、時間帯別の消費プロファイルから、実際の Open-Meteo 気象データを用いて太陽光・蓄電池の容量を算出。</p>
+<p>💬 <strong>プロンプト:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Build the Aurelis Solar + Battery Installation Simulator as specified in the
+Brief (section "Solar Panel + Battery Installation Simulator", Lot 1) — two
+independent customElement Client Extensions on the same page, coupled only
+through Liferay.fire()/Liferay.on(), never a shared DOM reference, module, or
+config file.
+
+(1) aurelis-simulator-inputs. Collects exactly three inputs: address
+(geocoded via Open-Meteo's geocoding endpoint), usable surface area in m²,
+and an hourly consumption profile for a typical day — an editable 24-bar
+chart with an adjustable Y-axis scale. On any change, fire
+Liferay.fire('aurelisSimulatorInputsChanged', {address, lat, lon, surfaceM2,
+hourlyConsumptionKwh: [24 numbers]}) with the full current state.
+
+(2) aurelis-simulator-results. A separate Client Extension subscribing via
+Liferay.on('aurelisSimulatorInputsChanged', ...). For a visitor-selected
+month (a real 12-month selector):
+- Fetch that location's historical solar irradiance for that month from
+  Open-Meteo's historical archive API.
+- Compute hourly solar production from surface area and irradiance.
+- Simulate the battery: store daytime surplus, discharge it during hours
+  without sun. Compute and display a recommended battery capacity (kWh),
+  labeled as this build's own answer to an open question in the Brief.
+- Render a 24-bar stacked chart per hour: solar / battery / grid, always
+  summing to that hour's consumption. Overlay battery state-of-charge (%) as
+  a line on the same chart.
+- Recompute the whole chart whenever the month changes.
+
+Out of scope, name explicitly in the README rather than deciding silently:
+no cost/savings estimate (physical simulation only); no
+efficiency/orientation/tilt inputs (name whatever fixed assumption is used as
+an explicit constant); no geography restriction beyond Open-Meteo's own
+coverage.
+
+Inject each Client Extension's JS/CSS from the fragment's own js field
+(document.createElement, appended to document.head, guarded by a data-*
+marker) — a fragment's html field silently strips &lt;script&gt;/&lt;link&gt; tags.
+Cache each (location, month) fetch; don't refetch on every unrelated redraw.
+
+Access expectations: the simulator page is public. Both widgets must work
+for an anonymous visitor: they call only Open-Meteo, never a Liferay API.
+Verify it in a fresh, signed-out browser context.
+</code></pre></div>
+<p>📸 <strong>スクリーンショット:</strong> 手描きの消費プロファイルを入力した入力ウィジェットと、選択した 2 つの異なる月に対する結果ウィジェットの積み上げグラフ。</p>
+<p><img alt="Aurelis シミュレーター" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/energy-consumption.png"/></p>
+<p>✅ <strong>検証:</strong> 実在の住所 + 妥当な面積 + 描いたプロファイル → 結果の棒グラフがすべての時間帯で正しく合計されることを確認します。月を切り替え、構成比が実際に変わることを確認します。結果ウィジェットをページから削除しても入力ウィジェットが単独で動作し続けることを確認します。これが、連携がイベントベースであることの証明になります。</p>
+<p>💡 <strong>レイアウトの変更:</strong> 2 つのウィジェットはデフォルトでは上下に積み重ねて配置されますが、その配置に縛られるわけではありません。イベントを通じてのみ通信しているため、横並びにしたり、任意のグリッドに配置したりできます（例えば左に入力、右に結果）。方法は 2 つあります。</p>
+<ul>
+<li><strong>ページエディターで:</strong> 2 つのモジュールを持つ <strong>Grid</strong> フラグメントをドロップし、各列にウィジェットを 1 つずつドラッグします。手軽ですが、ページは <code>page-definition.json</code> から再構築されるため、次回サイトイニシャライザーを実行すると上書きされます。</li>
+<li><strong>ソースツリーで:</strong> エージェントに、ページの <code>page-definition.json</code> を <code>Section → Row → Column</code> レイアウト（列サイズの合計が 12）に変更し、モバイルでは列を縦に積み重ねるよう依頼します。こうすれば、再プロビジョニングのたびに配置が保持されます。</li>
+</ul>
+<h3 id="62-opportunity-score-client-extension">6.2 — Opportunity Score クライアント拡張<a aria-hidden="true" class="heading-anchor" href="#62-opportunity-score-client-extension" tabindex="-1">#</a></h3>
+<p>🎯 Fit、Value、Intent に応じて <code>combinedOpportunityScore</code> を最新に保つ <code>objectAction</code> クライアント拡張。リードが入ってきた際には、そのリードを適切なアカウントに紐付け、訪問者の関心がそのアカウントのスコアに実際に反映されるようにします。</p>
+<p>🧩 <code>scaffold-client-extension</code>（タイプ <code>objectAction</code>）、<code>setup-oauth</code></p>
+<p>📎 REQ-26（識別された訪問者をその組織に紐付ける）、REQ-27 — Aurelis のスコアリング式は同社独自のビジネスロジックであり、Liferay のネイティブ機能では計算できません。</p>
+<p>📖 <strong>何が変わるのか。</strong> これまで <code>combinedOpportunityScore</code> は演習 2.3 で読み込んだ単なるデータでした（4.3 の注記を参照）。また、ホワイトペーパーフォーム（4.1）からのリードは会社名を自由テキストとして持つだけで、どのアカウントにも紐付いていませんでした。ここからは、1 つのクライアント拡張が 2 つのトリガーを処理します。</p>
+<ul>
+<li><strong>プロファイルが追加または更新されたとき:</strong> そのプロファイルのスコアを再計算します。</li>
+<li><strong>リードが追加されたとき:</strong> リードの <code>company</code> と名前が一致するアカウントを検索し、リードをそのアカウントに紐付けて（これによりアカウントの <code>numberOfLeads</code> が増加します）、そのアカウントのスコアを再計算します。</li>
+</ul>
+<p>計算式は「The account scoring story」のものです: <code>min(100, round(fitScore × valueScore / 100 × (1 + min(numberOfLeads, 5) / 10)))</code>。リードがまだ紐付いていない場合はデータセットの値とまったく同じになるため、リードが入ってくるか、誰かが Fit または Value のスコアを変更するまで、ランキングは変わりません。</p>
+<p>📖 <strong>このクライアント拡張に 2 つの OAuth アプリケーションが必要な理由。</strong> これまで、クライアント拡張は Liferay から送られてきたトークンを使って Liferay を呼び出していました。このトークンは、アクションをトリガーしたユーザーとして動作します。ここでは、リードは通常 <strong>匿名</strong> の訪問者がホワイトペーパーフォームを送信することで作成されるため、そのトークンはゲストのものとなり、ゲストはアカウントの読み取りもリードの編集もできません（すべての呼び出しが <code>403</code> を返します）。そのため、クライアント拡張には独自のアイデンティティを持たせます。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OAuth アプリケーション</th>
+<th>タイプ</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ユーザーエージェント（すべての <code>objectAction</code> で既に必須）</td>
+<td><code>oAuthApplicationUserAgent</code></td>
+<td>Liferay がマイクロサービスを呼び出し、トリガーしたユーザーを識別できるようにする</td>
+</tr>
+<tr>
+<td>ヘッドレスサーバー</td>
+<td><code>oAuthApplicationHeadlessServer</code></td>
+<td>マイクロサービス自身のサービスアカウント。Liferay へのすべてのコールバックで <code>client_credentials</code> とともに使用</td>
+</tr>
+</tbody>
+</table></div>
+<p>ヘッドレスサーバーのサービスアカウントは Administrator です。実行できる操作を制限するのはスコープリストだけなので、できる限り狭く保ってください。</p>
+<p class="adm-block adm-warning">⚠️ <strong>マイクロサービスは、認証情報をソースコードや設定に保持しません。</strong> デプロイ時に、DXP はヘッドレスサーバーのクライアント ID とシークレットを <code>bundles/routes/default/&lt;project-name&gt;/</code> 配下にファイルとして書き出します（Liferay Cloud では <code>/etc/liferay/lxc/ext-init-metadata</code> 配下）。<strong>再デプロイのたびに両方が変わり</strong>、それ以前に発行されたトークンは <code>401</code> を受け取ります。そのため、マイクロサービスはトークンを要求するたびにこれらのファイルを読み込み、<code>401</code> を受け取った場合は再度読み込んで 1 回だけリトライします。</p>
+<p>💬 <strong>プロンプト:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Scaffold an objectAction Client Extension (a Node microservice) that keeps
+AccountIntelligenceProfile.combinedOpportunityScore up to date:
+
+  combinedOpportunityScore =
+    min(100, round(fitScore * valueScore / 100 * (1 + min(numberOfLeads, 5) / 10)))
+
+where numberOfLeads is the Aggregation field on the profile's Account (it
+comes back as a string: parse it).
+
+Attach the same Client Extension to three object actions and tell the
+callers apart by objectDefinitionId:
+- AccountIntelligenceProfile, onAfterAdd and onAfterUpdate: recompute that
+  profile's score.
+- Lead, onAfterAdd: find the Account whose name exactly matches the Lead's
+  company (case-insensitive; escape single quotes in the filter). If there's
+  no match, do nothing. Otherwise link the Lead to that Account, then
+  recompute that Account's profile score.
+Only PATCH a score when the value actually changes, so the write-back
+doesn't re-trigger the action in a loop.
+
+Leads are created by anonymous visitors, so don't call back into Liferay
+with the inbound token. With setup-oauth, add an
+oAuthApplicationHeadlessServer and use client_credentials for every call
+back, with only these scopes: c_accountintelligenceprofile.everything,
+c_lead.everything, Liferay.Headless.Admin.User.everything.read. Keep the
+oAuthApplicationUserAgent the objectAction entry requires.
+Read the headless server's client ID and secret from the routes files DXP
+writes on deploy, each time a token is requested (never cached at startup,
+never copied into the project), and on a 401 re-read them and retry once.
+</code></pre></div>
+<p>✅ <strong>検証:</strong></p>
+<ul>
+<li><strong>Fit/Value の変更:</strong> Helix Retail Group の <code>fitScore</code> を 55 から 95 に変更し、<code>combinedOpportunityScore</code> が 71（95 × 75 / 100、リードなし）になることを確認します。Account Intelligence ページで、Helix が Novacorp に次ぐ 2 位になります。55 に戻し、スコアが 41 に戻ることを確認します。</li>
+<li><strong>Intent:</strong> プライベートウィンドウ（匿名）で、演習 4.1 のホワイトペーパーフォームを会社名 <code>Norrland Foods</code> で送信します。新しいリードが Norrland Foods アカウントに紐付けられ、アカウントが <code>"numberOfLeads": "1"</code> を返し、Norrland のスコアが 44 から 48 になることを確認します。もう一度送信するとスコアは 53 に達し、Norrland が Alderbrook Manufacturing（51）より上位になります。最後に、どのアカウントにも一致しない会社名で送信し、そのリードが未紐付けのままで、スコアが変わらないことを確認します。</li>
+<li><strong>ヘッドレスサーバーが必要な理由:</strong> 一時的にマイクロサービスが受信したトークンを使うように変更し、匿名でフォームを再送信して、コールバックが <code>403</code> で失敗することを確認します。その後、元に戻します。</li>
+<li><strong>スコープ:</strong> ヘッドレスサーバーに <code>Liferay.Headless.Object.everything</code> だけを与え、すべてのコールバックが <code>403</code> で失敗することを確認します。上記の 3 つのスコープを元に戻し、再び動作することを確認します。</li>
+<li><strong>認証情報のローテーション:</strong> マイクロサービスを再起動せずにクライアント拡張を再デプロイし、別のリードを送信して、引き続き動作することを確認します（マイクロサービスが <code>401</code> の後に新しい認証情報を読み直したことになります）。</li>
+</ul>
+<h3 id="63-measure-what-a-lead-submission-costs-with-glowroot">6.3 — リード送信のコストを Glowroot で測定する<a aria-hidden="true" class="heading-anchor" href="#63-measure-what-a-lead-submission-costs-with-glowroot" tabindex="-1">#</a></h3>
+<p>🎯 コードを読むのではなく、測定によって 1 つの問いに答えます: 匿名の訪問者がホワイトペーパーフォームを送信したとき、<strong>訪問者は次のページを受け取る前に Opportunity Score クライアント拡張（6.2）の処理を待たされるのか？</strong> また、1 件のリードによって合計で何回の呼び出しが発生するのか？</p>
+<p>🧩 <code>glowroot-performance</code> 🆕</p>
+<p>📎 NFR — 公開ジャーニーのパフォーマンス。6.2 の設計（ループガード、トリガー）を数値で検証します。</p>
+<p>📖 <strong>リードが入ってきたときに何が起こるか。</strong> 1 回のフォーム送信が、次のような連鎖を引き起こします。</p>
+<ol>
+<li>Liferay がリードを保存します。</li>
+<li><code>onAfterAdd</code> Object Action がクライアント拡張のマイクロサービスを呼び出します。</li>
+<li>マイクロサービスが Liferay を呼び出します: 名前でアカウントを検索し、リードを PATCH して紐付け、<code>numberOfLeads</code> を読み取り、プロファイルのスコアを PATCH します。</li>
+<li>これらの PATCH がさらにアクションをトリガーします: リードの <code>onAfterUpdate</code>、プロファイルの <code>onAfterUpdate</code>。6.2 のガードによって、これらが再度書き込みを行うことは防がれるはずです。</li>
+</ol>
+<p>これらの各ステップはブラウザからは見えません。Glowroot は Liferay の JVM 内で動作する APM エージェントで、すべてのリクエストをトランザクションとして、その所要時間、SQL クエリ、外部への HTTP 呼び出しとともに記録します。<code>glowroot-performance</code> スキルは、Glowroot の MCP サーバーを通じてそれらを読み取ります。</p>
+<p>📋 <strong>前提条件（設定済み）:</strong> ワークスペースの <code>setenv</code> ファイルが起動のたびに Glowroot エージェントをアタッチし（演習 0.2 の <code>blade server init</code> でインストール済み）、<code>.mcp.json</code> がその MCP サーバーを <code>http://localhost:4000/o/glowroot/mcp</code> に登録しています。Claude Code から <code>glowroot</code> MCP サーバーの承認を求められた場合は、承認してください。<code>http://localhost:4000/o/glowroot</code> が開けることを確認してください。</p>
+<p>💬 <strong>プロンプト:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using glowroot-performance, measure what a single Lead submission costs.
+
+First, in a private window (anonymous), I'll submit the white paper form built
+earlier three times with "Norrland Foods" as the company. Tell me when
+you're ready, then wait for me to say it's done.
+
+Then, over that time window:
+1. Check the CPU regime first and tell me whether the timings are reliable.
+2. Find the form submission transaction. Give its duration and say whether
+   the call to the Opportunity Score microservice (localhost:3101) appears
+   inside it as a service call. Conclude: does the visitor wait for the
+   Client Extension, yes or no?
+3. List the transactions caused by the microservice calling back into Liferay
+   (accounts lookup, Lead PATCH, profile PATCH, and anything else), with
+   count and average duration.
+4. Confirm the loop guard built earlier holds: exactly one profile score PATCH per Lead.
+5. Count the SQL queries behind one submission, end to end.
+
+Every claim must cite a Glowroot number and a trace id or transaction name,
+with the glowrootUrl so I can open it. If a fast transaction left no trace,
+lower the slow-trace threshold for that one transaction only, rerun, then put
+it back and tell me you did. Don't create instrumentation and don't run
+anything that pauses the JVM.
+</code></pre></div>
+<p>✅ <strong>検証:</strong></p>
+<ul>
+<li>Claude が提示する各 <code>glowrootUrl</code> を開き、Glowroot UI（Transactions → Web、次にトレース）で数値を自分で確認します。</li>
+<li>「訪問者は待たされるのか？」への答えは、コードが本来どう動くべきかではなく、トレースに基づいている必要があります。マイクロサービスの呼び出しが送信のトレース内に現れる場合、訪問者は送信のたびにそのレイテンシーを負担することになります。何を変更するか（例えば、アクションを非同期にする）を議論してください。</li>
+<li>3 回の送信でプロファイルのスコアの PATCH は 6 回ではなく 3 回になるはずです。それより多い場合は、ガードが機能していません。</li>
+<li>Claude が低速トレースのしきい値を下げた場合は、Glowroot UI で元の値に戻っていることを確認します。</li>
+</ul>
+<p class="adm-block adm-warning">⚠️ この環境では Glowroot の UI と MCP サーバーには認証がなく、<code>127.0.0.1</code> でのみリッスンしています。ポート 4000 を ngrok やその他のトンネル経由で公開しないでください。</p>
+<p>💡 <strong>この演習の先へ:</strong> この演習では 1 つの限られた問いに Glowroot を使いますが、同じアプローチは <code>glowroot-performance</code> スキルを通じて、Claude Code からのあらゆるパフォーマンス調査に使えます。このスキルでは次のことができます。</p>
+<ul>
+<li>低速トレースの読み取り</li>
+<li>特定のトランザクションのスレッドプロファイルの読み取り（トランザクションの種類と時間帯で絞り込み）</li>
+<li>トランザクションの背後にある SQL クエリの読み取り</li>
+<li>メモリと CPU の使用状況、および JMX メトリクスの読み取り</li>
+<li>Java メソッドへの新しいインストルメンテーションをプログラムで追加し、プロファイリングする</li>
+</ul>
+<p>私たちがよく使う手法: トランザクションのサンプルを取得し、そのスレッドプロファイルのスタックからホットスポットを探し、それらのメソッドにインストルメンテーションを追加して、内部で実際に何が起きているかを把握します。</p>
+<p>これは、MCP サーバーを公開する Glowroot の改変版に依存しています。非常に新しいもので、2026.Q3 では問題なく動作することが確認されており、現在より広範囲でテストが進められているところです。多少の粗さがあることを想定してください。</p>
+<hr/>
+<h2 id="level-7-security-permissions-and-the-native-ai-hub-chatbot-ai-hub">レベル 7 — セキュリティと権限、ネイティブの AI Hub チャットボット（AI Hub）<a aria-hidden="true" class="heading-anchor" href="#level-7-security-permissions-and-the-native-ai-hub-chatbot-ai-hub" tabindex="-1">#</a></h2>
+<h3 id="71-restrict-partner-content-access-by-tier">7.1 — ティアに応じてパートナーコンテンツへのアクセスを制限する<a aria-hidden="true" class="heading-anchor" href="#71-restrict-partner-content-access-by-tier" tabindex="-1">#</a></h3>
+<p>🎯 累積的な 3 つの Regular Role（Partner - Bronze/Silver/Gold、Gold ⊇ Silver ⊇ Bronze）。各 <code>PartnerDocumentation</code> エントリーの <code>minimumPartnerTier</code> に応じて、エントリーレベルの View 権限を付与します。</p>
+<p>🧩 <code>manage-roles-permissions</code></p>
+<p>📎 REQ-57 — ティア別のパートナー向けイネーブルメントコンテンツ。</p>
+<p>📖 Aurelis は設置パートナーを Bronze、Silver、Gold の 3 つのティアで認定しており、ティアが上がるほど Partner Portal でアクセスできる範囲が広がります。例えば Gold パートナーは、機密の製品ロードマップを閲覧できます。演習 3.1 では、パートナー向けドキュメントを <code>minimumPartnerTier</code> 付きの単なるデータとしてインポートしましたが、現時点ではそれを強制する仕組みはありません。この演習では、このフィールドを実際のアクセス制御に変えます。</p>
+<p>💡 <strong>設計上の判断（決定済み）</strong>（元のドキュメントでは未確定のため、プロンプトで決めています）:</p>
+<ul>
+<li><strong>排他的ではなく累積的</strong> — Gold パートナーは Bronze + Silver + Gold のコンテンツを閲覧できます。</li>
+<li><strong>「Gold-only section」を含むドキュメント</strong> — 2 つのエントリーに分割するのではなく、エントリー全体を Gold ティアに設定します。これにより、そのドキュメントの機密でない部分まで過剰に制限されますが、分割・再インポートの手順を追加するよりも、このトレードオフを受け入れます。</li>
+</ul>
+<p>💬 <strong>プロンプト:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-roles-permissions, create three Regular Roles for the partner
+tiers — Partner - Bronze, Partner - Silver, Partner - Gold. Then, for every
+PartnerDocumentation entry in the Partner Portal Space, GET its current
+permissions first, then PUT entry-level View permission driven by that
+entry's own minimumPartnerTier field, cumulatively: a Bronze-tier entry
+visible to all three roles, a Silver-tier entry visible to Silver and Gold,
+a Gold-tier entry visible to Gold alone. The PUT body is a bare array (not
+wrapped in a "permissions" key) of {actionIds, roleExternalReferenceCode,
+roleName, roleType} objects. This call is a full replace: include every
+existing role grant that should survive (Owner, any admin role) alongside
+the tier grants. Tag the "confidential roadmap briefing with a Gold-only
+section" entry Gold-tier as a whole — don't split it.
+
+Access expectations: after the PUT, no Guest, User or Site Member grant may
+remain on these entries, otherwise the tiers protect nothing. The three
+roles also need VIEW on the Space's folders. Create two active test users
+who can sign in: partner.bronze@aurelis-partner.example (Partner - Bronze
+only) and partner.gold@aurelis-partner.example (Partner - Gold only). Verify
+as each of them and anonymously, never as admin, and report the entry count
+each one sees. Tell me explicitly that entries added later get no tier
+grant by themselves.
+</code></pre></div>
+<p>✅ <strong>検証 — Basic 認証や管理者ではなく、実際のテストアカウントでログインします:</strong> Bronze ティアのアカウントからは Gold や Silver のエントリーが決して見えてはいけません。Gold ティアのアカウントからは Bronze、Silver、<em>そして</em> Gold のエントリーが見える必要があります。</p>
+<h3 id="72-stand-up-the-energy-advisor-chatbot-public-product-knowledge">7.2 — 「Energy Advisor」チャットボットを構築する: 公開製品ナレッジ<a aria-hidden="true" class="heading-anchor" href="#72-stand-up-the-energy-advisor-chatbot-public-product-knowledge" tabindex="-1">#</a></h3>
+<p>🎯 Product Content Space をグラウンディングに用いた公開 AI Hub チャットボット。ログアウトしたセッションから検証します。</p>
+<p>🧩 <code>manage-roles-permissions</code>（ゲストの閲覧権限）、<code>manage-cms</code> 🆕、<code>manage-ai-hub</code> 🆕（AI Hub 自身のコンソールで手作業で行う必要がある内容をまとめたビルドシートを提示し、その後結果を検証します）。</p>
+<p>📎 REQ-36/REQ-61（公開 Energy Advisor、Stage 1 Q&amp;A）、REQ-45（RAG でグラウンディングされた Product Knowledge Agent）。</p>
+<p class="adm-block adm-warning">⚠️ <strong>NFR-06:</strong> この世代の AI Hub はテキストのみに対応しており、音声・画像には対応していません。</p>
+<p class="adm-block adm-warning">⚠️ <strong>前提条件 — Product Content に対してゲストに View 権限を付与します。</strong> 公開チャットボットが公開されている度合いは、そのコンテンツの権限次第です。これはエラーにならずに失敗します: 管理者がテストするとグラウンディングされた回答が得られますが、実際の匿名訪問者には何も返りません。以下の構築を始める前に、必ず実施してください。</p>
+<p>💬 <strong>プロンプト:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-roles-permissions and manage-cms, make the Product Content
+Space's entries readable by anonymous visitors, so a public chatbot can
+retrieve them through search.
+
+Access expectations: Guest gets VIEW, company-wide, on the product structure
+entries in the Product Content Space (whatever that structure was called
+when it was created earlier), and VIEW on that Space's folders (folders carry their own
+permissions). Add DOWNLOAD_FILE only if those entries hold files. Grant
+nothing on the Customer Documentation, Partner Portal or White Papers
+Spaces. Reindex afterwards, since the chatbot reads the search index.
+
+Verify as an unauthenticated visitor: an anonymous request lists the product
+entries, and an anonymous request on a Customer Documentation entry returns
+nothing.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ <strong>エージェントをグラウンディングする方法は 2 つあります — 2 つ目を使用してください。</strong> AI Hub の <strong>Data Sources</strong> タブは外部 Web サイトの URL をクロールするだけで、権限を考慮しません。<strong>Search Blueprint</strong> を利用する <strong>Liferay Search</strong> ノードは、DXP 自身の権限を考慮した検索インデックスを直接クエリします。DXP 内部にあるコンテンツにそもそも到達できるのは、この 2 つのうちこちらだけです。</p>
+<p>📋 <strong>手順（すべて AI Hub/DXP のコンソールで行います。スキルは使用しません）:</strong></p>
+<ol>
+<li><strong>AI Hub は演習 3.3 で既に接続済みです</strong> — 引き続き有効であることを確認するだけです。</li>
+<li><strong>Search Blueprint を作成します。</strong> Global Menu → Search Experiences → Blueprints → Add。スコープ: <strong>Product Content</strong> Space。必要に応じて <code>ProductSheet</code> ストラクチャーに絞り込みます。保存し、Blueprint の <strong>External Reference Code</strong> を控えておきます。</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> スコープ/ストラクチャーを入力した Blueprint の設定画面。</p>
+<p><img alt="製品検索 Blueprint" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/product-blueprint.png"/></p>
+<p class="adm-block adm-warning">⚠️ <strong>ストラクチャーの名前は異なる場合があります。</strong> <code>ProductSheet</code> は、私たちが演習 3.1 を実行した際にエージェントが選んだ名前です。この演習ではストラクチャーを指定しておらず、エージェントがこのワークスペースのドキュメントから各ストラクチャーを推測したため、名前（およびフィールド）はあなたのプロジェクトでは異なる可能性があります。CMS 管理画面（演習 3.2）に表示される、Product Content Space に実際に存在する製品ストラクチャーを使用してください。</p>
+<ol start="3">
+<li><strong>Search Worker エージェントを作成します。</strong> Agent Builder → Liferay Search エージェントで、
+<strong>Duplicate</strong> アクションを使用します:<ul>
+<li><strong>Description:</strong> <em>"Retrieval worker for Aurelis product knowledge — solar, GridMax, EV charging, Pulse, energy transformation programs. The request sent to this agent is used directly as the search query. Formulate a short, precise keyword query before invoking — never the visitor's original question verbatim. Prefer product names/codes over prose."</em></li>
+<li><strong>Input Variables:</strong> <code>request</code>。 </li>
+<li><strong>Output Variables:</strong> <code>response</code>（使用されるのは最初の出力変数のみです。2 つ以上指定しないでください）。</li>
+<li>ワークフローを編集する前に、エージェントを有効にして <strong>Save</strong> をクリックします。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> 製品検索ワーカー。</p>
+<p><img alt="製品検索ワーカーエージェント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-product-search-agent.png"/></p>
+<ol start="4">
+<li>
+<p><strong>ワークフローを編集します:</strong> <code>Start → Liferay Search → End</code> とし、Liferay Search ノードの設定を編集します:</p>
+<ul>
+<li><strong>Prompt:</strong> <em>"Analyze the retrieved product content and return factual evidence relevant to the request. Use only the retrieved information. Return concise findings; do not produce the final answer — your response is evidence for another agent."</em></li>
+<li><strong>Input Variables:</strong> <code>[{"name": "request", "type": "string"}]</code>。</li>
+<li><strong>Output Variables:</strong> <code>[{"name": "response", "type": "string"}]</code>。</li>
+<li><strong>User Message:</strong> <code>{{request}}</code>。</li>
+<li><strong>RAG config:</strong> <code>{"contentRetriever": {"key": "liferay", "blueprintExternalReferenceCode": "&lt;Blueprint ERC&gt;"}}</code>。</li>
+<li><strong>Tools:</strong> <code>[]</code>。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> 製品検索ワーカーのワークフロー。</p>
+<p><img alt="製品検索ワーカーエージェントのワークフロー" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-product-search-agent-workflow.png"/></p>
+<ol start="5">
+<li><strong>Answer Builder エージェントを作成します。</strong> 2 つ目の、別個のエージェントです。<ul>
+<li><strong>Description:</strong> 調査が完了した後、元のリクエストと収集したすべての情報を受け取って常に最後に呼び出されます。情報取得には決して使用しません。</li>
+<li>Input Variables: <code>originalRequest,gatheredInformation</code>。</li>
+<li>Output Variable: <code>response</code>。有効にします。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> Answer Builder エージェント。</p>
+<p><img alt="Answer Builder エージェント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-answer-builder-agent.png"/></p>
+<ol start="6">
+<li><strong>ワークフローを編集します:</strong> <code>Start → LLM → End</code> — Liferay Search ノードは<strong>使用しません</strong>。<ul>
+<li><strong>Prompt:</strong> <code>Build a clear, direct answer from the gathered information alone; never invent unsupported facts; say explicitly when the evidence doesn't cover part of the question rather than guessing. Make synthetic responses, ask the user if he wants more details.</code></li>
+<li><strong>Input Variables:</strong> <code>[{"name": "originalRequest", "type": "string"}, {"name": "gatheredInformation", "type": "string"}]</code>。</li>
+<li><strong>Output Variables:</strong> <code>[{"name": "response", "type": "string"}]</code>。</li>
+<li><strong>User Message:</strong> <code>Original user request:\n{{originalRequest}}\n\nGathered information:\n{{gatheredInformation}}</code>。</li>
+<li><strong>RAG config:</strong> <code>[]</code>。</li>
+<li><strong>Tools:</strong> <code>[]</code>。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> Answer Builder エージェントのワークフロー。</p>
+<p><img alt="Answer Builder エージェント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-answer-builder-agent-workflow.png"/></p>
+<ol start="7">
+<li><strong>チャットボットを作成します。</strong> AI Hub → Chatbots → New Chatbot。</li>
+</ol>
+<p><strong>Assigned Agents:</strong> Search Worker と Answer Builder の<em>両方</em>を割り当てます。Intro Message を設定し、保存します。</p>
+<p>📸 <strong>スクリーンショット:</strong> Aurelis RAG チャットボット。</p>
+<p><img alt="Answer Builder エージェント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-chatbot.png"/></p>
+<ol start="8">
+<li><strong>Click to Chat でチャットボットをサイトに配置します。</strong> Click to Chat は Liferay のネイティブなチャット連携機能で、AI Hub はサポートされているプロバイダーの 1 つです。<strong>サイトごとに 1 つのチャットボット</strong>を割り当て、そのサイトのすべてのページに表示します。フラグメントを作成したり配置したりする必要はありません。設定は 2 か所で行います:</li>
+</ol>
+<p><strong>a. インスタンスで有効にします。</strong> Control Panel → Instance Settings → <strong>Click to Chat</strong>:
+   - <strong>Enable Click to Chat</strong> をオンにします。
+   - <strong>Site Settings Strategy:</strong> <em>Inherit or Override</em>。各サイトが独自のチャットボットを宣言できるようにします。
+   - <strong>Chat Provider</strong> と <strong>Chat Provider Account ID</strong> は空のままにします。チャットボットは以下でサイトごとに設定します。
+   - 保存します。</p>
+<p>📸 <strong>スクリーンショット:</strong> インスタンスレベルで有効化された Click to Chat。</p>
+<p><img alt="Instance Settings で有効化された Click to Chat" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/enable-click-to-chat.png"/></p>
+<p><strong>b. チャットボットを Aurelis サイトに割り当てます。</strong> Site Menu → Configuration → Site Settings → <strong>Click to Chat</strong>:
+   - <strong>Enable Click to Chat</strong> をオンにします。
+   - <strong>Chat Provider:</strong> <em>AI Hub</em>。
+   - <strong>Chat Provider Account ID:</strong> チャットボットの <strong>External Reference Code</strong>（AI Hub → Chatbots → 手順 7 のチャットボット）。例: <code>BASIC_CHATBOT_FBO</code>。
+   - <strong>Guest Users Allowed</strong> をオンにします。これは公開チャットボットであり、以下の検証はログアウトした状態で行います。
+   - <strong>Hide in Control Panel:</strong> 任意です。オンにすると、チャットのバブルは管理画面には表示されず、サイトのページにのみ表示されます。
+   - 保存します。</p>
+<p>📸 <strong>スクリーンショット:</strong> AI Hub とチャットボットの ERC を設定した、Aurelis サイトの Click to Chat 設定。</p>
+<p><img alt="Aurelis サイト向けに設定された Click to Chat" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/configure-click-to-chat.png"/></p>
+<p>サイトの任意のページを再読み込みすると、すべてのページにチャットのバブルが表示されます。</p>
+<p class="adm-block adm-warning">⚠️ <strong>サイトごとにチャットボットは 1 つです。</strong> Click to Chat では、一部のページにあるチャットボットを、別のページに別のチャットボットを配置することはできません。それが必要な場合は、以下の代替方法を使用してください。</p>
+<p>💡 <strong>代替方法 — スニペットをフラグメントに埋め込む。</strong> チャットボットにエージェントが割り当てられると、AI Hub の設定画面にすぐに使える HTML/JS スニペットも表示されます。これを新しいフラグメントにコピーし（Design → Fragments → Fragment Set 内で新しいフラグメントを作成 → HTML/JavaScript エディターに貼り付け）、そのフラグメントを目的のページにドラッグして公開します。この方法ではページ単位でチャットボットを配置できますが、ページごとに配置が必要です。同じサイトで Click to Chat と併用しないでください。併用すると、訪問者にチャットのバブルが 2 つ表示されます。</p>
+<p>✅ <strong>検証 — シークレットウィンドウ/ログアウトしたセッションから、</strong>稼働中のチャットボットに次の質問をします:</p>
+<ul>
+<li><em>"What is Aurelis GridMax and what does it do?"</em> — グラウンディングされた回答</li>
+<li><em>"What does the Solar Energy product line cover?"</em> — グラウンディングされた回答</li>
+<li><em>"If I'm interested in combining solar panels with EV charging, what would Aurelis offer me?"</em> — 2 つの製品シートにまたがる実際の統合が必要</li>
+<li><em>"What's the guaranteed response time for a Critical severity support issue for Aurelis GridMax?"</em> — 否定の検証: この約束事項は Product Content ではなく、Customer Documentation Space にある Customer Support &amp; SLA Handbook に記載されています。ボットは数値を捏造せず、わからないと答える必要があります。</li>
+</ul>
+<p>質問している間、ngrok インスペクター <a href="http://localhost:4040">http://localhost:4040</a>（演習 0.2）を確認してください。各質問で、AI Hub の Liferay Search ノードがあなたの DXP を呼び出し、<code>200</code> が返されることが表示されるはずです。リクエストがまったくない場合は、エージェントが DXP に到達していません（RAG config 内の Blueprint ERC と AI Hub の接続を確認してください）。<code>401</code>/<code>403</code> の場合は、DXP に到達したものの拒否されたことを意味します。</p>
+<h3 id="73-extend-the-energy-advisor-with-per-account-confidential-facts">7.3 — アカウントごとの機密情報で Energy Advisor を拡張する<a aria-hidden="true" class="heading-anchor" href="#73-extend-the-energy-advisor-with-per-account-confidential-facts" tabindex="-1">#</a></h3>
+<p>🎯 7.2 のチャットボットを拡張し、直接の API 呼び出しによってアカウントごとの機密情報に回答できるようにします。あるアカウントが別のアカウントのデータを決して見られないことを検証します。</p>
+<p>🧩 <code>manage-objects</code>（<code>AccountRolloutDetail</code>）、<code>manage-ai-hub</code> 🆕（HTTP Request エージェントと OAuth2 スコープの付与は、引き続き AI Hub/DXP のコンソールで手作業で行います。スキルは設定内容を伝え、それを検証します）。</p>
+<p>📖 7.2 の Energy Advisor が知っているのは、公開されている製品シートだけです。Novacorp や Solstice Manufacturing といった Aurelis の顧客企業は、自社の案件についても質問したいと考えています: 何が設置されるのか、どのようなスケジュールで、どのような交渉済みの条件で、担当のアカウントマネージャーは誰か。こうした情報は各顧客にとって機密です。この演習では、これらの情報をアカウントごとに保存し、チャットボットに取得させることで、サインインしたユーザーが常に自社の回答だけを得られるようにします。</p>
+<p>📋 <strong>1. データのセットアップ。</strong></p>
+<p>💬 <strong>プロンプト:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-objects, create the AccountRolloutDetail Custom Object, related
+oneToMany from Account (name the relationship accountToRolloutDetails).
+Fields: installationScope (Text), phasedSchedule (Text), negotiatedTerms
+(Text), accountManagerName (Text).
+
+Enable Account Restriction on this object definition, with the Account
+Restricted Field set to the relationship to Account. This is what makes
+GET /o/c/accountrolloutdetails return only the entries belonging to the
+caller's own account instead of every account's data — without it, REQ-35
+(one account must never see another's data) is not actually enforced,
+whatever the HTTP Request node's URL/filter looks like.
+
+Then, using the Liferay MCP server, read
+context-source/historical-rollout-data.csv and import each row as a real
+AccountRolloutDetail entry, resolving the matching Account by company name
+yourself.
+
+Finally, create two test users so the verification below has someone real to
+log in as: Sophie Martin (sophie.martin@novacorp.example), associated to the
+Novacorp Account, and Marcus Webb (marcus.webb@solsticemanufacturing.example),
+associated to the Solstice Manufacturing Account. Each must be a genuine
+member of their own account and nothing else — this is what Account
+Restriction actually filters on, so a user who isn't a real account member
+won't resolve to any rollout data at all, restricted or not.
+
+Access expectations: Account Restriction only filters results, it grants
+nothing. Make sure members of an account actually hold VIEW on their own
+account's AccountRolloutDetail entries, and tell me which role carries that
+grant. Grant Guest nothing on this object, and give no company-wide VIEW
+that would bypass the restriction. Both users must be active and able to
+sign in. Verify as each of them: Sophie gets only Novacorp's entry, Marcus
+only Solstice's, and an anonymous request gets nothing.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ <strong>ある顧客が別の顧客のデータを見られないようにしているのは Account Restriction であり、HTTP Request ノードの URL ではありません。</strong> 以下の手順 2 にある素の <code>GET /o/c/accountrolloutdetails</code> には、アカウントごとのフィルターは一切ありません。結果セットを呼び出し元自身のアカウントに絞り込むことは、完全にオブジェクト自体に依存しています。この設定を省略すると、まったく同じ呼び出しを通じて、すべてのアカウントが他のすべてのアカウントのロールアウトデータを見られるようになります。管理者はそもそも特定のアカウントに制限されないため、管理者ユーザーによる簡単なテストではこの穴は発見できません。以下の ✅ 検証で、管理者ではなく、管理者権限を持たない実際のアカウントユーザーでテストすることを必須としているのはこのためです。</p>
+<p>📋 <strong>2〜7. HTTP Request エージェントを作成して接続します（AI Hub コンソール）:</strong></p>
+<ol>
+<li>Agent Builder → New Agent → Edit Workflow: <code>Start → HTTP Request → LLM → End</code>。</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> アカウント情報エージェント。</p>
+<p><img alt="アカウント情報エージェント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-account-info-agent.png"/></p>
+<ol start="2">
+<li><strong>HTTP Request ノード:</strong> </li>
+</ol>
+<ul>
+<li><strong>Method:</strong> <code>GET</code> </li>
+<li><strong>URL:</strong> <code>{{aiHubCellLiferayDXPURL}}/o/c/accountrolloutdetails</code></li>
+<li><strong>Request body:</strong> <em>空</em></li>
+<li><strong>Input Variables:</strong> <code>[{"name": "aiHubCellLiferayDXPURL", "type": "string"}]</code>。</li>
+<li><strong>Output Variables:</strong> <code>[{"name": "rolloutDetails", "type": "string"}]</code>。</li>
+<li><em>カスタムヘッダーのフィールドはありません。Bearer トークンは AI Hub↔DXP の OAuth2 接続から自動的に付与されます。</em></li>
+</ul>
+<p>📸 <strong>スクリーンショット:</strong> アカウント情報エージェントのワークフロー: HTTP Request ノード。</p>
+<p><img alt="アカウント情報エージェント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-account-info-agent-workflow.png"/></p>
+<p>注: <code>aiHubCellLiferayDXPURL</code> は注入可能なコンテキスト変数で、Liferay DXP 環境の URL が格納されています。</p>
+<ol start="3">
+<li><strong>LLM ノード:</strong></li>
+</ol>
+<ul>
+<li><strong>Prompt:</strong> <code>You are an agent in charge of responsing to a request about a user's contracts, using your contract knowledge.</code></li>
+<li><strong>Input Variables:</strong> <code>[{"name": "request", "type": "string"}, {"name": "rolloutDetails", "type": "string"}]</code></li>
+<li><strong>Output Variables:</strong> <code>[{"name": "response", "type": "string"}]</code></li>
+<li><strong>User Message:</strong> <code>Here is the account's own rollout data: {{rolloutDetails}}; answer only from what's present, say explicitly when it doesn't cover the question.</code></li>
+<li><strong>RAG config:</strong> <code>[]</code>。</li>
+<li><strong>Tools:</strong> <code>[]</code>。 </li>
+</ul>
+<p>📸 <strong>スクリーンショット:</strong> アカウント情報エージェントのワークフロー: LLM ノード。</p>
+<p><img alt="アカウント情報エージェント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-account-info-agent-workflow-llm.png"/></p>
+<ol start="4">
+<li>
+<p>このエージェントを、先ほど作成した<strong>チャットボット</strong>に追加します。</p>
+</li>
+<li>
+<p>チャットボットと対話すると、失敗するはずです。ngrok を http://localhost:4040 で監視していれば、<strong><code>403</code> レスポンス</strong>が確認できます。これはバグではありません: 呼び出しが DXP に到達し、正しく拒否されたことを示しています。</p>
+</li>
+<li>
+<p>次に<strong>スコープを付与します。</strong> Control Panel → OAuth 2 Administration → <em>AI Hub Cell</em> アプリケーション → Scopes → <code>c_accountrolloutdetail.everything.read</code> を追加します。保存した後、新しいスコープを含む新しいトークンが取得されるよう、一度ログアウトして再度ログインします。</p>
+</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> HTTP Request ノードの設定パネルと、新しいスコープが付与された OAuth2 の Scopes タブ。</p>
+<p><img alt="AI Hub Cell の OAuth2 スコープ" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ai-hub-cell-oauth2.png"/></p>
+<ol start="7">
+<li><strong>再度、エンドツーエンドでテストします。</strong> 以下のいずれかのアカウントに所属する（または所属しない）エンドユーザーで比較します。ngrok インスペクターでは、各質問で <code>GET /o/c/accountrolloutdetails</code> が <code>403</code> ではなく <code>200</code> を返すようになります。</li>
+</ol>
+<p>📋 <strong>テストデータ:</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>アカウント</th>
+<th>機密データ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Novacorp</td>
+<td>42 拠点、3 フェーズのスケジュール、€8.2M、Camille Laurent</td>
+</tr>
+<tr>
+<td>Solstice Manufacturing</td>
+<td>パネル 180 枚 + 充電器 12 台、2 フェーズのスケジュール、4 時間 SLA、Diego Fernandes</td>
+</tr>
+</tbody>
+</table></div>
+<p>✅ <strong>検証 — 管理者ではなく、実際の各テストアカウントでログインして行います:</strong></p>
+<ul>
+<li><em>Sophie Martin（Novacorp）:</em> "How many sites are in the current rollout phase?" / "What price did we negotiate?" — どちらも正しくグラウンディングされていること。</li>
+<li><em>Sophie Martin、否定の検証:</em> "What's Solstice Manufacturing's SLA response time?" — Solstice のデータに由来する情報が何も返らないこと。</li>
+<li><em>Marcus Webb（Solstice）:</em> 対になる同様の 2 つの質問に加え、Novacorp の契約金額を尋ねる否定の検証。</li>
+<li>チャットボットの最終的な回答だけでなく、各呼び出しで HTTP Request ノードが実際に解決したアイデンティティ/フィルターを個別に確認します。誤ってフィルターされたリクエストから偶然正しい回答が得られるのは、実際に起こりうる失敗パターンであり、除外しておく価値があります。ngrok インスペクター（<a href="http://localhost:4040">http://localhost:4040</a>）で、各テストユーザーの質問に対応する <code>GET /o/c/accountrolloutdetails</code> リクエストを開き、その<strong>レスポンスボディ</strong>を確認します。Sophie Martin としてサインインしている場合は Novacorp のエントリーのみ、Marcus Webb の場合は Solstice のエントリーのみが含まれている必要があります。</li>
+</ul>
+<hr/>
+<h2 id="level-8-digital-sales-room-dsr">レベル 8 — Digital Sales Room (DSR)<a aria-hidden="true" class="heading-anchor" href="#level-8-digital-sales-room-dsr" tabindex="-1">#</a></h2>
+<h3 id="81-account-intelligence-digital-sales-room-end-to-end">8.1 — Account Intelligence から Digital Sales Room まで、エンドツーエンドで<a aria-hidden="true" class="heading-anchor" href="#81-account-intelligence-digital-sales-room-end-to-end" tabindex="-1">#</a></h3>
+<p>🎯 Account Intelligence ページを開き、<code>combinedOpportunityScore</code>（演習 2.3 で読み込み、演習 6.2 以降で計算）で Aurelis の最高スコアのアカウント — <strong>Novacorp</strong>、スコア 83（リードが紐付けられていればそれ以上）— を見つけ、Liferay 公式の <a href="https://learn.liferay.com/w/digital-sales-room/dsr-launchpad">DSR Launchpad</a> の手順にそのまま従い、カスタマイズなしでその Digital Sales Room を立ち上げます。このレベルは、レベル 2〜7 で構築済みのものに、ドキュメントどおりに使う Liferay ネイティブの機能を組み合わせるだけです。新しいオブジェクト、ページ、フラグメント、Client Extension は作成しません。</p>
+<p>🧩 なし — 公式ドキュメントどおりの GUI 操作のみです。</p>
+<p>📎 CSF-02（アカウント中心の Fit × Value × Intent による評価）、CSF-05（摩擦のない協働型の営業とパートナーエンゲージメント）、REQ-28、REQ-29（Digital Sales Room）。</p>
+<p>📋 <strong>有効化（初回のみ — <a href="https://learn.liferay.com/w/digital-sales-room/activating-digital-sales-room">Activating Digital Sales Room</a> に従います）:</strong></p>
+<ol>
+<li>Marketplace Customer Dashboard → <strong>My Products</strong> → DSR 製品 → <strong>Download</strong> タブ → このインスタンス用の <code>.lpkg</code> パッケージをダウンロードします。</li>
+<li>同じ製品 → <strong>Activation</strong> タブ → DSR ライセンスキー（<code>.xml</code>）を作成してダウンロードします。</li>
+<li>両方のファイルを <code>Liferay Home/deploy</code> にデプロイします。</li>
+<li>DXP を再起動し、すべての DSR モジュールが <code>STARTED</code> をログに出力するまで待ちます。</li>
+<li>Global Menu → Commerce → <strong>Digital Sales Room Management</strong></li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> 有効化された Digital Sales Room。</p>
+<p><img alt="有効化された DSR" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-activation.png"/></p>
+<p class="adm-block adm-warning">⚠️ <strong>DSR Management の画面に空のページを持つサイトが表示される場合</strong>（<strong>Rooms</strong> にルーム一覧がない、分析ページが空白）、DSR のサイトイニシャライザーが起動中の早すぎるタイミングで実行されています。初期の HTTP リクエスト（再読み込み中のブラウザタブ、ngrok トンネル、ヘルスチェック）が DSR のフラグメントレンダラーの登録前にそれを起動し、<code>dsr-view-*</code> フラグメントがすべてのページから暗黙のうちに削除されたのです。再起動しても確実には直りません。代わりに、既存のサイトに対して DSR サイトイニシャライザーを再実行します。Control Panel → Server Administration → <strong>Script</strong> を開き、<strong>Groovy</strong> を選択して、以下のスクリプトを貼り付け、<strong>Execute</strong> をクリックします。既存のページをその場で更新し（サイトの削除も重複もありません）、約 20 秒かかります。DSR のレンダラーがまだ登録されていない場合は自動的に中断するので、その場合は起動の完了を待ってから再実行してください。これは修正中の既知の問題で、修正後はこのスクリプトを実行する必要はなくなります。</p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code class="language-groovy">import com.liferay.fragment.renderer.FragmentRendererRegistry
+import com.liferay.portal.kernel.change.tracking.CTCollectionThreadLocal
+import com.liferay.portal.kernel.module.util.SystemBundleUtil
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil
+import com.liferay.portal.kernel.service.ServiceContext
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal
+import com.liferay.portal.kernel.util.PortalUtil
+
+def bundleContext = SystemBundleUtil.getBundleContext()
+def registry = bundleContext.getService(
+    bundleContext.getServiceReference(FragmentRendererRegistry.class))
+
+if (registry.getFragmentRenderer("dsr-view-rooms") == null) {
+    out.println("dsr-view-rooms is not registered yet. Aborting.")
+
+    return
+}
+
+def group = GroupLocalServiceUtil.getGroup(PortalUtil.getDefaultCompanyId(), "DSR")
+def references = bundleContext.getServiceReferences(
+    "com.liferay.site.initializer.SiteInitializer",
+    "(site.initializer.key=com.liferay.site.initializer.dsr)")
+def siteInitializer = bundleContext.getService(references[0])
+
+def safeCloseable = CTCollectionThreadLocal.setProductionModeWithSafeCloseable()
+
+ServiceContextThreadLocal.pushServiceContext(new ServiceContext())
+
+try {
+    siteInitializer.initialize(group.getGroupId())
+
+    out.println("DSR site reinitialized: group " + group.getGroupId())
+}
+finally {
+    ServiceContextThreadLocal.popServiceContext()
+
+    safeCloseable.close()
+}
+</code></pre></div>
+<p>出力は <code>DSR site reinitialized: group &lt;id&gt;</code> となるはずです。<strong>Digital Sales Room Management</strong> を再読み込みすると、ページが表示されます。根本原因、ログのタイムライン、代替の修正方法は <a href="https://github.com/liferay/liferay-course-masterclass/blob/master/troubleshooting/DSR_ACTIVATION_TROUBLESHOOTING.md"><code>troubleshooting/DSR_ACTIVATION_TROUBLESHOOTING.md</code></a> の §3.3 にあります。</p>
+<p>📋 <strong>Novacorp のルームの作成（DSR Launchpad ドキュメントに従います）:</strong></p>
+<ol start="6">
+<li>Global Menu → Commerce → <strong>Digital Sales Room Management</strong> → <strong>Rooms</strong> → <strong>New Digital Sales Room</strong>。</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> New Digital Sales Room をクリックして専用のスペースを作成します。</p>
+<p><img alt="New Digital Sales Room" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-new-room.png"/></p>
+<ol start="7">
+<li>関連付けるアカウントとして <strong>Novacorp</strong> を選択 → Next。ここで選んだアカウントによって、ルームに招待できるチームメンバーと連絡先が決まります。このルームに実際に入る必要があるのは、Novacorp 自身のアカウントマネージャーである Camille Laurent（演習 7.3 の展開データ）です。</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> ルームに関連付けるアカウントを選択します。</p>
+<p><img alt="アカウントの選択" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-select-account.png"/></p>
+<ol start="8">
+<li>事前設定済みのテンプレートを選択 → Next。</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> テンプレートを選択して開始します。</p>
+<p><img alt="テンプレートの選択" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-select-template.png"/></p>
+<ol start="9">
+<li>名前を付け（例: <em>「Novacorp — Solar + GridMax Rollout」</em>）、必要に応じて Friendly URL を設定 → <strong>Save</strong>。</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> ルームの名前と Friendly URL を入力します。</p>
+<p><img alt="ルームの命名" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-name-room.png"/></p>
+<ol start="10">
+<li>後で開き直すには: Commerce → Digital Sales Room Management → Rooms → 一覧から選択します。作り込みが完了すると、Novacorp 固有の展開コンテンツがタブ（Onboarding、Documents など）に整理された、公開可能なワークスペースになります。</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> コンテンツを入れた後のプロビジョニング済みルーム。</p>
+<p><img alt="プロビジョニング済みの DSR" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-room-workspace.png"/></p>
+<ol start="11">
+<li><strong>顧客を招待します。</strong> ルームから、<strong>Sophie Martin</strong>（演習 7.3 で作成した Novacorp のユーザー）を参加者として招待します。招待しないと、以下の検証でログインするユーザーがいません。Novacorp アカウントのメンバーであるだけでは、ルームへのアクセス権は得られません。</li>
+</ol>
+<p>✅ <strong>検証:</strong> Novacorp に紐付いた別の非管理者ユーザー（Sophie Martin、または招待した関係者）として新しく作成したルームを開き、ルームとその共有ドキュメントが表示されることを確認します。管理者による作成フローはプロビジョニングが機能することを証明するものであり、この 2 つ目の確認こそが、営業担当者から顧客への実際のジャーニーが機能することを証明します。</p>
+<hr/>
+<h2 id="level-9-from-native-to-custom-a-hand-built-chatbot-widget-client-extensions-ai-hub-segments-ldp">レベル 9 — ネイティブからカスタムへ: 手作りのチャットボットウィジェット（Client Extensions、AI Hub、Segments、LDP）<a aria-hidden="true" class="heading-anchor" href="#level-9-from-native-to-custom-a-hand-built-chatbot-widget-client-extensions-ai-hub-segments-ldp" tabindex="-1">#</a></h2>
+<p>演習 7.2〜7.3 で、適切にスコープ設定されたチャットボットはすでに立ち上がっています。このレベルでは、ネイティブの Click to Chat ではできないことを、カスタム構築したウィジェットで上乗せする方法を示します。リアルタイムのセグメントのコンテキストと、会話から得られる購買意欲のシグナルです。</p>
+<h3 id="91-custom-widget-with-real-time-segment-context">9.1 — リアルタイムのセグメントコンテキストを持つカスタムウィジェット<a aria-hidden="true" class="heading-anchor" href="#91-custom-widget-with-real-time-segment-context" tabindex="-1">#</a></h3>
+<p>🎯 AI Hub 自身のチャットボット REST API を直接呼び出し、訪問者が特定のホワイトペーパーをすでに読んだという事実を注入する、自己マウント型のチャットバブル Client Extension です。</p>
+<p>🧩 <code>scaffold-client-extension</code>（自己マウント型 <code>customElement</code> バリアント）、<code>react-custom-elements</code>、<code>manage-ai-hub</code> 🆕、<code>manage-analytics</code> 🆕</p>
+<p>📖 ネイティブの Click to Chat のバブルを独自のチャットバブルに置き換えますが、通信先は同じ AI Hub のチャットボットのままです。自分で構築することで、ネイティブ連携ではできない 2 つのことが可能になります。チャットボットが、訪問者がサイト上ですでに行ったこと（ここでは特定のホワイトペーパーを読んだこと）を把握して回答を調整できること、そしてすべてのやり取りが Analytics で追跡され、会話が測定可能な購買意欲のシグナルになることです。</p>
+<p>📋 <strong>手順:</strong></p>
+<ol start="0">
+<li><strong>Aurelis サイトの Click to Chat をオフにします。</strong> Site Menu → Configuration → Site Settings → <strong>Click to Chat</strong> → <strong>Enable Click to Chat</strong> をオフ → Save。そうしないと、すべてのページに演習 7.2 のネイティブのバブルと独自のバブルの 2 つのチャットバブルが表示されます。7.2 で代替のフラグメントを使った場合は、そのフラグメントをページから削除してください。チャットボット自体は AI Hub でそのまま残します。ウィジェットは同じチャットボットと通信します。</li>
+<li><strong>チャットボット自身の ERC を控えます。</strong> AI Hub → Chatbots → 演習 7.2 で構築したチャットボットで、その <strong>External Reference Code</strong> を確認します。これは Click to Chat で Chat Provider Account ID として入力した値です（演習 7.2、手順 8）。書き留めておいてください。以下のウィジェットはチャットボット自身の API と直接通信するため、すべての呼び出し（設定の取得、チャットのサブスクライブ、メッセージの送信）をこのチャットボットに正確に向ける必要があり、エージェントに推測させたり作り出させたりしてはいけません。</li>
+<li><strong>リアルタイムのセグメントを作成します。</strong> Liferay Data Platform の Segments 管理画面で、演習 4.1 のファネルを通過した訪問者に一致する Member Segment を作成します。Title/Description を付けたら、セグメント自身の <strong>External Reference Code</strong> フィールドを開き、自動生成された値のままにせず、<strong>自分で確実に識別できる値に編集します</strong> — 例えば自分のイニシャルを付けた <code>whitepaper-readers-abc</code> などです。ERC フィールドは小文字とハイフンのみを受け付け、大文字やアンダースコアは使えません。このワークスペースは共有されているため、ランダムに自動生成された ERC は見失いやすく、他の参加者のものと混同しやすくなります。選んだ値を書き留めておいてください。以下で必要になります。</li>
+</ol>
+<p>📸 <strong>スクリーンショット:</strong> （変更後の）ERC が表示されたセグメントの詳細画面。</p>
+<p><img alt="LDP のセグメント" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ldp-segment.png"/></p>
+<ol start="3">
+<li><strong>ウィジェットを構築します。</strong> シングルトンで自己マウント型の <code>customElement</code> Client Extension（チャットバブル形式）で、ネイティブの Click to Chat を使う代わりに、ネイティブのチャットボット自身の API 呼び出し（設定の取得、<code>chats/subscribe</code> SSE、<code>POST .../messages</code> — <code>manage-ai-hub</code> に従います）を再現します。<strong>メッセージの POST には最初から「Cell」の on-behalf-of 認可レイヤーを実装してください</strong>。これは機能検出によるもので、実質的に省略できません。省略するとすべてのメッセージが匿名で送信され、チャットボットの Search Blueprint がゲストに表示できないコンテンツから取得する場合、取得結果は何も返らず、しかも見た目は「ウィジェットが壊れている」のとまったく同じになります。</li>
+<li><strong>セグメントのコンテキストを付加します。</strong> クライアント側で <code>Analytics.segment.getRealTimeSegmentExternalReferenceCodes()</code> を呼び出します。これは訪問者の現在のリアルタイムセグメントの ERC の配列を返す Promise を返します。手順 2 の実際の ERC から説明文（<code>"has already read Aurelis' Solar + Battery Microgrid white paper"</code>）へのマップをハードコードします。訪問者の ERC が一致したら、その説明文をすべてのメッセージとともに AI Hub に送信します。送信先はメッセージの <code>context</code> オブジェクト内のキー <code>visitorContext</code> で（一致するセグメントがない場合は空文字列）、メッセージ本文の中には決して入れません。</li>
+<li><strong>すべての応答を追跡します。</strong> 実際にキャプチャしたストリームには、<code>manage-ai-hub</code> に記載された 2 つの名前付きイベント以外のものも含まれています。<code>: heartbeat</code> のコメント行が多数あり、エージェントの内部ワークフローの実行に伴って、1 ターンごとに複数の中間 <code>event: &lt;nodeName&gt;</code> メッセージ（例: <code>event: liferaySearch</code>、あるいはノード自身の UUID をそのまま名前にしたイベント）が届き、それぞれが部分的または重複した <code>{"nodeName", "data", "type"}</code> ペイロードを持っています。そのどれも最終的な回答ではありません。<code>Analytics.track()</code> は、そのターンのストリームの<em>終端</em>イベントにのみ結び付けてください。<code>Chat Message Sent</code>（成功 — <code>agentDefinitionExternalReferenceCodes</code> を持つ唯一のイベント）、または <code>Agent Invocation Failed</code>/接続の <code>error</code>（失敗）です。名前付きイベントごとに発火させると、実際の 1 回の返信に対して重複した「成功」イベントがいくつも記録されてしまいます。<strong><code>Analytics.track()</code> の第 2 引数に渡すものはすべてサニタイズしてください</strong>。受け付けるのは 1024 文字以内の文字列・数値・ブール値のみで、生の配列（例: <code>agentDefinitionExternalReferenceCodes</code>）や長すぎる文字列を渡すと、SDK から捕捉されない例外が直接スローされます。</li>
+</ol>
+<p>💬 <strong>プロンプト（手順 1 の自分のチャットボット ERC と手順 2 のセグメント ERC に置き換えてください）:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Build a self-mounting, singleton customElement Client Extension (chat-bubble style) that talks directly to AI Hub's own chatbot REST API — config fetch,
+chats/subscribe SSE stream, POST .../messages — using the confirmed pattern
+in the manage-ai-hub skill, instead of Liferay's native Click to Chat
+integration (it is turned off for this site). My chatbot's own External Reference Code is
+"&lt;your Chatbot's real ERC&gt;" — use it for every one of these calls, don't
+invent or guess a different one.
+
+Implement the "Cell" on-behalf-of authorization layer (postAuthorizationToken
+in the confirmed pattern) and attach its headers to at least the message POST
+from the start, not as an afterthought — it's feature-detected, not skippable
+in effect: an anonymous message POST against a permission-scoped Search
+Blueprint silently retrieves nothing, which looks identical to "the widget is
+broken" with no error anywhere.
+
+Client-side, call Analytics.segment.getRealTimeSegmentExternalReferenceCodes()
+— it returns a Promise resolving to an array of the visitor's current
+real-time Segment ERCs — and check the result against this hard-coded map:
+{"&lt;your Segment's real ERC&gt;": "has already read Aurelis' Solar + Battery
+Microgrid white paper"}
+On every message POSTed to AI Hub, send the matching description in the
+message's context object under the key visitorContext, e.g.
+"context": {"visitorContext": "has already read Aurelis' Solar + Battery
+Microgrid white paper"}, or an empty string when no segment matches. Never
+append it to the message text: the context keys bypass the chatbot's
+Supervisor and reach the agent's workflow directly.
+
+The SSE stream fires several intermediate "event: &lt;nodeName&gt;" messages per
+turn before the real answer (e.g. "event: liferaySearch", or an event named
+after a workflow node's own UUID), plus ": heartbeat" comment lines — ignore
+all of those for tracking purposes. Only fire Analytics.track() on the
+stream's terminal event for that turn: one custom event (e.g.
+chatbotResponseReceived) carrying real metadata from the SSE payload (e.g.
+agentDefinitionExternalReferenceCodes) when the terminal event is "Chat
+Message Sent", and a distinct custom event (e.g. chatbotResponseError) when
+it's "Agent Invocation Failed" — or a generic connection error — instead.
+Never fire the success event for a manifest chatbot error, and never fire
+more than one tracked event for a single reply. Analytics.track() only
+accepts string/number/boolean property values capped at 1024 characters, so
+sanitize anything forwarded from the SSE payload first (join an array like
+agentDefinitionExternalReferenceCodes into a string, stringify any object,
+truncate long strings) — passing a raw array or an over-length string
+straight through throws an uncaught exception from inside the SDK.
+</code></pre></div>
+<p>📋 <strong>次に、AI Hub のコンソールで（プロンプトではなく GUI での編集）:</strong> 7.2 の Answer Builder エージェントを、新しい <code>visitorContext</code> キーを読み取るように更新します。変更はすべて LLM ノードで行い、エージェント定義には何も変更を加えません:</p>
+<ol>
+<li><strong>エージェント定義の</strong> Input Variables はそのまま（<code>originalRequest,gatheredInformation</code>）にします。<strong>決して</strong>そこに <code>visitorContext</code> を追加しないでください。これらの変数は Supervisor が埋めるもので、Supervisor は <code>context</code> のキーを一切参照しないため、実際の値を空文字列で上書きしてしまいます。</li>
+<li>
+<p>Agent Builder → Answer Builder エージェント → <strong>Edit Workflow</strong> → <strong>LLM</strong> ノードを選択:</p>
+<ul>
+<li><strong>Input Variables:</strong> <code>visitorContext</code> を追加します: <code>[{"name": "originalRequest", "type": "string"}, {"name": "gatheredInformation", "type": "string"}, {"name": "visitorContext", "type": "string"}]</code>。</li>
+<li><strong>User Message:</strong> これを注入します: <code>Original user request:\n{{originalRequest}}\n\nGathered information:\n{{gatheredInformation}}\n\nWhat we know about this visitor:\n{{visitorContext}}</code>。</li>
+</ul>
+</li>
+<li>
+<p>同じノードで、その <strong>Prompt</strong> を拡張します:</p>
+</li>
+</ol>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>The user message may include a "What we know about this visitor" section. If
+it says the visitor has already read a specific Aurelis white paper, treat
+that as established context: acknowledge it briefly, then build on it — move
+straight to a concrete next step instead of re-explaining the basics. If that
+section is empty, answer normally.
+</code></pre></div>
+<p>セグメント外の訪問者の場合、<code>visitorContext</code> は空でそのセクションは空白のままなので、エージェントは以前と同じように回答します。</p>
+<p>💡 <strong>AI Hub でコンテキストがエージェントに届く仕組み。</strong> チャットボット API に POST されるメッセージは、訪問者のテキストと、オプションの <code>context</code> オブジェクトの 2 つを運びます。この 2 つは同じ経路を通りません:</p>
+<ul>
+<li><strong>テキスト</strong>はチャットボットの Supervisor に送られ、Supervisor は選んだエージェントに <code>request</code> として渡します。Supervisor はそれを言い換えることがあり、Supervisor がルーティングの判断に使うのはこのテキストだけです。テキストに書き込んだコンテキスト（例えば質問の前に置いた <code>[CONTEXT]</code> ブロック）も機能しますが、Supervisor のチャットメモリにも入るため、コピーのたびに増え、毎ターン要約されるので、ターンごとに遅くなっていきます。</li>
+<li><strong><code>context</code> のキー</strong>は Supervisor を迂回します。Supervisor はそれらを一切参照しないため、言い換えることもルーティングに使うこともできません。キーは Supervisor が呼び出したエージェントのワークフローコンテキストに直接届き、ワークフローノードがそのままの形で読み取ります。</li>
+</ul>
+<p><code>context</code> を使う際には、次の 2 つのルールに従います:</p>
+<ul>
+<li>各キーは、それを使う<strong>ワークフローノードの Input Variable</strong>（LLM ノード）として宣言し、<strong>エージェント定義の Input Variables</strong> には決して宣言しないでください。エージェント定義の変数は Supervisor が埋める引数であり、Supervisor が知っているのは訪問者のテキストだけです。そこにも列挙されたキーには Supervisor から空文字列が渡され、実際の値が上書きされます。</li>
+<li><strong>コンテキストはコンパクトに保ちます。</strong> コンテキストは毎ターン送信され、エージェント自身の LLM はプロンプトが参照するものをすべて読み込みます。あるフォーム入力用チャットボットでは、3,500 文字のページ状態をテキストに付加すると 1 ターンに約 40 秒かかり、何も付加しない場合は 12〜17 秒でした。エージェントが実際に使うものだけを送り、固定の指示はすべてのメッセージで繰り返すのではなく、プロンプトに一度だけ記述してください。</li>
+</ul>
+<p>そのため、この演習ではセグメントの説明をメッセージ本文ではなく、Answer Builder の LLM ノードで宣言され、その User Message に注入される <code>context</code> のキー <code>visitorContext</code> として送信します。</p>
+<p>✅ <strong>検証:</strong> Client Extension のタグを 1 か所（例: マスターページ）に配置し、2 つの異なるページを読み込んで、両方に同じウィジェットが表示され、それがページ上の唯一のチャットバブルである（Click to Chat のバブルが残っていない）ことを確認します。成功した会話を 1 回最後まで行い、応答ごとに実際のメタデータを持つ成功の <code>Analytics.track()</code> イベントがちょうど 1 つ発生することを確認します。さらに 2 人の異なる訪問者 — セグメントに該当する訪問者と該当しない訪問者 — として会話を 2 回実行し、返信が目に見えて異なることを確認します（セグメントに該当する方は、促されなくてもホワイトペーパーに言及するはずです）。次に、意図的に失敗を起こし（例: 不正な形式のリクエストや、割り当てられたエージェントを一時的に無効化する）、成功イベントの代わりにチャットボットエラーを示す別のイベントが発火すること — 両方でもなく、どちらも発火しないのでもないこと — を確認します。</p>
+<h3 id="92-detect-buying-interest-mid-conversation">9.2 — 会話の途中で購買意欲を検出する<a aria-hidden="true" class="heading-anchor" href="#92-detect-buying-interest-mid-conversation" tabindex="-1">#</a></h3>
+<p>🎯 同じウィジェットと同じエージェントを拡張し、複数製品の組み合わせへの関心を示す会話上のサインを、チャットの終了とともに消えてしまうのではなく、追跡可能なイベントにします。</p>
+<p>🧩 <code>scaffold-client-extension</code>（9.1 のウィジェットを拡張 — 新しい Client Extension は作成しません）、<code>manage-ai-hub</code> 🆕、<code>manage-analytics</code> 🆕</p>
+<p>📖 ページ訪問やフォーム送信からわかるのは、何かが起きたということだけです。会話からはずっと多くのことがわかります。ソーラーパネルと蓄電池がどのように連携するかを尋ねる訪問者は、組み合わせたオファーに本当の関心を示しています。ここでは、エージェントにその瞬間を返信の中でさりげなくフラグ付けするよう依頼し、ウィジェットがそれを関連製品名を含む Analytics イベントに変換します。マーケティングと営業はそれをもとにアクションを取ることができます。</p>
+<p>📋 <strong>1. AI Hub コンソール — 同じエージェントのプロンプトを再び拡張します:</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Answer the visitor normally first. Separately, if — and only if — the
+conversation shows the visitor is specifically interested in combining two
+or more Aurelis product lines (for example solar panels with battery
+storage), append this exact block on its own line at the very end of your
+reply, after the conversational answer, with the actual product lines
+substituted in:
+
+[[INTEREST:{"products":["Solar","GridMax"]}]]
+
+Only include this block when genuine combined-product interest is clearly
+expressed. Never mention this block to the visitor, never explain what it's
+for.
+</code></pre></div>
+<p>💬 <strong>2. ウィジェットの変更 — コーディングエージェント向けのプロンプト。</strong> 手順 1 と異なり、これは AI Hub に入力するものではありません。このワークスペースで Claude Code（または使用しているコーディングエージェント）に渡します。9.1 で構築したカスタムのチャットバブル Client Extension のコードを更新し、エージェントが新たに付加するマーカーをウィジェットが認識して、訪問者には表示せず、Analytics イベントに変換するようにします。</p>
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Extend the chat-bubble customElement Client Extension built earlier
+so it also recognizes a [[INTEREST:{...}]] marker anywhere in an assistant
+response:
+strip that marker, and the line it's on, from the text before rendering the
+reply to the visitor, parse the JSON it contains, and fire a second, distinct
+Analytics.track() call carrying that parsed payload — separate from the
+per-response tracking call already in place. If no marker is present, render
+the reply exactly as before.
+</code></pre></div>
+<p>✅ <strong>検証:</strong> 1 つの製品ラインだけについて質問します — 関心イベントは発火せず、余分なマーカーテキストも表示されないことを確認します。2 つの製品ラインの組み合わせについて質問します — 訪問者向けの返信にマーカー構文の痕跡がまったくないこと、正しい製品リストを持つ追加の <code>Analytics.track()</code> イベントがちょうど 1 つ発火すること（ブラウザの開発者ツールで直接確認します）、そしてそのイベントが送信リクエストだけでなく Liferay Data Platform に実際に表示されることを確認します。</p>
+<hr/>
+<h2 id="appendix-full-screenshot-checklist">付録 — スクリーンショットの完全なチェックリスト<a aria-hidden="true" class="heading-anchor" href="#appendix-full-screenshot-checklist" tabindex="-1">#</a></h2>
+<p>このチュートリアルの録画ウォークスルーや書面のレポートを準備する場合は、撮影リストとして使用してください。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>演習</th>
+<th>スクリーンショット</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.2</td>
+<td>ngrok の HTTPS URL 経由で読み込まれるポータル</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1.2</td>
+<td>3 つのフラグが有効になった Feature Flags パネル</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.4</td>
+<td>一意の名前と、ホーム/ランディング/ログアウトページとして Aurelis が設定された Instance Configuration → General</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2.1</td>
+<td>新しいカスタムフィールドを含む <code>Account</code> オブジェクト定義のフィールド一覧</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3.2</td>
+<td>バージョン履歴 / Restore Version 画面</td>
+</tr>
+<tr>
+<td>6</td>
+<td>3.2</td>
+<td>編集途中の Translate 画面</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3.2</td>
+<td>Basic Document の詳細パネルと通常のエントリーの詳細パネルの比較</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3.3</td>
+<td>AI Hub の Configurations 画面 + DXP の AI Hub 接続画面</td>
+</tr>
+<tr>
+<td>9</td>
+<td>3.3</td>
+<td>CKEditor5 の AI メニューを開いた状態と、書き換えの前後</td>
+</tr>
+<tr>
+<td>10</td>
+<td>3.4</td>
+<td>両方のタスクが割り当てられた CMP キャンペーンボード</td>
+</tr>
+<tr>
+<td>11</td>
+<td>4.1</td>
+<td>一覧ページ → ゲート付きエントリー → 全文 → LDP イベント</td>
+</tr>
+<tr>
+<td>12</td>
+<td>4.2</td>
+<td>保存された Event Analysis の設定、実際の行を含むダウンロードした Event Analysis Report</td>
+</tr>
+<tr>
+<td>13</td>
+<td>4.3</td>
+<td>ソートされた公開中のページ、Data Set がすでに選択された Page Editor（サイトイニシャライザーから接続済み）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>4.4</td>
+<td>編集モードのアカウント詳細アプリ、保存前後</td>
+</tr>
+<tr>
+<td>15</td>
+<td>5.1</td>
+<td>企業登記の検索が成功した後のパートナーフォーム</td>
+</tr>
+<tr>
+<td>16</td>
+<td>6.1</td>
+<td>プロファイルを描画した入力ウィジェット、2 か月分の結果チャート</td>
+</tr>
+<tr>
+<td>17</td>
+<td>7.1</td>
+<td>ロール × コンテンツのアクセスマトリクス</td>
+</tr>
+<tr>
+<td>18</td>
+<td>7.2</td>
+<td>Search Blueprint の設定、Agent Builder のワークフローキャンバス、Chatbot の Assigned Agents 画面</td>
+</tr>
+<tr>
+<td>19</td>
+<td>7.2</td>
+<td>Instance Settings で有効化された Click to Chat、AI Hub とチャットボット ERC を設定したサイトの Click to Chat 設定、サイト上で動作するチャットバブル</td>
+</tr>
+<tr>
+<td>20</td>
+<td>7.3</td>
+<td>HTTP Request ノードの設定、付与されたスコープを表示した OAuth2 Scopes タブ</td>
+</tr>
+<tr>
+<td>21</td>
+<td>8.1</td>
+<td>DSR の有効化、New Digital Sales Room、アカウントの選択、テンプレートの選択、命名、プロビジョニング済みのルームワークスペース</td>
+</tr>
+<tr>
+<td>22</td>
+<td>9.1</td>
+<td>ERC が表示されたセグメントの詳細画面、2 つのページ上のチャットバブル、異なる 2 つの返信</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="going-further-ai-hub-quick-starts">さらに先へ — AI Hub クイックスタート<a aria-hidden="true" class="heading-anchor" href="#going-further-ai-hub-quick-starts" tabindex="-1">#</a></h2>
+<p>AI Hub について、また具体的なユースケースでの使い方についてさらに学ぶには、AI Hub クイックスタートを参照してください: <a href="https://github.com/fabian-bouche-liferay/ai-hub-quick-start">https://github.com/fabian-bouche-liferay/ai-hub-quick-start</a>。各クイックスタートは 1 つの実際のシナリオに沿ったステップバイステップのガイドで、このワークブックの範囲を超える内容を扱っています。</p>
+    </main>
+  </div>
+</div>
+<button class="back-to-top" type="button" aria-label="ページの先頭へ">&#8593;</button>
+<script>
+
+(function () {
+  // Copy-to-clipboard for every prompt frame.
+  document.addEventListener("click", function (event) {
+    var btn = event.target.closest(".copy-btn");
+    if (!btn) return;
+    var frame = btn.closest(".copy-frame");
+    var target = frame.querySelector("pre, blockquote");
+    var text = target ? target.innerText : "";
+
+    function feedback() {
+      btn.classList.add("copied");
+      setTimeout(function () {
+        btn.classList.remove("copied");
+      }, 1500);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(feedback).catch(function () {
+        fallbackCopy(text, feedback);
+      });
+    } else {
+      fallbackCopy(text, feedback);
+    }
+  });
+
+  function fallbackCopy(text, done) {
+    var textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand("copy"); } catch (err) { /* no-op */ }
+    document.body.removeChild(textarea);
+    done();
+  }
+
+  // Mobile sidebar toggle.
+  var menuToggle = document.querySelector(".menu-toggle");
+  if (menuToggle) {
+    menuToggle.addEventListener("click", function () {
+      document.body.classList.toggle("sidebar-open");
+    });
+  }
+  document.querySelectorAll(".toc a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      document.body.classList.remove("sidebar-open");
+    });
+  });
+
+  // Table-of-contents filter (recursively keeps a branch visible if any
+  // descendant entry matches).
+  var filterInput = document.querySelector(".toc-filter");
+  if (filterInput) {
+    filterInput.addEventListener("input", function () {
+      var query = filterInput.value.trim().toLowerCase();
+      document.querySelectorAll(".toc > ul > li").forEach(function (li) {
+        filterItem(li, query);
+      });
+    });
+  }
+
+  function filterItem(li, query) {
+    var link = li.querySelector(":scope > a");
+    var text = link ? link.textContent.toLowerCase() : "";
+    var childList = li.querySelector(":scope > ul");
+    var childMatch = false;
+    if (childList) {
+      childList.querySelectorAll(":scope > li").forEach(function (childLi) {
+        if (filterItem(childLi, query)) childMatch = true;
+      });
+    }
+    var selfMatch = !query || text.indexOf(query) !== -1;
+    var show = selfMatch || childMatch;
+    li.style.display = show ? "" : "none";
+    return show;
+  }
+
+  // Scroll-spy: highlight the current section in the sidebar.
+  var headings = document.querySelectorAll(".doc-content h2[id], .doc-content h3[id], .doc-content h4[id]");
+  var linkMap = {};
+  document.querySelectorAll(".toc a").forEach(function (a) {
+    linkMap[a.getAttribute("href").slice(1)] = a;
+  });
+
+  if ("IntersectionObserver" in window && headings.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var link = linkMap[entry.target.id];
+        if (!link || !entry.isIntersecting) return;
+        document.querySelectorAll(".toc a.active").forEach(function (a) { a.classList.remove("active"); });
+        link.classList.add("active");
+      });
+    }, { rootMargin: "0px 0px -72% 0px", threshold: 0 });
+    headings.forEach(function (h) { observer.observe(h); });
+  }
+
+  // Back-to-top button.
+  var backToTop = document.querySelector(".back-to-top");
+  if (backToTop) {
+    window.addEventListener("scroll", function () {
+      backToTop.classList.toggle("visible", window.scrollY > 600);
+    }, { passive: true });
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+})();
+
+</script>
+</body>
+</html>
