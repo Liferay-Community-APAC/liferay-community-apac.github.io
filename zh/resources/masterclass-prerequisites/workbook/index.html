@@ -1,0 +1,2583 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Liferay Masterclass 的动手练习手册：借助 AI 编码代理，在 Liferay DXP 上逐级构建 Aurelis Energy 平台，从 Objects 和 CMS 到客户端扩展和 AI Hub。">
+<link rel="canonical" href="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/workbook/">
+<link rel="alternate" hreflang="en" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/workbook/">
+<link rel="alternate" hreflang="ja" href="https://liferay-community-apac.github.io/ja/resources/masterclass-prerequisites/workbook/">
+<link rel="alternate" hreflang="zh-Hans" href="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/workbook/">
+<link rel="alternate" hreflang="x-default" href="https://liferay-community-apac.github.io/resources/masterclass-prerequisites/workbook/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Liferay DXP + AI 编码代理 — 实操教程">
+<meta property="og:description" content="Liferay Masterclass 的动手练习手册：借助 AI 编码代理，在 Liferay DXP 上逐级构建 Aurelis Energy 平台，从 Objects 和 CMS 到客户端扩展和 AI Hub。">
+<meta property="og:url" content="https://liferay-community-apac.github.io/zh/resources/masterclass-prerequisites/workbook/">
+<title>Liferay DXP + AI 编码代理 — 实操教程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Source+Sans+3:wght@300;400;600;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  /* Design tokens pulled from learn.liferay.com's own stylesheet
+     (https://liferaylearnglobalcss-exte5a2learn-extprd.lfr.cloud/global.css)
+     — the CSS custom-property fallback values there, e.g.
+     var(--color-brand-primary, #0b5fff), are learn.liferay.com's real
+     palette, not an approximation of it. */
+  --lf-brand: #0b5fff;
+  --lf-brand-hover: #0053f0;
+  --lf-brand-active: #004ad7;
+
+  --lf-neutral-0: #ffffff;
+  --lf-neutral-1: #f7f7f8;
+  --lf-neutral-2: #e2e2e4;
+  --lf-neutral-4: #b1b2b9;
+  --lf-neutral-6: #82828c;
+  --lf-neutral-8: #54555f;
+  --lf-neutral-9: #33343d;
+  --lf-neutral-10: #282934;
+
+  --lf-active-bg: #e6edfb;
+  --lf-hover-bg: #edf3fe;
+
+  --lf-warning-bg: #f7eae0;   --lf-warning-text: #944000;
+  --lf-success-bg: #e9f5e8;   --lf-success-text: #3b892f;
+  --lf-info-bg: #e6ebf5;      --lf-info-text: #25488a;
+
+  --lf-font-sans: 'Source Sans 3', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --lf-font-mono: 'Source Code Pro', Consolas, Menlo, "Liberation Mono", monospace;
+  --lf-radius: 0.5rem;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--lf-font-sans);
+  color: var(--lf-neutral-8);
+  background: var(--lf-neutral-0);
+  line-height: 1.6;
+}
+
+/* Top bar */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px;
+  background: var(--lf-neutral-0); color: var(--lf-neutral-10);
+  display: flex; align-items: center; gap: .75rem; padding: 0 1rem;
+  z-index: 50; border-bottom: 1px solid var(--lf-neutral-2);
+}
+.topbar .logo { font-weight: 700; font-size: 1.05rem; display: flex; align-items: center; gap: .45rem; letter-spacing: .01em; color: var(--lf-neutral-10); }
+.topbar .logo .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--lf-brand); }
+.topbar .doc-title {
+  color: var(--lf-neutral-6); font-size: .85rem; border-left: 1px solid var(--lf-neutral-2);
+  padding-left: .75rem; margin-left: .1rem; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; max-width: 55vw;
+}
+.topbar .spacer { flex: 1; }
+.topbar .lang-switch { color: inherit; font-size: .9rem; font-weight: 600; text-decoration: none; padding: .3rem .7rem; border: 1px solid var(--lf-neutral-2); border-radius: 999px; }
+.topbar .lang-switch:hover { background: var(--lf-hover-bg); }
+.topbar .lang-links { display: flex; gap: .4rem; }
+.menu-toggle {
+  display: none; background: transparent; border: 1px solid var(--lf-neutral-2);
+  color: var(--lf-neutral-10); border-radius: 6px; padding: .3rem .55rem; font-size: 1rem; cursor: pointer;
+}
+
+/* Layout */
+.layout { display: flex; padding-top: 60px; min-height: 100vh; }
+.sidebar {
+  position: fixed; top: 60px; bottom: 0; left: 0; width: 300px;
+  overflow-y: auto; background: var(--lf-neutral-1); border-right: 1px solid var(--lf-neutral-2);
+  padding: 1rem .85rem 2.5rem; z-index: 40;
+}
+.toc-filter {
+  width: 100%; padding: .5rem .65rem; border: 1px solid var(--lf-neutral-2);
+  border-radius: 6px; font-size: .85rem; margin-bottom: .85rem; background: var(--lf-neutral-0);
+  font-family: inherit; color: var(--lf-neutral-10);
+}
+.toc ul { list-style: none; margin: 0; padding-left: 1rem; }
+.toc > div > ul, .toc > ul { padding-left: 0; }
+.toc a {
+  display: block; padding: .32rem .55rem .32rem .65rem; color: var(--lf-neutral-8);
+  text-decoration: none; font-size: .86rem; line-height: 1.35; border-left: 2px solid transparent;
+}
+.toc li.toc-level-2 > a { font-weight: 700; color: var(--lf-neutral-10); font-size: .9rem; margin-top: .4rem; }
+.toc li.toc-level-3 > a { font-weight: 500; }
+.toc li.toc-level-4 > a { font-size: .8rem; color: var(--lf-neutral-6); }
+.toc a:hover { color: var(--lf-neutral-10); background: var(--lf-hover-bg); }
+.toc a.active { background: var(--lf-active-bg); border-left-color: var(--lf-brand); color: var(--lf-brand-active); font-weight: 700; }
+
+.content-wrap { margin-left: 300px; flex: 1; display: flex; justify-content: center; padding: 2.5rem 2rem 7rem; }
+.doc-content { max-width: 840px; width: 100%; }
+
+/* Headings — learn.liferay.com's article headings are plain, undecorated:
+   no colored rule under h1, just weight and the neutral-10 ink. */
+.doc-content h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 1rem; color: var(--lf-neutral-10); font-weight: 700; }
+.doc-content h1 + p { font-size: 1.1rem; color: var(--lf-neutral-6); margin-top: 0; }
+.doc-content h2 {
+  font-size: 1.5rem; margin: 2.75rem 0 1rem; padding-top: .75rem;
+  border-top: 1px solid var(--lf-neutral-2); color: var(--lf-neutral-10); font-weight: 700; scroll-margin-top: 78px;
+}
+.doc-content h2:first-of-type { border-top: 0; margin-top: 1.75rem; }
+.doc-content h3 { font-size: 1.2rem; margin: 2rem 0 .75rem; color: var(--lf-neutral-10); font-weight: 600; scroll-margin-top: 78px; }
+.doc-content h4 { font-size: 1rem; margin: 1.5rem 0 .6rem; color: var(--lf-neutral-10); font-weight: 600; scroll-margin-top: 78px; }
+.heading-anchor { margin-left: .45rem; opacity: 0; text-decoration: none; color: var(--lf-brand); font-weight: 400; font-size: .8em; }
+h2:hover .heading-anchor, h3:hover .heading-anchor, h4:hover .heading-anchor { opacity: 1; }
+
+/* Body text — learn.liferay.com renders article paragraphs in neutral-8,
+   reserving neutral-10 for headings and emphasis. */
+.doc-content p { margin: .85rem 0; color: var(--lf-neutral-8); }
+.doc-content strong { color: var(--lf-neutral-10); font-weight: 600; }
+.doc-content ul, .doc-content ol { padding-left: 1.4rem; }
+.doc-content li { margin: .3rem 0; color: var(--lf-neutral-8); }
+.doc-content hr { border: 0; border-top: 1px solid var(--lf-neutral-2); margin: 2.75rem 0; }
+.doc-content a { color: var(--lf-brand); }
+.doc-content a:hover { color: var(--lf-brand-active); text-decoration: underline; }
+.doc-content code {
+  font-family: var(--lf-font-mono); background: var(--lf-neutral-2); color: var(--lf-neutral-10);
+  padding: .125rem .4rem; border-radius: 4px; font-size: .88em;
+}
+em { color: inherit; }
+.doc-content img {
+  max-width: 100%; height: auto; display: block; margin: 1.1rem 0;
+  border: 1px solid var(--lf-neutral-2); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* Admonitions — learn.liferay.com's own "adm-*" callout vocabulary
+   (adm-warning / adm-note / adm-important), same background/text pairs. */
+.doc-content p.adm-block { padding: .75rem 1rem; border-radius: var(--lf-radius); margin: 1.1rem 0; }
+.doc-content p.adm-warning { background: var(--lf-warning-bg); color: var(--lf-warning-text); }
+.doc-content p.adm-note { background: var(--lf-success-bg); color: var(--lf-success-text); }
+.doc-content p.adm-important { background: var(--lf-info-bg); color: var(--lf-info-text); }
+.doc-content p.adm-block strong:first-child { color: inherit; }
+
+/* Blockquotes — learn.liferay.com's lightweight quoted style: a thin blue
+   rule and no filled background, used both for a short quoted prompt and
+   for a documentation aside that mixes prose with nested code examples. */
+.doc-content blockquote {
+  border-left: 2px solid var(--lf-brand); color: var(--lf-neutral-8);
+  font-size: 1.125rem; font-weight: 300; line-height: 1.5;
+  margin: 1.5rem 0; padding-left: 1.5rem;
+}
+.doc-content blockquote p { margin: .6rem 0; }
+.doc-content blockquote code { background: var(--lf-neutral-2); }
+.doc-content blockquote.aside { font-size: 1rem; font-weight: 400; }
+.doc-content blockquote.aside h3 { font-size: 1.1rem; margin-top: 0; }
+.doc-content blockquote.aside .copy-frame-code { margin: 1rem 0; }
+
+/* Prompt / copy frames: a dark "code" frame for fenced code (matching
+   learn.liferay.com's own pre[class*="language-"] surface) and a light
+   "quote" frame that leaves the blockquote's own thin-rule style intact. */
+.copy-frame { position: relative; margin: 1rem 0 1.6rem; }
+.copy-frame-code { border-radius: var(--lf-radius); overflow: hidden; background: var(--lf-neutral-9); }
+.copy-frame-code pre {
+  margin: 0; padding: 1em 3.4rem 1em 1.25rem; color: var(--lf-neutral-0);
+  background: transparent; border: 0; font-family: var(--lf-font-mono);
+  font-size: .9rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word;
+}
+.copy-frame-code pre code { background: transparent; color: inherit; padding: 0; border-radius: 0; }
+.copy-frame-quote blockquote { margin: 0; padding-right: 3.2rem; }
+
+.copy-btn {
+  position: absolute; top: .6rem; right: .6rem; z-index: 2;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: transparent;
+  cursor: pointer; transition: background .15s ease, color .15s ease;
+}
+.copy-btn .icon-check { display: none; }
+.copy-btn.copied .icon-copy { display: none; }
+.copy-btn.copied .icon-check { display: inline; }
+.copy-frame-code .copy-btn { color: rgba(255,255,255,.75); }
+.copy-frame-code .copy-btn:hover { background: rgba(255,255,255,.12); color: var(--lf-neutral-0); }
+.copy-frame-quote .copy-btn { top: .4rem; color: var(--lf-neutral-6); }
+.copy-frame-quote .copy-btn:hover { background: var(--lf-hover-bg); color: var(--lf-brand-active); }
+.copy-btn.copied { color: var(--lf-success-text) !important; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: 1.4rem 0; border: 1px solid var(--lf-neutral-2); border-radius: var(--lf-radius); }
+.doc-content table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+.doc-content th, .doc-content td { padding: .55rem .75rem; border-bottom: 1px solid var(--lf-neutral-2); text-align: left; vertical-align: top; color: var(--lf-neutral-8); }
+.doc-content thead th { background: var(--lf-neutral-1); color: var(--lf-neutral-10); font-weight: 600; position: sticky; top: 0; }
+.doc-content tbody tr:nth-child(even) { background: var(--lf-neutral-1); }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; right: 1.5rem; bottom: 1.5rem; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--lf-brand); color: #fff; border: 0; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; box-shadow: 0 2px 10px rgba(11,95,255,.35);
+  opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease, background .15s ease; z-index: 45; font-size: 1.1rem;
+}
+.back-to-top:hover { background: var(--lf-brand-active); transform: translateY(-2px); }
+.back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .sidebar { transform: translateX(-100%); transition: transform .2s ease; box-shadow: 2px 0 14px rgba(0,0,0,.12); }
+  body.sidebar-open .sidebar { transform: translateX(0); }
+  .content-wrap { margin-left: 0; padding: 2rem 1.15rem 5rem; }
+  body.sidebar-open::after {
+    content: ""; position: fixed; inset: 60px 0 0 0; background: rgba(40,41,52,.35); z-index: 39;
+  }
+}
+
+@media print {
+  .topbar, .sidebar, .copy-btn, .menu-toggle, .back-to-top { display: none !important; }
+  .content-wrap { margin-left: 0; padding: 0; }
+  .copy-frame-code { border: 1px solid #999; }
+  .copy-frame-code pre { color: #111; }
+  :root { --lf-neutral-9: #f4f4f4; }
+}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-toggle" type="button" aria-label="切换目录">&#9776;</button>
+  <div class="logo"><span class="dot"></span>Liferay Learn</div>
+  <div class="doc-title">Liferay DXP + AI 编码代理 — 实操教程</div>
+  <div class="spacer"></div>
+  <span class="lang-links"><a class="lang-switch" href="../../../../resources/masterclass-prerequisites/workbook/" hreflang="en" lang="en">English</a><a class="lang-switch" href="../../../../ja/resources/masterclass-prerequisites/workbook/" hreflang="ja" lang="ja">日本語</a></span>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="目录">
+    <input class="toc-filter" type="search" placeholder="筛选本指南&hellip;" aria-label="筛选目录">
+    <div class="toc"><ul><li class="toc-level-2"><a href="#what-youre-building">您将构建的内容</a></li><li class="toc-level-2"><a href="#how-to-use-this-tutorial">如何使用本教程</a></li><li class="toc-level-2"><a href="#baseline-what-already-exists">基线 — 已有内容</a></li><li class="toc-level-2"><a href="#skills-used-in-this-tutorial">本教程中使用的技能</a><ul><li class="toc-level-3"><a href="#where-these-skills-come-from">这些技能的来源</a></li><li class="toc-level-3"><a href="#all-skills-by-origin">所有技能（按来源）</a></li><li class="toc-level-3"><a href="#skills-not-used-in-this-path">本路径中未使用的技能</a></li></ul></li><li class="toc-level-2"><a href="#roadmap">路线图</a></li><li class="toc-level-2"><a href="#setting-up-your-workstation">设置您的工作站</a></li><li class="toc-level-2"><a href="#level-0-orientation-liferay-workspace-blade-setup">第 0 级 — 入门（Liferay Workspace、Blade 设置）</a><ul><li class="toc-level-3"><a href="#01-seed-the-project-context-files">0.1 — 初始化项目上下文文件</a></li><li class="toc-level-3"><a href="#02-stand-up-the-bundle-behind-a-public-tunnel">0.2 — 在公共隧道之后启动 bundle</a></li><li class="toc-level-3"><a href="#021-alternative-exercise-02-end-to-end-with-one-prompt">0.2.1 — 替代方案：用一个提示词端到端完成练习 0.2</a></li><li class="toc-level-3"><a href="#03-persist-and-validate-the-admin-login">0.3 — 持久化并验证管理员登录</a></li><li class="toc-level-3"><a href="#04-read-the-terrain-before-touching-it">0.4 — 动手之前先了解环境</a></li><li class="toc-level-3"><a href="#05-map-the-existing-site-initializer">0.5 — 梳理现有的站点初始化程序</a></li></ul></li><li class="toc-level-2"><a href="#level-1-foundations-mcp-server">第 1 级 — 基础（MCP Server）</a><ul><li class="toc-level-3"><a href="#11-enable-and-query-the-mcp-server">1.1 — 启用并查询 MCP 服务器</a></li><li class="toc-level-3"><a href="#111-alternative-connect-claude-code-to-the-mcp-server-and-query-it">1.1.1 — 替代方案：将 Claude Code 连接到 MCP 服务器并进行查询</a></li><li class="toc-level-3"><a href="#12-enable-the-flags-this-path-needs">1.2 — 启用本路径所需的功能标志</a></li><li class="toc-level-3"><a href="#13-first-deployverify-cycle">1.3 — 第一个部署/验证循环</a></li><li class="toc-level-3"><a href="#14-make-aurelis-the-portal-home-and-name-your-instance">1.4 — 将 Aurelis 设为门户首页并为您的实例命名</a></li></ul></li><li class="toc-level-2"><a href="#level-2-business-data-modeling-liferay-objects">第 2 级 — 业务数据建模（Liferay Objects）</a><ul><li class="toc-level-3"><a href="#21-extend-the-native-account-system-object">2.1 — 扩展原生的 Account 系统对象</a></li><li class="toc-level-3"><a href="#22-accountintelligenceprofile-and-lead">2.2 — AccountIntelligenceProfile 和 Lead</a></li><li class="toc-level-3"><a href="#23-load-the-target-account-dataset">2.3 — 加载目标账户数据集</a></li><li class="toc-level-3"><a href="#24-notify-on-a-qualified-lead">2.4 — 在出现合格潜在客户时发送通知</a></li></ul></li><li class="toc-level-2"><a href="#level-3-editorial-content-cms-cmp">第 3 级 — 编辑内容（CMS、CMP）</a><ul><li class="toc-level-3"><a href="#31-four-cms-spaces-four-content-structures">3.1 — 四个 CMS Spaces，四个 Content Structures</a></li><li class="toc-level-3"><a href="#32-tour-the-cms-admin-gui">3.2 — 浏览 CMS 管理界面</a></li><li class="toc-level-3"><a href="#33-ckeditor5s-native-ai-actions">3.3 — CKEditor5 的原生 AI 操作</a></li><li class="toc-level-3"><a href="#34-stand-up-a-cmp-campaign-for-white-paper-production">3.4 — 为白皮书制作建立 CMP 营销活动</a></li></ul></li><li class="toc-level-2"><a href="#level-4-page-composition-account-management-page-builder-data-sets-ldp">第 4 级 — 页面组合与账户管理（Page Builder、Data Sets、LDP）</a><ul><li class="toc-level-3"><a href="#41-gated-white-paper-funnel">4.1 — 受限访问的白皮书漏斗</a></li><li class="toc-level-3"><a href="#42-monitor-white-paper-downloads-in-liferay-data-platform">4.2 — 在 Liferay Data Platform 中监控白皮书下载</a></li><li class="toc-level-3"><a href="#43-account-intelligence-page-with-a-data-set">4.3 — 使用 Data Set 的 Account Intelligence 页面</a></li><li class="toc-level-3"><a href="#44-make-the-account-detail-app-editable">4.4 — 让账户详情应用可编辑</a></li></ul></li><li class="toc-level-2"><a href="#level-5-visitor-interactions-form-containers-objects-integrations">第 5 级 — 访客交互（Form Containers、Objects、集成）</a><ul><li class="toc-level-3"><a href="#51-become-an-aurelis-partner-form-with-a-live-company-lookup">5.1 — 带实时企业查询的「Become an Aurelis Partner」表单</a></li></ul></li><li class="toc-level-2"><a href="#level-6-custom-development-client-extensions-client-extensions-object-actions-glowroot">第 6 级 — 定制开发：Client Extensions（Client Extensions、Object Actions、Glowroot）</a><ul><li class="toc-level-3"><a href="#61-solar-battery-installation-simulator">6.1 — 太阳能 + 储能电池安装模拟器</a></li><li class="toc-level-3"><a href="#62-opportunity-score-client-extension">6.2 — Opportunity Score 客户端扩展</a></li><li class="toc-level-3"><a href="#63-measure-what-a-lead-submission-costs-with-glowroot">6.3 — 使用 Glowroot 衡量一次 Lead 提交的开销</a></li></ul></li><li class="toc-level-2"><a href="#level-7-security-permissions-and-the-native-ai-hub-chatbot-ai-hub">第 7 级 — 安全与权限，以及原生 AI Hub 聊天机器人（AI Hub）</a><ul><li class="toc-level-3"><a href="#71-restrict-partner-content-access-by-tier">7.1 — 按等级限制合作伙伴内容的访问</a></li><li class="toc-level-3"><a href="#72-stand-up-the-energy-advisor-chatbot-public-product-knowledge">7.2 — 搭建「Energy Advisor」聊天机器人：公开的产品知识</a></li><li class="toc-level-3"><a href="#73-extend-the-energy-advisor-with-per-account-confidential-facts">7.3 — 为 Energy Advisor 扩展按账户区分的机密信息</a></li></ul></li><li class="toc-level-2"><a href="#level-8-digital-sales-room-dsr">第 8 级 — Digital Sales Room（DSR）</a><ul><li class="toc-level-3"><a href="#81-account-intelligence-digital-sales-room-end-to-end">8.1 — 从 Account Intelligence 到 Digital Sales Room，端到端流程</a></li><li class="toc-level-3"><a href="#82-from-native-to-custom-a-room-generated-from-a-saved-simulation">8.2 — 从原生到定制：由已保存的模拟生成的房间</a></li></ul></li><li class="toc-level-2"><a href="#level-9-from-native-to-custom-a-hand-built-chatbot-widget-client-extensions-ai-hub-segments-ldp">第 9 级 — 从原生到定制：手工构建的聊天机器人小部件（Client Extensions、AI Hub、Segments、LDP）</a><ul><li class="toc-level-3"><a href="#91-custom-widget-with-real-time-segment-context">9.1 — 带实时细分上下文的定制小部件</a></li><li class="toc-level-3"><a href="#92-detect-buying-interest-mid-conversation">9.2 — 在对话中检测购买意向</a></li></ul></li><li class="toc-level-2"><a href="#appendix-full-screenshot-checklist">附录 — 完整截图检查清单</a></li><li class="toc-level-2"><a href="#going-further-ai-hub-quick-starts">更进一步 — AI Hub 快速入门</a></li></ul></div>
+  </nav>
+  <div class="content-wrap">
+    <main class="doc-content" data-pagefind-body>
+<h1 id="liferay-dxp-ai-coding-agent-hands-on-tutorial">Liferay DXP + AI 编码代理 — 实操教程</h1>
+<p><strong>项目：</strong>Aurelis Energy —「Aurelis One」数字平台（第 1 批次）</p>
+<p><strong>受众：</strong>在此工作区中借助其技能集使用 Claude Code 的 Liferay 集成商</p>
+<p class="adm-block adm-warning">⚠️ <strong>重要：提示词只是工作的开始，而非结束。</strong>发送提示词并不意味着练习已经完成。AI 代理要求您澄清或确认，并由此展开一段对话，这很正常，也在预料之中。因此，请仔细阅读代理的回复，包括其中间进度消息，并尽力引导它；如果它偏离了方向，甚至可以中止它。AI 代理非常擅长串联嵌套任务，但要确保它们所做的工作真正有用，您的作用不可或缺。
+<strong>掌握方向盘的是您！</strong></p>
+<hr/>
+<h2 id="what-youre-building">您将构建的内容<a aria-hidden="true" class="heading-anchor" href="#what-youre-building" tabindex="-1">#</a></h2>
+<p>完成本教程后，您将拥有 Aurelis Energy 数字平台的一个可运行切片，它完全基于 Liferay DXP 端到端构建，大部分代码由 AI 编码代理在您的指挥下编写：一个带评分的账户管道、一套真实的内容运营流程（CMS + 营销活动规划）、一个需填写表单才能获取内容的潜在客户获取漏斗、一个定制的太阳能/储能电池模拟器、两个 AI Hub 聊天机器人（先是原生的，然后是定制的）、基于等级的合作伙伴权限，以及一个将所有内容整合进 Digital Sales Room 的综合项目：先由销售人员开启房间，再根据客户保存的模拟结果自动生成房间。</p>
+<p>共十个级别，每一级都建立在上一级的基础上 — 您不必回头重做已完成的内容。下面的每个练习都会告诉您：要构建什么、由哪个技能驱动、需要执行的具体步骤或提示词、在哪里截图，以及如何验证它真正生效（而不仅仅是某条命令以 0 退出）。</p>
+<p><strong>AI 在这里的角色。</strong>您指挥，Claude 执行。您提出需求，审查它的方案，并独立验证结果 — 每个练习都以自己的验证步骤结尾，正是为了在虚构的端点或错误的假设成为下一个练习的基础之前将其发现。</p>
+<p><strong>如果 Claude 卡住了。</strong>这可能适用于您在本次研讨会中要做的工作，但更可能适用于您今后的探索。此工作区中的技能内容丰富，但并非万无一失 — 在较复杂的步骤上，偶尔走错路是可以预期的。如果某个步骤明显在原地打转（同样的调用反复失败，毫无进展），请中止它，询问它刚才尝试了什么，然后重新引导。如果它确实卡在一个无法猜出的结构上，请先在 Liferay UI 中亲自构建一个可运行的示例（页面、片段或对象），再让 Claude 去检查它（例如导出 <code>.lar</code>、捕获 API 响应、进行监控），而不是用文字描述目标。当您找到值得保留的修复方法时，请将其写回负责该步骤的技能（<code>.claude/skills/&lt;skill&gt;/SKILL.md</code>）或对应的 <code>.claude/rules/*.md</code> 参考卡片，并注明您验证时所用的 DXP 版本。也可以让 Claude 替您完成，这样下一个会话就无需重新摸索。</p>
+<p>本练习手册是借助 Claude Code 编写的，它是一个能力相当强的代理。例如，当它卡住时，它能够反编译 Liferay 的 jar 包来找出正确的 Json 结构。但这类额外工作会消耗大量令牌（token）。因此，记录有用的发现非常重要，这样它下次遇到类似挑战时，就有一份现成的解决方案可用。</p>
+<hr/>
+<h2 id="how-to-use-this-tutorial">如何使用本教程<a aria-hidden="true" class="heading-anchor" href="#how-to-use-this-tutorial" tabindex="-1">#</a></h2>
+<ul>
+<li><strong>每个练习一个简短的 Claude 会话</strong>（偶尔是一小组练习），而不是用一个长会话承载整个项目。练习 0.1 会创建两个文件 — <code>solution-context.md</code> 和 <code>solution-index.yaml</code> — 正是为了让每个新会话都能立即完成初始化，而无需重新阅读所有内容。</li>
+<li>每当您<strong>启动新的 Claude Code 会话</strong>时，其技能都知道如何读取这些文件，因此您无需从头重新解释 Aurelis 和您的进度。</li>
+<li><strong>在每个练习结束时，技能会同步更新 <code>solution-index.yaml</code></strong>，并将刚刚构建的内容标记为 <code>done</code> — 这样下一个会话就能准确了解「还剩什么」。</li>
+</ul>
+<p><strong>为什么要使用简短的 Claude 会话？</strong>我们观察到，随着上下文窗口不断增长（例如经过一段很长的对话），令牌用量会增加，而准确性往往会同时下降。因此，我们提出了这种组织知识和工作完成进度的方案。在您自己的项目中，您甚至可以将 Claude Code 与 Jira 项目连接起来。</p>
+<ul>
+<li>
+<p><strong>每个创建内容、表单、页面或对象的提示词都以「Access expectations」（访问要求）结尾。</strong>它告诉 Claude 谁必须能够读取或写入什么、访客<em>不得</em>做什么，以及以哪个用户身份进行验证。权限缺口会静默失败：页面返回 200，表单正常保存，在管理员看来一切正常。预先说明访问要求，可以让 Claude 第一次就构建并测试正确的访问权限，而不是由您日后才发现缺口。在改编提示词时请保留这些内容，并为您新增的任何提示词写上一条。</p>
+</li>
+<li>
+<p><strong>全文使用的图例：</strong></p>
+</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>标记</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🎯</td>
+<td>您将构建的内容</td>
+</tr>
+<tr>
+<td>🧩</td>
+<td>驱动本练习的技能（🆕 = 在此工作区中新增，不属于 Liferay 官方技能集）</td>
+</tr>
+<tr>
+<td>📋</td>
+<td>需遵循的步骤</td>
+</tr>
+<tr>
+<td>💬</td>
+<td>要粘贴到 Claude 中的提示词</td>
+</tr>
+<tr>
+<td>📸</td>
+<td>在此处截图</td>
+</tr>
+<tr>
+<td>✅</td>
+<td>如何验证其已生效</td>
+</tr>
+<tr>
+<td>⚠️</td>
+<td>开始之前值得了解的陷阱</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="baseline-what-already-exists">基线 — 已有内容<a aria-hidden="true" class="heading-anchor" href="#baseline-what-already-exists" tabindex="-1">#</a></h2>
+<p>在练习 0.1 之前，工作区中已包含：</p>
+<ul>
+<li>一个<strong>站点初始化程序</strong>（<code>client-extensions/&lt;name&gt;/site-initializer/</code>）</li>
+<li>一个基线<strong>片段库</strong></li>
+<li>一个<strong>样式手册（style book）</strong></li>
+<li>一个<strong>母版页</strong></li>
+<li>一个<strong>首页</strong></li>
+<li><strong>Glowroot</strong>（APM），已预装：代理程序位于 <code>configs/common/glowroot/</code>，<code>configs/common/tomcat/bin/setenv.*</code> 将其挂载到 Tomcat（始终开启），<code>.mcp.json</code> 注册了它的 MCP 服务器。用于练习 6.3。</li>
+<li><strong>4 GB 堆内存</strong>供 Liferay 使用，在同一组 <code>setenv.*</code> 文件中设置（该 bundle 的默认值为 2.5 GB）。</li>
+</ul>
+<p>这些内容都不会重建 — 练习 0.5 是对它们的导览，而不是重新创建。</p>
+<hr/>
+<h2 id="skills-used-in-this-tutorial">本教程中使用的技能<a aria-hidden="true" class="heading-anchor" href="#skills-used-in-this-tutorial" tabindex="-1">#</a></h2>
+<h3 id="where-these-skills-come-from">这些技能的来源<a aria-hidden="true" class="heading-anchor" href="#where-these-skills-come-from" tabindex="-1">#</a></h3>
+<p>Liferay 在 Liferay Portal 代码仓库中发布了一套官方 AI 代理技能：<a href="https://github.com/liferay/liferay-portal/tree/master/workspaces/liferay-sample-workspace/.agents"><code>workspaces/liferay-sample-workspace/.agents</code></a>。其中包含 24 个技能（<code>skills/</code>）、8 张参考卡片（<code>rules/</code>）以及一个规则入口文件（<code>liferay-rules.md</code>）。</p>
+<p>您在本练习手册中使用的工作区以这套官方技能为起点，并做了进一步扩展：</p>
+<ul>
+<li><strong>🆕 新增：</strong>8 个官方技能集中没有的技能。它们涵盖本练习手册所需的产品和模式：CMS、CMP、Data Sets、Form Containers、AI Hub、Liferay Data Platform 分析、Glowroot 性能诊断，以及 Digital Sales Room 自动化。</li>
+<li><strong>✏️ 增强：</strong>18 个官方技能，补充了在编写本练习手册过程中实际验证过的发现（静默失败、特定版本的行为、任何 OpenAPI 规范都未记录的结构）。</li>
+<li><strong>⚪ 未改动：</strong>4 个官方技能，按原样使用。</li>
+<li>未包含：官方的 <code>author-skill</code> 和 <code>commit-skill</code>，它们用于维护官方技能集本身。</li>
+</ul>
+<p>在这里，所有内容都位于 <code>.claude/</code> 下：<code>CLAUDE.md</code>（入口文件和技能路由）、<code>skills/&lt;name&gt;/SKILL.md</code>，以及 <code>rules/</code>（与官方技能集相同的 8 张参考卡片）。以下对比基于 2026-10-05 官方代码仓库的 <code>master</code> 分支。</p>
+<h3 id="all-skills-by-origin">所有技能（按来源）<a aria-hidden="true" class="heading-anchor" href="#all-skills-by-origin" tabindex="-1">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>技能</th>
+<th>来源</th>
+<th>相比官方技能集新增的内容</th>
+<th>练习</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>manage-cms</code></td>
+<td>🆕 新增</td>
+<td>CMS Spaces、Content Structures、条目和文件夹；将 Space 连接到站点以呈现其内容</td>
+<td>3.1, 7.2</td>
+</tr>
+<tr>
+<td><code>manage-cmp-campaigns</code></td>
+<td>🆕 新增</td>
+<td>CMP 项目（营销活动）和任务、负责人、截止日期</td>
+<td>3.4</td>
+</tr>
+<tr>
+<td><code>manage-data-sets</code></td>
+<td>🆕 新增</td>
+<td>Data Set 定义（列、筛选、排序、行操作）以及放置 Data Set 片段</td>
+<td>4.3</td>
+</tr>
+<tr>
+<td><code>manage-form-containers</code></td>
+<td>🆕 新增</td>
+<td>创建或编辑对象条目的原生 Form Containers、成功后重定向、隐藏的上下文字段</td>
+<td>4.1, 5.1</td>
+</tr>
+<tr>
+<td><code>manage-ai-hub</code></td>
+<td>🆕 新增</td>
+<td>将 DXP 连接到 AI Hub、代理回调 DXP（HTTP Request、基于 Search Blueprints 的 RAG）、页面上的聊天机器人、Cell on-behalf-of 身份验证</td>
+<td>3.3, 7.2, 7.3, 9.1, 9.2</td>
+</tr>
+<tr>
+<td><code>manage-analytics</code></td>
+<td>🆕 新增</td>
+<td>将 DXP 连接到 Liferay Data Platform、<code>Analytics.track()</code> 自定义事件、实时细分、检查事件是否送达</td>
+<td>4.1, 4.2, 9.1, 9.2</td>
+</tr>
+<tr>
+<td><code>glowroot-performance</code></td>
+<td>🆕 新增</td>
+<td>使用 Glowroot APM 进行性能诊断</td>
+<td>6.3</td>
+</tr>
+<tr>
+<td><code>manage-dsr</code></td>
+<td>🆕 新增</td>
+<td>通过 REST 以 <code>DSRRoom</code> 条目形式创建房间、打包为 OSGi 模块的自定义房间模板、房间成员、限定在房间站点范围内的数据</td>
+<td>8.2</td>
+</tr>
+<tr>
+<td><code>workspace-init</code></td>
+<td>✏️ 增强</td>
+<td>先释放 8080 端口；功能标志与管理员首次启动的关系</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td><code>mcp-server</code></td>
+<td>✏️ 增强</td>
+<td>2026.Q3 的 Instance Settings 开关；MCP 工具集因版本而异；Windows 上的 Claude Code 以访客身份调用</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td><code>feature-flags</code></td>
+<td>✏️ 增强</td>
+<td>无需重启的运行时开关；Deprecation/Developer 标志会忽略 <code>portal-ext.properties</code></td>
+<td>1.2</td>
+</tr>
+<tr>
+<td><code>deploy-and-verify</code></td>
+<td>✏️ 增强</td>
+<td>重启遵循 <code>CLAUDE.md</code> 中的会话重启策略</td>
+<td>1.3 及之后的每次部署</td>
+</tr>
+<tr>
+<td><code>manage-objects</code></td>
+<td>✏️ 增强</td>
+<td>字段 ERC、选择列表键规则、扩展 Account 等系统对象、Aggregation 字段</td>
+<td>2.1, 2.2, 2.3, 7.3, 8.2</td>
+</tr>
+<tr>
+<td><code>manage-object-logic</code></td>
+<td>✏️ 增强</td>
+<td>真正生效的工作流关联、Single Approver 复制陷阱、访客提交、HSQLDB 死锁</td>
+<td>2.4, 8.2</td>
+</tr>
+<tr>
+<td><code>manage-pages</code></td>
+<td>✏️ 增强</td>
+<td>站点初始化程序目录树中的链接、表单和菜单（<code>displayPageURL</code>、跨对象表单、成功后重定向、Menu Display）以及映射限制</td>
+<td>4.1, 4.3</td>
+</tr>
+<tr>
+<td><code>scaffold-fragment</code></td>
+<td>✏️ 增强</td>
+<td>迭代循环、各类型配置的特殊之处、编辑模式检测、FreeMarker 方括号和空值陷阱</td>
+<td>4.1, 8.2</td>
+</tr>
+<tr>
+<td><code>scaffold-client-extension</code></td>
+<td>✏️ 增强</td>
+<td>通过片段放置 CET、<code>globalJS</code> 与 Senna、微服务 <code>Dockerfile</code>/<code>LCP.json</code>、<code>Liferay.fire</code>/<code>Liferay.on</code> 消息传递</td>
+<td>4.3, 4.4, 6.1, 6.2, 8.2, 9.1, 9.2</td>
+</tr>
+<tr>
+<td><code>react-custom-elements</code></td>
+<td>✏️ 增强</td>
+<td>Vite 库模式与 <code>process.env.NODE_ENV</code>；OSGi「deleted」循环无需重命名</td>
+<td>4.3, 4.4, 9.1</td>
+</tr>
+<tr>
+<td><code>setup-oauth</code></td>
+<td>✏️ 增强</td>
+<td>位于 <code>routes/</code> 下的 Headless-server 凭据，每次重新部署时轮换</td>
+<td>6.2, 8.2</td>
+</tr>
+<tr>
+<td><code>manage-roles-permissions</code></td>
+<td>✏️ 增强</td>
+<td>Depot（Space）角色、条目权限检查、客户端的范围角色</td>
+<td>3.4, 7.1, 7.2, 8.2</td>
+</tr>
+<tr>
+<td><code>build-site</code></td>
+<td>✏️ 增强</td>
+<td>预先确定重新配置的成本、themeCSS 决策、MCP 工具检测</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>commerce-catalogs</code></td>
+<td>✏️ 增强</td>
+<td>经过验证的 Commerce REST 陷阱（ERC 长度、默认 SKU、规格键、选项值）</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>integrate-external-data</code></td>
+<td>✏️ 增强</td>
+<td>搭建 <code>objectEntryManager</code> CET 及其存储类型</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>manage-environments</code></td>
+<td>✏️ 增强</td>
+<td>重启策略、环境配置中的功能标志</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>scaffold-form-fragment</code></td>
+<td>✏️ 增强</td>
+<td>通过实时页面 API 放置时需要真实的 <code>html</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>theme-and-design</code></td>
+<td>✏️ 增强</td>
+<td>静默不生效的 Style Book 令牌、Web 字体、对比度检查</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>guided-client-extension</code></td>
+<td>⚪ 未改动</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>initial-setup-guide</code></td>
+<td>⚪ 未改动</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>manage-cloud-project</code></td>
+<td>⚪ 未改动</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>production-standards</code></td>
+<td>⚪ 未改动</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>在每个练习的 🧩 行中，🆕 表示该技能是在此工作区中新增的。</p>
+<h3 id="skills-not-used-in-this-path">本路径中未使用的技能<a aria-hidden="true" class="heading-anchor" href="#skills-not-used-in-this-path" tabindex="-1">#</a></h3>
+<p>了解原因，以便在您自己的项目中正确使用它们：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>技能</th>
+<th>未纳入本路径的原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>commerce-catalogs</code></td>
+<td>Aurelis 没有需要管理的电子商务目录</td>
+</tr>
+<tr>
+<td><code>scaffold-form-fragment</code></td>
+<td>这里的每个自定义字段都对应内置的 <code>INPUTS-*</code> 类型 — 当表单需要真正自定义的选择器时，才轮到它出场</td>
+</tr>
+<tr>
+<td><code>theme-and-design</code></td>
+<td>在这里，UX 设计仍由人来负责 — 品牌应用不属于本路径</td>
+</tr>
+<tr>
+<td><code>build-site</code></td>
+<td>综合项目复用已构建的全部内容，而不是从头组装一个新站点</td>
+</tr>
+<tr>
+<td><code>manage-environments</code> / <code>production-standards</code></td>
+<td>为避免云环境方面的繁琐事务而略过 — 接下来可以尝试</td>
+</tr>
+<tr>
+<td><code>integrate-external-data</code></td>
+<td><code>Account</code> 以原生为主，没有需要代理或同步的外部系统；这里的两个外部调用（练习 5.1、6.1）是简单的客户端读取，而不是作为对象数据源的集成</td>
+</tr>
+<tr>
+<td><code>manage-cloud-project</code></td>
+<td>本教程在本地/隧道环境中运行，从不针对托管的 Cloud/LXC 项目</td>
+</tr>
+<tr>
+<td><code>guided-client-extension</code> / <code>initial-setup-guide</code></td>
+<td>面向初学者的封装 — 本教程假定由一位专家级架构师指挥 AI</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="roadmap">路线图<a aria-hidden="true" class="heading-anchor" href="#roadmap" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>级别</th>
+<th>交付内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>准备</td>
+<td>工作站已对照课堂先决条件检查，VS Code 和 Claude Code 准备就绪</td>
+</tr>
+<tr>
+<td>0</td>
+<td>工作区已打开，隧道已启动，凭据已持久化，上下文文件已初始化</td>
+</tr>
+<tr>
+<td>1</td>
+<td>MCP 服务器上线，功能标志已启用，首次部署已验证，Aurelis 已设为门户首页，并拥有唯一命名的实例</td>
+</tr>
+<tr>
+<td>2</td>
+<td>带评分的账户数据模型（<code>Account</code>、<code>AccountIntelligenceProfile</code>、<code>Lead</code>），并加载了共享的六个账户数据集</td>
+</tr>
+<tr>
+<td>3</td>
+<td>四个 CMS Spaces、一个 CMP 营销活动、CKEditor5 AI 起草</td>
+</tr>
+<tr>
+<td>4</td>
+<td>需填写表单获取的白皮书漏斗、在 Liferay Data Platform 中监控下载、Account Intelligence 页面、可编辑的账户详情</td>
+</tr>
+<tr>
+<td>5</td>
+<td>带实时公司查询的公开合作伙伴申请表单</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Solar + Battery Simulator、Opportunity Score 客户端扩展（Fit × Value × Intent，含潜在客户与账户的匹配），并使用 Glowroot 进行度量</td>
+</tr>
+<tr>
+<td>7</td>
+<td>合作伙伴等级权限、原生「Energy Advisor」AI Hub 聊天机器人</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Digital Sales Room — 从 Account Intelligence 到 Digital Sales Room 的端到端流程；然后基于自定义模板，根据已保存的模拟结果生成房间</td>
+</tr>
+<tr>
+<td>9</td>
+<td>带细分上下文和购买意向检测的自定义聊天机器人小部件</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h2 id="setting-up-your-workstation">设置您的工作站<a aria-hidden="true" class="heading-anchor" href="#setting-up-your-workstation" tabindex="-1">#</a></h2>
+<p>🎯 一台满足 <a href="https://www.liferay.com/classroom-training/classroom-prerequisites">Liferay 课堂培训先决条件</a>的工作站，并已准备好 VS Code 和 Claude Code 扩展，用于完成本路径的其余部分。</p>
+<p>🧩 无 — 研讨会准备事务。</p>
+<p>📋 <strong>步骤：</strong></p>
+<ol>
+<li>安装 <a href="https://code.visualstudio.com/">VS Code</a>，然后从 VS Code Marketplace 安装 <strong>Claude Code</strong> 扩展并登录。</li>
+<li><strong>在 VS Code 中打开工作区文件夹</strong>（File → Open Folder），而不仅仅是打开某个文件。只有打开文件夹，扩展才能找到 <code>.claude</code> 文件夹及其中的技能。</li>
+<li>在该文件夹中启动一个 Claude Code 会话，并运行下面的审核提示词。它会检查已公布的先决条件（Git、JDK 21、Blade CLI、内存、磁盘空间），而不会做任何更改。</li>
+<li><strong>设置 ngrok。</strong>练习 0.2 会将 bundle 置于公共 ngrok 隧道之后。本课程使用 Liferay Enablement 的 ngrok 账户，这是付费套餐：您的 Liferay 前面不会出现插页，并且域名永远不会变化。请在 <a href="https://ngrok.com/">ngrok.com</a> 使用您提供给我们的电子邮件地址创建账户，接受加入 Liferay Enablement 账户的邀请，<a href="https://ngrok.com/download">安装代理程序</a>，然后在您自己的终端中注册该账户的 authtoken（ngrok dashboard → Your Authtoken）：
+   <code>bash
+   ngrok config add-authtoken &lt;your-authtoken&gt;</code>
+   然后检查是否正常工作：
+   <code>bash
+   ngrok version
+   ngrok config check</code>
+   请亲自输入 authtoken，切勿将其粘贴到 Claude 会话中。<code>ngrok config check</code> 会确认配置文件有效，而不会显示令牌。</li>
+</ol>
+<p>然后在 Enablement 账户中<strong>预留您自己的域名</strong>：在 ngrok dashboard 中打开 <strong>Domains</strong> 并新建一个，例如 <code>&lt;your-name&gt;-masterclass.ngrok.app</code>。请记下它：练习 0.2 会将您的 Liferay 置于该域名之后，从第 7 级开始，AI Hub 也会通过它调用您的 Liferay。不要使用随机的 <code>*.ngrok-free.app</code> 主机名：它的插页会静默破坏 AI Hub 对您 Liferay 的调用，而且每次 ngrok 重启时它都会变化。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Check whether my workstation is ready for Liferay classroom training:
+https://www.liferay.com/classroom-training/classroom-prerequisites
+
+Perform a read-only audit. Do not install, update, delete, or change settings
+without asking me first.
+
+First identify my operating system, architecture, and shell. Confirm you are
+checking my actual training workstation, not a remote environment or
+container. If you cannot access the workstation, give me the appropriate
+commands to run and ask me to paste the results. Never invent results.
+
+Check the current requirements on the linked page. If you cannot access it,
+use the baseline below and clearly state that you could not verify the latest
+requirements:
+
+1. Git
+   Run git --version and verify it is accessible from the command line.
+   No specific Git version or GitHub account is required.
+2. Java JDK 21
+   Run java -version and javac -version.
+   Confirm both use major version 21 and that a full JDK is available, not
+   just a JRE. Inspect the resolved executable paths and JAVA_HOME, if set.
+   Flag conflicting Java installations or configuration separately.
+3. Liferay Blade CLI
+   Run blade version.
+   Confirm version 6.0.0.202404102137 or newer.
+   If outdated, suggest the update command but do not run it.
+4. Available memory
+   Check that at least 4 GB of RAM is currently available, not merely
+   installed. Report total and available memory separately. Use an
+   OS-appropriate measurement that accounts for reclaimable memory; if
+   uncertain, mark it as needing manual verification.
+5. Available storage
+   Check for at least 10 GB free on the drive where the training workspace
+   will be stored. State which drive/path you checked. Ask me for the
+   workspace location if it would change the result.
+6. ngrok (required by this workshop, not by the classroom page)
+   Run ngrok version and ngrok config check.
+   Confirm the agent is on the PATH and the config is valid. Then confirm
+   an authtoken is registered by checking that the config file has an
+   authtoken key, without printing its value or the file's contents.
+   Do not start a tunnel.
+
+Also ask whether I have reviewed the corresponding Liferay Learning Path and
+received any class-specific prerequisites. Treat the learning path as
+recommended preparation. Do not claim all class-specific requirements are
+satisfied unless I provide them for checking.
+
+Use only targeted checks; do not print credentials, tokens, or unrelated
+environment variables.
+
+Return:
+- A table with: Check | Requirement | Detected result | PASS / FAIL / UNVERIFIED.
+- A short overall verdict on the published workstation requirements.
+- Any class-specific requirements still awaiting confirmation.
+- Prioritized fixes for failed checks, with commands or official installation
+  links appropriate to my OS.
+
+Only mark a check PASS when supported by observed evidence. If a command is
+blocked or unavailable, distinguish an unverified result from a confirmed
+missing prerequisite. After any fixes I approve, rerun the affected checks.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>表格的每一行都显示 PASS。修复所有 FAIL，然后让 Claude 重新运行受影响的检查。UNVERIFIED 行表示该检查无法运行：请亲自运行它给出的命令，并将结果粘贴回来。对于 ngrok，<code>ngrok version</code> 会打印版本号，<code>ngrok config check</code> 会报告配置有效。</p>
+<p class="adm-block adm-warning">⚠️ 内存检查针对的是<strong>当前可用</strong>的 RAM，而不是已安装的 RAM。研讨会开始前请关闭占用资源较多的应用程序：仅 Liferay bundle 本身就以 4 GB 堆内存运行（练习 0.2）。</p>
+<hr/>
+<h2 id="level-0-orientation-liferay-workspace-blade-setup">第 0 级 — 入门（Liferay Workspace、Blade 设置）<a aria-hidden="true" class="heading-anchor" href="#level-0-orientation-liferay-workspace-blade-setup" tabindex="-1">#</a></h2>
+<h3 id="01-seed-the-project-context-files">0.1 — 初始化项目上下文文件<a aria-hidden="true" class="heading-anchor" href="#01-seed-the-project-context-files" tabindex="-1">#</a></h3>
+<p>🎯 在工作区根目录创建两个文件，让以后的每个会话都能立即完成初始化：<code>solution-context.md</code>（业务背景）和 <code>solution-index.yaml</code>（本路径要构建的所有产物的待办清单）。</p>
+<p>🧩 无 — 下面的提示词是自包含的。</p>
+<p>📋 请首先完成此练习，然后再进行 0.2 和 0.3。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>We're starting a training path implementing part of Aurelis Energy's 'Aurelis
+One' digital platform program on Liferay DXP. Seed two files at the workspace
+root: solution-context.md and solution-index.yaml.
+
+Confirm first that context-source/Aurelis_Energy_Company_Digital_Platform_Brief.md,
+context-source/step1-business-objectives.md, and context-source/liferay-skills-learning-path.md
+are present. Stop and tell me if any is missing — don't invent content.
+
+solution-context.md: read the Brief and step1-business-objectives.md and write
+a short, human-readable summary (not a copy-paste): Aurelis Energy's product
+lines, the Aurelis One program's purpose, the ten business objectives and six
+Critical Success Factors at summary level, and what's in scope (Lot 1) vs not.
+Cite the source files by name instead of inlining everything.
+
+solution-index.yaml: one entry per artifact this path builds — one row per
+Level-2-through-9 exercise in liferay-skills-learning-path.md (skip Level 0/1,
+which produce no lasting artifact). Each entry: exercise number, short
+identifier, kind (object-definition / cms-space / client-extension / page /
+permission-config / ai-hub-config, etc.), the REQ-XX it maps to, status todo.
+Also copy the 'Skills not used in this path' table into
+solution-context.md so it's clear what this project does NOT build.
+
+Confirm both files read back correctly with no other file open.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>打开一个全新的 Claude 会话，只让它读取 <code>solution-context.md</code> 和 <code>solution-index.yaml</code>，然后让它概述 Aurelis One 以及还剩哪些内容要构建。如果它无需您粘贴任何其他内容就能准确回答，说明本练习已成功。</p>
+<p class="adm-block adm-warning">⚠️ 您可能想在 <code>solution-context.md</code> 中添加更多信息，但请尽量保持简短 — 一页即可，而不是 Brief 的副本。如需更深入的内容，请通过路径指向 <code>context-source/</code>。目的是避免塞满代理的上下文窗口，从而将令牌用量控制在可管理的范围内。</p>
+<h3 id="02-stand-up-the-bundle-behind-a-public-tunnel">0.2 — 在公共隧道之后启动 bundle<a aria-hidden="true" class="heading-anchor" href="#02-stand-up-the-bundle-behind-a-public-tunnel" tabindex="-1">#</a></h3>
+<p>🎯 一个正在运行的 Liferay 实例，既可以通过 <code>localhost</code> 访问，也可以通过 HTTPS 从您预留的 ngrok 域名访问 — 之后 AI Hub（第 7 级）和 Liferay Data Platform（第 4、9 级）都需要用到。</p>
+<p>🧩 <code>workspace-init</code></p>
+<p>📖 <strong>什么是 ngrok？</strong>ngrok 会在您的本地 Liferay 前面提供一个公共 HTTPS 地址，否则 Liferay 只能在 <code>localhost:8080</code> 上访问。这样，互联网上的任何地方都可以访问它。</p>
+<p><strong>课程为什么需要它：</strong>AI Hub 是一项云服务，在某些练习中，它必须回调您的 DXP：HTTP Request 节点和 Liferay Search RAG。它无法访问 <code>localhost</code>，因此 AI Hub 的「Environment URLs」设置会拒绝它，而需要一个公共 HTTPS URL。仅从 DXP 调用 AI Hub 的请求无需隧道即可工作。</p>
+<p>本练习使用您在 Liferay Enablement ngrok 账户中预留的域名（<a href="#setting-up-your-workstation">设置您的工作站</a>，第 4 步）。在下面的提示词中，请将 <code>&lt;your-domain&gt;</code> 替换为该域名，例如 <code>&lt;your-name&gt;-masterclass.ngrok.app</code>。ngrok dashboard 的 <a href="https://dashboard.ngrok.com/get-started/gateway">Get started → Gateway</a> 页面是很好的入门指南。</p>
+<p class="adm-block adm-warning">⚠️ <strong>非常重要：</strong>在 <code>web.server.host</code>（位于 <code>portal-ext.properties</code> 中）设置为您的域名之前（第 1 步会完成此设置），请勿启动 Liferay。否则会导致 Liferay Data Set 功能损坏，因为 Object Definitions 将无法正确创建。</p>
+<p>📋 <strong>步骤：</strong></p>
+<ol>
+<li>让 Claude 启动隧道并准备 bundle：发送下面的<strong>第 1 轮</strong>提示词。它会在您的域名上启动 ngrok，通过 ngrok 的本地 API 进行检查，设置 <code>web.server.host</code>，运行 <code>blade server init</code> 并检查结果，然后停下来交由您继续。</li>
+<li><strong>在您自己的终端中亲自启动服务器</strong> — 切勿让 Claude 运行 <code>blade server start</code>/<code>stop</code> 或任何 <code>catalina</code>/<code>startup</code>/<code>shutdown</code> 脚本。运行 <code>blade server start --tail</code> 并等待出现 <code>STARTED</code>。</li>
+<li>让 Claude 检查隧道、forwarded-host 和 forwarded-port 配置以及 Glowroot：发送下面的<strong>第 2 轮</strong>提示词。</li>
+<li>在浏览器中加载 <code>https://&lt;your-domain&gt;</code>（而不是 <code>localhost</code>），确认 forwarded-host 配置正常工作。</li>
+<li>立即更改管理员密码（My Account → Password）— 一旦实例公开，自带的默认密码就会成为真正的安全隐患。</li>
+</ol>
+<p>💬 <strong>提示词（第 1 轮）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Set up the public tunnel for exercise 0.2 with my ngrok domain &lt;your-domain&gt;. Do not start, stop or restart Liferay at any point; I'll do that myself.
+
+1. Check ngrok is installed and its config is valid (ngrok version, ngrok config check). Never print the authtoken. If a tunnel for my domain is already running, reuse it; otherwise start it as a background process:
+   ngrok http 8080 --url=https://&lt;your-domain&gt; --request-header-add "X-Forwarded-Port: 443"
+2. Confirm through ngrok's local API (http://localhost:4040/api/tunnels) that the tunnel is online and its public URL is https://&lt;your-domain&gt;.
+3. In configs/local/portal-ext.properties, set web.server.host=&lt;your-domain&gt;: no https:// prefix and no trailing slash. Change nothing else, and show me the diff.
+4. If bundles/ doesn't exist yet, run blade server init. Then confirm bundles/tomcat/bin/setenv.sh (or setenv.bat) contains -Xmx4096m and glowroot.jar, and that bundles/glowroot/ exists.
+5. Stop and tell me to run blade server start --tail in my own terminal.
+</code></pre></div>
+<p>额外的 <code>X-Forwarded-Port</code> 标头很重要：ngrok 会转发协议和主机，但不转发端口，因此如果没有它，Liferay 会生成 <code>https://&lt;host&gt;:80/...</code> 形式的 URL，API Explorer（<code>/o/api</code>）会报错「Failed to fetch」。ngrok 会在日志中提示该标志已弃用，但它仍然有效。如果您的安全软件阻止 Claude 启动 ngrok，请在一个保持打开的终端中亲自运行该 <code>ngrok http</code> 命令，然后让 Claude 从提示词的第 2 步继续。</p>
+<p>隧道启动后，运行 ngrok 的终端会显示 <strong>Session Status: online</strong>，<strong>Forwarding</strong> 行会将 <code>https://&lt;your-domain&gt;</code> 映射到 <code>http://localhost:8080</code>。Liferay 运行后（第 2 步），每个经过隧道的请求都会显示在 <strong>HTTP Requests</strong> 下：</p>
+<p><img alt="ngrok 正在运行" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ngrok-is-running.png"/></p>
+<p>💡 <strong>请保持 ngrok 检查器处于打开状态：<a href="http://localhost:4040">http://localhost:4040</a>。</strong>它列出经过隧道的每个请求，包括方法、URL、状态、标头和正文，并且可以重放其中任何一个。从第 7 级开始，它是唯一能看到 <strong>AI Hub 对您 Liferay 发起的调用</strong>（Liferay Search RAG、HTTP Request 节点）的地方：这些调用来自云端，因此既不会出现在浏览器的 DevTools 中，也不会在 Liferay 日志中以可识别的形式出现。当聊天机器人的回答看起来不对时，请先查看这里：AI Hub 是否调用了 DXP，调用了哪个 URL，返回了什么状态？</p>
+<p class="adm-block adm-warning">⚠️ 检查器会以明文显示请求标头，包括 <code>Authorization</code> 令牌。分享其截图之前请先将其隐藏。</p>
+<p>💬 <strong>提示词（第 2 轮）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Liferay is up. Verify exercise 0.2 for my domain &lt;your-domain&gt; without starting or stopping anything:
+
+1. GET https://&lt;your-domain&gt;/ through the tunnel. Pass if it returns Liferay HTML. If it returns an ngrok "visit site" interstitial page instead, fail and tell me: it means the tunnel isn't running on the Liferay Enablement account's paid plan.
+2. GET https://&lt;your-domain&gt;/o/headless-admin-user/v1.0/my-user-account without credentials. Pass if the response is JSON (a 401 or 403 is fine), not HTML.
+3. Check the forwarded-port config: fetch https://&lt;your-domain&gt;/o/api and confirm no URL in the response contains ":80" or "http://&lt;your-domain&gt;".
+4. Confirm http://localhost:4000/o/glowroot loads locally. Never reach it through the tunnel.
+5. Report each check as PASS or FAIL with the evidence. Don't change any password and never print any credential.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>Claude 报告中的每项检查都显示 PASS。<code>https://&lt;your-domain&gt;</code> 能在浏览器中加载 — 没有代理错误、没有插页、没有试用期已过的横幅 — 并且旧的默认密码已失效。<code>http://localhost:4000/o/glowroot</code>（仅限本地访问，切勿通过隧道）显示 Glowroot UI。</p>
+<p class="adm-block adm-warning">⚠️ 免费的 ngrok 主机名（<code>*.ngrok-free.app</code>）会在每个请求前插入一个交互式的「visit site」插页 — 对点击通过的人来说几乎察觉不到，但对任何无人值守的 API 调用（包括之后 AI Hub 自己的 HTTP Request 节点）来说却是静默致命的。这就是本课程使用 Enablement 账户的付费套餐和您预留的域名的原因。如果某个 curl 调用返回的是 HTML 而不是 JSON，在怀疑 Liferay 之前，请先检查 ngrok 是否使用 Enablement 账户的 authtoken 和您的域名运行。</p>
+<p class="adm-block adm-warning">⚠️ 代理切勿自行运行启动/停止命令 — 这是一条硬性规则（<code>CLAUDE.md</code>），这样也能规避防病毒/终端安全软件：即使由您运行同一命令没有问题，这类软件也常常会阻止由代理派生的进程。</p>
+<h3 id="021-alternative-exercise-02-end-to-end-with-one-prompt">0.2.1 — 替代方案：用一个提示词端到端完成练习 0.2<a aria-hidden="true" class="heading-anchor" href="#021-alternative-exercise-02-end-to-end-with-one-prompt" tabindex="-1">#</a></h3>
+<p>🎯 与 0.2 相同的结果 — 一个在您预留的 ngrok 域名之后运行、并已设置新管理员密码的 Liferay — 只需一个提示词：Claude 准备机器、启动隧道和 Liferay、检查所有内容并更改管理员密码。</p>
+<p>🧩 <code>workspace-init</code>、<code>deploy-and-verify</code></p>
+<p>0.2 和 0.2.1 二选一，不要两者都做。0.2 让您掌控服务器；0.2.1 则把一切交给 Claude。</p>
+<p class="adm-block adm-warning">⚠️ <strong>此提示词放宽了 0.2 中 Claude 绝不启动或停止服务器的规则。</strong>它的第一行明确授权 Claude（仅限本练习）停止它发现的 Docker 容器和 ngrok 进程、在本工作区自己的 Liferay 正在运行时将其停止，并启动 Liferay。防病毒或终端安全软件仍可能阻止 Claude 启动的进程：如果 Liferay 或 ngrok 无法由 Claude 启动，请亲自运行该命令并让 Claude 从下一步继续，或者改为按照 0.2 操作。</p>
+<p>📋 <strong>发送之前：</strong></p>
+<ol>
+<li>您已接受加入 Liferay Enablement ngrok 账户的邀请，预留了您的域名，并注册了该账户的 authtoken（<a href="#setting-up-your-workstation">设置您的工作站</a>，第 4 步）。</li>
+<li>关闭所有打开您域名的浏览器标签页。在启动完成之前到达 Liferay 的请求可能导致 DSR 站点初始化程序过早运行。</li>
+<li>预计 Claude Code 会在执行若干命令（<code>docker stop</code>、<code>pkill</code>、<code>blade</code>）之前征求您的同意。请批准它们，或在本练习中切换到更宽松的权限模式。</li>
+<li>将提示词中的 <code>&lt;your-domain&gt;</code> 替换为您的域名，例如 <code>&lt;your-name&gt;-masterclass.ngrok.app</code>。</li>
+</ol>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Run exercise 0.2 end to end, fully automated, with my ngrok domain &lt;your-domain&gt;. I authorize you, for this exercise only, to stop the Docker containers and ngrok processes you find, to stop this workspace's own Liferay if it is running, and to start Liferay yourself. Report what you did at each step.
+
+0. Preflight
+   a. Check the tools: java -version reports 21, blade version runs, and ngrok version runs. If ngrok is older than 3.16, tell me to update it and stop.
+   b. Check ngrok's config is valid (ngrok config check). Never print the authtoken.
+   c. If Docker is installed and running, list running containers (docker ps), show me the list, then stop each one with docker stop. Don't remove containers, images or volumes. If Docker isn't installed or isn't running, skip this.
+   d. List running ngrok processes (ps/pgrep on macOS and Linux, tasklist on Windows), show me the list, then stop each one (pkill ngrok, or taskkill /IM ngrok.exe /F on Windows). Confirm http://localhost:4040 no longer answers.
+   e. If this workspace's own Liferay is running (a Tomcat started from this workspace's bundles/), stop it with blade server stop and wait until port 8080 is free.
+   f. Check ports 8080, 4040 and 4000 are free. If anything else holds one of them, don't kill it: tell me what it is and stop the exercise.
+
+1. Tunnel
+   a. Start a new tunnel detached from this session, so it survives when the session ends, with its output going to ngrok.log in the workspace root (nohup ... &amp; on macOS and Linux, Start-Process on Windows):
+      ngrok http 8080 --url=https://&lt;your-domain&gt; --request-header-add "X-Forwarded-Port: 443"
+   b. Confirm through ngrok's local API (http://localhost:4040/api/tunnels) that the tunnel is online and its public URL is https://&lt;your-domain&gt;.
+   c. If ngrok reports the endpoint is already online (ERR_NGROK_334), another session, probably on another machine, holds my domain: stop and tell me to stop it there, or in the ngrok dashboard under Agents. If ngrok says the domain isn't reserved for my account, I'm signed in with the wrong authtoken: stop and tell me.
+
+2. Host name
+   a. In configs/local/portal-ext.properties, set web.server.host=&lt;your-domain&gt;: no https:// prefix and no trailing slash. Change nothing else, and show me the diff.
+   b. If bundles/ already exists, set the same value in bundles/portal-ext.properties, because blade server init copies configs/local only when it creates the bundle. If bundles/data/ exists, this bundle has already been started: tell me which host it was started with and stop, because changing the host on a used bundle breaks Data Sets, and it needs a fresh bundle, which I'll decide on.
+
+3. If bundles/ doesn't exist, run blade server init. Then confirm bundles/portal-ext.properties has web.server.host=&lt;your-domain&gt;, bundles/tomcat/bin/setenv.sh (or setenv.bat) contains -Xmx4096m and glowroot.jar, and bundles/glowroot/ exists.
+
+4. Start Liferay
+   a. Note the current line count of bundles/tomcat/logs/catalina.out (0 if it doesn't exist): the file keeps earlier boots, so only lines after that count belong to this start.
+   b. Run blade server start, which starts Tomcat in the background and keeps it running after this session ends. Don't use --tail or blade server run.
+   c. While Liferay starts, send no HTTP request to it, locally or through the tunnel. An early request can make the DSR site initializer run too soon.
+   d. Follow the new lines of catalina.out until "Server startup in" appears, for up to 20 minutes. If an exception appears, or startup times out, stop and show me the relevant lines from catalina.out and bundles/logs/liferay.*.log.
+
+5. Check through the tunnel:
+   a. GET https://&lt;your-domain&gt;/ returns Liferay HTML, not an ngrok "visit site" interstitial page.
+   b. GET https://&lt;your-domain&gt;/o/headless-admin-user/v1.0/my-user-account without credentials returns JSON (a 401 or 403 is fine), not HTML.
+   c. https://&lt;your-domain&gt;/o/api contains no URL with ":80" or "http://&lt;your-domain&gt;".
+   d. http://localhost:4000/o/glowroot loads locally. Never reach it through the tunnel.
+
+6. Change the admin password
+   a. The current admin is test@liferay.com / test unless configs/local/admin.properties already exists, in which case use the credentials in it.
+   b. Confirm configs/local/admin.properties is listed in .gitignore; add it if it isn't.
+   c. With a shell command, generate a 24-character password of letters and digits only, and write it straight into configs/local/admin.properties as ADMIN_EMAIL=&lt;admin email&gt; and ADMIN_PASSWORD=&lt;new password&gt;. Keep the old file's credentials until the change succeeds. The new password must never appear in your output, in the conversation or in any other file.
+   d. Set it with PATCH /o/headless-admin-user/v1.0/user-accounts/{admin id} {"password": ...} on http://localhost:8080, reading the value from that file and authenticating with the current credentials. If it's refused, restore the old file and tell me to change the password myself under My Account → Password.
+   e. Verify: GET /o/headless-admin-user/v1.0/my-user-account with the new credentials returns 200, and with the old ones returns 401.
+
+Finish with a table: one row per step and check, PASS, FAIL or SKIPPED, with the evidence. Tell me the password is in configs/local/admin.properties, without showing it, and remind me to open https://&lt;your-domain&gt; in my browser to sign in.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>Claude 表格的每一行都显示 PASS 或 SKIPPED。<code>https://&lt;your-domain&gt;</code> 能在浏览器中加载，并且您可以使用 <code>configs/local/admin.properties</code> 中的凭据登录（请亲自打开该文件；切勿将密码粘贴到聊天中）。FAIL 行会告诉您从哪里继续：修复原因，然后让 Claude 从该步骤继续。</p>
+<p class="adm-block adm-warning">⚠️ 此提示词会将新的管理员密码写入 <code>configs/local/admin.properties</code>。在练习 0.3 中，请跳过第 1 步：该文件已存在，直接进入提示词即可。</p>
+<h3 id="03-persist-and-validate-the-admin-login">0.3 — 持久化并验证管理员登录<a aria-hidden="true" class="heading-anchor" href="#03-persist-and-validate-the-admin-login" tabindex="-1">#</a></h3>
+<p>🎯 一份以后每个会话都能自行找到的凭据，而不是「交给 Claude」一次后就被遗忘。</p>
+<p>🧩 无 — 研讨会准备事务。</p>
+<p>📋 <strong>步骤：</strong></p>
+<ol>
+<li>在聊天之外亲自创建 <code>configs/local/admin.properties</code> — 两行内容，<code>ADMIN_EMAIL=...</code> / <code>ADMIN_PASSWORD=...</code>。如果您按照 0.2.1 操作，该文件已存在：请跳过此步骤。</li>
+<li>让 Claude 确认它已列在 <code>.gitignore</code> 中（如未列出则添加），然后通过一次真实调用验证凭据。</li>
+</ol>
+<p>💬 <strong>提示词（第 1 轮）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Confirm configs/local/admin.properties exists and is listed in .gitignore —
+add it there if it isn't. Then read the admin email and password from that
+file (never print the password back to me) and validate it works: call
+GET /o/headless-admin-user/v1.0/my-user-account with Basic Auth and show me
+the 200 response's own name/emailAddress field.
+</code></pre></div>
+<p>💬 <strong>提示词（第 2 轮 — 修改 <code>CLAUDE.md</code>，让以后的每个会话都能自动找到它）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Update CLAUDE.md's 'Establish Context First' section, point 4, to read:
+
+'Authentication. Look first for configs/local/admin.properties
+(git-ignored; ADMIN_EMAIL=... / ADMIN_PASSWORD=...), then
+LIFERAY_ADMIN_EMAIL/LIFERAY_ADMIN_PASSWORD environment variables. Use them
+for Basic Auth without ever printing, logging, or echoing the password into
+the conversation or any generated file. If neither exists, ask the user once
+for the admin account to use, then — with their explicit confirmation —
+write it to configs/local/admin.properties so no future session has to ask
+again. Never accept a password typed inline as part of a task description.'
+
+Confirm the edit was saved.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>打开一个真正全新的 Claude 会话，给它一个需要身份验证的普通任务，并且完全不提凭据。它应该能自行找到 <code>configs/local/admin.properties</code> 并完成身份验证，而无需向您索要任何信息。</p>
+<p class="adm-block adm-warning">⚠️ 避免在提示词或对话记录中直接输入密码。如果之后的练习遇到无法解释的 401/403，请先重新检查本练习的设置，再进一步调试。</p>
+<h3 id="04-read-the-terrain-before-touching-it">0.4 — 动手之前先了解环境<a aria-hidden="true" class="heading-anchor" href="#04-read-the-terrain-before-touching-it" tabindex="-1">#</a></h3>
+<p>🎯 确认实际的 DXP 版本、端口和身份验证方式 — 绝不想当然。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Read CLAUDE.md's 'Establish Context First' section, then walk me through this
+workspace: find the workspace root, read the DXP version from
+gradle.properties, check whether bundles/ exists and what port Tomcat is on,
+and tell me what authentication method is available. Don't touch anything yet.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>亲自打开 <code>gradle.properties</code> 和 <code>bundles/tomcat*/conf/server.xml</code>，独立确认报告中的四项事实。此工作区中记录的一些特殊行为会随季度版本而变化 — 每次都要抽查。</p>
+<h3 id="05-map-the-existing-site-initializer">0.5 — 梳理现有的站点初始化程序<a aria-hidden="true" class="heading-anchor" href="#05-map-the-existing-site-initializer" tabindex="-1">#</a></h3>
+<p>🎯 在添加任何内容之前，列出源代码中已有的内容（片段、页面、母版页分配）。此时尚未部署任何内容 — 部署在练习 1.3 中进行。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Walk the site-initializer/ tree under client-extensions/ and list every
+fragment (directory name = fragment key), every page under layouts/, and
+which master page is assigned to the home page. This is a read of the source
+tree only — nothing has been deployed yet. Don't create, modify, or deploy
+anything, this is reconnaissance only.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>亲自对照 <code>ls client-extensions/*/site-initializer/fragments/group/*/fragments/</code> 和 <code>layouts/</code> 文件夹进行交叉核对。</p>
+<p class="adm-block adm-important"><strong>注意 — 从这里开始，请使用简短的 Claude Code 会话。</strong>每当您进入一个并非直接基于上一个练习的练习时，请启动新会话（或输入 <code>/clear</code>）。这会重置上下文：对话中累积的所有内容不再随每个请求重新发送，因此令牌消耗保持在较低水平，代理也能专注于手头的任务。不会丢失任何内容，因为新会话会从 <code>solution-context.md</code> 和 <code>solution-index.yaml</code>（练习 0.1）中接续项目。只有当多个练习紧密关联时（例如一个构建练习及其后续修复），才在它们之间保持同一个会话。</p>
+<hr/>
+<h2 id="level-1-foundations-mcp-server">第 1 级 — 基础（MCP Server）<a aria-hidden="true" class="heading-anchor" href="#level-1-foundations-mcp-server" tabindex="-1">#</a></h2>
+<h3 id="11-enable-and-query-the-mcp-server">1.1 — 启用并查询 MCP 服务器<a aria-hidden="true" class="heading-anchor" href="#11-enable-and-query-the-mcp-server" tabindex="-1">#</a></h3>
+<p>🎯 确认 Claude 能够通过 MCP「看到」实时的对象架构，而不是去猜测。</p>
+<p>🧩 <code>mcp-server</code></p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Check whether feature flag LPD-63311 (the Liferay MCP server) is enabled on
+this instance. If not, enable it using the feature-flags skill. Then connect
+over MCP, run tools/list, and use the tools it actually returns to list every
+object definition currently in this workspace. Don't assume tool names: on
+this release the server exposes a discovery chain (tool sets, then a set's
+operations, then an operation's schema, then invoke), not a single
+call-http-endpoint tool. Show me which tools you called, in order.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>直接调用 <code>GET /o/object-admin/v1.0/object-definitions</code>，确认其结果与 MCP 报告的一致。</p>
+<h3 id="111-alternative-connect-claude-code-to-the-mcp-server-and-query-it">1.1.1 — 替代方案：将 Claude Code 连接到 MCP 服务器并进行查询<a aria-hidden="true" class="heading-anchor" href="#111-alternative-connect-claude-code-to-the-mcp-server-and-query-it" tabindex="-1">#</a></h3>
+<p>🎯 目标与 1.1 相同，但详细说明了设置过程：Claude 检查 MCP 服务器，在不暴露您凭据的前提下将其注册到 Claude Code 中，然后仅通过 MCP 回答关于此实例的实际问题，并证明这些答案与 REST 的结果一致。</p>
+<p>🧩 <code>mcp-server</code></p>
+<p>1.1 和 1.1.1 任选其一即可。1.1.1 适合之前从未在 Claude Code 中注册过 MCP 服务器的学员。</p>
+<p>📖 提示词会为您处理以下两件事：</p>
+<ul>
+<li><strong>在 2026.Q3 上，仅有功能标志还不够。</strong><code>LPD-63311</code> 已在此工作区的 <code>portal-ext.properties</code> 中开启，但还需要在 <strong>Control Panel → Instance Settings → Platform → MCP Server → Enabled</strong> 中启用服务器。在此之前，<code>/o/mcp</code> 只会返回一个普通的 Liferay 404 页面。该界面需要已登录的管理员操作，因此请在 Claude 提出请求时由您自己开启。</li>
+<li><strong>Claude Code 在会话启动时读取其 MCP 服务器。</strong>因此需要分两轮：第一轮注册服务器，第二轮使用它。请在两轮之间重启 Claude Code，让第二轮能够使用原生 MCP 工具。如果不重启，第二个提示词仍然可以运行：Claude 会自行将同样的 MCP 调用发送到 <code>/o/mcp</code>。</li>
+</ul>
+<p>💬 <strong>提示词（第 1 轮 — 连接）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Set up the Liferay MCP server for this workspace, following the mcp-server skill.
+
+1. Confirm feature flag LPD-63311 is on (it's in configs/local/portal-ext.properties); don't restart anything.
+2. Call initialize on http://localhost:8080/o/mcp with Basic auth from configs/local/admin.properties, never printing the password. If it answers with a Liferay 404 page, stop and tell me to enable Control Panel → Instance Settings → Platform → MCP Server → Enabled myself, then try again.
+3. Register the server in Claude Code at local scope (claude mcp add --scope local, Streamable HTTP, http://localhost:8080/o/mcp, Basic auth header built from admin.properties), so the credential stays out of the repository. Never show the header value.
+4. Tell me to restart this Claude Code session, then check with /mcp that "liferay" is connected.
+</code></pre></div>
+<p>重启 Claude Code，运行 <code>/mcp</code>，检查 <code>liferay</code> 服务器是否显示为已连接。然后在新会话中（如果跳过重启，则在同一会话中）：</p>
+<p>💬 <strong>提示词（第 2 轮 — 查询）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Use only the Liferay MCP server for this, not REST endpoints. Never print the admin password or the Authorization header.
+
+0. Pick the MCP path.
+   a. If this session has the "liferay" MCP tools loaded (check with a tool search), use them.
+   b. If not, the session started before the server was registered. Don't stop: send the same MCP JSON-RPC calls yourself to http://localhost:8080/o/mcp (POST, Content-Type: application/json, Accept: application/json, text/event-stream, Basic auth built from configs/local/admin.properties inside the script so the credential never appears in a command or in output). Send initialize first, then tools/list, then tools/call. Tell me which path you used, and that I can restart the session to use the native tools.
+   c. If initialize returns a Liferay 404 page, stop and tell me to enable Control Panel → Instance Settings → Platform → MCP Server → Enabled.
+
+1. Run tools/list and show me the tools it returns, with their arguments. On 2026.Q3 they are a discovery chain (getToolSetsPage → getToolSetToolSetNameToolSummariesPage → getToolSetToolSetNameTool → postToolSetToolSetNameToolInvoke); don't assume a tool exists because another release had it.
+
+2. Walk the chain to answer: which custom object definitions exist in this instance?
+   - Find the tool set (object-admin-v1.0), its operation (getObjectDefinitionsPage), and read that operation's schema before invoking it.
+   - Invoke it with query parameters flat inside "body", e.g. {"pageSize": 200}. A request payload, if an operation has one, is nested once more under its own "body" key.
+   - "Custom" means system == false. Filter client-side: the API rejects filter=system eq false with 400.
+   - For each custom definition give its name, REST path (restContextPath, /o/c/&lt;plural&gt;), scope, status label and number of fields (the length of objectFields, which includes the built-in system fields; also give the custom-field count in brackets). Also give the total number of definitions.
+
+3. Answer one Aurelis question: how many Accounts are there (totalCount), and what are the names of the first five sorted by name ascending? Use headless-admin-user-v1.0 → getAccountsPage with body {"pageSize": 5, "page": 1, "sort": "name:asc", "fields": "id,name"}.
+
+4. Show me every MCP call you made, in order, as a table: number, JSON-RPC method or tool, tool set, operation, and body.
+
+5. Check your step 2 answer against a direct GET http://localhost:8080/o/object-admin/v1.0/object-definitions?pageSize=200 (Basic auth from admin.properties, passed through a curl config file, never on the command line). Apply the same system == false filter, compare name, REST path, scope, status and field count row by row, and compare totalCount. Tell me whether they match, and list any row that differs.
+
+Delete any temporary file that held a credential when you're done.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>Claude 说明了它使用的 MCP 路径（重启后，<code>/mcp</code> 将 <code>liferay</code> 列为已连接）；其 MCP 调用表依次走完了发现链；MCP 返回的自定义对象定义及其总数与直接 REST 调用的结果逐行一致；并且密码和 Basic 认证头均未出现在输出、代码库（<code>git grep -i authorization</code> 未发现新内容）或残留的临时文件中。</p>
+<p class="adm-block adm-warning">⚠️ 如果直接 REST 调用正常，但每个 MCP 调用都返回 <code>403</code>，请参阅 <code>mcp-server</code> 技能中的「MCP/REST Auth Split」部分；在 Windows 上，还请参阅其中关于 <code>~/.claude.json</code> 中重复盘符条目的说明。</p>
+<h3 id="12-enable-the-flags-this-path-needs">1.2 — 启用本路径所需的功能标志<a aria-hidden="true" class="heading-anchor" href="#12-enable-the-flags-this-path-needs" tabindex="-1">#</a></h3>
+<p>🎯 <code>LPD-74328</code>（实时页面组合）、<code>LPS-164563</code>（Data Set 管理）、<code>LPD-17564</code> + <code>LPD-52006</code>（按条目权限）— 全部在需要之前启用。</p>
+<p>🧩 <code>feature-flags</code></p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Audit whether these feature flags are enabled: LPD-74328 (live page
+composition), LPS-164563 (Data Set admin), and LPD-17564 plus LPD-52006
+(per-entry permissions). Report the current state of each, then enable
+whichever are off.
+</code></pre></div>
+<p>📸 <strong>截图：</strong>Control Panel → Instance Settings → Feature Flags，显示现已启用的开关。</p>
+<p><img alt="功能标志" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/feature-flags.png"/></p>
+<p>✅ <strong>验证：</strong>亲自打开 Feature Flags 面板，确认每个开关的实时状态。</p>
+<h3 id="13-first-deployverify-cycle">1.3 — 第一个部署/验证循环<a aria-hidden="true" class="heading-anchor" href="#13-first-deployverify-cycle" tabindex="-1">#</a></h3>
+<p>🎯 首次部署站点初始化程序，并根据运行时状态（而不是退出码）确认部署成功。</p>
+<p>🧩 <code>deploy-and-verify</code></p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Deploy the site-initializer Client Extension for the first time in this
+workspace and confirm it actually started — don't just report that the
+command exited 0. Tail the log in the background and show me the STARTED
+line before calling this done.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>亲自 grep <code>STARTED</code>，检查 <code>bundles/tomcat*/logs/catalina.out</code>（或 <code>bundles/logs/liferay.&lt;date&gt;.log</code>）。这将成为您在本路径后续部分中的个人「每次部署后检查项」检查清单。</p>
+<h3 id="14-make-aurelis-the-portal-home-and-name-your-instance">1.4 — 将 Aurelis 设为门户首页并为您的实例命名<a aria-hidden="true" class="heading-anchor" href="#14-make-aurelis-the-portal-home-and-name-your-instance" tabindex="-1">#</a></h3>
+<p>🎯 站点初始化程序已经创建了 Aurelis Energy 站点，现在将门户首页指向它，并为您的 Liferay 实例取一个班上其他人都没有使用的名称。</p>
+<p>📋 <strong>步骤（在浏览器中手动操作，不使用代理）：</strong></p>
+<ol>
+<li>打开 <strong>Control Panel → Instance Settings → Instance Configuration → General</strong>（Virtual Instance Scope）。</li>
+<li>
+<p><strong>Name：</strong>将默认值替换为您独有的名称，例如 <code>Liferay &lt;YOUR LASTNAME&gt;</code>。</p>
+<ul>
+<li>为什么这很重要：本课程使用的 Liferay Data Platform 环境<strong>由所有学员共享</strong>。您的实例会以这个名称出现在其中。如果每个人都保留默认名称，在第 4 级（及之后）的 Data Platform 练习中，您将无法分辨哪些数据是您自己的。</li>
+</ul>
+</li>
+<li>
+<p><strong>Navigation：</strong>将以下三个字段都设为 Aurelis 站点的 URL <code>/web/aurelis-energy</code>：</p>
+<ul>
+<li><strong>Home URL</strong></li>
+<li><strong>Default Landing Page</strong>（用户登录后进入的页面）</li>
+<li><strong>Default Logout Page</strong>（用户退出后进入的页面）</li>
+</ul>
+</li>
+<li>
+<p>保持 <strong>Mail Domain</strong> 和 <strong>Virtual Host</strong> 不变。Virtual Host 必须保持为练习 0.2 中您自己的隧道主机名。</p>
+</li>
+<li>点击 <strong>Save</strong>。</li>
+</ol>
+<p>📸 <strong>截图：</strong>Instance Configuration → General 界面，显示您的唯一名称以及已设置的三个导航字段。</p>
+<p><img alt='Instance Configuration → General，Name 设为 "Liferay FABIAN"，Home URL、Default Landing Page 和 Default Logout Page 均设为 /web/aurelis-energy。' src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/virtual-instance.png"/></p>
+<p>✅ <strong>验证：</strong></p>
+<ul>
+<li>在隐私窗口中打开隧道的根 URL（<code>https://&lt;your-tunnel-host&gt;/</code>）。您应进入 Aurelis Energy 首页，而不是默认的 Liferay 欢迎页面。</li>
+<li>先登录，再退出。两次都应回到 Aurelis 站点。</li>
+<li>如果 <code>/web/aurelis-energy</code> 返回 404，请在 <strong>Site Settings → Site Configuration</strong> 中查看站点的实际友好 URL，并改用该值。</li>
+</ul>
+<hr/>
+<h2 id="level-2-business-data-modeling-liferay-objects">第 2 级 — 业务数据建模（Liferay Objects）<a aria-hidden="true" class="heading-anchor" href="#level-2-business-data-modeling-liferay-objects" tabindex="-1">#</a></h2>
+<p>Brief 要求 Lot 1 构建并维护一个目标账户情报数据库（Target Account Intelligence Database），而不是从外部系统复制一个 — 因此本级扩展 Liferay 原生的 <code>Account</code> 系统对象，并从一开始就将其作为记录系统。</p>
+<div class="copy-frame copy-frame-quote"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><blockquote>
+<p><strong>📖 账户评分的来龙去脉 — 开始第 2 级之前请先阅读</strong></p>
+<p><strong>业务问题。</strong>Aurelis 的销售团队无法跟进每一家公司。Brief 要求平台告诉他们<em>应该把精力放在哪里</em>。平台通过回答关于每个目标账户的三个问题来实现这一点：</p>
+<ul>
+<li><strong>Fit（契合度）</strong> — <em>这是我们想要的那类公司吗？</em>行业、站点数量、能源需求。存储为 <code>fitScore</code>，取值为 0 到 100 的整数。</li>
+<li><strong>Value（价值）</strong> — <em>这个账户可能值多少？</em>Brief 称之为「Opportunity Potential」，以欧元表示（Novacorp 为 €8–12M）。这里将其归一化为 <code>valueScore</code>，取值为 0 到 100 的整数，以便与 Fit 结合。</li>
+<li><strong>Intent（意向）</strong> — <em>他们现在是否表现出购买迹象？</em>访问的页面、下载的白皮书、提交的表单、聊天机器人对话。在评分中，Intent 以 <code>numberOfLeads</code> 衡量：即关联到该账户的潜在客户（表单提交）数量。</li>
+</ul>
+<p>三者组合成一个数字，即用于对账户排序的 <strong>Aurelis Opportunity Score</strong>（<code>combinedOpportunityScore</code>）：</p>
+<p><code>combinedOpportunityScore = min(100, round(fitScore × valueScore / 100 × (1 + min(numberOfLeads, 5) / 10)))</code></p>
+<p>Fit × Value 给出账户的基础潜力。每个潜在客户增加 10% 的意向加成，上限为 +50%。评分本身与 Fit 和 Value 一样以 100 为上限：拥有许多潜在客户的优质账户止于 100，而不会超出范围。之所以采用加成而不是第三个乘数，是因为尚无潜在客户的账户仍然值得跟进，只是暂时还没有表现出意向。</p>
+<p><strong>贯穿始终的示例。</strong>Novacorp（42 个物流站点、正在电动化的车队、目前储能很少）的 Fit 为 92，Value 为 90，因此在尚无潜在客户时其评分为 83，是数据集中最高的。这就是第 8 级为 Novacorp 开设 Digital Sales Room 的原因。即使是最大的意向加成，也无法让其他账户超过它（Solstice 最高为 82）。</p>
+<p><strong>每个部分存放在哪里，以及何时构建：</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>部分</th>
+<th>存储于</th>
+<th>填写者</th>
+<th>练习</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分类：<code>sector</code>、<code>size</code>、<code>priorityTier</code></td>
+<td><code>Account</code>（原生，已扩展）</td>
+<td>员工</td>
+<td>2.1，在 4.4 中编辑</td>
+</tr>
+<tr>
+<td><code>fitScore</code>、<code>valueScore</code></td>
+<td><code>AccountIntelligenceProfile</code></td>
+<td>员工（手动输入；实际中来自 Aurelis 自己的评分模型）</td>
+<td>2.2，在 2.3 中加载</td>
+</tr>
+<tr>
+<td><code>numberOfLeads</code>（评分中的 Intent）</td>
+<td><code>Account</code>（Aggregation 字段：统计关联的潜在客户）</td>
+<td>平台，随着潜在客户关联到账户</td>
+<td>2.2，潜在客户来自 4.1，在 6.2 中自动关联</td>
+</tr>
+<tr>
+<td><code>combinedOpportunityScore</code></td>
+<td><code>AccountIntelligenceProfile</code></td>
+<td>先随数据集加载，之后自动计算</td>
+<td>2.3，在 6.2 中自动化</td>
+</tr>
+<tr>
+<td>更丰富的意向信号</td>
+<td>Liferay Data Platform 事件、聊天机器人信号</td>
+<td>平台，随着访客的互动</td>
+<td>4.1、9.1、9.2</td>
+</tr>
+<tr>
+<td>账户排名视图</td>
+<td>Account Intelligence 页面</td>
+<td>平台</td>
+<td>4.3</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>为什么使用单独的 <code>AccountIntelligenceProfile</code> 对象，而不是在 <code>Account</code> 上增加更多字段？</strong><code>Account</code> 自身的 API 无法按自定义字段排序，而且 <code>Account</code> 既不支持 Display Page Template，也不支持 Form Container。关联到 <code>Account</code> 的普通自定义对象没有这些限制，因此 4.3 中的排名页面可以按评分排序。</p>
+<p><strong>本课程做了哪些简化。</strong>评分中的 Intent 只是潜在客户的数量，不考虑时效性。更丰富的信号（第 4 级中的 Liferay Data Platform 事件、第 9 级中的聊天机器人信号）会被采集，但不会影响评分。Brief 中的「Solution Affinity」指标（哪些 Aurelis 产品适合该账户）未建模。</p>
+</blockquote></div>
+<h3 id="21-extend-the-native-account-system-object">2.1 — 扩展原生的 <code>Account</code> 系统对象<a aria-hidden="true" class="heading-anchor" href="#21-extend-the-native-account-system-object" tabindex="-1">#</a></h3>
+<p>🎯 将 <code>sector</code>（选择列表）、<code>size</code> 和 <code>priorityTier</code>（选择列表）添加到 <code>Account</code>。</p>
+<p>🧩 <code>manage-objects</code></p>
+<p>📎 REQ-22 — 构建并维护专有的目标账户情报数据库。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-objects, extend the native Account System Object with a sector
+field (Picklist), a size field (Integer, number of employees), and a
+priorityTier field (Picklist). This is a System Object extension, not a new
+Custom Object — confirm the mechanics differ before publishing.
+Use exactly these picklist entry keys (they must match the dataset loaded
+later):
+- sector: logistics, manufacturing, foodDistribution, retail, hospitality
+- priorityTier: strategic, key, standard
+</code></pre></div>
+<p>📸 <strong>截图：</strong><code>Account</code> 对象定义的字段列表，显示三个新的自定义字段与内置字段并列。</p>
+<p><img alt="Account 对象定义的 Fields 选项卡，显示 Sector (Picklist)、Size (Employees) (Integer) 和 Priority Tier (Picklist) 作为自定义字段，与内置的系统字段并列。" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/account-custom-fields.png"/></p>
+<p>✅ <strong>验证：</strong><code>GET /o/object-admin/v1.0/object-definitions?filter=name eq 'Account'</code> 显示这三个字段；对实际条目执行 <code>GET /o/headless-admin-user/v1.0/accounts</code> 返回已填写的字段值。</p>
+<h3 id="22-accountintelligenceprofile-and-lead">2.2 — <code>AccountIntelligenceProfile</code> 和 <code>Lead</code><a aria-hidden="true" class="heading-anchor" href="#22-accountintelligenceprofile-and-lead" tabindex="-1">#</a></h3>
+<p>🎯 一个关联到 <code>Account</code> 的评分对象，保存 Fit、Value 和组合后的 Opportunity Score。以及一个 <code>Lead</code> 对象，以多对一方式关联到 <code>Account</code>，即第一个意向信号。</p>
+<p>🧩 <code>manage-objects</code></p>
+<p>📎 REQ-24、REQ-27 — Strategic Fit Score、Opportunity Potential 以及组合 Opportunity Score（参见上文「账户评分的来龙去脉」）。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Create an AccountIntelligenceProfile object with three Integer fields:
+fitScore (0-100), valueScore (0-100) and combinedOpportunityScore (0-100).
+Add a validation that rejects fitScore or valueScore outside 0-100. Relate it
+to the native Account object as a oneToMany relationship from Account
+(oneToOne is rejected server-side on this release — enforce
+single-profile-per-account as a business rule, not a schema constraint).
+Create a new Lead object with the fields a qualified lead would carry,
+including a company Text field and a qualificationStatus picklist
+(unqualified, qualified), and add a many-to-one relationship from Lead to
+Account. Finally, add an Aggregation field numberOfLeads on Account that
+counts its related Leads.
+
+Access expectations: grant Guest nothing on either object in this exercise.
+Leads will later come from anonymous form submissions, and
+they will then get Guest ADD_OBJECT_ENTRY only, never VIEW: Leads hold names
+and emails. AccountIntelligenceProfile is internal sales data and must never
+be readable anonymously.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ <code>numberOfLeads</code> 从 Account API 返回时是<strong>字符串</strong>（<code>"numberOfLeads": "1"</code>），而不是数字，并且无法对其排序或过滤。这没有关系：它只是评分的输入，本身从不作为排序键。任何读取它的代码都必须先进行转换（<code>parseInt</code>）。</p>
+<p>📸 <strong>截图：</strong>已创建 <code>Lead</code> 和 <code>Account Intelligence</code> 对象定义，并与 Account 建立了一对多关系。</p>
+<p><img alt="Lead 和 Account Intelligence 对象定义" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/account-intelligence-and-lead.png"/></p>
+<p>✅ <strong>验证：</strong>在 Control Panel → Objects 中，确认两个定义均已发布，<code>AccountIntelligenceProfile</code> 包含三个 Integer 字段和 0–100 校验，与 <code>Account</code> 的两个关系均已存在，并且 <code>Account</code> 现在有 <code>numberOfLeads</code> Aggregation 字段。您将在下一个练习中为它们填入实际数据。</p>
+<h3 id="23-load-the-target-account-dataset">2.3 — 加载目标账户数据集<a aria-hidden="true" class="heading-anchor" href="#23-load-the-target-account-dataset" tabindex="-1">#</a></h3>
+<p>🎯 六个逼真的目标账户，各自带有分类和评分档案，这样后续每个练习（4.3 中的排名页面、6.2 中的评分自动化、8.1 中的 Digital Sales Room）对每个人都基于相同的数据。</p>
+<p>🧩 <code>manage-objects</code>（通过 Headless API 创建条目）</p>
+<p>📎 REQ-22 — 填充目标账户情报数据库。</p>
+<p>数据集位于 <code>context-source/target-accounts.csv</code>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>accountName</th>
+<th>sector</th>
+<th>size</th>
+<th>priorityTier</th>
+<th>fitScore</th>
+<th>valueScore</th>
+<th>combinedOpportunityScore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Novacorp</td>
+<td>logistics</td>
+<td>8500</td>
+<td>strategic</td>
+<td>92</td>
+<td>90</td>
+<td>83</td>
+</tr>
+<tr>
+<td>Solstice Manufacturing</td>
+<td>manufacturing</td>
+<td>2400</td>
+<td>key</td>
+<td>78</td>
+<td>70</td>
+<td>55</td>
+</tr>
+<tr>
+<td>Alderbrook Manufacturing</td>
+<td>manufacturing</td>
+<td>3200</td>
+<td>key</td>
+<td>85</td>
+<td>60</td>
+<td>51</td>
+</tr>
+<tr>
+<td>Norrland Foods</td>
+<td>foodDistribution</td>
+<td>1900</td>
+<td>key</td>
+<td>80</td>
+<td>55</td>
+<td>44</td>
+</tr>
+<tr>
+<td>Helix Retail Group</td>
+<td>retail</td>
+<td>12000</td>
+<td>standard</td>
+<td>55</td>
+<td>75</td>
+<td>41</td>
+</tr>
+<tr>
+<td>Brightwater Hospitality</td>
+<td>hospitality</td>
+<td>600</td>
+<td>standard</td>
+<td>40</td>
+<td>30</td>
+<td>12</td>
+</tr>
+</tbody>
+</table></div>
+<p>如何解读：<code>combinedOpportunityScore</code> 已经填好，采用「账户评分的来龙去脉」中的公式，且尚无潜在客户（因此就是 <code>round(fitScore × valueScore / 100)</code>）。目前这些值只是数据；练习 6.2 会让平台计算它们，包括意向加成。请注意 Helix Retail Group：它是一家大公司（Value 高），但与 Aurelis 契合度差（Fit 低），因此排名低于规模较小但更契合的账户。这正是结合两个维度的意义所在。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Load context-source/target-accounts.csv into the platform. For each row,
+create (or update, if it already exists) an Account with that name, sector,
+size and priorityTier, and exactly one AccountIntelligenceProfile linked to
+it, carrying fitScore, valueScore and combinedOpportunityScore as given — do
+not recompute them. Give every Account and profile a readable external
+reference code derived from the account name (e.g. novacorp,
+novacorp-profile) so re-running this is idempotent. Don't create any Lead:
+every account must start with numberOfLeads = 0.
+</code></pre></div>
+<p>✅ <strong>验证：</strong></p>
+<ul>
+<li><code>GET /o/headless-admin-user/v1.0/accounts</code> 返回这六个账户，且 <code>sector</code>、<code>size</code> 和 <code>priorityTier</code> 均已填写。</li>
+<li><code>GET /o/c/accountintelligenceprofiles</code> 恰好返回六个档案，每个账户一个，评分与表格一致。</li>
+<li>每个账户都返回 <code>"numberOfLeads": "0"</code>。</li>
+</ul>
+<h3 id="24-notify-on-a-qualified-lead">2.4 — 在出现合格潜在客户时发送通知<a aria-hidden="true" class="heading-anchor" href="#24-notify-on-a-qualified-lead" tabindex="-1">#</a></h3>
+<p>🎯 一个 Object Action，在创建 <code>Lead</code> 且其为合格状态时，发送 Liferay 应用内通知（通知铃铛，而不是电子邮件）。</p>
+<p>🧩 <code>manage-object-logic</code></p>
+<p>📎 REQ-43 — 在会议/潜在客户创建后，将资格评估上下文交给销售人员。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Add an Object Action on Lead, triggered onAfterAdd, that notifies the
+salesperson when an entry is created. Use an in-app Liferay notification
+(a User Notification template, delivered to the notifications bell) — not
+an email. Send it to my own admin account, standing in for the salesperson,
+and include the lead's contact name and qualification status in the message.
+Leave the condition expression empty at first so I can see it fire on every
+write, then help me tighten it to only fire when qualificationStatus is
+qualified.
+</code></pre></div>
+<p>📸 <strong>截图：</strong>已创建 <code>Lead</code> Object Action 和 Notification 模板。</p>
+<p><img alt="Lead Object Action" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/lead-object-action.png"/></p>
+<p><img alt="Lead Notification 模板" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/lead-created-notification.png"/></p>
+<p>✅ <strong>验证：</strong>创建一个 <code>Lead</code>，其 <code>qualificationStatus</code> 为 unqualified（无通知），再创建一个 qualified 的（顶栏铃铛图标下出现一条新通知，字段已正确插值 — 而不是字面的 <code>[%TOKEN%]</code> 文本）。</p>
+<p>创建它们最简单的方法是询问 Claude：</p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Create two test Leads through the Lead API, both linked to the Brightwater
+Hospitality account loaded earlier, with a made-up contact name and
+company: the first with qualificationStatus unqualified, the second with
+qualificationStatus qualified. Show me the response of each call.
+</code></pre></div>
+<p>📖 将它们关联到评分最低的账户 Brightwater Hospitality，意味着无需手动创建任何账户，而且这两个潜在客户之后也不会改变排名：练习 6.2 加入意向加成后，其评分只会从 12 升到 14。</p>
+<hr/>
+<h2 id="level-3-editorial-content-cms-cmp">第 3 级 — 编辑内容（CMS、CMP）<a aria-hidden="true" class="heading-anchor" href="#level-3-editorial-content-cms-cmp" tabindex="-1">#</a></h2>
+<h3 id="31-four-cms-spaces-four-content-structures">3.1 — 四个 CMS Spaces，四个 Content Structures<a aria-hidden="true" class="heading-anchor" href="#31-four-cms-spaces-four-content-structures" tabindex="-1">#</a></h3>
+<p>🎯 每类受众一个 Space + Content Structure：<strong>Product Content</strong>、<strong>Customer Documentation</strong>、<strong>Partner Portal</strong>、<strong>White Papers</strong> — 并将 <code>context-source/</code> 中现有的每份文档都导入为实际条目。</p>
+<p>🧩 <code>manage-cms</code> 🆕</p>
+<p>📎 REQ-08–REQ-11（CMS、可复用结构、富文本编辑、DAM），REQ-14（翻译）。</p>
+<p>📋 源文件夹 — 导入前请确认实际文件数量，不要假定为下列数字：</p>
+<ul>
+<li><code>context-source/products/</code>（约 5 个文件）→ <strong>Product Content</strong></li>
+<li><code>context-source/customer-documentation/</code>（约 10 个文件）→ <strong>Customer Documentation</strong></li>
+<li><code>context-source/partner-documentation/</code>（约 10 个文件）→ <strong>Partner Portal</strong>（必须准确使用此名称 — 练习 7.1 按此名称引用它）</li>
+<li><code>context-source/white-papers/</code>（3 个文件，Novacorp/Alderbrook/Norrland）→ <strong>White Papers</strong></li>
+</ul>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-cms, read every file under context-source/products/,
+context-source/customer-documentation/, context-source/partner-documentation/,
+and context-source/white-papers/. For each of the four folders, design one
+Content Structure whose fields actually fit that folder's content, create a
+Space named appropriately for its audience (name the partner one 'Partner
+Portal'), connect each Space to [site], and import every document in that
+folder as a real entry using its own content. Don't skip any document, and
+don't force all four folders into one shared structure.
+
+Add a documentType Picklist on the Customer/Partner Documentation structures
+to capture sub-genre (user guide, release notes, SLA handbook, certification,
+technical manual, etc.) instead of splitting into a structure per sub-genre.
+
+Model minimumPartnerTier and any account-scoping-looking field as plain data
+only — no Role, permission grant, or scoping mechanism yet. That comes
+later.
+
+Access expectations: don't open anything to Guest in this exercise. Later
+exercises open exactly what must be public: the White Papers entries and
+the Product Content entries. Customer Documentation and Partner
+Portal must never become readable anonymously. If the import leaves Guest
+VIEW on any entry or folder, tell me rather than leaving it silently.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ 不要在本练习中构建页面或 Collection Display — 那是第 4 级的任务。在这里构建一个临时页面只会重复那一步，毫无益处。</p>
+<p>📸 <strong>截图：</strong>已创建 4 个 CMS 空间，以及内容结构和内容。</p>
+<p><img alt="CMS 及其 4 个空间" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/cms.png"/></p>
+<p>✅ <strong>验证：</strong>对全部四个 Space，<code>GET .../asset-libraries/{spaceERC}/connected-sites</code> 列出目标站点；<code>GET /o/c/&lt;pluralLabel&gt;/scopes/{spaceScopeId}</code> 返回预期的条目数量，且全部为 <code>status: approved</code>。</p>
+<p class="adm-block adm-warning">⚠️ CMS 空间和内容结构的名称可能与截图不同。
+本练习假定 AI 代理会根据此工作区中包含的内容推断结构。
+因此，这里存在一定的随机性，这完全在预期之中。如果旁边有人，不妨看看邻座的屏幕并进行比较。</p>
+<p>💡 <strong>为什么做这个练习：</strong>源文档是结构化内容，但只以渲染后的形式存在。模板还在，底层数据模型却没有了。这正是从现有网站迁移、却拿不到其源数据时的情形。重点在于展示 LLM 能够读取这些渲染后的内容，推断其背后的结构，并重新组织内容，使其可以加载到 Liferay CMS 等目标系统中。上面的提示词有意将结构交由代理决定。在实际项目中，您可以给出更明确的指示：详尽描述目标结构，或者只强调需要单独提取的特定字段，例如便于以后对内容进行过滤或分类。</p>
+<h3 id="32-tour-the-cms-admin-gui">3.2 — 浏览 CMS 管理界面<a aria-hidden="true" class="heading-anchor" href="#32-tour-the-cms-admin-gui" tabindex="-1">#</a></h3>
+<p>🎯 走一遍真实作者日常使用的内容生命周期：草稿、发布、版本历史、定时发布和本地化。有意只使用图形界面 — 不使用技能，也不使用 API。</p>
+<p>📎 REQ-08–REQ-21 整体（治理、翻译）。</p>
+<p>📋 <strong>步骤</strong>：</p>
+<ol>
+<li>打开 CMS。Global Menu → CMS → Contents。</li>
+<li>找到包含产品的 CMS Space。</li>
+<li>编辑一个产品，例如 <em>Aurelis GridMax</em>。</li>
+<li>回到产品列表，对刚编辑的产品使用上下文菜单，选择 <em>View history</em>。</li>
+<li>恢复上一个版本（上一个版本会作为该内容的又一个新版本被恢复）。</li>
+<li>现在再次编辑其中一个产品，在右侧菜单中查看 <em>Schedule</em> 部分：它可以让您决定内容何时可见和/或何时过期。</li>
+<li>回到产品列表，这次使用翻译上下文菜单。Liferay CMS 提供了一个便于内容翻译的图形界面。如果您还无法将内容翻译成其他语言，也不必担心，很快您就可以请 AI Hub 帮忙了！</li>
+</ol>
+<p>✅ <strong>验证：</strong>一个条目拥有 ≥2 个已发布版本，并演示了回滚；一个条目设置了未来的定时发布日期；在某个产品页上打开了 Translate 界面（此阶段第二种语言环境为可选）。</p>
+<h3 id="33-ckeditor5s-native-ai-actions">3.3 — CKEditor5 的原生 AI 操作<a aria-hidden="true" class="heading-anchor" href="#33-ckeditor5s-native-ai-actions" tabindex="-1">#</a></h3>
+<p>🎯 使用 AI Hub 原生的 CKEditor5 AI 菜单进行摘要、面向特定受众改写，并生成语气变体 — 无需插件，无需自定义代码。</p>
+<p>🧩 <code>manage-ai-hub</code> 🆕 用于 AI Hub 连接（见下方前提条件）；编辑本身为手动操作。</p>
+<p>📎 REQ-33 — AI 生成的草稿、标题/摘要、受众适配、改写、营销活动变体。</p>
+<p>📋 <strong>前提条件 — 连接 AI Hub（本路径中的第一次）：</strong></p>
+<ol>
+<li>Control Panel → Instance Settings → Feature Flags → Release → 启用 <strong>AI Hub (LPD-62272)</strong>。</li>
+<li>在 AI Hub 中：Configurations → 将 <strong>Environment URL</strong> 设为练习 0.2 中的 ngrok URL（不是 <code>localhost</code>）→ Save → 复制生成的 <strong>Client ID</strong> / <strong>Client Secret</strong>。</li>
+<li>回到 DXP：Control Panel → Instance Settings → <strong>AI Hub</strong> → 粘贴 Client ID/Secret，将 <strong>Service URL</strong> 设为 <code>https://ai.hub.liferay.com</code> → Save。</li>
+</ol>
+<p>📸 <strong>截图：</strong>AI Hub 的 Configurations 界面和 DXP 的 AI Hub 连接界面，均显示已保存的连接。</p>
+<p><img alt="AI Hub 实例设置" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ai-hub-instance-settings.png"/></p>
+<p><img alt="AI Hub 配置" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ai-hub-configuration.png"/></p>
+<p>✅ <strong>验证：</strong>为了确认一切正常，只需向 CMS 中现已可用的
+聊天机器人说一声 <em>Hi!</em> 即可。</p>
+<p>📋 <strong>在 CMS 中</strong>，选择 3.1 中的一个产品条目，选中一个段落，然后使用 CKEditor5 的 AI 菜单：</p>
+<ol>
+<li>为富文本正文生成摘要。</li>
+<li>为非技术受众改写一个段落（例如面向房主，而不是设施工程师）。</li>
+<li>为一个段落生成地区/语气变体（不是语言翻译 — 而是措辞上的调整）。</li>
+</ol>
+<h3 id="34-stand-up-a-cmp-campaign-for-white-paper-production">3.4 — 为白皮书制作建立 CMP 营销活动<a aria-hidden="true" class="heading-anchor" href="#34-stand-up-a-cmp-campaign-for-white-paper-production" tabindex="-1">#</a></h3>
+<p>🎯 两个新用户（Elena Ruiz、Marcus Chen），其权限各自限定在 White Papers CMS Space 内，以及一个 CMP 营销活动（"New White Papers"），为每位作者分配一个带截止日期的任务。</p>
+<p>🧩 <code>manage-cmp-campaigns</code> 🆕 用于营销活动；用户/角色直接通过 MCP/REST 处理。</p>
+<p>📎 大规模内容治理 — 白皮书的分配/截止日期生命周期独立于其 CMS 草稿/发布工作流。</p>
+<p>📋 <strong>前提条件 — 激活 CMP</strong>（需许可证的附加组件）：</p>
+<ol>
+<li>在 Liferay marketplace 中下载 CMP <code>.lpkg</code> 并创建激活密钥。</li>
+<li>部署激活密钥</li>
+<li>部署 <code>.lpkg</code></li>
+</ol>
+<p>您应该看到以下内容：</p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>2026-09-15 12:13:26.406 INFO  [com.liferay.portal.kernel.deploy.auto.AutoDeployScanner][AutoDeployDir:274] Processing activation-key-content-marketing-platform-1-desktop-mj58ha2.xml
+2026-09-15 12:13:32.391 INFO  [fileinstall-directory-watcher][b:-1] Content Marketing Platform license validation passed
+2026-09-15 12:13:32.392 INFO  [fileinstall-directory-watcher][b:-1] License registered for Content Marketing Platform
+2026-09-15 12:14:11.547 INFO  [com.liferay.portal.kernel.deploy.auto.AutoDeployScanner][AutoDeployDir:274] Processing Liferay Content Marketing Platform.lpkg
+2026-09-15 12:14:21.131 INFO  [Start Level: Equinox Container: d5e96260-3dbf-4406-800d-a05f76184048][BundleStartStopLogger:66] STARTED com.liferay.headless.cmp.api_2.2.0 [1560]
+2026-09-15 12:14:21.135 INFO  [Start Level: Equinox Container: d5e96260-3dbf-4406-800d-a05f76184048][BundleStartStopLogger:66] STARTED Liferay Content Marketing Platform - API_26.3.0 [1559]
+2026-09-15 12:14:21.312 INFO  [fileinstall-directory-watcher][BundleStartStopLogger:66] STARTED com.liferay.site.initializer.cmp_1.0.10 [1565]
+2026-09-15 12:14:21.330 INFO  [fileinstall-directory-watcher][BundleStartStopLogger:66] STARTED com.liferay.site.cmp.site.initializer_1.0.12 [1564]
+2026-09-15 12:14:21.749 INFO  [fileinstall-directory-watcher][BundleStartStopLogger:66] STARTED com.liferay.headless.cmp.impl_1.0.8 [1563]
+2026-09-15 12:14:22.017 INFO  [Start Level: Equinox Container: d5e96260-3dbf-4406-800d-a05f76184048][BundleStartStopLogger:66] STARTED Liferay Content Marketing Platform - Impl_26.3.0 [1561]
+2026-09-15 12:14:22.169 INFO  [fileinstall-directory-watcher][BundleStartStopLogger:66] STARTED com.liferay.headless.cmp.client_1.0.6 [1562]
+</code></pre></div>
+<p>如果一切正常，请前往 Control Panel → Instance Settings → Feature Flags 并启用 CMP (LPD-58677)。</p>
+<p class="adm-block adm-warning">⚠️ 如果 CMP 未能正确激活，请不要启用 CMP 功能标志。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using the Liferay MCP server (or the REST API directly if MCP isn't
+available), set up a campaign for a new white paper production effort in
+CMP, using the manage-cmp-campaigns skill.
+
+First, create two new users: Elena Ruiz (elena.ruiz@aurelis.com), who will
+author the ACME Corp white paper, and Marcus Chen (marcus.chen@aurelis.com),
+who will author the RayLife Ltd white paper. Both users must be active and
+able to sign in. Make each a member of the White Papers Space with a role
+that lets them add and edit white paper entries there, but not delete or
+publish them, and grants nothing in the other Spaces or in the Control
+Panel. Each must be able to see their own CMP task. Before calling it done,
+list exactly what the role grants.
+
+Then create a CMP campaign ('New White Papers') for two white papers: one
+for ACME Corp, one for RayLife Ltd. Add one task per white paper, each
+assigned to the corresponding author, with a due date.
+</code></pre></div>
+<p>📸 <strong>截图：</strong>CMP 营销活动看板，显示两个任务，并可见负责人和截止日期。</p>
+<p><img alt="新用户已被邀请加入 CMS 空间" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/invited-members.png"/></p>
+<p><img alt="任务已分配给他们" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/cmp-tasks.png"/></p>
+<p>✅ <strong>验证：</strong>对每个用户的账户执行 <code>GET</code>，确认所授予角色的权限与请求的完全一致，没有更宽泛的权限。打开营销活动，确认两个任务都显示正确的负责人和截止日期。</p>
+<p><strong>思路：</strong>何不创建 AI Personas，让它们通过 Liferay MCP 服务器与 CMS 交互，并使用 CMP 及其 API 协调各自的工作？</p>
+<hr/>
+<h2 id="level-4-page-composition-account-management-page-builder-data-sets-ldp">第 4 级 — 页面组合与账户管理（Page Builder、Data Sets、LDP）<a aria-hidden="true" class="heading-anchor" href="#level-4-page-composition-account-management-page-builder-data-sets-ldp" tabindex="-1">#</a></h2>
+<h3 id="41-gated-white-paper-funnel">4.1 — 受限访问的白皮书漏斗<a aria-hidden="true" class="heading-anchor" href="#41-gated-white-paper-funnel" tabindex="-1">#</a></h3>
+<p>🎯 列表页面 → 受限条目（潜在客户采集表单）→ 提交后重定向 → 完整文章 → 在 Liferay Data Platform 中跟踪事件。</p>
+<p>🧩 <code>manage-form-containers</code> 🆕，<code>manage-pages</code>，<code>scaffold-fragment</code>，<code>manage-analytics</code> 🆕</p>
+<p>📎 标准的受限内容模式；通过 <code>MutationObserver</code> → <code>Analytics.track()</code> 包装器实现 REQ-25（行为信号采集）。</p>
+<p>📋 <strong>前提条件 — 连接 Liferay Data Platform（Analytics Cloud）：</strong></p>
+<ol>
+<li>在 LDP 中，将此实例添加为新的 Data Source。</li>
+<li>复制生成的令牌（token）。</li>
+<li>在 Liferay DXP 中，Control Panel → Instance Settings → Analytics Cloud → 粘贴令牌 → Save。</li>
+<li>在 LDP 中，选择 Aurelis 站点以对其进行跟踪。</li>
+<li>在 LDP 中重命名您的 Liferay 数据源，使其名称不那么通用。</li>
+</ol>
+<p class="adm-block adm-warning">⚠️ <strong>此工作区由本次课程的所有学员共享。</strong>如果每个人的 <code>Analytics.track()</code> 调用都触发相同的原始事件名称，练习 4.2 的报告就会变成所有人下载记录的混杂，无法阅读。下面的提示词会让代理先询问您姓名的三个字母缩写，并将其作为事件名称的后缀 — 请不要跳过这一步，并记住您自己带后缀的名称，以便在练习 4.2 中使用。选择三个能代表您的字母：名字的首字母 + 姓氏的前两个字母（<em>Fabian Bouché</em> → <code>FBO</code>），如果您的名字由三部分组成，也可以每部分取一个字母（<em>Andrew Lloyd Webber</em> → <code>ALW</code>）。其他任意三个字母也可以，只要能明显识别出是您。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-pages, manage-form-containers and manage-analytics, build the Novacorp
+white paper's full funnel, bound to the WhitePaper Content Structure, entirely
+through the site-initializer tree.
+
+Before doing anything else, ask me for my three-letter initials and use them
+to suffix every custom event name below (e.g. whitePaperDownloaded_ABC for
+initials ABC) — this workspace is shared across every participant, so a
+bare, unsuffixed event name would collide with everyone else's.
+
+- A "White Papers" listing page with one card per white paper, each linking
+  into its own entry.
+- That entry's default page: a short teaser plus a lead-capture form (name,
+  email, company, role) writing into the existing Lead object, tagged with
+  source = 'whitepaper-novacorp'.
+- A second, non-default page for the same entry: the full write-up.
+- Once the form is submitted, take the visitor straight to that full write-up
+  page and record the visit as a tracked event, fired with a real
+  `Analytics.track()` call from the page, using my initials-suffixed event
+  name — not just a reachable page. The Liferay Analytics Cloud SDK is
+  already loaded site-wide once the prerequisite above is connected; don't
+  invent a separate tracking mechanism or fire the event from anywhere other
+  than the visitor's own browser session.
+- Access expectations. Guest must be able to browse the listing, read an
+  entry, and submit the form; nothing beyond that should be readable or
+  writable anonymously. Concretely:
+  - Guest gets VIEW on the WhitePaper entries and on the folders that hold
+    them (folders carry their own permissions), plus DOWNLOAD_FILE if an
+    entry renders a file or image.
+  - Guest gets ADD_OBJECT_ENTRY on Lead, and never VIEW: submitted names
+    and emails must not be readable anonymously.
+  - The form must not depend on a picklist fetched over REST (Guest can't
+    read picklists): ship any options in the markup.
+  - The gate is a user-experience gate, not a security boundary: the
+    write-up URL stays reachable by Guest. Say so in your summary rather
+    than presenting it as protected.
+  Verify every point as an unauthenticated visitor (curl with no
+  credentials, then a fresh browser context), never with admin credentials,
+  and show me that an anonymous GET on the Lead collection returns no
+  entries.
+</code></pre></div>
+<p>📸 <strong>截图：</strong>列表页面、带有潜在客户采集表单的受限（默认）条目页面、完整文章页面，以及在 Liferay Data Platform 中显示的跟踪事件。</p>
+<p><img alt="白皮书列表" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/white-papers-collection.png"/></p>
+<p><img alt="白皮书潜在客户采集表单" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/white-paper-form-dpt.png"/></p>
+<p><img alt="白皮书完整文章" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/white-paper-display-dpt.png"/></p>
+<p>✅ <strong>验证 — 以真实的匿名访客身份，而不是管理员会话：</strong>列表 → 点击 Novacorp → 确认进入受限模板 → 提交表单 → 确认已创建实际的 <code>Lead</code> 条目，且带有正确的 <code>source</code> 标记 → 确认重定向进入同一条目的完整文章 → 确认该事件确实出现在 Liferay Data Platform 中。</p>
+<p>同时打开 Chrome DevTools → Network 选项卡，<strong>启用 "Preserve log"</strong>（否则普通的重定向会清空面板），按 Analytics Cloud 请求域名过滤，确认 <code>Analytics.track()</code> 调用作为真实的出站请求发出，并带有预期的事件负载。<code>Analytics.track()</code> 采用存储转发方式 — 它会立即将事件排入 <code>localStorage</code> 队列，由 SDK 按约 2 秒的间隔自行刷新发送，所以不要指望在重定向发生前看到请求；请在完整文章页面加载后的几秒内查找。无论如何也不要只依赖 LDP 仪表板，因为仪表板中条目的延迟并不能说明浏览器是否真的发出了该调用。</p>
+<p>📸 <strong>截图：</strong>发送到 LDP 的自定义事件。</p>
+<p><img alt="自定义事件" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/custom-event.png"/></p>
+<p class="adm-block adm-warning">⚠️ 由于我们没有为代理提供任何关于如何渲染这些页面的严格指导，页面外观很可能与截图略有不同。</p>
+<h3 id="42-monitor-white-paper-downloads-in-liferay-data-platform">4.2 — 在 Liferay Data Platform 中监控白皮书下载<a aria-hidden="true" class="heading-anchor" href="#42-monitor-white-paper-downloads-in-liferay-data-platform" tabindex="-1">#</a></h3>
+<p>🎯 在 LDP 中保存一个 Event Analysis，跟踪<em>您自己的</em> <code>whitePaperDownloaded_&lt;your initials&gt;</code> 事件，并按实际下载的白皮书进行细分 — 这是练习 4.1 跟踪事件的「意义所在」：只有当有人能看到聚合结果时，采集事件才有价值。</p>
+<p>🧩 无需构建 — 纯粹在 Liferay Data Platform 中进行图形界面操作。<code>manage-analytics</code> 🆕 可以帮助您检查事件和 Event Analysis。</p>
+<p>📎 REQ-25（行为信号采集）。</p>
+<p class="adm-block adm-warning">⚠️ 请分析您在练习 4.1 中带有姓名缩写后缀的事件名称，而不是原始的 <code>whitePaperDownloaded</code> — 此工作区是共享的，其他每位学员也在同时触发他们自己带后缀的变体。</p>
+<p>📋 <strong>步骤（全部在 LDP 中完成 — 不涉及技能）：</strong></p>
+<ol>
+<li>先生成至少一个真实事件 — 以访客身份亲自走完练习 4.1 的完整漏斗（列表 → 表单 → 重定向 → 完整文章），以便有一个实际的 <code>whitePaperDownloaded_&lt;your initials&gt;</code> 事件可供分析。空报告无法证明跟踪是否正确接通。</li>
+<li>在 LDP 中：<strong>Events → Event Analysis</strong>。</li>
+<li><strong>Analyze：</strong><code>whitePaperDownloaded_&lt;your initials&gt;</code>。<strong>Breakdown：</strong>添加 <code>pageTitle</code>（Event）— 正是它让报告能够区分实际到达的是<em>哪一份</em>白皮书的完整文章，而不仅仅是一个原始总数。</li>
+<li><strong>Save Analysis</strong>，名称中也要包含您的姓名缩写（例如 "White paper download - ABC"）— 已保存的分析与其他一切一样，在整个工作区内共享。</li>
+</ol>
+<p>📸 <strong>截图：</strong>已保存的 Event Analysis 配置。</p>
+<p><img alt="Event Analysis" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/event-analysis.png"/></p>
+<ol start="5">
+<li>将范围设为 <strong>Last 24 hours</strong>，确认表格中显示真实的 <code>pageTitle</code> 行（而不是 "No Results"），然后点击 <strong>Download Reports</strong> 并打开导出的 Event Analysis Report。</li>
+</ol>
+<p>📸 <strong>截图：</strong>下载的 Event Analysis Report，显示真实且非空的细分结果。</p>
+<p><img alt="Event Analysis 报告" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/event-analysis-report.png"/></p>
+<p>✅ <strong>验证：</strong>报告中的 <code>pageTitle</code> 行与您实际下载的白皮书一致，<code>Total Events</code> ≥ 1，并且下载的报告文件本身（而不仅仅是 LDP 实时界面）反映了同一行。</p>
+<h3 id="43-account-intelligence-page-with-a-data-set">4.3 — 使用 Data Set 的 Account Intelligence 页面<a aria-hidden="true" class="heading-anchor" href="#43-account-intelligence-page-with-a-data-set" tabindex="-1">#</a></h3>
+<p>🎯 一个显示 <code>AccountIntelligenceProfile</code> 条目的页面，按 <code>combinedOpportunityScore</code> 排序，每一行都链接到一个展示对应账户的小型 React 应用。</p>
+<p>🧩 <code>manage-pages</code>，<code>manage-data-sets</code> 🆕，<code>scaffold-client-extension</code>，<code>react-custom-elements</code></p>
+<p>📎 REQ-27 — 按组合 Opportunity Score 对账户进行优先级排序。</p>
+<p>📖 <strong>此时评分从何而来。</strong>您将用于排序的 <code>combinedOpportunityScore</code> 值，是练习 2.3 中随数据集加载的值。目前还没有任何机制计算它们；如果您现在编辑 <code>fitScore</code>，组合评分不会改变。练习 6.2 会将此计算自动化。本页面的预期顺序：Novacorp (83)、Solstice Manufacturing (55)、Alderbrook Manufacturing (51)、Norrland Foods (44)、Helix Retail Group (41)、Brightwater Hospitality (12)。</p>
+<p class="adm-block adm-warning">⚠️ Data Set 的数据源应为 <code>AccountIntelligenceProfile</code>，<strong>而不是</strong> <code>Account</code> — <code>Account</code> 自身的 Headless 模块只支持按一小组硬编码字段排序，并拒绝按任何自定义/关联字段排序。<code>Account</code> 也既不支持 Display Page Template，也不支持 Form Container，因此行操作会链接到一个承载 React 应用的普通 Content Page。</p>
+<p class="adm-block adm-warning">⚠️ <strong>需要 2026.Q3.6 或更高版本（LPD-102157 的修复）。</strong>Data Set 片段通过<strong>外部引用代码</strong>引用其 Data Set，直接来自站点初始化程序的 <code>page-definition.json</code>。在 2026.Q3.2 上，这需要一个热修复。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Create a Data Set of Account Intelligence Profiles, sorted by combined
+Opportunity Score (highest first, and sortable by users), showing each
+profile's account name, with a row action that opens /account-detail for
+that profile.
+
+Then add an 'Account Intelligence' page to the site initializer with this
+Data Set on it. Deploy it and confirm the page renders real rows without
+anyone touching the Page Editor.
+
+Separately, build the /account-detail page: a small React customElement
+Client Extension that reads profileId from the URL, fetches that
+AccountIntelligenceProfile entry, then follows its own relationship field to
+fetch the related Account — two Headless calls — and renders both live.
+
+Access expectations: both pages are for Aurelis sales staff only. Create a
+Regular Role 'Aurelis Sales' if it doesn't exist, with VIEW on
+AccountIntelligenceProfile entries and on Accounts (company-wide), and an
+active test user holding only that role (alex.moreau@aurelis.com). Remove
+Guest VIEW from both pages in their page.json (an empty actionIds for
+Guest), and give the Aurelis Sales role VIEW on them. Verify three ways: as
+alex.moreau the page shows the six rows and /account-detail resolves; as
+Guest both pages answer 404; as a signed-in user without the role the pages
+are not accessible either. Don't verify as admin only.
+</code></pre></div>
+<p>📸 <strong>截图：</strong>按评分降序排列的实时 "Account Intelligence" 页面，以及 Page Editor 中显示该片段上已选中的 Data Set（没有任何人手动选择）。</p>
+<p><img alt="Account Intelligence Data Set" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/account-dataset.png"/></p>
+<p>✅ <strong>验证：</strong>打开 <code>layouts/&lt;page&gt;/page-definition.json</code>，确认片段的 <code>itemSelector</code> 通过 ERC 指定了 Data Set。在 Page Editor 中，确认该片段显示已选中此 Data Set，而无需任何人手动选择。加载实时页面，点击评分列的表头，确认排序确实重新排列了行，并确认账户名称列通过反向关系解析。触发一个行操作，确认 <code>/account-detail</code> 能实时解析档案及其关联账户。</p>
+<h3 id="44-make-the-account-detail-app-editable">4.4 — 让账户详情应用可编辑<a aria-hidden="true" class="heading-anchor" href="#44-make-the-account-detail-app-editable" tabindex="-1">#</a></h3>
+<p>🎯 扩展练习 4.3 中的 React 应用，让员工可以直接在同一页面上编辑账户的分类字段。</p>
+<p>🧩 <code>scaffold-client-extension</code>，<code>react-custom-elements</code></p>
+<p>📎 REQ-22 — 这才是维护目标账户情报数据库的实际机制。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Extend the /account-detail React customElement built earlier so it
+can also update the Account it displays. Add editable fields for sector,
+size, country, and priorityTier, a Save button that PATCHes the change to
+Account's own Headless API (/o/headless-admin-user/v1.0/accounts/{id}), and
+re-fetch the entry afterward so the page reflects what was actually
+persisted.
+
+Access expectations: being signed in is not enough to edit. Grant the
+Aurelis Sales role (created earlier) UPDATE on Accounts, and let the server-side
+permission decide: hide the editor for users who can't update, but never
+rely on the hidden UI as the protection. Verify as alex.moreau (the save
+persists), as a signed-in user without the role (the PATCH is rejected), and
+anonymously (401/403, never a silent success).
+</code></pre></div>
+<p>📸 <strong>截图：</strong>处于编辑模式的账户详情页面。</p>
+<p><img alt="处于编辑模式的账户详情应用" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/account-edit.png"/></p>
+<p>✅ <strong>验证：</strong>修改一个字段，保存，重新加载 — 确认新值确实已持久化。确认对同一 PATCH 的未认证请求返回 401/403，绝不会悄无声息地成功。</p>
+<hr/>
+<h2 id="level-5-visitor-interactions-form-containers-objects-integrations">第 5 级 — 访客交互（Form Containers、Objects、集成）<a aria-hidden="true" class="heading-anchor" href="#level-5-visitor-interactions-form-containers-objects-integrations" tabindex="-1">#</a></h2>
+<h3 id="51-become-an-aurelis-partner-form-with-a-live-company-lookup">5.1 — 带实时企业查询的「Become an Aurelis Partner」表单<a aria-hidden="true" class="heading-anchor" href="#51-become-an-aurelis-partner-form-with-a-live-company-lookup" tabindex="-1">#</a></h3>
+<p>🎯 一个公开的 Form Container，用于创建 <code>PartnerApplication</code> 条目，并通过法国公共企业登记库预填数据。</p>
+<p>🧩 <code>manage-form-containers</code> 🆕</p>
+<p>📎 REQ-55 — 合作伙伴注册与申请受理。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Build a public Form Container bound to a new PartnerApplication object:
+company registration number, company name, country, sector, message. When
+the registration number is entered, call France's public company registry
+(GET https://recherche-entreprises.api.gouv.fr/search?q=&lt;number&gt;) and
+prefill name/sector/country from the match. Keep every prefilled field
+editable — nothing submits automatically from the lookup.
+
+Access expectations: the page and the form are public. Guest gets
+ADD_OBJECT_ENTRY on PartnerApplication and nothing else: applications
+contain company details and must be readable only by the Aurelis Sales role
+(created earlier). Without ADD_OBJECT_ENTRY the Form Container renders nothing
+for a visitor, with no error. If sector or country is a picklist, ship its
+options in the markup: Guest can't read picklists over REST. Verify the
+submission as an unauthenticated visitor, and show me that an anonymous GET
+on the PartnerApplication collection returns no entries.
+</code></pre></div>
+<p>📸 <strong>截图：</strong>查询成功后的表单，显示已预填但仍可编辑的字段。</p>
+<p><img alt="成为合作伙伴表单" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/become-a-partner.png"/></p>
+<p>✅ <strong>验证：</strong>使用 <code>789 001 377</code>（Liferay France 自己的 SIREN）提交，确认查询被触发，并预填了名称、行业和国家。再用一个查询不到结果的号码提交，确认表单仍允许您手动填写所有字段。确认两次提交都创建了真实的 <code>PartnerApplication</code> 条目，并且预填的字段在提交前仍可编辑。</p>
+<p class="adm-block adm-warning">⚠️ 仅适用于在法国注册的企业（SIREN）。已确认 CORS 是开放的，无需服务器端代理。登记库在服务器端限速为每秒 7 个请求，以打字速度使用完全足够。</p>
+<hr/>
+<h2 id="level-6-custom-development-client-extensions-client-extensions-object-actions-glowroot">第 6 级 — 定制开发：Client Extensions（Client Extensions、Object Actions、Glowroot）<a aria-hidden="true" class="heading-anchor" href="#level-6-custom-development-client-extensions-client-extensions-object-actions-glowroot" tabindex="-1">#</a></h2>
+<p>这是内容最密集的一级，涵盖了为 Aurelis 确定的核心定制开发工作量。</p>
+<h3 id="61-solar-battery-installation-simulator">6.1 — 太阳能 + 储能电池安装模拟器<a aria-hidden="true" class="heading-anchor" href="#61-solar-battery-installation-simulator" tabindex="-1">#</a></h3>
+<p>🎯 两个相互独立的 <code>customElement</code> 客户端扩展（输入部件和结果部件），仅通过 <code>Liferay.fire()</code>/<code>Liferay.on()</code> 耦合。</p>
+<p>🧩 <code>scaffold-client-extension</code>（×2，包括其中的「Messaging Between Widgets: <code>Liferay.fire</code> / <code>Liferay.on</code>」一节）。</p>
+<p>📎 REQ-63–REQ-66 — 基于地址、可用面积和逐小时用电曲线，使用 Open-Meteo 的真实天气数据，计算太阳能和储能电池的配置规模。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Build the Aurelis Solar + Battery Installation Simulator as specified in the
+Brief (section "Solar Panel + Battery Installation Simulator", Lot 1) — two
+independent customElement Client Extensions on the same page, coupled only
+through Liferay.fire()/Liferay.on(), never a shared DOM reference, module, or
+config file.
+
+(1) aurelis-simulator-inputs. Collects exactly three inputs: address
+(geocoded via Open-Meteo's geocoding endpoint), usable surface area in m²,
+and an hourly consumption profile for a typical day — an editable 24-bar
+chart with an adjustable Y-axis scale. On any change, fire
+Liferay.fire('aurelisSimulatorInputsChanged', {address, lat, lon, surfaceM2,
+hourlyConsumptionKwh: [24 numbers]}) with the full current state.
+
+(2) aurelis-simulator-results. A separate Client Extension subscribing via
+Liferay.on('aurelisSimulatorInputsChanged', ...). For a visitor-selected
+month (a real 12-month selector):
+- Fetch that location's historical solar irradiance for that month from
+  Open-Meteo's historical archive API.
+- Compute hourly solar production from surface area and irradiance.
+- Simulate the battery: store daytime surplus, discharge it during hours
+  without sun. Compute and display a recommended battery capacity (kWh),
+  labeled as this build's own answer to an open question in the Brief.
+- Render a 24-bar stacked chart per hour: solar / battery / grid, always
+  summing to that hour's consumption. Overlay battery state-of-charge (%) as
+  a line on the same chart.
+- Recompute the whole chart whenever the month changes.
+
+Out of scope, name explicitly in the README rather than deciding silently:
+no cost/savings estimate (physical simulation only); no
+efficiency/orientation/tilt inputs (name whatever fixed assumption is used as
+an explicit constant); no geography restriction beyond Open-Meteo's own
+coverage.
+
+Inject each Client Extension's JS/CSS from the fragment's own js field
+(document.createElement, appended to document.head, guarded by a data-*
+marker) — a fragment's html field silently strips &lt;script&gt;/&lt;link&gt; tags.
+Cache each (location, month) fetch; don't refetch on every unrelated redraw.
+
+Access expectations: the simulator page is public. Both widgets must work
+for an anonymous visitor: they call only Open-Meteo, never a Liferay API.
+Verify it in a fresh, signed-out browser context.
+</code></pre></div>
+<p>📸 <strong>截图：</strong>带有手绘用电曲线的输入部件，以及结果部件在两个不同月份下的堆叠图。</p>
+<p><img alt="Aurelis 模拟器" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/energy-consumption.png"/></p>
+<p>✅ <strong>验证：</strong>输入真实地址、合理的面积和手绘曲线，确认结果柱形图在每个小时的合计都正确。切换月份，确认能源构成确实发生变化。从页面上移除结果部件，输入部件应仍能独立工作，这证明了两者是基于事件耦合的。</p>
+<p>💡 <strong>调整布局：</strong>默认情况下，两个部件上下堆叠，但并没有什么将它们绑定在这种排列上。由于它们只通过事件通信，您可以将它们并排放置或按任意网格排列，例如输入在左、结果在右。有两种做法：</p>
+<ul>
+<li><strong>在页面编辑器中：</strong>放置一个包含两个模块的 <strong>Grid</strong> 片段，然后将每个部件分别拖入一列。这种方式很快，但下一次运行站点初始化程序时会被覆盖，因为页面会根据其 <code>page-definition.json</code> 重建。</li>
+<li><strong>在源代码树中：</strong>让代理将页面的 <code>page-definition.json</code> 改为 <code>Section → Row → Column</code> 布局，列宽合计为 12，并在移动端将各列堆叠显示。这样，布局在每次重新预配后都能保留。</li>
+</ul>
+<h3 id="62-opportunity-score-client-extension">6.2 — Opportunity Score 客户端扩展<a aria-hidden="true" class="heading-anchor" href="#62-opportunity-score-client-extension" tabindex="-1">#</a></h3>
+<p>🎯 一个 <code>objectAction</code> 客户端扩展，根据 Fit、Value 和 Intent 使 <code>combinedOpportunityScore</code> 保持最新。当有 Lead 进入时，它还会将该 Lead 关联到正确的 Account，使访客的兴趣真正计入该账户的评分。</p>
+<p>🧩 <code>scaffold-client-extension</code>（类型 <code>objectAction</code>）、<code>setup-oauth</code></p>
+<p>📎 REQ-26（将已识别的访客匹配到其所属组织）、REQ-27 — Aurelis 的评分公式是其自身的业务逻辑，Liferay 没有原生功能可以计算它。</p>
+<p>📖 <strong>有哪些变化。</strong>到目前为止，<code>combinedOpportunityScore</code> 只是在练习 2.3 中加载的普通数据（参见 4.3 中的说明），而来自白皮书表单（4.1）的 Lead 只以自由文本形式携带公司名称，没有关联到任何 Account。从现在起，一个客户端扩展处理两个触发器：</p>
+<ul>
+<li><strong>添加或更新档案时：</strong>重新计算该档案的评分。</li>
+<li><strong>添加 Lead 时：</strong>查找名称与 Lead 的 <code>company</code> 匹配的 Account，将 Lead 关联到该账户（这会增加该账户的 <code>numberOfLeads</code>），然后重新计算该账户的评分。</li>
+</ul>
+<p>公式来自「The account scoring story」：<code>min(100, round(fitScore × valueScore / 100 × (1 + min(numberOfLeads, 5) / 10)))</code>。在尚未关联任何 Lead 时，它得出的正是数据集中的值，因此在有 Lead 进入或有人修改 Fit 或 Value 评分之前，排名不会变化。</p>
+<p>📖 <strong>为什么这个客户端扩展需要两个 OAuth 应用。</strong>到目前为止，客户端扩展回调 Liferay 时使用的是 Liferay 发给它的令牌，该令牌以触发操作的用户身份执行。而在这里，Lead 通常由提交白皮书表单的<strong>匿名</strong>访客创建，因此该令牌属于 Guest，而 Guest 无法读取 Account，也无法编辑 Lead（每次调用都返回 <code>403</code>）。因此，该客户端扩展拥有自己的身份：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OAuth 应用</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User agent（每个 <code>objectAction</code> 本来就需要）</td>
+<td><code>oAuthApplicationUserAgent</code></td>
+<td>让 Liferay 调用微服务并识别触发操作的用户</td>
+</tr>
+<tr>
+<td>Headless server</td>
+<td><code>oAuthApplicationHeadlessServer</code></td>
+<td>微服务自己的服务账户，在每次回调 Liferay 时通过 <code>client_credentials</code> 使用</td>
+</tr>
+</tbody>
+</table></div>
+<p>headless server 的服务账户是 Administrator：只有其作用域列表限制它能做什么，因此请尽可能缩小范围。</p>
+<p class="adm-block adm-warning">⚠️ <strong>微服务绝不在源代码或配置中保存凭据。</strong>部署时，DXP 会将 headless server 的客户端 ID 和密钥以文件形式写入 <code>bundles/routes/default/&lt;project-name&gt;/</code>（在 Liferay Cloud 上为 <code>/etc/liferay/lxc/ext-init-metadata</code>）。<strong>每次重新部署都会同时更改两者</strong>，之前签发的令牌随后会得到 <code>401</code>。因此，微服务每次请求令牌时都会读取这些文件，遇到 <code>401</code> 时重新读取并重试一次。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Scaffold an objectAction Client Extension (a Node microservice) that keeps
+AccountIntelligenceProfile.combinedOpportunityScore up to date:
+
+  combinedOpportunityScore =
+    min(100, round(fitScore * valueScore / 100 * (1 + min(numberOfLeads, 5) / 10)))
+
+where numberOfLeads is the Aggregation field on the profile's Account (it
+comes back as a string: parse it).
+
+Attach the same Client Extension to three object actions and tell the
+callers apart by objectDefinitionId:
+- AccountIntelligenceProfile, onAfterAdd and onAfterUpdate: recompute that
+  profile's score.
+- Lead, onAfterAdd: find the Account whose name exactly matches the Lead's
+  company (case-insensitive; escape single quotes in the filter). If there's
+  no match, do nothing. Otherwise link the Lead to that Account, then
+  recompute that Account's profile score.
+Only PATCH a score when the value actually changes, so the write-back
+doesn't re-trigger the action in a loop.
+
+Leads are created by anonymous visitors, so don't call back into Liferay
+with the inbound token. With setup-oauth, add an
+oAuthApplicationHeadlessServer and use client_credentials for every call
+back, with only these scopes: c_accountintelligenceprofile.everything,
+c_lead.everything, Liferay.Headless.Admin.User.everything.read. Keep the
+oAuthApplicationUserAgent the objectAction entry requires.
+Read the headless server's client ID and secret from the routes files DXP
+writes on deploy, each time a token is requested (never cached at startup,
+never copied into the project), and on a 401 re-read them and retry once.
+</code></pre></div>
+<p>✅ <strong>验证：</strong></p>
+<ul>
+<li><strong>Fit/Value 变化：</strong>将 Helix Retail Group 的 <code>fitScore</code> 从 55 改为 95，确认其 <code>combinedOpportunityScore</code> 变为 71（95 × 75 / 100，无 Lead）。在 Account Intelligence 页面上，Helix 现在排名第二，仅次于 Novacorp。改回 55，确认评分恢复为 41。</li>
+<li><strong>Intent：</strong>在隐私窗口（匿名）中，以 <code>Norrland Foods</code> 作为公司名称提交练习 4.1 的白皮书表单。确认新的 Lead 已关联到 Norrland Foods Account，该 Account 返回 <code>"numberOfLeads": "1"</code>，且 Norrland 的评分从 44 变为 48。再提交一次：评分达到 53，Norrland 的排名超过 Alderbrook Manufacturing（51）。最后用一个不匹配任何 Account 的公司名称再提交一次，确认该 Lead 保持未关联状态，且没有任何评分变化。</li>
+<li><strong>为什么需要 headless server：</strong>临时让微服务改用传入的令牌，再次以匿名方式提交表单，确认回调失败并返回 <code>403</code>。然后改回来。</li>
+<li><strong>作用域：</strong>只给 headless server 分配 <code>Liferay.Headless.Object.everything</code>，确认每次回调都失败并返回 <code>403</code>。恢复上述三个作用域，确认功能恢复正常。</li>
+<li><strong>凭据轮换：</strong>在不重启微服务的情况下重新部署客户端扩展，提交另一个 Lead，确认仍能正常工作（微服务在遇到 <code>401</code> 后重新读取了新凭据）。</li>
+</ul>
+<h3 id="63-measure-what-a-lead-submission-costs-with-glowroot">6.3 — 使用 Glowroot 衡量一次 Lead 提交的开销<a aria-hidden="true" class="heading-anchor" href="#63-measure-what-a-lead-submission-costs-with-glowroot" tabindex="-1">#</a></h3>
+<p>🎯 用测量数据而不是阅读代码来回答一个问题：当匿名访客提交白皮书表单时，<strong>访客是否要等待 Opportunity Score 客户端扩展（6.2）执行完才能看到下一个页面？</strong>以及单个 Lead 总共会触发多少次调用？</p>
+<p>🧩 <code>glowroot-performance</code> 🆕</p>
+<p>📎 NFR — 公开访问流程的性能；用数据检验 6.2 的设计（循环保护、触发器）。</p>
+<p>📖 <strong>Lead 进入时会发生什么。</strong>一次表单提交会引发一连串操作：</p>
+<ol>
+<li>Liferay 保存 Lead。</li>
+<li><code>onAfterAdd</code> Object Action 调用客户端扩展的微服务。</li>
+<li>微服务回调 Liferay：按名称查找 Account，PATCH Lead 以建立关联，读取 <code>numberOfLeads</code>，PATCH 档案的评分。</li>
+<li>这些 PATCH 又会触发更多操作：Lead 上的 <code>onAfterUpdate</code>，档案上的 <code>onAfterUpdate</code>。6.2 中的保护机制应阻止它们再次写入。</li>
+</ol>
+<p>这些步骤在浏览器中都不可见。Glowroot 是运行在 Liferay JVM 内部的 APM 代理，它将每个请求记录为一个事务，包括其耗时、SQL 查询和对外 HTTP 调用。<code>glowroot-performance</code> 技能通过 Glowroot 的 MCP 服务器读取这些数据。</p>
+<p>📋 <strong>前提条件（已为您准备好）：</strong>工作区的 <code>setenv</code> 文件会在每次启动时挂载 Glowroot 代理（由练习 0.2 中的 <code>blade server init</code> 安装），<code>.mcp.json</code> 会在 <code>http://localhost:4000/o/glowroot/mcp</code> 注册其 MCP 服务器。如果 Claude Code 请您批准 <code>glowroot</code> MCP 服务器，请接受。检查 <code>http://localhost:4000/o/glowroot</code> 能否打开。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using glowroot-performance, measure what a single Lead submission costs.
+
+First, in a private window (anonymous), I'll submit the white paper form built
+earlier three times with "Norrland Foods" as the company. Tell me when
+you're ready, then wait for me to say it's done.
+
+Then, over that time window:
+1. Check the CPU regime first and tell me whether the timings are reliable.
+2. Find the form submission transaction. Give its duration and say whether
+   the call to the Opportunity Score microservice (localhost:3101) appears
+   inside it as a service call. Conclude: does the visitor wait for the
+   Client Extension, yes or no?
+3. List the transactions caused by the microservice calling back into Liferay
+   (accounts lookup, Lead PATCH, profile PATCH, and anything else), with
+   count and average duration.
+4. Confirm the loop guard built earlier holds: exactly one profile score PATCH per Lead.
+5. Count the SQL queries behind one submission, end to end.
+
+Every claim must cite a Glowroot number and a trace id or transaction name,
+with the glowrootUrl so I can open it. If a fast transaction left no trace,
+lower the slow-trace threshold for that one transaction only, rerun, then put
+it back and tell me you did. Don't create instrumentation and don't run
+anything that pauses the JVM.
+</code></pre></div>
+<p>✅ <strong>验证：</strong></p>
+<ul>
+<li>打开 Claude 给出的每个 <code>glowrootUrl</code>，在 Glowroot UI 中亲自核对数据：Transactions → Web，然后查看追踪记录。</li>
+<li>「访客是否要等待？」的答案必须基于追踪记录，而不是基于代码应有的行为。如果微服务调用出现在提交的追踪记录内，访客每次提交都要承担其延迟。讨论您会做哪些修改（例如，将该操作改为异步）。</li>
+<li>三次提交应产生三次档案评分 PATCH，而不是六次。更多则说明保护机制没有生效。</li>
+<li>如果 Claude 调低了慢追踪阈值，请在 Glowroot UI 中确认它已恢复为原始值。</li>
+</ul>
+<p class="adm-block adm-warning">⚠️ 此处 Glowroot 的 UI 和 MCP 服务器没有身份验证，且仅监听 <code>127.0.0.1</code>。切勿通过 ngrok 或任何其他隧道暴露 4000 端口。</p>
+<p>💡 <strong>本练习之外：</strong>本练习只用 Glowroot 回答一个具体问题，但同样的方法可通过 <code>glowroot-performance</code> 技能，用于在 Claude Code 中进行任何性能调查。该技能可以：</p>
+<ul>
+<li>读取慢追踪记录；</li>
+<li>读取特定事务的线程剖析，可按事务类型和时间窗口过滤；</li>
+<li>读取事务背后的 SQL 查询；</li>
+<li>读取内存和 CPU 使用情况，以及 JMX 指标；</li>
+<li>以编程方式为 Java 方法添加新的插桩，以便对其进行剖析。</li>
+</ul>
+<p>我们常用的一种技巧：抽取一批事务样本，在其线程剖析的调用栈中寻找热点，然后为这些方法添加插桩，了解其内部真正发生了什么。</p>
+<p>这依赖于一个提供 MCP 服务器的 Glowroot 修改版本。它是全新的：已在 2026.Q3 上运行良好，目前正在更广泛地测试中，因此可能会遇到一些不完善之处。</p>
+<hr/>
+<h2 id="level-7-security-permissions-and-the-native-ai-hub-chatbot-ai-hub">第 7 级 — 安全与权限，以及原生 AI Hub 聊天机器人（AI Hub）<a aria-hidden="true" class="heading-anchor" href="#level-7-security-permissions-and-the-native-ai-hub-chatbot-ai-hub" tabindex="-1">#</a></h2>
+<h3 id="71-restrict-partner-content-access-by-tier">7.1 — 按等级限制合作伙伴内容的访问<a aria-hidden="true" class="heading-anchor" href="#71-restrict-partner-content-access-by-tier" tabindex="-1">#</a></h3>
+<p>🎯 三个累进式的 Regular Role（Partner - Bronze/Silver/Gold，Gold ⊇ Silver ⊇ Bronze），根据每个 <code>PartnerDocumentation</code> 条目的 <code>minimumPartnerTier</code>，授予条目级的 View 权限。</p>
+<p>🧩 <code>manage-roles-permissions</code></p>
+<p>📎 REQ-57 — 分等级的合作伙伴赋能内容。</p>
+<p>📖 Aurelis 将其安装合作伙伴认证为 Bronze、Silver 和 Gold 三个等级，每个等级可以解锁更多的 Partner Portal 内容：例如，Gold 合作伙伴可以看到机密的产品路线图。在练习 3.1 中，您导入了合作伙伴文档，其 <code>minimumPartnerTier</code> 只是普通数据，目前还没有任何机制强制执行它。本练习将把这个字段变成真正的访问控制。</p>
+<p>💡 <strong>已为您做出的设计决策</strong>（源文档未作规定，因此由提示词确定）：</p>
+<ul>
+<li><strong>累进式，而非互斥式</strong> — Gold 合作伙伴可以看到 Bronze + Silver + Gold 的内容。</li>
+<li><strong>「Gold-only section」文档</strong> — 将整个条目标记为 Gold 等级，而不是拆分为两个条目。这会过度限制该文档中非机密的部分；请接受这一权衡，而不是增加拆分和重新导入的步骤。</li>
+</ul>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-roles-permissions, create three Regular Roles for the partner
+tiers — Partner - Bronze, Partner - Silver, Partner - Gold. Then, for every
+PartnerDocumentation entry in the Partner Portal Space, GET its current
+permissions first, then PUT entry-level View permission driven by that
+entry's own minimumPartnerTier field, cumulatively: a Bronze-tier entry
+visible to all three roles, a Silver-tier entry visible to Silver and Gold,
+a Gold-tier entry visible to Gold alone. The PUT body is a bare array (not
+wrapped in a "permissions" key) of {actionIds, roleExternalReferenceCode,
+roleName, roleType} objects. This call is a full replace: include every
+existing role grant that should survive (Owner, any admin role) alongside
+the tier grants. Tag the "confidential roadmap briefing with a Gold-only
+section" entry Gold-tier as a whole — don't split it.
+
+Access expectations: after the PUT, no Guest, User or Site Member grant may
+remain on these entries, otherwise the tiers protect nothing. The three
+roles also need VIEW on the Space's folders. Create two active test users
+who can sign in: partner.bronze@aurelis-partner.example (Partner - Bronze
+only) and partner.gold@aurelis-partner.example (Partner - Gold only). Verify
+as each of them and anonymously, never as admin, and report the entry count
+each one sees. Tell me explicitly that entries added later get no tier
+grant by themselves.
+</code></pre></div>
+<p>✅ <strong>验证 — 以真实的测试账户登录，不要用 Basic Auth，也不要用管理员：</strong>Bronze 等级的账户永远不应看到 Gold 或 Silver 条目。Gold 等级的账户应能看到 Bronze、Silver <em>以及</em> Gold 条目。</p>
+<h3 id="72-stand-up-the-energy-advisor-chatbot-public-product-knowledge">7.2 — 搭建「Energy Advisor」聊天机器人：公开的产品知识<a aria-hidden="true" class="heading-anchor" href="#72-stand-up-the-energy-advisor-chatbot-public-product-knowledge" tabindex="-1">#</a></h3>
+<p>🎯 一个基于 Product Content Space 的公开 AI Hub 聊天机器人，并在未登录的会话中进行验证。</p>
+<p>🧩 <code>manage-roles-permissions</code>（Guest 可见性）、<code>manage-cms</code> 🆕、<code>manage-ai-hub</code> 🆕（它会为必须在 AI Hub 自身控制台中手动完成的工作提供一份构建清单，然后验证结果）。</p>
+<p>📎 REQ-36/REQ-61（公开的 Energy Advisor，第 1 阶段问答）、REQ-45（基于 RAG 的 Product Knowledge Agent）。</p>
+<p class="adm-block adm-warning">⚠️ <strong>NFR-06：</strong>这一代 AI Hub 仅支持文本，不支持语音和图像。</p>
+<p class="adm-block adm-warning">⚠️ <strong>前提条件 — 为 Guest 授予 Product Content 的 View 权限。</strong>公开聊天机器人的公开程度取决于其内容的权限。这种失败是静默的：管理员测试时看到的是有依据的回答，而真正的匿名访客什么也得不到。请在构建下面任何内容之前先完成此步骤。</p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-roles-permissions and manage-cms, make the Product Content
+Space's entries readable by anonymous visitors, so a public chatbot can
+retrieve them through search.
+
+Access expectations: Guest gets VIEW, company-wide, on the product structure
+entries in the Product Content Space (whatever that structure was called
+when it was created earlier), and VIEW on that Space's folders (folders carry their own
+permissions). Add DOWNLOAD_FILE only if those entries hold files. Grant
+nothing on the Customer Documentation, Partner Portal or White Papers
+Spaces. Reindex afterwards, since the chatbot reads the search index.
+
+Verify as an unauthenticated visitor: an anonymous request lists the product
+entries, and an anonymous request on a Customer Documentation entry returns
+nothing.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ <strong>为代理提供依据的两种方式 — 请使用第二种。</strong>AI Hub 的 <strong>Data Sources</strong> 选项卡只能爬取外部网站 URL，并且不感知权限。由 <strong>Search Blueprint</strong> 支持的 <strong>Liferay Search</strong> 节点直接查询 DXP 自身的、感知权限的搜索索引，这是两者中唯一能够访问 DXP 内部内容的方式。</p>
+<p>📋 <strong>步骤（全部在 AI Hub 或 DXP 的控制台中完成，不涉及技能）：</strong></p>
+<ol>
+<li><strong>AI Hub 已在练习 3.3 中连接</strong>，只需确认连接仍然有效。</li>
+<li><strong>构建 Search Blueprint。</strong>Global Menu → Search Experiences → Blueprints → Add，命名例如 <em>Aurelis Products Blueprint</em>。<strong>Scope</strong> → Select Scope：选择 <strong>Product Content</strong> Space。也可以将其缩小到 <code>ProductSheet</code> 结构：<strong>Source</strong> → Searchable Types and Subtypes → <strong>Selected Types</strong> → Select Asset Types。保存，并记下该 Blueprint 的 <strong>External Reference Code</strong>。</li>
+</ol>
+<p>📸 <strong>截图：</strong>已填写范围和结构的 Blueprint 配置界面。</p>
+<p><img alt="产品搜索 Blueprint" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/product-blueprint.png"/></p>
+<p class="adm-block adm-warning">⚠️ <strong>您的结构名称可能不同。</strong><code>ProductSheet</code> 是我们运行练习 3.1 时代理所选的名称。该练习并未强制规定结构：代理是根据本工作区中的文档推断出每个结构的，因此在您的项目中，其名称（以及字段）可能不同。请使用您的 Product Content Space 中实际存在的产品结构，即 CMS 管理界面中显示的结构（练习 3.2）。</p>
+<ol start="3">
+<li><strong>构建 Search Worker 代理。</strong>Agent Builder → Liferay Search agent，然后使用 <strong>Duplicate</strong> 操作：<ul>
+<li><strong>Title：</strong>例如 <em>Aurelis Products Liferay Search</em>。</li>
+<li><strong>Description：</strong><em>"Retrieval worker for Aurelis product knowledge — solar, GridMax, EV charging, Pulse, energy transformation programs. The request sent to this agent is used directly as the search query. Before invoking it, formulate a short, precise keyword query — never the visitor's original question verbatim. Prefer product names/codes over prose."</em></li>
+<li><strong>Input Variables：</strong><code>request</code>。 </li>
+<li><strong>Output Variables：</strong><code>response</code>（只会使用第一个输出变量，切勿列出多个）。</li>
+<li>启用该代理并点击 <strong>Save</strong>，然后再编辑工作流。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>截图：</strong>产品搜索 worker。</p>
+<p><img alt="产品搜索 worker 代理" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-product-search-agent.png"/></p>
+<ol start="4">
+<li>
+<p><strong>编辑其工作流：</strong><code>Start → Liferay Search → End</code>，并编辑 Liferay Search 节点的配置：</p>
+<ul>
+<li><strong>Prompt：</strong><em>"Analyze the retrieved product content and return factual evidence relevant to the request. Use only the retrieved information. Do not invent or infer missing product facts. Return concise findings; do not try to produce the final answer, as your response will be used as evidence by another agent."</em></li>
+<li><strong>Input Variables：</strong><code>[{"name": "request", "type": "string"}]</code>。</li>
+<li><strong>Output Variables：</strong><code>[{"name": "response", "type": "string"}]</code>。</li>
+<li><strong>User Message：</strong><code>{{request}}</code>。</li>
+<li><strong>RAG config：</strong><code>{"contentRetriever": {"key": "liferay", "blueprintExternalReferenceCode": "&lt;Blueprint ERC&gt;"}}</code>。</li>
+<li><strong>Tools：</strong><code>[]</code>。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>截图：</strong>产品搜索 worker 的工作流。</p>
+<p><img alt="产品搜索 worker 代理工作流" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-product-search-agent-workflow.png"/></p>
+<ol start="5">
+<li><strong>构建 Answer Builder 代理。</strong>这是第二个独立的代理。<ul>
+<li><strong>Title：</strong>例如 <em>Aurelis Answer builder agent</em>。</li>
+<li><strong>Description：</strong><em>"Always invoke this agent last, after research is complete, passing the original request plus everything gathered — never use it for retrieval itself."</em></li>
+<li><strong>Input Variables：</strong><code>originalRequest,gatheredInformation</code>。</li>
+<li><strong>Output Variable：</strong><code>response</code>。</li>
+<li><strong>Data Sources：</strong>将 <em>Assigned Sources</em> 留空。</li>
+<li>启用该代理并点击 <strong>Save</strong>，然后再编辑工作流。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>截图：</strong>Answer Builder 代理。</p>
+<p><img alt="Answer Builder 代理" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-answer-builder-agent.png"/></p>
+<ol start="6">
+<li><strong>编辑其工作流：</strong><code>Start → LLM → End</code>，<strong>不要</strong>添加 Liferay Search 节点。<ul>
+<li><strong>Prompt：</strong><code>Build a clear, direct answer to the original request from the gathered information alone; never invent unsupported facts; say explicitly when the evidence doesn't cover part of the question rather than guessing. Make synthetic responses, ask the user if he wants more details.</code></li>
+<li><strong>Input Variables：</strong><code>[{"name": "originalRequest", "type": "string"}, {"name": "gatheredInformation", "type": "string"}]</code>。</li>
+<li><strong>Output Variables：</strong><code>[{"name": "response", "type": "string"}]</code>。</li>
+<li><strong>User Message：</strong><code>Original user request:\n{{originalRequest}}\n\nGathered information:\n{{gatheredInformation}}</code>。</li>
+<li><strong>RAG config：</strong><code>[]</code>。</li>
+<li><strong>Tools：</strong><code>[]</code>。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>截图：</strong>Answer Builder 代理的工作流。</p>
+<p><img alt="Answer Builder 代理" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-answer-builder-agent-workflow.png"/></p>
+<ol start="7">
+<li><strong>创建聊天机器人。</strong>AI Hub → Chatbots → New Chatbot。<ul>
+<li><strong>Title：</strong>例如 <em>Aurelis Chatbot FBO</em>（使用您自己的姓名首字母）。</li>
+<li><strong>External Reference Code：</strong>设置一个带有您姓名首字母、易读的值，例如 <code>AURELIS_CHATBOT_FBO</code>，并记下来：Click to Chat（第 8 步）和自定义部件（练习 9.1）都需要它。</li>
+<li><strong>Enable Chatbot：</strong>开启。</li>
+<li><strong>Assigned Agents：</strong>同时添加 Search Worker 和 Answer Builder <em>两个</em>代理。</li>
+<li>设置 <strong>Intro Message</strong>。保存。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>截图：</strong>Aurelis RAG 聊天机器人。</p>
+<p><img alt="已分配两个代理的 Aurelis 聊天机器人" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-chatbot.png"/></p>
+<ol start="8">
+<li>
+<p><strong>通过 Click to Chat 将聊天机器人放到站点上。</strong>Click to Chat 是 Liferay 的原生聊天集成，AI Hub 是其支持的提供方之一。它为<strong>每个站点挂载一个聊天机器人</strong>，显示在该站点的每个页面上，无需构建或放置任何片段。需要在两个地方进行配置：</p>
+<p><strong>a. 为实例启用。</strong>Control Panel → Instance Settings → <strong>Click to Chat</strong>：
+- 开启 <strong>Enable Click to Chat</strong>。
+- <strong>Site Settings Strategy：</strong>选择 <em>Inherit or Override</em>，使每个站点都可以声明自己的聊天机器人。
+- 将 <strong>Chat Provider</strong> 和 <strong>Chat Provider Account ID</strong> 留空：聊天机器人将在下面按站点设置。
+- 保存。</p>
+<p>📸 <strong>截图：</strong>在实例级别启用的 Click to Chat。</p>
+<p><img alt="在 Instance Settings 中启用的 Click to Chat" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/enable-click-to-chat.png"/></p>
+<p><strong>b. 将聊天机器人挂载到 Aurelis 站点。</strong>Site Menu → Configuration → Site Settings → <strong>Click to Chat</strong>：
+- 开启 <strong>Enable Click to Chat</strong>。
+- <strong>Chat Provider：</strong><em>AI Hub</em>。
+- <strong>Chat Provider Account ID：</strong>您的聊天机器人的 <strong>External Reference Code</strong>（AI Hub → Chatbots → 第 7 步中的聊天机器人），例如 <code>AURELIS_CHATBOT_FBO</code>。忽略该字段下方的 <em>Get my account token for AI Hub</em> 链接：此字段只需要聊天机器人的 ERC。
+- 开启 <strong>Guest Users Allowed</strong>：这是一个公开聊天机器人，下面的验证在未登录状态下进行。
+- <strong>Hide in Control Panel：</strong>由您决定。开启后，聊天气泡不会出现在管理界面上，只在站点页面上显示。
+- 保存。</p>
+<p>📸 <strong>截图：</strong>Aurelis 站点的 Click to Chat 设置，包含 AI Hub 和您的聊天机器人 ERC。</p>
+<p><img alt="为 Aurelis 站点配置的 Click to Chat" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/configure-click-to-chat.png"/></p>
+<p>重新加载站点的任意页面：聊天气泡会出现在所有页面上。</p>
+<p class="adm-block adm-warning">⚠️ <strong>每个站点一个聊天机器人。</strong>Click to Chat 无法在部分页面上放置一个聊天机器人，而在其他页面上放置另一个。如有此需要，请使用下面的替代方案。</p>
+<p>💡 <strong>替代方案 — 在片段中嵌入代码片段。</strong>聊天机器人分配了代理后，其在 AI Hub 中的配置界面还会提供一段可直接使用的 HTML/JS 代码片段。将其复制到一个新的片段中（Design → Fragments → 在某个 Fragment Set 中新建 Fragment → 粘贴到 HTML/JavaScript 编辑器），将该片段拖到您需要的页面上并发布。这种方式按页面放置聊天机器人，但每个页面都需要单独放置。不要在同一站点上将其与 Click to Chat 同时使用，否则访客会看到两个聊天气泡。</p>
+</li>
+</ol>
+<p>✅ <strong>验证 — 在无痕/未登录的会话中，</strong>向在线的聊天机器人提出以下问题：</p>
+<ul>
+<li><em>"What is Aurelis GridMax and what does it do?"</em> — 有依据</li>
+<li><em>"What does the Solar Energy product line cover?"</em> — 有依据</li>
+<li><em>"If I'm interested in combining solar panels with EV charging, what would Aurelis offer me?"</em> — 需要对两份产品资料进行真正的综合</li>
+<li><em>"What's the guaranteed response time for a Critical severity support issue for Aurelis GridMax?"</em> — 反向验证：该承诺位于 Customer Documentation Space 中的 Customer Support &amp; SLA Handbook，而不在 Product Content 中；机器人应表示不知道，而不是编造一个数字。</li>
+</ul>
+<p>提问时，请观察位于 <a href="http://localhost:4040">http://localhost:4040</a> 的 ngrok 检查器（练习 0.2）：每个问题都应显示 AI Hub 的 Liferay Search 节点调用了您的 DXP，并返回 <code>200</code>。如果完全没有请求，说明代理从未访问到 DXP（请检查 RAG config 中的 Blueprint ERC 和 AI Hub 连接）；如果返回 <code>401</code>/<code>403</code>，说明请求到达了 DXP 但被拒绝。</p>
+<h3 id="73-extend-the-energy-advisor-with-per-account-confidential-facts">7.3 — 为 Energy Advisor 扩展按账户区分的机密信息<a aria-hidden="true" class="heading-anchor" href="#73-extend-the-energy-advisor-with-per-account-confidential-facts" tabindex="-1">#</a></h3>
+<p>🎯 扩展 7.2 中的聊天机器人，通过直接 API 调用回答按账户区分的机密信息，并验证一个账户永远看不到另一个账户的数据。</p>
+<p>🧩 <code>manage-objects</code>（<code>AccountRolloutDetail</code>）、<code>manage-ai-hub</code> 🆕（HTTP Request 代理和 OAuth2 作用域授权仍需在 AI Hub 或 DXP 的控制台中手动完成；该技能会告诉您如何设置并进行验证）。</p>
+<p>📖 7.2 中的 Energy Advisor 只了解公开的产品资料。Aurelis 的客户，例如 Novacorp 或 Solstice Manufacturing 这样的公司，也希望向它询问自己的项目：安装了什么、按什么时间表进行、采用哪些协商条款，以及他们的客户经理是谁。这些信息对每个客户都是机密的。在本练习中，您将按 Account 存储这些信息，并让聊天机器人获取它们，使已登录的用户只会得到自己公司的答案。</p>
+<p>📋 <strong>1. 数据设置。</strong></p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-objects, create the AccountRolloutDetail Custom Object, related
+oneToMany from Account (name the relationship accountToRolloutDetails).
+Fields: installationScope (Text), phasedSchedule (Text), negotiatedTerms
+(Text), accountManagerName (Text).
+
+Enable Account Restriction on this object definition, with the Account
+Restricted Field set to the relationship to Account. This is what makes
+GET /o/c/accountrolloutdetails return only the entries belonging to the
+caller's own account instead of every account's data — without it, REQ-35
+(one account must never see another's data) is not actually enforced,
+whatever the HTTP Request node's URL/filter looks like.
+
+Then, using the Liferay MCP server, read
+context-source/historical-rollout-data.csv and import each row as a real
+AccountRolloutDetail entry, resolving the matching Account by company name
+yourself.
+
+Finally, create two test users so the verification below has someone real to
+log in as: Sophie Martin (sophie.martin@novacorp.example), associated to the
+Novacorp Account, and Marcus Webb (marcus.webb@solsticemanufacturing.example),
+associated to the Solstice Manufacturing Account. Each must be a genuine
+member of their own account and nothing else — this is what Account
+Restriction actually filters on, so a user who isn't a real account member
+won't resolve to any rollout data at all, restricted or not.
+
+Access expectations: Account Restriction only filters results, it grants
+nothing. Make sure members of an account actually hold VIEW on their own
+account's AccountRolloutDetail entries, and tell me which role carries that
+grant. Grant Guest nothing on this object, and give no company-wide VIEW
+that would bypass the restriction. Both users must be active and able to
+sign in. Verify as each of them: Sophie gets only Novacorp's entry, Marcus
+only Solstice's, and an anonymous request gets nothing.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ <strong>防止一个客户看到另一个客户数据的是 Account Restriction，而不是 HTTP Request 节点的 URL。</strong>下面 HTTP Request 节点使用的 <code>GET /o/c/accountrolloutdetails</code> 没有任何按账户的过滤；它完全依赖对象本身将结果集缩小到调用者自己的账户。如果跳过这个开关，每个账户都会通过完全相同的调用看到其他所有账户的部署数据。用管理员用户快速测试不会暴露这个漏洞，因为管理员本来就不受限于任何一个账户。这也是为什么下面的 ✅ 验证坚持要以真实的非管理员账户用户进行测试，绝不使用管理员。</p>
+<p>📋 <strong>2. 构建并连接 HTTP Request 代理（AI Hub 控制台）：</strong></p>
+<ol>
+<li>Agent Builder → New Agent：<ul>
+<li><strong>Title：</strong>例如 <em>Aurelis Current User's account contract information Agent</em>。</li>
+<li><strong>Description：</strong><em>"Use this agent to fetch information about the current user's account's contracts."</em> 聊天机器人的 Supervisor 根据此描述选择要调用的代理，因此不要写得含糊。</li>
+<li><strong>Input Variables：</strong><code>request</code>。</li>
+<li><strong>Output Variable：</strong><code>response</code>。</li>
+<li>启用该代理并点击 <strong>Save</strong>，然后点击 <strong>Edit Workflow</strong>：<code>Start → HTTP Request → LLM → End</code>。</li>
+</ul>
+</li>
+</ol>
+<p>📸 <strong>截图：</strong>账户信息代理。</p>
+<p><img alt="账户信息代理定义" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-account-info-agent.png"/></p>
+<ol start="2">
+<li><strong>HTTP Request 节点：</strong> </li>
+</ol>
+<ul>
+<li><strong>Method：</strong><code>GET</code> </li>
+<li><strong>URL：</strong><code>{{aiHubCellLiferayDXPURL}}/o/c/accountrolloutdetails</code></li>
+<li><strong>Request body：</strong><em>留空</em></li>
+<li><strong>Input Variables：</strong><code>[{"name": "aiHubCellLiferayDXPURL", "type": "string"}]</code>。</li>
+<li><strong>Output Variables：</strong><code>[{"name": "rolloutDetails", "type": "string"}]</code>。</li>
+<li><em>没有自定义请求头字段，Bearer 令牌会通过 AI Hub↔DXP 的 OAuth2 连接自动附加。</em></li>
+</ul>
+<p>📸 <strong>截图：</strong>账户信息代理的工作流：HTTP Request 节点。</p>
+<p><img alt="账户信息代理工作流：HTTP Request 节点" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-account-info-agent-workflow.png"/></p>
+<p>注意：<code>aiHubCellLiferayDXPURL</code> 是一个可注入的上下文变量，包含您的 Liferay DXP 环境的 URL。</p>
+<ol start="3">
+<li><strong>LLM 节点：</strong></li>
+</ol>
+<ul>
+<li><strong>Prompt：</strong><code>You are an agent in charge of responding to a request about a user's contracts, using your contract knowledge.</code></li>
+<li><strong>Input Variables：</strong><code>[{"name": "request", "type": "string"}, {"name": "rolloutDetails", "type": "string"}]</code></li>
+<li><strong>Output Variables：</strong><code>[{"name": "response", "type": "string"}]</code></li>
+<li><strong>User Message：</strong><code>This is what you know about the user's contracts:\n{{rolloutDetails}}\n\nThis is what you are specifically asked to do:\n{{request}}</code>。请保留其中的 <code>{{request}}</code>：没有它，LLM 永远看不到问题。</li>
+<li><strong>RAG config：</strong><code>[]</code>。</li>
+<li><strong>Tools：</strong><code>[]</code>。 </li>
+</ul>
+<p>📸 <strong>截图：</strong>账户信息代理的工作流：LLM 节点。</p>
+<p><img alt="账户信息代理工作流：LLM 节点" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/aurelis-account-info-agent-workflow-llm.png"/></p>
+<ol start="4">
+<li>
+<p>将此代理添加到我们之前创建的<strong>聊天机器人</strong>中。</p>
+</li>
+<li>
+<p>与聊天机器人交互，预期会失败。如果您在 http://localhost:4040 监控 ngrok，会看到 <strong><code>403</code> 响应</strong>。这不是缺陷：它证明调用已到达 DXP 并被正确拒绝。</p>
+</li>
+<li>
+<p>现在<strong>授予作用域。</strong>Control Panel → OAuth 2 Administration → <em>AI Hub Cell</em> 应用 → Scopes → 添加 <code>c_accountrolloutdetail.everything.read</code>。保存，然后注销并重新登录，使新令牌获得新的作用域。</p>
+</li>
+</ol>
+<p>📸 <strong>截图：</strong>AI Hub Cell 应用的 Scopes 选项卡，已授予新作用域。</p>
+<p><img alt="AI Hub Cell OAuth2 作用域" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ai-hub-cell-oauth2.png"/></p>
+<ol start="7">
+<li><strong>再次进行端到端测试。</strong>与属于以下账户之一（或不属于任何账户）的最终用户进行对比。在 ngrok 检查器中，每个问题现在都会显示一个 <code>GET /o/c/accountrolloutdetails</code> 请求，返回 <code>200</code> 而不是 <code>403</code>。</li>
+</ol>
+<p>📋 <strong>测试数据：</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>账户</th>
+<th>机密数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Novacorp</td>
+<td>42 个站点，三阶段时间表，€8.2M，Camille Laurent</td>
+</tr>
+<tr>
+<td>Solstice Manufacturing</td>
+<td>180 块面板 + 12 台充电桩，两阶段时间表，4 小时 SLA，Diego Fernandes</td>
+</tr>
+</tbody>
+</table></div>
+<p>✅ <strong>验证 — 分别以每个真实测试账户登录，绝不使用管理员：</strong></p>
+<ul>
+<li><em>Sophie Martin（Novacorp）：</em>"How many sites are in the current rollout phase?" / "What price did we negotiate?" — 两者都应正确地基于数据回答。</li>
+<li><em>Sophie Martin，反向验证：</em>"What's Solstice Manufacturing's SLA response time?" — 不得返回任何来自 Solstice 数据的内容。</li>
+<li><em>Marcus Webb（Solstice）：</em>对应的一组镜像问题，外加一个询问 Novacorp 合同金额的反向验证。</li>
+<li>针对每次调用，独立检查 HTTP Request 节点实际解析出的身份和过滤条件，而不仅仅是聊天机器人的最终回答。过滤错误的请求碰巧得出正确答案，是一种真实存在、值得排除的失败模式。请在 ngrok 检查器（<a href="http://localhost:4040">http://localhost:4040</a>）中进行：打开每个测试用户提问对应的 <code>GET /o/c/accountrolloutdetails</code> 请求，阅读其<strong>响应正文</strong>。以 Sophie Martin 登录时，其中只能包含 Novacorp 的条目；以 Marcus Webb 登录时，只能包含 Solstice 的条目。</li>
+</ul>
+<hr/>
+<h2 id="level-8-digital-sales-room-dsr">第 8 级 — Digital Sales Room（DSR）<a aria-hidden="true" class="heading-anchor" href="#level-8-digital-sales-room-dsr" tabindex="-1">#</a></h2>
+<h3 id="81-account-intelligence-digital-sales-room-end-to-end">8.1 — 从 Account Intelligence 到 Digital Sales Room，端到端流程<a aria-hidden="true" class="heading-anchor" href="#81-account-intelligence-digital-sales-room-end-to-end" tabindex="-1">#</a></h3>
+<p>🎯 打开 Account Intelligence 页面，根据 <code>combinedOpportunityScore</code>（在练习 2.3 中加载，自练习 6.2 起计算）找出 Aurelis 得分最高的账户 — <strong>Novacorp</strong>，得分 83（如果已有潜在客户关联到它，分数会更高）— 然后严格按照 Liferay 官方的 <a href="https://learn.liferay.com/w/digital-sales-room/dsr-launchpad">DSR Launchpad</a> 流程启动它的 Digital Sales Room，不做任何定制。本级将第 2–7 级已构建的内容组合起来，再加上一项完全按文档使用的 Liferay 原生功能 — 不新增对象、页面、片段或 Client Extension。</p>
+<p>🧩 无 — 纯 GUI 操作，直接依照官方文档。</p>
+<p>📎 CSF-02（以账户为中心的 Fit × Value × Intent 资格评估），CSF-05（顺畅的协作式销售与合作伙伴互动）；REQ-28、REQ-29（Digital Sales Room）。</p>
+<p>📋 <strong>激活（一次性操作 — 参见 <a href="https://learn.liferay.com/w/digital-sales-room/activating-digital-sales-room">Activating Digital Sales Room</a>）：</strong></p>
+<ol>
+<li>Marketplace Customer Dashboard → <strong>My Products</strong> → DSR 产品 → <strong>Download</strong> 选项卡 → 下载适用于本实例的 <code>.lpkg</code> 包。</li>
+<li>同一产品 → <strong>Activation</strong> 选项卡 → 创建并下载 DSR 许可证密钥（<code>.xml</code>）。</li>
+<li>将这两个文件部署到 <code>Liferay Home/deploy</code>。</li>
+<li>重启 DXP，并等待每个 DSR 模块的日志都显示 <code>STARTED</code>。</li>
+<li>Global Menu → Commerce → <strong>Digital Sales Room Management</strong></li>
+</ol>
+<p>📸 <strong>截图：</strong>已激活的 Digital Sales Room。</p>
+<p><img alt="DSR 已激活" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-activation.png"/></p>
+<p class="adm-block adm-warning">⚠️ <strong>如果 DSR Management 界面显示的是一个页面为空的站点</strong>（<strong>Rooms</strong> 中没有房间列表，分析页面一片空白），说明 DSR 站点初始化程序在启动期间运行得过早：某个早期的 HTTP 请求（正在重新加载的浏览器标签页、ngrok 隧道、健康检查）在 DSR 片段渲染器注册之前就触发了它，导致 <code>dsr-view-*</code> 片段被悄无声息地从每个页面中丢弃。重启并不能可靠地解决该问题。请改为在现有站点上重新运行 DSR 站点初始化程序：打开 Control Panel → Server Administration → <strong>Script</strong>，选择 <strong>Groovy</strong>，粘贴下面的脚本并点击 <strong>Execute</strong>。它会就地更新现有页面（不删除站点，不产生重复），耗时约 20 秒。如果 DSR 渲染器尚未注册，它会自行中止；此时请等待启动完成后再次运行。这是一个已知问题，我们正在修复，修复后将不再需要运行此脚本。</p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code class="language-groovy">import com.liferay.fragment.renderer.FragmentRendererRegistry
+import com.liferay.portal.kernel.change.tracking.CTCollectionThreadLocal
+import com.liferay.portal.kernel.module.util.SystemBundleUtil
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil
+import com.liferay.portal.kernel.service.ServiceContext
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal
+import com.liferay.portal.kernel.util.PortalUtil
+
+def bundleContext = SystemBundleUtil.getBundleContext()
+def registry = bundleContext.getService(
+    bundleContext.getServiceReference(FragmentRendererRegistry.class))
+
+if (registry.getFragmentRenderer("dsr-view-rooms") == null) {
+    out.println("dsr-view-rooms is not registered yet. Aborting.")
+
+    return
+}
+
+def group = GroupLocalServiceUtil.getGroup(PortalUtil.getDefaultCompanyId(), "DSR")
+def references = bundleContext.getServiceReferences(
+    "com.liferay.site.initializer.SiteInitializer",
+    "(site.initializer.key=com.liferay.site.initializer.dsr)")
+def siteInitializer = bundleContext.getService(references[0])
+
+def safeCloseable = CTCollectionThreadLocal.setProductionModeWithSafeCloseable()
+
+ServiceContextThreadLocal.pushServiceContext(new ServiceContext())
+
+try {
+    siteInitializer.initialize(group.getGroupId())
+
+    out.println("DSR site reinitialized: group " + group.getGroupId())
+}
+finally {
+    ServiceContextThreadLocal.popServiceContext()
+
+    safeCloseable.close()
+}
+</code></pre></div>
+<p>输出应为 <code>DSR site reinitialized: group &lt;id&gt;</code>。重新加载 <strong>Digital Sales Room Management</strong>：页面现在可以正常渲染。根本原因、日志时间线和备用修复方法见 <a href="https://github.com/liferay/liferay-course-masterclass/blob/master/troubleshooting/DSR_ACTIVATION_TROUBLESHOOTING.md"><code>troubleshooting/DSR_ACTIVATION_TROUBLESHOOTING.md</code></a> §3.3。</p>
+<p>📋 <strong>创建 Novacorp 的房间（依照 DSR Launchpad 文档）：</strong></p>
+<ol start="6">
+<li>Global Menu → Commerce → <strong>Digital Sales Room Management</strong> → <strong>Rooms</strong> → <strong>New Digital Sales Room</strong>。</li>
+</ol>
+<p>📸 <strong>截图：</strong>点击 New Digital Sales Room 创建专属空间。</p>
+<p><img alt="新建 Digital Sales Room" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-new-room.png"/></p>
+<ol start="7">
+<li>选择 <strong>Novacorp</strong> 作为关联账户 → Next。您在此选择的账户决定了哪些团队成员和联系人可以被邀请进入房间 — Novacorp 自己的客户经理 Camille Laurent（练习 7.3 的上线数据）才是真正需要使用这个房间的人。</li>
+</ol>
+<p>📸 <strong>截图：</strong>选择要与房间关联的账户。</p>
+<p><img alt="选择账户" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-select-account.png"/></p>
+<ol start="8">
+<li>选择一个预配置的模板 → Next。</li>
+</ol>
+<p>📸 <strong>截图：</strong>选择一个模板开始。</p>
+<p><img alt="选择模板" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-select-template.png"/></p>
+<ol start="9">
+<li>为其命名（例如 <em>"Novacorp — Solar + GridMax Rollout"</em>），可选设置 Friendly URL → <strong>Save</strong>。</li>
+</ol>
+<p>📸 <strong>截图：</strong>为房间输入名称和 Friendly URL。</p>
+<p><img alt="为房间命名" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-name-room.png"/></p>
+<ol start="10">
+<li>以后重新打开：Commerce → Digital Sales Room Management → Rooms → 从列表中选择它。完善之后，它就是一个可发布的工作空间，Novacorp 自己的上线内容按选项卡（Onboarding、Documents 等）组织。</li>
+</ol>
+<p>📸 <strong>截图：</strong>已配置的房间，填充内容之后。</p>
+<p><img alt="已配置的 DSR" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-room-workspace.png"/></p>
+<ol start="11">
+<li><strong>邀请客户。</strong>在房间中，邀请 <strong>Sophie Martin</strong>（练习 7.3 中创建的 Novacorp 用户）作为参与者。如果不发出邀请，下面的验证就没有可以登录的用户：仅仅是 Novacorp 账户的成员，本身并不能获得房间的访问权限。</li>
+</ol>
+<p>✅ <strong>验证：</strong>以另一个与 Novacorp 关联的非管理员用户（Sophie Martin 或受邀的相关方）身份打开新创建的房间，确认其可以看到房间及其共享文档。管理员创建的流程证明了配置可行 — 而第二项检查才证明真正的销售人员到客户的旅程是可行的。</p>
+<h3 id="82-from-native-to-custom-a-room-generated-from-a-saved-simulation">8.2 — 从原生到定制：由已保存的模拟生成的房间<a aria-hidden="true" class="heading-anchor" href="#82-from-native-to-custom-a-room-generated-from-a-saved-simulation" tabindex="-1">#</a></h3>
+<p>🎯 将 Solar + Battery Simulator（6.1）变成销售对话的起点。使用公司账户登录的客户在公开页面上运行一次模拟，并点击 <strong>Save your simulation</strong>。随后 Liferay 会根据定制的 <strong>"Aurelis — Solar + Battery Proposal"</strong> 模板为该账户创建一个 Digital Sales Room。房间中有一个 <strong>Simulation</strong> 选项卡，打开时即显示客户自己的数据，客户和其 Aurelis 销售人员可以在那里一起调整。</p>
+<p>🧩 <code>manage-dsr</code> 🆕、<code>manage-objects</code>、<code>manage-roles-permissions</code>、<code>scaffold-fragment</code>、<code>scaffold-client-extension</code>（<code>customElement</code> 和 <code>objectAction</code>）、<code>setup-oauth</code>、<code>manage-object-logic</code>、<code>browser-verify</code>。</p>
+<p>📎 CSF-05（顺畅的协作式销售）；REQ-28、REQ-29（Digital Sales Room）；REQ-63–REQ-66（模拟器）。</p>
+<p>📖 <strong>8.1 由销售人员发起；本练习由客户发起。</strong>在 8.1 中，销售人员在向导中手动开设房间。这里则由客户自己的操作开设房间，且他们产生的数据已在其中。DSR 的三个特性使之成为可能，<code>manage-dsr</code> 技能对每一项都有说明：</p>
+<ul>
+<li><strong>房间是一个对象条目。</strong>每个房间都是系统对象 <code>DSRRoom</code> 的一个条目，向 <code>/o/digital-sales-room/rooms</code> 提交一个条目即可创建房间及其站点。向导本身也是这样做的。<code>headless-dsr</code> 没有"创建房间"端点，只有复制、成员和邀请。</li>
+<li><strong>房间模板是一个 Site Template</strong>，通过条目的 <code>siteTemplateKey</code> 字段中的 UUID 引用。向导会列出实例中所有的 Site Template，因此定制模板也会出现在其中，供手动创建房间的销售人员使用。</li>
+<li><strong>房间是一个站点，因此可以保存站点范围的数据。</strong>站点范围的对象为每个房间存储一个条目。模板中放置的模拟器从当前站点读取"本房间的模拟"，页面中无需任何 id。</li>
+</ul>
+<p>📖 <strong>为什么其他一切都是 Client Extension，而模板却是 OSGi 模块。</strong>Liferay 没有提供创建 Site Template 的 REST 端点。<code>siteInitializer</code> Client Extension 也无法以其为目标，因为模板的组不是站点，该 CX 使用的端点会拒绝它。而通过导出/导入将站点页面复制到模板中，会因 <code>LARTypeException</code> 而失败。因此，模板的打包方式<strong>与 Liferay 打包其自身 DSR 模板的方式相同</strong>：</p>
+<ul>
+<li>一个 OSGi 模块携带一个站点初始化程序目录树，由 bundle 头 <code>Liferay-Site-Initializer-Name</code> 将其注册为站点初始化程序；</li>
+<li>一个小组件创建一个具有固定 UUID 的 Site Template，并将该目录树应用到其上。</li>
+</ul>
+<p>代价：这在无法部署模块的 Liferay SaaS 上无法运行。在那里，模板需要手动创建。</p>
+<p class="adm-block adm-warning">⚠️ <strong>前提条件：</strong>已完成 8.1（DSR 已激活）、6.1 中的模拟器，以及 7.3 中作为 Novacorp 账户成员的 Sophie Martin。请保留一个空闲的终端：第 3 步中创建房间的微服务以本地 Node 进程方式运行。</p>
+<p>📋 <strong>1. 房间模板。</strong></p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-dsr, package a custom Digital Sales Room template as an OSGi
+module in modules/aurelis-dsr-solar-template, the way DSR packages its own:
+
+- The module carries a site-initializer tree. Start from the tree of the
+  "Digital Sales Room" initializer (the room template, not the "DSR"
+  initializer that builds the management screens), copied from the
+  com.liferay.digital.sales.room.site.initializer jar inside the DSR Impl
+  lpkg. Keep its Onboarding, Documents and Login pages and its
+  digital-sales-room-master master.
+- Add a fourth page, Simulation (/simulation), on that master, with a short
+  intro and the simulator: copies of the 6.1 simulator fragments in their own
+  collection, since fragment keys are per site.
+- A component creates the Site Template "Aurelis — Solar + Battery Proposal"
+  with the fixed UUID AURELIS_DSR_SOLAR_TEMPLATE where DSR is deployed, and
+  re-applies the tree whenever the module is redeployed.
+
+Then create one room over REST with that template for Novacorp, check it has
+the four tabs, and delete it.
+
+Access expectations: none of the template's pages may be visible to Guest.
+</code></pre></div>
+<p>✅ 日志显示 <code>Applied com.aurelis.dsr.solar.template … to Site Template AURELIS_DSR_SOLAR_TEMPLATE</code>。该模板出现在 <strong>Digital Sales Room Management → New Digital Sales Room → Choose a template</strong> 中，位于默认模板旁边。</p>
+<p>📸 <strong>截图：</strong>向导的模板步骤，已选中 "Aurelis — Solar + Battery Proposal" 并显示其预览。</p>
+<p><img alt="选择 Aurelis DSR 房间模板" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/select-aurelis-dsr-template.png"/></p>
+<p>📋 <strong>2. 保存模拟。</strong></p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using manage-objects, create a site-scoped SolarSimulation object, related
+oneToMany from Account (relationship accountToSolarSimulations) and Account
+Restricted on that relationship. Fields: address (Text), latitude, longitude,
+surfaceM2 (Decimal), hourlyConsumptionKwh (LongText, a JSON array of 24
+numbers), and for the room round trip roomId, roomSiteId, sourceSimulationId
+(LongInteger) and roomURL (Text).
+
+Using scaffold-client-extension, add a third simulator widget,
+aurelis-simulator-save, coupled to the inputs widget only through
+Liferay.on('aurelisSimulatorInputsChanged') and
+Liferay.fire('aurelisSimulatorInputsRequested'), like the results widget:
+- mode="create" on the public simulator page: shown only to a signed-in user
+  who belongs to an Account. "Save your simulation" creates a SolarSimulation
+  in the current site for that Account, then waits for the entry's roomURL
+  and shows a link to the room.
+- mode="update" on the template's Simulation page: saves the edited inputs
+  onto the room's own SolarSimulation (the latest of the current site).
+Teach aurelis-simulator-inputs to start from saved data: with the attribute
+load-scope-simulation, it loads the latest SolarSimulation of the current
+site and starts from it. Use that attribute on the template's copy of the
+fragment only. Place the save widget under the inputs widget on both pages.
+
+Create Camille Laurent (camille.laurent@aurelis.example), Aurelis's seller,
+with the regular DSR Seller role, as a test user.
+
+Access expectations: a signed-in user may create SolarSimulation entries only
+for an Account they belong to; Guest gets nothing and sees a sign-in hint
+instead of the button; a signed-in user with no Account sees no button.
+Inside a room, the members (DSR Room Collaborator and DSR Content
+Contributor) can read and update the room's simulation, through grants in
+the site initializer's resource-permissions.json. Nobody else can.
+</code></pre></div>
+<p>📋 <strong>3. 创建房间。</strong></p>
+<p>💬 <strong>提示词：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Using scaffold-client-extension and setup-oauth, build an objectAction
+microservice, aurelis-dsr-room-provisioner (Node, no dependencies), attached
+to SolarSimulation onAfterAdd. For a simulation saved on the public page:
+1. create a Digital Sales Room for the simulation's Account from the template
+   AURELIS_DSR_SOLAR_TEMPLATE, named "&lt;Account&gt; — Solar + Battery Proposal
+   #&lt;simulation id&gt;";
+2. wait until the room is initialized;
+3. copy the simulation into the room's site scope, marked as a copy;
+4. add the customer who saved it as DSR Room Collaborator and Camille as
+   DSR Content Contributor;
+5. write roomId, roomSiteId and the room's Simulation page URL back onto the
+   saved simulation.
+Ignore copies, or the action fires on its own copy. Use its own
+oAuthApplicationHeadlessServer identity for every call back into Liferay,
+with only the scopes it needs. Answer the action's call at once and do the
+work afterwards. Start it locally and tell me the command you used.
+
+Access expectations: the customer's own token must not be what creates the
+room. Verify the whole journey in a browser with browser-verify, as Sophie
+(save, open the room, edit and save there), as Camille (opens the room, sees
+Sophie's edit), as a signed-in user outside Novacorp (no button, 404 on the
+room) and as Guest (sign-in hint, 404 on the room).
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ <strong>微服务运行在 Liferay 之外。</strong><code>blade gw deploy</code> 会注册 CX 及其 OAuth 应用，但不会启动 Node 进程。这样 Liferay 会调用一个无人监听的端口，保存小部件会一直等待一个永远不会出现的房间。请使用代理给出的命令启动它，并保持其运行。</p>
+<p>✅ <strong>验证：</strong></p>
+<ul>
+<li><strong>以 Sophie 身份：</strong>在公开模拟器上定位一个城市，设置面积，然后点击 <strong>Save your simulation</strong>。几秒钟内会出现链接 "Open your Digital Sales Room"。房间打开时位于 <strong>Simulation</strong> 选项卡，Sophie 的地址、面积和用电曲线均已加载。修改面积，点击 <strong>Save changes</strong>，重新加载：新值保持不变。</li>
+<li><strong>以 Camille 身份：</strong>打开房间的链接（保存小部件向 Sophie 显示的 URL）：其 Simulation 选项卡显示 Sophie 的最新数值，Camille 也可以保存更改。</li>
+<li><strong>以其他任何人身份：</strong>Novacorp 以外的已登录用户看不到保存按钮，访问房间时得到 <code>404</code>；访客也是如此，看到的是登录提示而不是按钮。</li>
+<li><strong>数据：</strong>Aurelis 站点中已保存的模拟保留原始数值，并带有房间的 URL；房间自己的副本则带有修改。两个条目，两个范围：公开记录保持客户提交时的样子，房间则保存工作版本。</li>
+</ul>
+<p>📸 <strong>截图：</strong>保存后的公开模拟器，带有指向房间的链接；房间的 Simulation 选项卡，已加载保存的数据。</p>
+<p><img alt="动态创建 DSR 房间" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dynamic-dsr-room-creation.png"/></p>
+<p><img alt="动态创建的 DSR 房间" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/dsr-room-aurelis.png"/></p>
+<hr/>
+<h2 id="level-9-from-native-to-custom-a-hand-built-chatbot-widget-client-extensions-ai-hub-segments-ldp">第 9 级 — 从原生到定制：手工构建的聊天机器人小部件（Client Extensions、AI Hub、Segments、LDP）<a aria-hidden="true" class="heading-anchor" href="#level-9-from-native-to-custom-a-hand-built-chatbot-widget-client-extensions-ai-hub-segments-ldp" tabindex="-1">#</a></h2>
+<p>练习 7.2–7.3 已经搭建了一个范围设置得当的聊天机器人。本级展示定制构建的小部件能在其之上叠加哪些原生 Click to Chat 无法实现的能力：实时细分上下文，以及在对话中捕捉购买意向信号。</p>
+<h3 id="91-custom-widget-with-real-time-segment-context">9.1 — 带实时细分上下文的定制小部件<a aria-hidden="true" class="heading-anchor" href="#91-custom-widget-with-real-time-segment-context" tabindex="-1">#</a></h3>
+<p>🎯 一个自挂载的聊天气泡 Client Extension，它直接调用 AI Hub 自身的聊天机器人 REST API，并注入"访问者已经阅读过某份特定白皮书"这一事实。</p>
+<p>🧩 <code>scaffold-client-extension</code>（自挂载 <code>customElement</code> 变体）、<code>react-custom-elements</code>、<code>manage-ai-hub</code> 🆕、<code>manage-analytics</code> 🆕</p>
+<p>📖 您将用自己的聊天气泡替换原生 Click to Chat 气泡，它仍然与同一个 AI Hub 聊天机器人通信。自行构建可以带来原生集成无法提供的两点：聊天机器人知道访问者在站点上已经做过什么（这里是阅读过某份白皮书），从而可以调整回答；并且每一次交流都会在 Analytics 中被跟踪，使对话成为可衡量的购买意向信号。</p>
+<p>📋 <strong>步骤：</strong></p>
+<ol start="0">
+<li><strong>为 Aurelis 站点关闭 Click to Chat。</strong>Site Menu → Configuration → Site Settings → <strong>Click to Chat</strong> → 关闭 <strong>Enable Click to Chat</strong> → Save。否则每个页面都会显示两个聊天气泡：练习 7.2 中的原生气泡和您的气泡。如果您在 7.2 中使用的是片段替代方案，请将该片段从其页面中移除。聊天机器人本身在 AI Hub 中保持不变：您的小部件与同一个聊天机器人通信。</li>
+<li><strong>记下您的聊天机器人自己的 ERC。</strong>在 AI Hub → Chatbots → 您在练习 7.2 中构建的聊天机器人中，找到其 <strong>External Reference Code</strong>。它就是您在 Click to Chat 中填写为 Chat Provider Account ID 的值（练习 7.2，第 8 步）。请把它记下来 — 下面的小部件直接与聊天机器人自身的 API 通信，因此它发出的每一个调用（获取配置、订阅聊天、发送消息）都需要指向这个确切的聊天机器人，而不能留给代理去猜测或编造。</li>
+<li><strong>创建实时细分。</strong>在 Liferay Data Platform 的 Segments 管理界面中，创建一个 Member Segment，匹配经历过练习 4.1 漏斗的访问者。LDP 的编辑器称之为 <strong>Individuals Segment</strong>（实时）。其条件：<strong>Individual has triggered <code>whitePaperDownloaded_&lt;your initials&gt;</code> at least 1 time in the last 1 days</strong> — 使用您自己在练习 4.1 和 4.2 中带姓名缩写后缀的事件，切勿使用不带后缀的名称或其他学员的事件，因为所有学员共享这个 LDP 工作空间。为其填写 Title/Description，然后打开该细分自己的 <strong>External Reference Code</strong> 字段，<strong>将其修改为您能真正认出的值</strong> — 例如带有您自己姓名缩写的 <code>whitepaper-readers-abc</code> — 而不是保留自动生成的值。ERC 字段只接受小写字母和连字符，不接受大写字母或下划线。这个工作空间是共享的，随机自动生成的 ERC 很容易被弄丢或与其他学员的混淆；请记下您选择的值，下面会用到。</li>
+</ol>
+<p>📸 <strong>截图：</strong>细分的详情界面，显示其（已重命名的）ERC。</p>
+<p><img alt="LDP 细分" src="../../../../resources/masterclass-prerequisites/workbook/workbook-screenshots/ldp-segment.png"/></p>
+<ol start="3">
+<li><strong>构建小部件。</strong>一个单例、自挂载的 <code>customElement</code> Client Extension（聊天气泡样式），复刻原生聊天机器人自身的 API 调用（获取配置、<code>chats/subscribe</code> SSE、<code>POST .../messages</code> — 依照 <code>manage-ai-hub</code>），而不是使用原生 Click to Chat。<strong>从一开始就在消息 POST 上实现 "Cell" 代表用户（on-behalf-of）授权层</strong> — 它是通过特性检测启用的，实际上并非可选：跳过它会使每条消息都以匿名方式发送；如果聊天机器人的 Search Blueprint 从访客无法查看的内容中检索，检索会静默地返回空结果，看起来与"小部件坏了"毫无区别。</li>
+<li><strong>附加细分上下文。</strong>在客户端调用 <code>Analytics.segment.getRealTimeSegmentExternalReferenceCodes()</code> — 它返回一个 Promise，解析为访问者当前所属实时细分 ERC 的数组。硬编码一个映射，将第 2 步中的真实 ERC 映射到一段描述（<code>"has already read Aurelis' Novacorp white paper on solar and GridMax energy storage"</code>）。当访问者的 ERC 匹配时，在发往 AI Hub 的每条消息中附带该描述，放在消息的 <code>context</code> 对象中、键名为 <code>visitorContext</code>（无匹配细分时为空字符串），切勿放在消息文本中。</li>
+<li><strong>跟踪每一次响应。</strong>实际捕获的流中不只有 <code>manage-ai-hub</code> 中记录的两个具名事件 — 其中还充斥着 <code>: heartbeat</code> 注释行，以及代理内部工作流运行时每轮产生的多个中间 <code>event: &lt;nodeName&gt;</code> 消息（例如 <code>event: liferaySearch</code>，或直接以某个节点 UUID 命名的事件），每个都携带部分或重复的 <code>{"nodeName", "data", "type"}</code> 载荷。这些都不是最终答案 — 只将 <code>Analytics.track()</code> 绑定到该轮流的<em>终止</em>事件：<code>Chat Message Sent</code>（成功 — 唯一携带 <code>agentDefinitionExternalReferenceCodes</code> 的事件）或 <code>Agent Invocation Failed</code>/连接 <code>error</code>（失败）。如果改为在每个具名事件上触发，一次实际回复就会记录多个重复的"成功"事件。<strong>对传给 <code>Analytics.track()</code> 第二个参数的内容进行清理</strong> — 它只接受字符串/数字/布尔值，且上限为 1024 个字符；直接传入原始数组（例如 <code>agentDefinitionExternalReferenceCodes</code>）或超长字符串，会从 SDK 中直接抛出未捕获的异常。</li>
+</ol>
+<p>💬 <strong>提示词（替换为您在第 1 步中的聊天机器人 ERC 和第 2 步中的细分 ERC）：</strong></p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Build a self-mounting, singleton customElement Client Extension (chat-bubble style) that talks directly to AI Hub's own chatbot REST API — config fetch,
+chats/subscribe SSE stream, POST .../messages — using the confirmed pattern
+in the manage-ai-hub skill, instead of Liferay's native Click to Chat
+integration (it is turned off for this site). My chatbot's own External Reference Code is
+"&lt;your Chatbot's real ERC&gt;" — use it for every one of these calls, don't
+invent or guess a different one.
+
+Implement the "Cell" on-behalf-of authorization layer (postAuthorizationToken
+in the confirmed pattern) and attach its headers to at least the message POST
+from the start, not as an afterthought — it's feature-detected, not skippable
+in effect: an anonymous message POST against a permission-scoped Search
+Blueprint silently retrieves nothing, which looks identical to "the widget is
+broken" with no error anywhere.
+
+Client-side, call Analytics.segment.getRealTimeSegmentExternalReferenceCodes()
+— it returns a Promise resolving to an array of the visitor's current
+real-time Segment ERCs — and check the result against this hard-coded map:
+{"&lt;your Segment's real ERC&gt;": "has already read Aurelis' Novacorp white
+paper on solar and GridMax energy storage"}
+On every message POSTed to AI Hub, send the matching description in the
+message's context object under the key visitorContext, e.g.
+"context": {"visitorContext": "has already read Aurelis' Novacorp white
+paper on solar and GridMax energy storage"}, or an empty string when no segment matches. Never
+append it to the message text: the context keys bypass the chatbot's
+Supervisor and reach the agent's workflow directly.
+
+The SSE stream fires several intermediate "event: &lt;nodeName&gt;" messages per
+turn before the real answer (e.g. "event: liferaySearch", or an event named
+after a workflow node's own UUID), plus ": heartbeat" comment lines — ignore
+all of those for tracking purposes. Only fire Analytics.track() on the
+stream's terminal event for that turn: one custom event (e.g.
+chatbotResponseReceived) carrying real metadata from the SSE payload (e.g.
+agentDefinitionExternalReferenceCodes) when the terminal event is "Chat
+Message Sent", and a distinct custom event (e.g. chatbotResponseError) when
+it's "Agent Invocation Failed" — or a generic connection error — instead.
+Never fire the success event for a manifest chatbot error, and never fire
+more than one tracked event for a single reply. Analytics.track() only
+accepts string/number/boolean property values capped at 1024 characters, so
+sanitize anything forwarded from the SSE payload first (join an array like
+agentDefinitionExternalReferenceCodes into a string, stringify any object,
+truncate long strings) — passing a raw array or an over-length string
+straight through throws an uncaught exception from inside the SDK.
+</code></pre></div>
+<p>📋 <strong>然后，在 AI Hub 控制台中（GUI 编辑，而非提示词）：</strong>更新 7.2 中的 Answer Builder 代理，使其读取新的 <code>visitorContext</code> 键。所有修改都在其 LLM 节点上，代理定义不做任何修改：</p>
+<ol>
+<li>保持<strong>代理定义</strong>的 Input Variables 不变（<code>originalRequest,gatheredInformation</code>）。<strong>不要</strong>在那里添加 <code>visitorContext</code>：这些变量由 Supervisor 填充，它从不会看到 <code>context</code> 键，并会用空字符串覆盖真实值。</li>
+<li>
+<p>Agent Builder → Answer Builder 代理 → <strong>Edit Workflow</strong> → 选择 <strong>LLM</strong> 节点：</p>
+<ul>
+<li><strong>Input Variables：</strong>添加 <code>visitorContext</code>：<code>[{"name": "originalRequest", "type": "string"}, {"name": "gatheredInformation", "type": "string"}, {"name": "visitorContext", "type": "string"}]</code>。</li>
+<li><strong>User Message：</strong>将其注入：<code>Original user request:\n{{originalRequest}}\n\nGathered information:\n{{gatheredInformation}}\n\nWhat we know about this visitor:\n{{visitorContext}}</code>。</li>
+</ul>
+</li>
+<li>
+<p>在同一节点中，扩展其 <strong>Prompt</strong>：</p>
+</li>
+</ol>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>The user message may include a "What we know about this visitor" section. If
+it says the visitor has already read a specific Aurelis white paper, treat
+that as established context: acknowledge it briefly, then build on it — move
+straight to a concrete next step instead of re-explaining the basics. If that
+section is empty, answer normally.
+</code></pre></div>
+<p>对于不在该细分中的访问者，<code>visitorContext</code> 为空，该部分保持空白，代理会像以前一样回答。</p>
+<p>💡 <strong>上下文如何到达 AI Hub 中的代理。</strong>POST 到聊天机器人 API 的消息携带两样东西：访问者的文本，以及一个可选的 <code>context</code> 对象。两者的传递方式并不相同：</p>
+<ul>
+<li><strong>文本</strong>发送给聊天机器人的 Supervisor，由它作为 <code>request</code> 传递给它选中的代理。Supervisor 可能会改写文本，而且文本是 Supervisor 进行路由的唯一依据。写进文本中的上下文（例如问题前面的 <code>[CONTEXT]</code> 块）可以生效，但它也会进入 Supervisor 的聊天记忆，每次复制都会使其增长，且每轮都会被摘要，因此每一轮都会变得更慢。</li>
+<li><strong><code>context</code> 键</strong>绕过 Supervisor：它从不会看到这些键，因此既不能改写它们，也不能根据它们路由。它们直接进入被调用代理的工作流上下文，工作流节点可以原样读取。</li>
+</ul>
+<p>使用 <code>context</code> 时，由此得出两条规则：</p>
+<ul>
+<li>将每个键声明为使用它的<strong>工作流节点上的 Input Variable</strong>（即 LLM 节点），切勿在<strong>代理定义的 Input Variables</strong> 中声明。代理定义的变量是由 Supervisor 填写的参数，而它只知道访问者的文本：同时列在那里的键会从 Supervisor 得到一个空字符串，从而覆盖真实值。</li>
+<li><strong>保持上下文精简。</strong>它在每一轮都会被发送，而代理自身的 LLM 仍会读取其提示词所引用的全部内容。在一个表单填写聊天机器人上，当文本后附加 3,500 个字符的页面状态时，一轮耗时约 40 秒；不附加任何内容时为 12–17 秒。只发送代理真正用到的内容，并将固定指令在提示词中一次性说明，而不是在每条消息中重复。</li>
+</ul>
+<p>这就是本练习将细分描述作为 <code>context</code> 键 <code>visitorContext</code> 发送的原因：它在 Answer Builder 的 LLM 节点上声明，并注入其 User Message，而不是放在消息文本中。</p>
+<p>✅ <strong>验证：</strong>将该 Client Extension 标签放置一次（例如放在母版页上），加载两个不同的页面，确认两个页面上出现的是同一个小部件，并且它是页面上唯一的聊天气泡（没有残留的 Click to Chat 气泡）。进行一次完整、成功的对话，确认每次响应恰好产生一个带有真实元数据的成功 <code>Analytics.track()</code> 事件。再以两个不同的访问者身份各进行一次对话 — 一个属于该细分，一个不属于 — 确认回复明显不同（属于该细分的访问者得到的回复应主动提及白皮书）。然后强制制造一次失败（例如发送格式错误的请求，或暂时禁用已分配的代理），确认触发的是独立的聊天机器人错误事件而非成功事件 — 既不是两者都触发，也不是两者都不触发。</p>
+<h3 id="92-detect-buying-interest-mid-conversation">9.2 — 在对话中检测购买意向<a aria-hidden="true" class="heading-anchor" href="#92-detect-buying-interest-mid-conversation" tabindex="-1">#</a></h3>
+<p>🎯 扩展同一个小部件和同一个代理，使对话中出现的组合产品意向信号成为一个可跟踪的事件，而不是在聊天结束时消失。</p>
+<p>🧩 <code>scaffold-client-extension</code>（扩展 9.1 的小部件 — 不新建 Client Extension）、<code>manage-ai-hub</code> 🆕、<code>manage-analytics</code> 🆕</p>
+<p>📖 页面访问或表单提交只能告诉您发生了某件事。对话则能告诉您更多：一个询问太阳能电池板与储能电池如何协同工作的访问者，正在表现出对组合方案的真实兴趣。在这里，您让代理在回复中悄悄标记这一时刻，小部件则将其转换为一个列出相关产品的 Analytics 事件，供市场和销售团队据此采取行动。</p>
+<p>📋 <strong>1. AI Hub 控制台 — 再次扩展 Answer Builder。</strong>两处修改，都针对 7.2 和 9.1 中的 Answer Builder。</p>
+<p><strong>a. 其 LLM 节点的 Prompt</strong> — 追加：</p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Answer the visitor normally first. Separately, if — and only if — the
+conversation shows the visitor is specifically interested in combining two
+or more Aurelis product lines (for example solar panels with battery
+storage), append this exact block on its own line at the very end of your
+reply, after the conversational answer, with the actual product lines
+substituted in:
+
+[[INTEREST:{"products":["Solar","GridMax"]}]]
+
+Only include this block when genuine combined-product interest is clearly
+expressed. Never mention this block to the visitor, never explain what it's
+for.
+</code></pre></div>
+<p><strong>b. 代理定义的 Description</strong> — 在现有描述后追加这句话：</p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Its output is read by a program: return it to the visitor verbatim, without
+rewording, summarizing or removing anything, including any trailing
+[[INTEREST:...]] line.
+</code></pre></div>
+<p class="adm-block adm-warning">⚠️ <strong>为什么要修改 Description，而不仅仅是节点的 Prompt。</strong>访问者从不会直接得到 Answer Builder 的输出：聊天机器人的 Supervisor 会转发它，并可能改写该输出，丢掉它认为是噪声的标记。Supervisor 从不读取节点的 Prompt，只读取各代理的 Description，因此"原样返回"规则必须写在那里。这能降低风险，但无法消除风险：这是给 LLM 的指令，而不是保证，这也是下面的验证要检查原始流的原因。</p>
+<p>💬 <strong>2. 小部件修改 — 给编码代理的提示词。</strong>与第 1 步不同，这一步不是在 AI Hub 中输入的。请在本工作区中将其交给 Claude Code（或您使用的其他编码代理）：它会更新您在 9.1 中构建的定制聊天气泡 Client Extension 的代码，使小部件能够识别代理现在添加的标记，对访问者隐藏该标记，并将其转换为 Analytics 事件。</p>
+<div class="copy-frame copy-frame-code"><button aria-label="复制到剪贴板" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Extend the chat-bubble customElement Client Extension built earlier
+so it also recognizes a [[INTEREST:{...}]] marker anywhere in an assistant
+response:
+strip that marker, and the line it's on, from the text before rendering the
+reply to the visitor, parse the JSON it contains, and fire a second, distinct
+Analytics.track() call carrying that parsed payload — separate from the
+per-response tracking call already in place. If no marker is present, render
+the reply exactly as before.
+</code></pre></div>
+<p>✅ <strong>验证：</strong>只询问一条产品线 — 不触发意向事件，也看不到多余的标记文本。询问两条产品线的组合 — 确认面向访问者的回复中没有任何标记语法的痕迹，恰好额外触发一个带有正确产品列表的 <code>Analytics.track()</code> 事件（直接在浏览器的开发者工具中检查），并且该事件确实出现在 Liferay Data Platform 中，而不只是出现在发出的请求里。</p>
+<p>如果组合产品问题没有触发意向事件，请在修改提示词之前先找出标记是在哪里丢失的。在 DevTools 中打开 <code>chats/subscribe</code> 流（Network → EventStream），比较该轮的两个事件：Answer Builder LLM 节点自身的事件，以及 <code>Chat Message Sent</code>。如果标记出现在节点的事件中，但不在 <code>Chat Message Sent</code> 中，说明是 Supervisor 删除了它：收紧第 1b 步中的 Description。如果节点的事件中也没有标记，说明是 LLM 没有添加：重新编写第 1a 步中的 Prompt。</p>
+<hr/>
+<h2 id="appendix-full-screenshot-checklist">附录 — 完整截图检查清单<a aria-hidden="true" class="heading-anchor" href="#appendix-full-screenshot-checklist" tabindex="-1">#</a></h2>
+<p>如果您正在准备本教程的录制演示或书面报告，可以将此作为拍摄清单。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>练习</th>
+<th>截图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.2</td>
+<td>ngrok 终端在线，且有请求通过隧道</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1.2</td>
+<td>Feature Flags 面板，已启用四个功能标志</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.4</td>
+<td>Instance Configuration → General，具有唯一名称，并将 Aurelis 设为主页/登录后页面/注销页面</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2.1</td>
+<td><code>Account</code> 对象定义的字段列表，包含新的自定义字段</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2.2</td>
+<td><code>Lead</code> 和 <code>AccountIntelligenceProfile</code> 对象定义，及其与 Account 的关系</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2.4</td>
+<td><code>Lead</code> 的 Object Action 及其 Notification 模板</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3.1</td>
+<td>四个 CMS Spaces 及其结构和内容</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3.3</td>
+<td>AI Hub Configurations 界面 + DXP AI Hub 连接界面</td>
+</tr>
+<tr>
+<td>9</td>
+<td>3.4</td>
+<td>被邀请到 White Papers Space 的用户；两项任务均已分配的 CMP 活动看板</td>
+</tr>
+<tr>
+<td>10</td>
+<td>4.1</td>
+<td>列表页面 → 受限条目 → 完整文章 → LDP 事件</td>
+</tr>
+<tr>
+<td>11</td>
+<td>4.2</td>
+<td>已保存的 Event Analysis 配置；下载的包含真实数据行的 Event Analysis Report</td>
+</tr>
+<tr>
+<td>12</td>
+<td>4.3</td>
+<td>已排序的线上页面；Page Editor 中显示 Data Set 已被选中（由站点初始化程序配置）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>4.4</td>
+<td>处于编辑模式的账户详情应用</td>
+</tr>
+<tr>
+<td>14</td>
+<td>5.1</td>
+<td>公司注册信息查询成功后的合作伙伴表单</td>
+</tr>
+<tr>
+<td>15</td>
+<td>6.1</td>
+<td>绘制了用电曲线的输入小部件；两个月的结果图表</td>
+</tr>
+<tr>
+<td>16</td>
+<td>7.2</td>
+<td>Search Blueprint 配置；Search Worker 和 Answer Builder 的定义与工作流；Chatbot Assigned Agents 界面</td>
+</tr>
+<tr>
+<td>17</td>
+<td>7.2</td>
+<td>在 Instance Settings 中启用的 Click to Chat；站点的 Click to Chat 设置，包含 AI Hub 和聊天机器人 ERC</td>
+</tr>
+<tr>
+<td>18</td>
+<td>7.3</td>
+<td>账户信息代理定义；其 HTTP Request 和 LLM 节点；带有已授予范围的 AI Hub Cell Scopes 选项卡</td>
+</tr>
+<tr>
+<td>19</td>
+<td>8.1</td>
+<td>DSR 已激活；New Digital Sales Room；选择账户；选择模板；命名；已配置的房间工作空间</td>
+</tr>
+<tr>
+<td>20</td>
+<td>8.2</td>
+<td>包含定制模板的向导模板步骤；保存后带有房间链接的公开模拟器；已加载保存数据的房间 Simulation 选项卡</td>
+</tr>
+<tr>
+<td>21</td>
+<td>9.1</td>
+<td>显示其 ERC 的细分详情界面</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="going-further-ai-hub-quick-starts">更进一步 — AI Hub 快速入门<a aria-hidden="true" class="heading-anchor" href="#going-further-ai-hub-quick-starts" tabindex="-1">#</a></h2>
+<p>要进一步了解 AI Hub 以及如何将其用于具体用例，请参阅 AI Hub 快速入门：<a href="https://github.com/fabian-bouche-liferay/ai-hub-quick-start">https://github.com/fabian-bouche-liferay/ai-hub-quick-start</a>。每个快速入门都是围绕一个真实场景构建的分步指南，内容超出了本练习手册的范围。</p>
+    </main>
+  </div>
+</div>
+<button class="back-to-top" type="button" aria-label="返回顶部">&#8593;</button>
+<script>
+
+(function () {
+  // Copy-to-clipboard for every prompt frame.
+  document.addEventListener("click", function (event) {
+    var btn = event.target.closest(".copy-btn");
+    if (!btn) return;
+    var frame = btn.closest(".copy-frame");
+    var target = frame.querySelector("pre, blockquote");
+    var text = target ? target.innerText : "";
+
+    function feedback() {
+      btn.classList.add("copied");
+      setTimeout(function () {
+        btn.classList.remove("copied");
+      }, 1500);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(feedback).catch(function () {
+        fallbackCopy(text, feedback);
+      });
+    } else {
+      fallbackCopy(text, feedback);
+    }
+  });
+
+  function fallbackCopy(text, done) {
+    var textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand("copy"); } catch (err) { /* no-op */ }
+    document.body.removeChild(textarea);
+    done();
+  }
+
+  // Mobile sidebar toggle.
+  var menuToggle = document.querySelector(".menu-toggle");
+  if (menuToggle) {
+    menuToggle.addEventListener("click", function () {
+      document.body.classList.toggle("sidebar-open");
+    });
+  }
+  document.querySelectorAll(".toc a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      document.body.classList.remove("sidebar-open");
+    });
+  });
+
+  // Table-of-contents filter (recursively keeps a branch visible if any
+  // descendant entry matches).
+  var filterInput = document.querySelector(".toc-filter");
+  if (filterInput) {
+    filterInput.addEventListener("input", function () {
+      var query = filterInput.value.trim().toLowerCase();
+      document.querySelectorAll(".toc > ul > li").forEach(function (li) {
+        filterItem(li, query);
+      });
+    });
+  }
+
+  function filterItem(li, query) {
+    var link = li.querySelector(":scope > a");
+    var text = link ? link.textContent.toLowerCase() : "";
+    var childList = li.querySelector(":scope > ul");
+    var childMatch = false;
+    if (childList) {
+      childList.querySelectorAll(":scope > li").forEach(function (childLi) {
+        if (filterItem(childLi, query)) childMatch = true;
+      });
+    }
+    var selfMatch = !query || text.indexOf(query) !== -1;
+    var show = selfMatch || childMatch;
+    li.style.display = show ? "" : "none";
+    return show;
+  }
+
+  // Scroll-spy: highlight the current section in the sidebar.
+  var headings = document.querySelectorAll(".doc-content h2[id], .doc-content h3[id], .doc-content h4[id]");
+  var linkMap = {};
+  document.querySelectorAll(".toc a").forEach(function (a) {
+    linkMap[a.getAttribute("href").slice(1)] = a;
+  });
+
+  if ("IntersectionObserver" in window && headings.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var link = linkMap[entry.target.id];
+        if (!link || !entry.isIntersecting) return;
+        document.querySelectorAll(".toc a.active").forEach(function (a) { a.classList.remove("active"); });
+        link.classList.add("active");
+      });
+    }, { rootMargin: "0px 0px -72% 0px", threshold: 0 });
+    headings.forEach(function (h) { observer.observe(h); });
+  }
+
+  // Back-to-top button.
+  var backToTop = document.querySelector(".back-to-top");
+  if (backToTop) {
+    window.addEventListener("scroll", function () {
+      backToTop.classList.toggle("visible", window.scrollY > 600);
+    }, { passive: true });
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+})();
+
+</script>
+</body>
+</html>
