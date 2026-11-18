@@ -918,7 +918,7 @@ call-http-endpoint tool. Show me which tools you called, in order.
 <p>📖 Two things the prompts handle for you:</p>
 <ul>
 <li><strong>The feature flag isn't enough on 2026.Q3.</strong> <code>LPD-63311</code> is already on in this workspace's <code>portal-ext.properties</code>, but the server also has to be switched on in <strong>Control Panel → Instance Settings → Platform → MCP Server → Enabled</strong>. Until it is, <code>/o/mcp</code> answers with a plain Liferay 404 page. That screen needs a signed-in admin, so you switch it on yourself when Claude asks.</li>
-<li><strong>Claude Code reads its MCP servers when a session starts.</strong> So there are two turns: the first registers the server, you restart Claude Code, and the second uses it.</li>
+<li><strong>Claude Code reads its MCP servers when a session starts.</strong> So there are two turns: the first registers the server, and the second uses it. Restart Claude Code in between to give the second turn the native MCP tools. If you don't, the second prompt still works: Claude sends the same MCP calls to <code>/o/mcp</code> itself.</li>
 </ul>
 <p>💬 <strong>Prompt (turn 1 — connect):</strong></p>
 <div class="copy-frame copy-frame-code"><button aria-label="Copy to clipboard" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Set up the Liferay MCP server for this workspace, following the mcp-server skill.
@@ -928,17 +928,32 @@ call-http-endpoint tool. Show me which tools you called, in order.
 3. Register the server in Claude Code at local scope (claude mcp add --scope local, Streamable HTTP, http://localhost:8080/o/mcp, Basic auth header built from admin.properties), so the credential stays out of the repository. Never show the header value.
 4. Tell me to restart this Claude Code session, then check with /mcp that "liferay" is connected.
 </code></pre></div>
-<p>Restart Claude Code, run <code>/mcp</code>, and check that the <code>liferay</code> server shows as connected. Then, in the new session:</p>
+<p>Restart Claude Code, run <code>/mcp</code>, and check that the <code>liferay</code> server shows as connected. Then, in the new session (or in the same one, if you skip the restart):</p>
 <p>💬 <strong>Prompt (turn 2 — query):</strong></p>
-<div class="copy-frame copy-frame-code"><button aria-label="Copy to clipboard" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Use only the Liferay MCP server for this, not curl.
+<div class="copy-frame copy-frame-code"><button aria-label="Copy to clipboard" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Use only the Liferay MCP server for this, not REST endpoints. Never print the admin password or the Authorization header.
 
-1. Run tools/list and show me the tools it returns. On 2026.Q3 they are a discovery chain (tool sets → a set's operations → an operation's schema → invoke), so don't assume a tool exists because another release had it.
-2. Walk the chain to answer: which custom object definitions exist in this instance? For each, give its name, its REST path (/o/c/&lt;plural&gt;), its scope, its status and its number of fields.
-3. Then answer one Aurelis question: how many Accounts are there, and what are the names of the first five?
-4. Show me every tool call you made, in order, with the tool set and operation each used.
-5. Finally, check your MCP answer to step 2 against a direct GET /o/object-admin/v1.0/object-definitions (Basic auth from admin.properties) and tell me whether they match.
+0. Pick the MCP path.
+   a. If this session has the "liferay" MCP tools loaded (check with a tool search), use them.
+   b. If not, the session started before the server was registered. Don't stop: send the same MCP JSON-RPC calls yourself to http://localhost:8080/o/mcp (POST, Content-Type: application/json, Accept: application/json, text/event-stream, Basic auth built from configs/local/admin.properties inside the script so the credential never appears in a command or in output). Send initialize first, then tools/list, then tools/call. Tell me which path you used, and that I can restart the session to use the native tools.
+   c. If initialize returns a Liferay 404 page, stop and tell me to enable Control Panel → Instance Settings → Platform → MCP Server → Enabled.
+
+1. Run tools/list and show me the tools it returns, with their arguments. On 2026.Q3 they are a discovery chain (getToolSetsPage → getToolSetToolSetNameToolSummariesPage → getToolSetToolSetNameTool → postToolSetToolSetNameToolInvoke); don't assume a tool exists because another release had it.
+
+2. Walk the chain to answer: which custom object definitions exist in this instance?
+   - Find the tool set (object-admin-v1.0), its operation (getObjectDefinitionsPage), and read that operation's schema before invoking it.
+   - Invoke it with query parameters flat inside "body", e.g. {"pageSize": 200}. A request payload, if an operation has one, is nested once more under its own "body" key.
+   - "Custom" means system == false. Filter client-side: the API rejects filter=system eq false with 400.
+   - For each custom definition give its name, REST path (restContextPath, /o/c/&lt;plural&gt;), scope, status label and number of fields (the length of objectFields, which includes the built-in system fields; also give the custom-field count in brackets). Also give the total number of definitions.
+
+3. Answer one Aurelis question: how many Accounts are there (totalCount), and what are the names of the first five sorted by name ascending? Use headless-admin-user-v1.0 → getAccountsPage with body {"pageSize": 5, "page": 1, "sort": "name:asc", "fields": "id,name"}.
+
+4. Show me every MCP call you made, in order, as a table: number, JSON-RPC method or tool, tool set, operation, and body.
+
+5. Check your step 2 answer against a direct GET http://localhost:8080/o/object-admin/v1.0/object-definitions?pageSize=200 (Basic auth from admin.properties, passed through a curl config file, never on the command line). Apply the same system == false filter, compare name, REST path, scope, status and field count row by row, and compare totalCount. Tell me whether they match, and list any row that differs.
+
+Delete any temporary file that held a credential when you're done.
 </code></pre></div>
-<p>✅ <strong>Verify:</strong> <code>/mcp</code> lists <code>liferay</code> as connected; Claude's list of tool calls walks the discovery chain; the object definitions from MCP match the direct REST call; and the Basic auth header appears nowhere in the repository (<code>git grep -i authorization</code> finds nothing new).</p>
+<p>✅ <strong>Verify:</strong> Claude says which MCP path it used (after a restart, <code>/mcp</code> lists <code>liferay</code> as connected); its table of MCP calls walks the discovery chain; the custom object definitions and their total from MCP match the direct REST call row by row; and neither the password nor the Basic auth header appears in the output, the repository (<code>git grep -i authorization</code> finds nothing new) or a leftover temporary file.</p>
 <p class="adm-block adm-warning">⚠️ If every MCP call returns <code>403</code> while the direct REST call works, see the <code>mcp-server</code> skill's "MCP/REST Auth Split" and, on Windows, its note on duplicate drive-letter entries in <code>~/.claude.json</code>.</p>
 <h3 id="12-enable-the-flags-this-path-needs">1.2 — Enable the flags this path needs<a aria-hidden="true" class="heading-anchor" href="#12-enable-the-flags-this-path-needs" tabindex="-1">#</a></h3>
 <p>🎯 <code>LPD-74328</code> (live page composition), <code>LPS-164563</code> (Data Set admin), <code>LPD-17564</code> + <code>LPD-52006</code> (per-entry permissions) — all enabled before you need them.</p>

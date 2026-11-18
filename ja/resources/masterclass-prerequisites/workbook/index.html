@@ -918,7 +918,7 @@ call-http-endpoint tool. Show me which tools you called, in order.
 <p>📖 プロンプトが代わりに対処する点が 2 つあります：</p>
 <ul>
 <li><strong>2026.Q3 ではフィーチャーフラグだけでは不十分です。</strong> このワークスペースの <code>portal-ext.properties</code> では <code>LPD-63311</code> がすでに有効ですが、<strong>Control Panel → Instance Settings → Platform → MCP Server → Enabled</strong> でもサーバーを有効にする必要があります。有効にするまで、<code>/o/mcp</code> は通常の Liferay の 404 ページを返します。この画面にはサインインした管理者が必要なので、Claude に依頼されたらご自身で有効にしてください。</li>
-<li><strong>Claude Code は MCP サーバーをセッション開始時に読み込みます。</strong> そのためターンは 2 つです。最初のターンでサーバーを登録し、Claude Code を再起動して、2 つ目のターンでサーバーを使います。</li>
+<li><strong>Claude Code は MCP サーバーをセッション開始時に読み込みます。</strong> そのためターンは 2 つです。最初のターンでサーバーを登録し、2 つ目のターンでサーバーを使います。2 つ目のターンでネイティブの MCP ツールを使えるよう、間で Claude Code を再起動してください。再起動しなくても 2 つ目のプロンプトは動作します。その場合は Claude が同じ MCP 呼び出しを <code>/o/mcp</code> に直接送ります。</li>
 </ul>
 <p>💬 <strong>プロンプト（ターン 1 — 接続）：</strong></p>
 <div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Set up the Liferay MCP server for this workspace, following the mcp-server skill.
@@ -928,17 +928,32 @@ call-http-endpoint tool. Show me which tools you called, in order.
 3. Register the server in Claude Code at local scope (claude mcp add --scope local, Streamable HTTP, http://localhost:8080/o/mcp, Basic auth header built from admin.properties), so the credential stays out of the repository. Never show the header value.
 4. Tell me to restart this Claude Code session, then check with /mcp that "liferay" is connected.
 </code></pre></div>
-<p>Claude Code を再起動して <code>/mcp</code> を実行し、<code>liferay</code> サーバーが接続済みと表示されることを確認します。そのあと、新しいセッションで：</p>
+<p>Claude Code を再起動して <code>/mcp</code> を実行し、<code>liferay</code> サーバーが接続済みと表示されることを確認します。そのあと、新しいセッションで（再起動しない場合は同じセッションで）：</p>
 <p>💬 <strong>プロンプト（ターン 2 — クエリ）：</strong></p>
-<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Use only the Liferay MCP server for this, not curl.
+<div class="copy-frame copy-frame-code"><button aria-label="クリップボードにコピー" class="copy-btn" type="button"><svg class="icon-copy" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg></button><pre><code>Use only the Liferay MCP server for this, not REST endpoints. Never print the admin password or the Authorization header.
 
-1. Run tools/list and show me the tools it returns. On 2026.Q3 they are a discovery chain (tool sets → a set's operations → an operation's schema → invoke), so don't assume a tool exists because another release had it.
-2. Walk the chain to answer: which custom object definitions exist in this instance? For each, give its name, its REST path (/o/c/&lt;plural&gt;), its scope, its status and its number of fields.
-3. Then answer one Aurelis question: how many Accounts are there, and what are the names of the first five?
-4. Show me every tool call you made, in order, with the tool set and operation each used.
-5. Finally, check your MCP answer to step 2 against a direct GET /o/object-admin/v1.0/object-definitions (Basic auth from admin.properties) and tell me whether they match.
+0. Pick the MCP path.
+   a. If this session has the "liferay" MCP tools loaded (check with a tool search), use them.
+   b. If not, the session started before the server was registered. Don't stop: send the same MCP JSON-RPC calls yourself to http://localhost:8080/o/mcp (POST, Content-Type: application/json, Accept: application/json, text/event-stream, Basic auth built from configs/local/admin.properties inside the script so the credential never appears in a command or in output). Send initialize first, then tools/list, then tools/call. Tell me which path you used, and that I can restart the session to use the native tools.
+   c. If initialize returns a Liferay 404 page, stop and tell me to enable Control Panel → Instance Settings → Platform → MCP Server → Enabled.
+
+1. Run tools/list and show me the tools it returns, with their arguments. On 2026.Q3 they are a discovery chain (getToolSetsPage → getToolSetToolSetNameToolSummariesPage → getToolSetToolSetNameTool → postToolSetToolSetNameToolInvoke); don't assume a tool exists because another release had it.
+
+2. Walk the chain to answer: which custom object definitions exist in this instance?
+   - Find the tool set (object-admin-v1.0), its operation (getObjectDefinitionsPage), and read that operation's schema before invoking it.
+   - Invoke it with query parameters flat inside "body", e.g. {"pageSize": 200}. A request payload, if an operation has one, is nested once more under its own "body" key.
+   - "Custom" means system == false. Filter client-side: the API rejects filter=system eq false with 400.
+   - For each custom definition give its name, REST path (restContextPath, /o/c/&lt;plural&gt;), scope, status label and number of fields (the length of objectFields, which includes the built-in system fields; also give the custom-field count in brackets). Also give the total number of definitions.
+
+3. Answer one Aurelis question: how many Accounts are there (totalCount), and what are the names of the first five sorted by name ascending? Use headless-admin-user-v1.0 → getAccountsPage with body {"pageSize": 5, "page": 1, "sort": "name:asc", "fields": "id,name"}.
+
+4. Show me every MCP call you made, in order, as a table: number, JSON-RPC method or tool, tool set, operation, and body.
+
+5. Check your step 2 answer against a direct GET http://localhost:8080/o/object-admin/v1.0/object-definitions?pageSize=200 (Basic auth from admin.properties, passed through a curl config file, never on the command line). Apply the same system == false filter, compare name, REST path, scope, status and field count row by row, and compare totalCount. Tell me whether they match, and list any row that differs.
+
+Delete any temporary file that held a credential when you're done.
 </code></pre></div>
-<p>✅ <strong>検証：</strong> <code>/mcp</code> で <code>liferay</code> が接続済みと表示されること。Claude が示したツール呼び出しの一覧がディスカバリーチェーンをたどっていること。MCP から得たオブジェクト定義が REST の直接呼び出しの結果と一致すること。そして Basic 認証のヘッダーがリポジトリのどこにも含まれていないこと（<code>git grep -i authorization</code> で新たに何も見つからないこと）。</p>
+<p>✅ <strong>検証：</strong> Claude がどちらの MCP の経路を使ったかを伝えること（再起動した場合は、<code>/mcp</code> で <code>liferay</code> が接続済みと表示されること）。MCP 呼び出しの表がディスカバリーチェーンをたどっていること。MCP から得たカスタムオブジェクト定義とその総数が、REST の直接呼び出しの結果と行ごとに一致すること。そしてパスワードも Basic 認証のヘッダーも、出力、リポジトリ（<code>git grep -i authorization</code> で新たに何も見つからないこと）、残った一時ファイルのいずれにも含まれていないこと。</p>
 <p class="adm-block adm-warning">⚠️ REST の直接呼び出しは成功するのに MCP の呼び出しがすべて <code>403</code> を返す場合は、<code>mcp-server</code> スキルの「MCP/REST Auth Split」を参照してください。Windows では、<code>~/.claude.json</code> 内でドライブ文字の大文字・小文字だけが異なる重複エントリーについての注記も確認してください。</p>
 <h3 id="12-enable-the-flags-this-path-needs">1.2 — このコースで必要なフラグを有効にする<a aria-hidden="true" class="heading-anchor" href="#12-enable-the-flags-this-path-needs" tabindex="-1">#</a></h3>
 <p>🎯 <code>LPD-74328</code>（ライブのページ構成）、<code>LPS-164563</code>（Data Set の管理）、<code>LPD-17564</code> + <code>LPD-52006</code>（エントリー単位の権限）。すべて必要になる前に有効にしておきます。</p>
