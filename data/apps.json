@@ -766,10 +766,10 @@
         "id": "Segera hadir: chat Liferay AI Hub dan AI Assistant di dalam editor pada DXP 2024.Q1–2025.Q4"
       },
       "summary": {
-        "en": "Bring Liferay AI Hub to the DXP releases that predate the AI Hub cell. This connector adds the AI Hub chat widget and the in-editor AI Assistant — writing tools, tag and category suggestions, field generation and translation — to 2024.Q1 through 2025.Q4, with a per-user token and a server-side proxy, and steps aside once you upgrade to 2026.Q1 or later. It reuses your licensed AI Hub subscription.",
-        "ja": "AI Hub セルが登場する前の DXP リリースに Liferay AI Hub をもたらします。このコネクターは、AI Hub チャットウィジェットと、エディター内の AI アシスタント（文章作成ツール、タグとカテゴリーの提案、フィールド生成、翻訳）を 2024.Q1〜2025.Q4 に追加します。ユーザーごとのトークンとサーバー側プロキシを備え、2026.Q1 以降にアップグレードすると自動的に役目を譲ります。お持ちの AI Hub サブスクリプションを利用します。",
-        "zh": "将 Liferay AI Hub 带到早于 AI Hub cell 的 DXP 版本。该连接器为 2024.Q1 至 2025.Q4 添加 AI Hub 聊天挂件和编辑器内 AI 助手（写作工具、标签与分类建议、字段生成与翻译），配备按用户令牌和服务器端代理，并在升级到 2026.Q1 或更高版本后自动退让。它复用您已授权的 AI Hub 订阅。",
-        "id": "Hadirkan Liferay AI Hub ke rilis DXP yang lebih lama dari AI Hub cell. Konektor ini menambahkan widget chat AI Hub dan AI Assistant di dalam editor — alat penulisan, saran tag dan kategori, pembuatan field, dan terjemahan — ke 2024.Q1 hingga 2025.Q4, dengan token per pengguna dan proxy sisi server, lalu mundur otomatis setelah Anda upgrade ke 2026.Q1 atau yang lebih baru. Konektor ini memakai langganan AI Hub Anda yang berlisensi."
+        "en": "Bring Liferay AI Hub to the DXP releases that predate the AI Hub cell. This connector adds the AI Hub chat widget and the in-editor AI Assistant — writing tools, tag and category suggestions, field and image generation, and translation — to 2024.Q1 through 2025.Q4, with a per-user token and a server-side proxy, and steps aside once you upgrade to 2026.Q1 or later. It reuses your licensed AI Hub subscription.",
+        "ja": "AI Hub セルが登場する前の DXP リリースに Liferay AI Hub をもたらします。このコネクターは、AI Hub チャットウィジェットと、エディター内の AI アシスタント（文章作成ツール、タグとカテゴリーの提案、フィールドと画像の生成、翻訳）を 2024.Q1〜2025.Q4 に追加します。ユーザーごとのトークンとサーバー側プロキシを備え、2026.Q1 以降にアップグレードすると自動的に役目を譲ります。お持ちの AI Hub サブスクリプションを利用します。",
+        "zh": "将 Liferay AI Hub 带到早于 AI Hub cell 的 DXP 版本。该连接器为 2024.Q1 至 2025.Q4 添加 AI Hub 聊天挂件和编辑器内 AI 助手（写作工具、标签与分类建议、字段与图像生成、翻译），配备按用户令牌和服务器端代理，并在升级到 2026.Q1 或更高版本后自动退让。它复用您已授权的 AI Hub 订阅。",
+        "id": "Hadirkan Liferay AI Hub ke rilis DXP yang lebih lama dari AI Hub cell. Konektor ini menambahkan widget chat AI Hub dan AI Assistant di dalam editor — alat penulisan, saran tag dan kategori, pembuatan field dan gambar, dan terjemahan — ke 2024.Q1 hingga 2025.Q4, dengan token per pengguna dan proxy sisi server, lalu mundur otomatis setelah Anda upgrade ke 2026.Q1 atau yang lebih baru. Konektor ini memakai langganan AI Hub Anda yang berlisensi."
       },
       "highlights": [
         {
@@ -794,10 +794,10 @@
             "id": "AI Assistant di dalam editor"
           },
           "text": {
-            "en": "Writing tools, suggest tags and categories, generate a field value, and translate content into the site's other languages, right inside the Web Content editor.",
-            "ja": "文章作成ツール、タグとカテゴリーの提案、フィールド値の生成、サイトの他の言語へのコンテンツ翻訳を、Web コンテンツエディターの中で直接利用できます。",
-            "zh": "写作工具、标签与分类建议、生成字段值，以及将内容翻译成站点的其他语言——都在 Web 内容编辑器中直接完成。",
-            "id": "Alat penulisan, saran tag dan kategori, pembuatan nilai field, dan menerjemahkan konten ke bahasa lain di situs — langsung di dalam editor Web Content."
+            "en": "Writing tools, suggest tags and categories, generate a field value or an image, and translate content into the site's other languages, right inside the Web Content editor.",
+            "ja": "文章作成ツール、タグとカテゴリーの提案、フィールド値や画像の生成、サイトの他の言語へのコンテンツ翻訳を、Web コンテンツエディターの中で直接利用できます。",
+            "zh": "写作工具、标签与分类建议、生成字段值或图像，以及将内容翻译成站点的其他语言——都在 Web 内容编辑器中直接完成。",
+            "id": "Alat penulisan, saran tag dan kategori, pembuatan nilai field atau gambar, dan menerjemahkan konten ke bahasa lain di situs — langsung di dalam editor Web Content."
           }
         },
         {
