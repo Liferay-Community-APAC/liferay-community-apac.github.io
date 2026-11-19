@@ -38,6 +38,8 @@ const check = args.includes('--check');
 const siteDir = args.find((a) => !a.startsWith('--')) || join(dirname(fileURLToPath(import.meta.url)), '..');
 const LANGS = ['en', 'ja', 'zh', 'id'];
 const SITE = 'https://liferay-community-apac.github.io/';
+// Where people report a problem with a Marketplace App: one tracker for them all, with a form per kind of issue.
+const ISSUES = 'https://github.com/Liferay-Community-APAC/marketplace-app-docs/issues/new/choose';
 const HOME = { en: '', ja: 'ja/', zh: 'zh/', id: 'id/' };
 
 // Pages with generated parts, and their language.
@@ -52,22 +54,22 @@ const PAGES = LANGS.flatMap((l) => [
 const COMPACT_HIGHLIGHTS = 4;
 
 const STRINGS = {
-  en: { viewDetails: 'View details →', otherApps: 'Other Marketplace Apps', poweredBy: 'Powered by {name}. ', recipe: 'Read the recipe →', recipeNamed: '{title} →', about: 'About {name}',
+  en: { issues: 'Report an issue or suggest a feature →', viewDetails: 'View details →', otherApps: 'Other Marketplace Apps', poweredBy: 'Powered by {name}. ', recipe: 'Read the recipe →', recipeNamed: '{title} →', about: 'About {name}',
         more: 'Read the guide →', moreOther: 'Read the guide →', marketplace: 'Marketplace listing →',
         guide: 'Read the guide', guideOther: 'Read the guide', download: 'Download', details: 'All features and screenshots →',
         features: 'Features', screenshots: 'Screenshots', versions: 'Works with', version: 'Version',
         soonTag: 'Coming soon', soonTitle: 'More Marketplace Apps coming soon', soonText: 'More Marketplace Apps and their guides are on the way.' },
-  ja: { viewDetails: '詳細を見る →', otherApps: 'その他の Marketplace アプリ', poweredBy: '{name} を活用。', recipe: 'レシピを見る（英語）→', recipeNamed: '{title}（英語）→', about: '{name} について',
+  ja: { issues: '不具合の報告・機能の提案（英語）→', viewDetails: '詳細を見る →', otherApps: 'その他の Marketplace アプリ', poweredBy: '{name} を活用。', recipe: 'レシピを見る（英語）→', recipeNamed: '{title}（英語）→', about: '{name} について',
         more: 'ガイドを読む →', moreOther: 'ガイドを読む（英語）→', marketplace: 'Marketplace で見る →',
         guide: 'ガイドを読む', guideOther: 'ガイドを読む（英語）', download: 'ダウンロード', details: 'すべての機能とスクリーンショット →',
         features: '機能', screenshots: 'スクリーンショット', versions: '対応製品', version: 'バージョン',
         soonTag: '近日公開', soonTitle: 'その他の Marketplace アプリも近日公開', soonText: '新しい Marketplace アプリとガイドを準備中です。' },
-  zh: { viewDetails: '查看详情 →', otherApps: '其他 Marketplace 应用', poweredBy: '由 {name} 提供支持。', recipe: '查看实践指南（英文）→', recipeNamed: '{title}（英文）→', about: '了解 {name}（英文）',
+  zh: { issues: '报告问题或建议功能（英文）→', viewDetails: '查看详情 →', otherApps: '其他 Marketplace 应用', poweredBy: '由 {name} 提供支持。', recipe: '查看实践指南（英文）→', recipeNamed: '{title}（英文）→', about: '了解 {name}（英文）',
         more: '阅读指南 →', moreOther: '阅读指南（英文）→', marketplace: '在 Marketplace 查看 →',
         guide: '阅读指南', guideOther: '阅读指南（英文）', download: '下载', details: '全部功能与截图 →',
         features: '功能', screenshots: '截图', versions: '适用于', version: '版本',
         soonTag: '即将推出', soonTitle: '更多 Marketplace 应用即将推出', soonText: '更多 Marketplace 应用及其指南正在准备中。' },
-  id: { viewDetails: 'Lihat detail →', otherApps: 'Marketplace App lainnya', poweredBy: 'Didukung oleh {name}. ', recipe: 'Baca recipe (bahasa Inggris) →', recipeNamed: '{title} (bahasa Inggris) →', about: 'Tentang {name} (bahasa Inggris)',
+  id: { issues: 'Laporkan masalah atau usulkan fitur (bahasa Inggris) →', viewDetails: 'Lihat detail →', otherApps: 'Marketplace App lainnya', poweredBy: 'Didukung oleh {name}. ', recipe: 'Baca recipe (bahasa Inggris) →', recipeNamed: '{title} (bahasa Inggris) →', about: 'Tentang {name} (bahasa Inggris)',
         more: 'Baca panduan →', moreOther: 'Baca panduan (bahasa Inggris) →', marketplace: 'Lihat di Marketplace →',
         guide: 'Baca panduan', guideOther: 'Baca panduan (bahasa Inggris)', download: 'Unduh', details: 'Semua fitur dan screenshot →',
         features: 'Fitur', screenshots: 'Screenshot', versions: 'Untuk', version: 'Versi',
@@ -226,6 +228,8 @@ function showcase(a, page, indent, full, detail) {
   lines.push('    </div>');
   if (a.poweredBy) lines.push(poweredBy(a.poweredBy, page, '    '));
   if (!full && hl.length) lines.push(`    <a class="more" href="${esc(href(appPage(a, lang), page))}">${esc(t.details)}</a>`);
+  // An app's own page links to the shared issue tracker (or the app's own, when it names one).
+  if (detail && (a.issues || a.category === 'marketplace-apps')) lines.push(`    <a class="more" href="${esc(a.issues || ISSUES)}">${esc(t.issues)}</a>`);
   lines.push('  </div>');
   if (full && points.length) lines.push('  <div class="showcase-features">', `    <h4>${esc(t.features)}</h4>`, '    <ul class="features">', ...points, '    </ul>', '  </div>');
   if (full && (a.screenshots || []).length) {
