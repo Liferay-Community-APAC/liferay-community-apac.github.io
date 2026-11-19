@@ -756,6 +756,137 @@
       "docsRepo": "https://github.com/Liferay-Community-APAC/liferay-migration-studio"
     },
     {
+      "id": "liferay-aihub-legacy-connector",
+      "category": "marketplace-apps",
+      "name": "AI Hub Legacy Connector",
+      "tagline": {
+        "en": "Coming soon: Liferay AI Hub's chat and in-editor AI Assistant on DXP 2024.Q1–2025.Q4",
+        "ja": "近日公開：Liferay AI Hub のチャットとエディター内 AI アシスタントを DXP 2024.Q1〜2025.Q4 で",
+        "zh": "即将推出：在 DXP 2024.Q1–2025.Q4 上使用 Liferay AI Hub 的聊天与编辑器内 AI 助手",
+        "id": "Segera hadir: chat Liferay AI Hub dan AI Assistant di dalam editor pada DXP 2024.Q1–2025.Q4"
+      },
+      "summary": {
+        "en": "Bring Liferay AI Hub to the DXP releases that predate the AI Hub cell. This connector adds the AI Hub chat widget and the in-editor AI Assistant — writing tools, tag and category suggestions, field generation and translation — to 2024.Q1 through 2025.Q4, with a per-user token and a server-side proxy, and steps aside once you upgrade to 2026.Q1 or later. It reuses your licensed AI Hub subscription.",
+        "ja": "AI Hub セルが登場する前の DXP リリースに Liferay AI Hub をもたらします。このコネクターは、AI Hub チャットウィジェットと、エディター内の AI アシスタント（文章作成ツール、タグとカテゴリーの提案、フィールド生成、翻訳）を 2024.Q1〜2025.Q4 に追加します。ユーザーごとのトークンとサーバー側プロキシを備え、2026.Q1 以降にアップグレードすると自動的に役目を譲ります。お持ちの AI Hub サブスクリプションを利用します。",
+        "zh": "将 Liferay AI Hub 带到早于 AI Hub cell 的 DXP 版本。该连接器为 2024.Q1 至 2025.Q4 添加 AI Hub 聊天挂件和编辑器内 AI 助手（写作工具、标签与分类建议、字段生成与翻译），配备按用户令牌和服务器端代理，并在升级到 2026.Q1 或更高版本后自动退让。它复用您已授权的 AI Hub 订阅。",
+        "id": "Hadirkan Liferay AI Hub ke rilis DXP yang lebih lama dari AI Hub cell. Konektor ini menambahkan widget chat AI Hub dan AI Assistant di dalam editor — alat penulisan, saran tag dan kategori, pembuatan field, dan terjemahan — ke 2024.Q1 hingga 2025.Q4, dengan token per pengguna dan proxy sisi server, lalu mundur otomatis setelah Anda upgrade ke 2026.Q1 atau yang lebih baru. Konektor ini memakai langganan AI Hub Anda yang berlisensi."
+      },
+      "highlights": [
+        {
+          "title": {
+            "en": "AI Hub chat on every page",
+            "ja": "すべてのページで AI Hub チャット",
+            "zh": "每个页面都有 AI Hub 聊天",
+            "id": "Chat AI Hub di setiap halaman"
+          },
+          "text": {
+            "en": "The AI Hub chat widget, set in Instance and Site Settings the way the 2026.Q1+ cell provides it — on every page, without changing Liferay's code.",
+            "ja": "AI Hub チャットウィジェットを、2026.Q1 以降のセルと同じようにインスタンス設定とサイト設定で有効化。Liferay のコードを変更せず、すべてのページに表示します。",
+            "zh": "AI Hub 聊天挂件，可像 2026.Q1+ 的 cell 那样在实例设置和站点设置中配置——出现在每个页面，无需修改 Liferay 代码。",
+            "id": "Widget chat AI Hub, diatur di Instance dan Site Settings seperti yang disediakan cell 2026.Q1+ — di setiap halaman, tanpa mengubah kode Liferay."
+          }
+        },
+        {
+          "title": {
+            "en": "In-editor AI Assistant",
+            "ja": "エディター内 AI アシスタント",
+            "zh": "编辑器内 AI 助手",
+            "id": "AI Assistant di dalam editor"
+          },
+          "text": {
+            "en": "Writing tools, suggest tags and categories, generate a field value, and translate content into the site's other languages, right inside the Web Content editor.",
+            "ja": "文章作成ツール、タグとカテゴリーの提案、フィールド値の生成、サイトの他の言語へのコンテンツ翻訳を、Web コンテンツエディターの中で直接利用できます。",
+            "zh": "写作工具、标签与分类建议、生成字段值，以及将内容翻译成站点的其他语言——都在 Web 内容编辑器中直接完成。",
+            "id": "Alat penulisan, saran tag dan kategori, pembuatan nilai field, dan menerjemahkan konten ke bahasa lain di situs — langsung di dalam editor Web Content."
+          }
+        },
+        {
+          "title": {
+            "en": "Secure by default",
+            "ja": "デフォルトで安全",
+            "zh": "默认即安全",
+            "id": "Aman secara bawaan"
+          },
+          "text": {
+            "en": "A per-user token so the chat acts as the signed-in user, and a server-side proxy that keeps AI Hub's access token out of the browser.",
+            "ja": "チャットがサインイン中のユーザーとして動作するようユーザーごとのトークンを発行し、サーバー側プロキシが AI Hub のアクセストークンをブラウザーに渡しません。",
+            "zh": "按用户颁发令牌，使聊天以登录用户的身份运行；服务器端代理让 AI Hub 的访问令牌不会进入浏览器。",
+            "id": "Token per pengguna agar chat bertindak sebagai pengguna yang masuk, dan proxy sisi server yang menjaga access token AI Hub tetap di luar browser."
+          }
+        },
+        {
+          "title": {
+            "en": "Steps aside on upgrade",
+            "ja": "アップグレード時に役目を譲る",
+            "zh": "升级时自动退让",
+            "id": "Mundur saat upgrade"
+          },
+          "text": {
+            "en": "Deactivates itself automatically where Liferay's own AI Hub cell is present, so moving to 2026.Q1 or later needs no cleanup.",
+            "ja": "Liferay 自身の AI Hub セルがある環境では自動的に無効化されるため、2026.Q1 以降への移行時に後片付けは不要です。",
+            "zh": "在存在 Liferay 自带 AI Hub cell 的环境中自动停用，因此升级到 2026.Q1 或更高版本时无需清理。",
+            "id": "Nonaktif secara otomatis jika AI Hub cell milik Liferay sudah ada, sehingga pindah ke 2026.Q1 atau yang lebih baru tidak perlu pembersihan."
+          }
+        },
+        {
+          "title": {
+            "en": "Across eight releases",
+            "ja": "8 つのリリースで検証",
+            "zh": "覆盖八个版本",
+            "id": "Delapan rilis"
+          },
+          "text": {
+            "en": "Validated on DXP 2024.Q1, Q2, Q3, Q4 and 2025.Q1, Q2, Q3, Q4, each on the latest update of the quarter.",
+            "ja": "DXP 2024.Q1・Q2・Q3・Q4 と 2025.Q1・Q2・Q3・Q4 の各四半期の最新アップデートで検証済みです。",
+            "zh": "已在 DXP 2024.Q1、Q2、Q3、Q4 和 2025.Q1、Q2、Q3、Q4 上验证，每个季度均采用其最新更新。",
+            "id": "Divalidasi pada DXP 2024.Q1, Q2, Q3, Q4 dan 2025.Q1, Q2, Q3, Q4, masing-masing pada update terbaru kuartal tersebut."
+          }
+        },
+        {
+          "title": {
+            "en": "Uses your AI Hub subscription",
+            "ja": "お持ちの AI Hub サブスクリプションを利用",
+            "zh": "复用您的 AI Hub 订阅",
+            "id": "Memakai langganan AI Hub Anda"
+          },
+          "text": {
+            "en": "The connector reuses your licensed Liferay AI Hub; it isn't a model provider and doesn't replace an AI Hub subscription.",
+            "ja": "このコネクターはライセンス済みの Liferay AI Hub を利用します。モデルプロバイダーではなく、AI Hub サブスクリプションを置き換えるものではありません。",
+            "zh": "该连接器复用您已授权的 Liferay AI Hub；它不是模型提供方，也不能替代 AI Hub 订阅。",
+            "id": "Konektor ini memakai Liferay AI Hub Anda yang berlisensi; bukan penyedia model dan tidak menggantikan langganan AI Hub."
+          }
+        }
+      ],
+      "dxp": "Liferay DXP 2024.Q1 to 2025.Q4",
+      "docsLanguages": [
+        "en"
+      ],
+      "image": {
+        "src": "assets/apps/liferay-aihub-legacy-connector/suggest-tags.png",
+        "width": 1280,
+        "height": 1352
+      },
+      "screenshots": [
+        {
+          "src": "assets/apps/liferay-aihub-legacy-connector/suggest-tags.png",
+          "width": 1280,
+          "height": 1352,
+          "caption": "The in-editor assistant adds an AI action to Web Content fields; here it has suggested and applied tags to a launch-announcement article."
+        },
+        {
+          "src": "assets/apps/liferay-aihub-legacy-connector/suggest-categories.png",
+          "width": 1280,
+          "height": 1352,
+          "caption": "Suggest categories matches the article against the site's vocabularies and applies the ones that fit — here, two Topics categories."
+        }
+      ],
+      "docs": "marketplace-app-docs/liferay-aihub-legacy-connector/",
+      "marketplace": null,
+      "search": "marketplace-app-docs/pagefind/",
+      "sitemap": "marketplace-app-docs/sitemap.xml",
+      "docsRepo": "https://github.com/Liferay-Community-APAC/marketplace-app-docs"
+    },
+    {
       "id": "solution-recipes",
       "category": "solution-recipes",
       "name": "Solution Recipes",
