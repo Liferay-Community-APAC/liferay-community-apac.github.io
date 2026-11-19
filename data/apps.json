@@ -760,10 +760,10 @@
       "category": "marketplace-apps",
       "name": "AI Hub Legacy Connector",
       "tagline": {
-        "en": "Coming soon: Liferay AI Hub's chat and in-editor AI Assistant on DXP 2024.Q1–2025.Q4",
-        "ja": "近日公開：Liferay AI Hub のチャットとエディター内 AI アシスタントを DXP 2024.Q1〜2025.Q4 で",
-        "zh": "即将推出：在 DXP 2024.Q1–2025.Q4 上使用 Liferay AI Hub 的聊天与编辑器内 AI 助手",
-        "id": "Segera hadir: chat Liferay AI Hub dan AI Assistant di dalam editor pada DXP 2024.Q1–2025.Q4"
+        "en": "Liferay AI Hub's chat and in-editor AI Assistant on DXP 2024.Q1–2025.Q4",
+        "ja": "Liferay AI Hub のチャットとエディター内 AI アシスタントを DXP 2024.Q1〜2025.Q4 で",
+        "zh": "在 DXP 2024.Q1–2025.Q4 上使用 Liferay AI Hub 的聊天与编辑器内 AI 助手",
+        "id": "Chat Liferay AI Hub dan AI Assistant di dalam editor pada DXP 2024.Q1–2025.Q4"
       },
       "summary": {
         "en": "Bring Liferay AI Hub to the DXP releases that predate the AI Hub cell. This connector adds the AI Hub chat widget and the in-editor AI Assistant — writing tools, tag and category suggestions, field and image generation, and translation — to 2024.Q1 through 2025.Q4, with a per-user token and a server-side proxy, and steps aside once you upgrade to 2026.Q1 or later. It reuses your licensed AI Hub subscription.",
@@ -857,6 +857,7 @@
           }
         }
       ],
+      "version": "2.9.1",
       "dxp": "Liferay DXP 2024.Q1 to 2025.Q4",
       "docsLanguages": [
         "en"
@@ -881,6 +882,7 @@
         }
       ],
       "docs": "marketplace-app-docs/liferay-aihub-legacy-connector/",
+      "download": "https://github.com/orgs/Liferay-Community-APAC/packages/container/package/liferay-aihub-legacy-connector",
       "marketplace": null,
       "search": "marketplace-app-docs/pagefind/",
       "sitemap": "marketplace-app-docs/sitemap.xml",
