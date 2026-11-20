@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Building Enterprise Websites with Liferay and AI prerequisites · Liferay Community APAC</title>
+  <meta name="description" content="Get ready for the two-day Building Enterprise Websites with Liferay and AI course: prepare your computer and Docker, download Liferay DXP ahead of time, install VS Code and your own AI coding agent, and check it all with that agent.">
+  <meta property="og:title" content="Building Enterprise Websites with Liferay and AI prerequisites · Liferay Community APAC">
+  <meta property="og:description" content="Get ready for the two-day Building Enterprise Websites with Liferay and AI course: prepare your computer and Docker, download Liferay DXP ahead of time, install VS Code and your own AI coding agent, and check it all with that agent.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://liferay-community-apac.github.io/resources/bewl-ai-prerequisites/">
+  <meta property="og:url" content="https://liferay-community-apac.github.io/resources/bewl-ai-prerequisites/">
+  <meta property="og:site_name" content="Liferay Community APAC">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://liferay-community-apac.github.io/assets/og-image.png?v=7">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../assets/liferay-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../assets/liferay-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../../assets/site.css?v=c18">
+  <script src="../../assets/site-chrome.js?v=22" defer></script>
+</head>
+<body data-section="resources">
+
+<header class="site-header" data-site-header>
+  <div class="wrap">
+    <a class="brand" href="../../"><img class="brand-mark" src="../../assets/liferay-mark-white.png" alt="" width="30" height="30"><span class="brand-name">Liferay Community APAC</span></a>
+  </div>
+</header>
+
+<main data-pagefind-body>
+  <section class="hero page">
+    <div class="wrap">
+      <div>
+        <p class="crumbs"><a href="../../">Home</a><span>/</span><a href="../">Resources</a><span>/</span>Building Enterprise Websites with Liferay and AI prerequisites</p>
+        <p class="eyebrow">Training</p>
+        <h1>Building Enterprise Websites with Liferay and AI prerequisites</h1>
+        <p class="lead">Five steps to get your computer, tools and downloads ready before the two-day course. Tick each item as you go: your progress is saved in this browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mc">
+    <div class="wrap mc-layout">
+      <aside class="mc-side">
+        <div class="mc-progress" aria-live="polite">
+          <div class="mc-bar"><span style="width:0%"></span></div>
+          <p><strong class="mc-done">0</strong> of <span class="mc-total">0</span> done</p>
+        </div>
+        <nav aria-label="Steps">
+          <ol class="mc-toc"><li><a href="#computer">Prepare your computer</a></li><li><a href="#docker">Install Docker</a></li><li><a href="#downloads">Download ahead of time</a></li><li><a href="#tools">Install your tools</a></li><li><a href="#check">Check with your AI agent</a></li></ol>
+        </nav>
+        <button type="button" class="mc-reset">Clear my checklist</button>
+      </aside>
+      <div class="mc-main">
+      <section class="mc-step" id="about" aria-labelledby="about-h">
+        <div class="mc-step-head">
+          <div>
+            <h2 id="about-h">About the course</h2>
+            <p>Over two days you build Clarity Vision Solutions' public website on <strong>Liferay DXP 2026.Q3</strong>: users and permissions, sites, pages and master pages, fragments, styling, CMS content, collections, commerce, headless APIs, workflow and Publications, search, Objects and personalization. You build it <strong>with an AI coding agent</strong>: each exercise gives you a prompt for the agent, then you check the result yourself in Liferay.</p>
+            <p>Bring a laptop you can install software on, and an AI coding agent you already have access to. The course doesn't provide an AI subscription. The course repository and workbook are shared on the first morning.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mc-step" id="computer" aria-labelledby="computer-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">1</span>
+          <div>
+            <h2 id="computer-h">Prepare your computer</h2>
+            <p>Install and check each item below. Run the commands in a terminal: the Terminal app on a Mac or Linux, or PowerShell on Windows.</p>
+          </div>
+        </div>
+        <p class="mc-source">Based on Liferay's <a href="https://www.liferay.com/classroom-training/classroom-prerequisites">classroom training prerequisites</a>.</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="bw-git" data-key="git">
+            <div>
+              <label for="bw-git" class="check-title">Git</label>
+              <p>Any recent version. You don't need a GitHub account.</p>
+              <details class="howto">
+                <summary>How to install</summary>
+                <div class="os"><h4>Windows</h4><p>Install Git for Windows from <a href="https://git-scm.com/downloads/win">git-scm.com</a>, or run the command below. During setup, choose to use Git from the command line and also from third-party software.</p><pre class="cmd"><code>winget install --id Git.Git -e</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>Run the command below and click <em>Install</em> when macOS asks. With Homebrew, you can run <code>brew install git</code> instead.</p><pre class="cmd"><code>xcode-select --install</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>On Ubuntu or Debian:</p><pre class="cmd"><code>sudo apt install git</code></pre></div>
+              </details>
+              <p class="check-label">Check it</p>
+              <pre class="cmd"><code>git version</code></pre>
+              <p class="expect">You should see something like:</p>
+              <pre class="cmd out"><code>git version 2.44.0</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="bw-jdk" data-key="jdk">
+            <div>
+              <label for="bw-jdk" class="check-title">Java JDK 21</label>
+              <p>A JDK, not just a JRE, reporting a 21.x version.</p>
+              <details class="howto">
+                <summary>How to install</summary>
+                <div class="os"><h4>Windows</h4><p>Install Microsoft Build of OpenJDK 21:</p><pre class="cmd"><code>winget install Microsoft.OpenJDK.21</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>With Homebrew:</p><pre class="cmd"><code>brew install --cask microsoft-openjdk@21</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>On Ubuntu or Debian:</p><pre class="cmd"><code>sudo apt install openjdk-21-jdk</code></pre></div><p class="note">If <code>java -version</code> shows another version, set the <code>JAVA_HOME</code> environment variable to your JDK 21 folder and put its <code>bin</code> folder first in your <code>PATH</code>, then open a new terminal.</p>
+              </details>
+              <p class="check-label">Check it</p>
+              <pre class="cmd"><code>java -version
+javac -version</code></pre>
+              <p class="expect">You should see something like:</p>
+              <pre class="cmd out"><code>openjdk version "21.0.5" 2024-10-15 LTS
+javac 21.0.5</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="bw-blade" data-key="blade">
+            <div>
+              <label for="bw-blade" class="check-title">Liferay Blade CLI</label>
+              <p>Version 7.0 or later, which Liferay DXP needs to work with JDK 21. Install the JDK first.</p>
+              <details class="howto">
+                <summary>How to install</summary>
+                <div class="os"><h4>macOS and Linux</h4><p>Run the command below. When it says Blade installed successfully, open a new terminal. If <code>blade</code> isn't found, add the folder the installer shows to your <code>PATH</code>.</p><pre class="cmd"><code>curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh</code></pre></div>
+                <div class="os"><h4>Windows</h4><p>Download and run the <a href="https://github.com/liferay/liferay-ide/releases/">Liferay Project SDK installer</a>: it detects your Java and adds <code>blade</code> to your <code>PATH</code>.</p></div><p class="note">If your version is older than 7.0, update it:</p><pre class="cmd"><code>blade update</code></pre>
+              </details>
+              <p class="check-label">Check it</p>
+              <pre class="cmd"><code>blade version</code></pre>
+              <p class="expect">You should see something like:</p>
+              <pre class="cmd out"><code>blade version 7.0.3</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="bw-space" data-key="space">
+            <div>
+              <label for="bw-space" class="check-title">16 GB of memory and 20 GB of free disk space</label>
+              <p>Liferay DXP, its search engine and the PostgreSQL database run on your computer, next to your editor and browser. You need 16 GB of memory installed, with at least 8 GB free on the day. Close other heavy applications during the course.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="bw-admin" data-key="admin">
+            <div>
+              <label for="bw-admin" class="check-title">Permission to install software</label>
+              <p>A company laptop may block installs, Docker or local servers. Check with your IT team before the course, and ask them to allow ports 8080 and 5432 on <code>localhost</code>.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="bw-learn" data-key="learn">
+            <div>
+              <label for="bw-learn" class="check-title">Recommended: the Learning Path on Liferay Learn</label>
+              <p>Working through a <a href="https://learn.liferay.com/">Liferay Learn</a> Learning Path on site building first lets the course move faster and go deeper.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="docker" aria-labelledby="docker-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">2</span>
+          <div>
+            <h2 id="docker-h">Install Docker</h2>
+            <p>Docker is required. The course runs its PostgreSQL database in a Docker container, next to Liferay DXP.</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="bw-docker" data-key="docker">
+            <div>
+              <label for="bw-docker" class="check-title">Docker with Docker Compose, running</label>
+              <p>Docker Desktop on Windows and macOS, or Docker Engine with the Compose plugin on Linux. Start it before you check it.</p>
+              <details class="howto">
+                <summary>How to install</summary>
+                <div class="os"><h4>Windows</h4><p>Install <a href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop for Windows</a>, or run the command below. Restart when asked, then start Docker Desktop.</p><pre class="cmd"><code>winget install --id Docker.DockerDesktop -e</code></pre></div>
+                <div class="os"><h4>macOS</h4><p>Install <a href="https://docs.docker.com/desktop/setup/install/mac-install/">Docker Desktop for Mac</a> for your chip (Apple silicon or Intel), or use Homebrew. Then open Docker from Applications.</p><pre class="cmd"><code>brew install --cask docker</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>Install <a href="https://docs.docker.com/engine/install/">Docker Engine</a> and the <a href="https://docs.docker.com/compose/install/linux/">Compose plugin</a> for your distribution, then let your user run Docker without <code>sudo</code>: <code>sudo usermod -aG docker $USER</code>, and sign out and back in.</p></div>
+                <p class="note">Docker Desktop's license is free for personal use, education and small businesses. Larger companies need a paid subscription: check with your IT team.</p>
+              </details>
+              <p class="check-label">Check it</p>
+              <pre class="cmd"><code>docker compose version
+docker run --rm hello-world</code></pre>
+              <p class="expect">You should see something like:</p>
+              <pre class="cmd out"><code>Docker Compose version v2.29.1
+...
+Hello from Docker!
+This message shows that your installation appears to be working correctly.</code></pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="downloads" aria-labelledby="downloads-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">3</span>
+          <div>
+            <h2 id="downloads-h">Download ahead of time</h2>
+            <p>These downloads are about 1.5 GB. Do them at home or the office, so the course doesn't depend on the venue's Wi-Fi.</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="bw-bundle" data-key="bundle">
+            <div>
+              <label for="bw-bundle" class="check-title">Liferay DXP 2026.Q3.10 bundle</label>
+              <p>Save it in Liferay's download cache, where the course workspace finds it instead of downloading it again. It's about 1.3 GB.</p>
+              <details class="howto" open>
+                <summary>How to download</summary>
+                <div class="os"><h4>macOS and Linux</h4><pre class="cmd"><code>mkdir -p ~/.liferay/bundles
+curl -L -o ~/.liferay/bundles/liferay-dxp-tomcat-2026.q3.10-1793707249.7z https://releases-cdn.liferay.com/dxp/2026.q3.10/liferay-dxp-tomcat-2026.q3.10-1793707249.7z</code></pre></div>
+                <div class="os"><h4>Windows (PowerShell)</h4><pre class="cmd"><code>New-Item -ItemType Directory -Force "$HOME\.liferay\bundles"
+curl.exe -L -o "$HOME\.liferay\bundles\liferay-dxp-tomcat-2026.q3.10-1793707249.7z" https://releases-cdn.liferay.com/dxp/2026.q3.10/liferay-dxp-tomcat-2026.q3.10-1793707249.7z</code></pre></div>
+              </details>
+              <p class="check-label">Check it</p>
+              <p>The file <code>liferay-dxp-tomcat-2026.q3.10-1793707249.7z</code> in <code>~/.liferay/bundles</code> (<code>%USERPROFILE%\.liferay\bundles</code> on Windows) is about 1.3 GB. If it's much smaller, the download was interrupted: delete it and run the command again.</p>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="bw-image" data-key="image">
+            <div>
+              <label for="bw-image" class="check-title">PostgreSQL image</label>
+              <p>The database the course runs in Docker. Start Docker first.</p>
+              <p class="check-label">Download and check it</p>
+              <pre class="cmd"><code>docker pull postgres:16
+docker image ls postgres</code></pre>
+              <p class="expect">You should see something like:</p>
+              <pre class="cmd out"><code>REPOSITORY   TAG   IMAGE ID       CREATED       SIZE
+postgres     16    3f8b2c1d9a7e   2 weeks ago   453MB</code></pre>
+            </div>
+          </li>
+          <li class="check-item">
+            <input type="checkbox" id="bw-key" data-key="key">
+            <div>
+              <label for="bw-key" class="check-title">Your Liferay DXP activation key</label>
+              <p>The organizers email you an activation key file (<code>activation-key-….xml</code>) before the course. Save it somewhere you can find it on the first morning. It's for your own use during the course: don't share it or commit it to a repository.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="tools" aria-labelledby="tools-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">4</span>
+          <div>
+            <h2 id="tools-h">Install your tools</h2>
+            <p>You'll work in a Liferay Workspace in VS Code, with an AI coding agent at your side. Bring the agent you already have access to: it must have an agent mode that can run terminal commands and connect to an MCP server. One is enough, and ticking it completes this choice.</p>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="bw-vscode" data-key="vscode">
+            <div>
+              <label for="bw-vscode" class="check-title"><a href="https://code.visualstudio.com/">Visual Studio Code</a></label>
+              <p>Or another editor your agent works in. The workbook's instructions use VS Code.</p>
+            </div>
+          </li>
+          <li class="check-group-label" aria-hidden="true">Choose one AI coding agent</li>
+          <li class="check-item choice">
+            <input type="radio" name="bw-agent" data-group="agent" id="bw-claude" data-key="claude">
+            <div>
+              <label for="bw-claude" class="check-title"><a href="https://code.claude.com/docs/en/vs-code">Claude Code extension for VS Code</a></label>
+              <p>Sign in with a Claude plan or account that includes Claude Code.</p>
+            </div>
+          </li>
+          <li class="check-item choice">
+            <input type="radio" name="bw-agent" data-group="agent" id="bw-codex" data-key="codex">
+            <div>
+              <label for="bw-codex" class="check-title"><a href="https://developers.openai.com/codex/ide">OpenAI Codex extension for VS Code</a></label>
+              <p>Sign in with your ChatGPT account. Codex comes with paid ChatGPT plans.</p>
+            </div>
+          </li>
+          <li class="check-item choice">
+            <input type="radio" name="bw-agent" data-group="agent" id="bw-copilot" data-key="copilot">
+            <div>
+              <label for="bw-copilot" class="check-title"><a href="https://code.visualstudio.com/docs/copilot/setup">GitHub Copilot in VS Code</a></label>
+              <p>Sign in to VS Code with the GitHub account that has your Copilot access, and use the Chat view in <em>Agent</em> mode.</p>
+            </div>
+          </li>
+          <li class="check-item choice">
+            <input type="radio" name="bw-agent" data-group="agent" id="bw-other" data-key="other">
+            <div>
+              <label for="bw-other" class="check-title">Another AI coding agent</label>
+              <p>Any agent that reads Agent Skills from an <code>.agents/</code> folder, runs terminal commands in your workspace and connects to an HTTP MCP server.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mc-step" id="check" aria-labelledby="check-h">
+        <div class="mc-step-head">
+          <span class="mc-num" aria-hidden="true">5</span>
+          <div>
+            <h2 id="check-h">Check everything with your AI agent</h2>
+            <p>Let the AI agent you installed in step 4 check your setup for you. It runs the checks in a terminal and tells you what passes and what to fix. It's also a good first test that your agent works.</p>
+          </div>
+        </div>
+        <ol class="mc-howto">
+          <li>In VS Code, open any folder (<em>File</em> → <em>Open Folder</em>), for example your home folder or a new empty one.</li>
+          <li>Open your AI agent's chat:
+            <ul>
+              <li><strong>Claude Code:</strong> click the Claude icon, or run <em>Claude Code: Open</em> from the Command Palette.</li>
+              <li><strong>OpenAI Codex:</strong> click the Codex icon in the sidebar.</li>
+              <li><strong>GitHub Copilot:</strong> open the Chat view and switch the mode to <em>Agent</em>, so Copilot can run commands.</li>
+            </ul>
+          </li>
+          <li>Copy the prompt below, paste it into the chat and send it. When the agent asks to run a command, allow it: the checks only read information.</li>
+        </ol>
+        <div class="mc-prompt">
+          <div class="mc-prompt-head"><span>Prompt</span><button type="button" class="mc-copy" data-copy="bw-prompt-text" data-label="Copy" data-copied="Copied" data-fail="Select and copy">Copy</button></div>
+          <pre id="bw-prompt-text">Check that my computer is ready for the Building Enterprise Websites with Liferay and AI course. First tell me my operating system and shell. Then run each check in the terminal, one at a time. Don&#x27;t install, update or change anything.
+
+1. Git: run `git version`. PASS if Git is installed.
+2. Java: run `java -version` and `javac -version`. PASS if both report version 21.x (a JDK, not just a JRE).
+3. Blade: run `blade version`. PASS if it&#x27;s 7.0 or later.
+4. Docker: run `docker compose version` and `docker info --format &quot;{{.ServerVersion}}&quot;`. PASS if Compose is installed and the Docker engine answers (so it&#x27;s running).
+5. PostgreSQL image: run `docker image ls postgres:16`. PASS if the image is listed.
+6. DXP bundle: look for liferay-dxp-tomcat-2026.q3.10-1793707249.7z in the .liferay/bundles folder of my home folder. PASS if it exists and is larger than 1 GB.
+7. Memory: report the total and the currently available RAM. PASS if at least 16 GB is installed and 8 GB is available; WARN if less is available now.
+8. Disk: check the free space on the drive with my home folder. PASS if at least 20 GB is free.
+9. Ports: check whether anything is already listening on ports 8080 and 5432. PASS if both are free; otherwise WARN and tell me which program uses them.
+
+Then show the results as a table with the columns Check, Result (PASS, WARN or FAIL) and Details. For anything that isn&#x27;t PASS, tell me how to fix it on my operating system.
+
+Finally, list what I need to confirm myself, because you can&#x27;t check it: that I received my Liferay DXP activation key by email, and that I can install software and run Docker on this computer during the course.</pre>
+        </div>
+        <ul class="checklist">
+          <li class="check-item">
+            <input type="checkbox" id="bw-check" data-key="check">
+            <div>
+              <label for="bw-check" class="check-title">All checks show PASS</label>
+              <p>Run the check, fix anything marked FAIL or WARN, and run it again until everything passes. Then confirm the items it lists.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+        <div class="mc-ready" hidden>
+          <strong>You're all set.</strong> See you at the course.
+        </div>
+        <p class="mc-help">Something not working, or your activation key hasn't arrived? Contact the course organizers, or see <a href="../../get-help/">Get help</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Checklist: progress is kept in this browser only.
+    (function () {
+      var KEY = 'lca-bewl-ai-checklist';
+      var boxes = [].slice.call(document.querySelectorAll('.checklist input[type=checkbox], .checklist input[type=radio]'));
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+      // Items in a group (data-group, such as the AI agents: you need one) count once, done when any is ticked.
+      function units(list) {
+        var seen = {}, total = 0, done = 0;
+        list.forEach(function (b) {
+          var g = b.dataset.group;
+          if (!g) { total++; if (b.checked) done++; return; }
+          if (!(g in seen)) { seen[g] = false; total++; }
+          if (b.checked && !seen[g]) { seen[g] = true; done++; }
+        });
+        return { total: total, done: done };
+      }
+      function update() {
+        var u = units(boxes);
+        document.querySelector('.mc-done').textContent = u.done;
+        document.querySelector('.mc-total').textContent = u.total;
+        document.querySelector('.mc-bar span').style.width = Math.round(u.done / u.total * 100) + '%';
+        document.querySelector('.mc-ready').hidden = u.done !== u.total;
+        [].forEach.call(document.querySelectorAll('.mc-step'), function (s) {
+          var su = units([].slice.call(s.querySelectorAll('input[type=checkbox], input[type=radio]')));
+          s.classList.toggle('complete', su.total > 0 && su.done === su.total);
+        });
+      }
+      boxes.forEach(function (b) {
+        b.checked = !!saved[b.dataset.key];
+        b.addEventListener('change', function () {
+          saved[b.dataset.key] = b.checked;
+          // Choosing one alternative clears the others in its group.
+          if (b.dataset.group) boxes.forEach(function (o) { if (o !== b && o.dataset.group === b.dataset.group) saved[o.dataset.key] = false; });
+          try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+          update();
+        });
+      });
+      document.querySelector('.mc-reset').addEventListener('click', function () {
+        saved = {}; boxes.forEach(function (b) { b.checked = false; });
+        try { localStorage.removeItem(KEY); } catch (e) {}
+        update();
+      });
+      update();
+      [].forEach.call(document.querySelectorAll('.mc-copy'), function (btn) {
+        btn.addEventListener('click', function () {
+          var text = document.getElementById(btn.dataset.copy).textContent;
+          function done(ok) { btn.textContent = ok ? btn.dataset.copied : btn.dataset.fail; setTimeout(function () { btn.textContent = btn.dataset.label; }, 2000); }
+          if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+          else done(false);
+        });
+      });
+    })();
+  </script>
+</main>
+
+<footer class="site-footer" data-site-footer>
+  <p class="wrap disclaimer">Tutorials, sample code and guides on this site are unofficial and provided as-is. Use them at your own risk.</p>
+</footer>
+
+</body>
+</html>
