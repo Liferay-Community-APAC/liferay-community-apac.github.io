@@ -115,7 +115,7 @@ javac 21.0.5</code></pre>
             <input type="checkbox" id="bw-blade" data-key="blade">
             <div>
               <label for="bw-blade" class="check-title">Liferay Blade CLI</label>
-              <p>Version 7.0 or later, which Liferay DXP needs to work with JDK 21. Install the JDK first.</p>
+              <p>Version 7.0 or later. Your AI agent uses it to build and deploy the client extensions you create. Install the JDK first.</p>
               <details class="howto">
                 <summary>How to install</summary>
                 <div class="os"><h4>macOS and Linux</h4><p>Run the command below. When it says Blade installed successfully, open a new terminal. If <code>blade</code> isn't found, add the folder the installer shows to your <code>PATH</code>.</p><pre class="cmd"><code>curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh</code></pre></div>
@@ -131,7 +131,7 @@ javac 21.0.5</code></pre>
             <input type="checkbox" id="bw-space" data-key="space">
             <div>
               <label for="bw-space" class="check-title">16 GB of memory and 20 GB of free disk space</label>
-              <p>Liferay DXP, its search engine and the PostgreSQL database run on your computer, next to your editor and browser. You need 16 GB of memory installed, with at least 8 GB free on the day. Close other heavy applications during the course.</p>
+              <p>Liferay DXP, its search engine and the PostgreSQL database run on your computer in Docker, next to your editor and browser. You need 16 GB of memory installed, and Docker gets 8 GB of it (step 2). Close other heavy applications during the course.</p>
             </div>
           </li>
           <li class="check-item">
@@ -156,7 +156,7 @@ javac 21.0.5</code></pre>
           <span class="mc-num" aria-hidden="true">2</span>
           <div>
             <h2 id="docker-h">Install Docker</h2>
-            <p>Docker is required. The course runs its PostgreSQL database in a Docker container, next to Liferay DXP.</p>
+            <p>Docker is required. The course runs Liferay DXP and its PostgreSQL database as Docker containers, so the setup is the same on macOS, Windows and Linux.</p>
           </div>
         </div>
         <ul class="checklist">
@@ -182,6 +182,24 @@ Hello from Docker!
 This message shows that your installation appears to be working correctly.</code></pre>
             </div>
           </li>
+          <li class="check-item">
+            <input type="checkbox" id="bw-dockermem" data-key="dockermem">
+            <div>
+              <label for="bw-dockermem" class="check-title">8 GB of memory for Docker</label>
+              <p>Liferay and its search engine need about 6 GB, and PostgreSQL needs some too. With less, Liferay restarts in a loop or stops with exit code 137.</p>
+              <details class="howto" open>
+                <summary>How to set it</summary>
+                <div class="os"><h4>macOS</h4><p>Open Docker Desktop → <em>Settings</em> (the gear icon) → <em>Resources</em> → <em>Advanced</em>, set <strong>Memory</strong> to 8 GB or more, then click <strong>Apply &amp; restart</strong>.</p></div>
+                <div class="os"><h4>Windows</h4><p>Docker Desktop runs its containers in WSL 2, which sets the memory limit. In PowerShell, write the limit to <code>.wslconfig</code> in your user folder, then restart WSL. If you already have a <code>.wslconfig</code>, open it instead and set <code>memory=8GB</code> under <code>[wsl2]</code>. Then start Docker Desktop again and wait for <em>Engine running</em>.</p><pre class="cmd"><code>Set-Content -Path "$env:USERPROFILE\.wslconfig" -Value "[wsl2]`nmemory=8GB"
+wsl --shutdown</code></pre></div>
+                <div class="os"><h4>Linux</h4><p>Docker Engine uses your computer's memory directly: nothing to set. If you use Docker Desktop for Linux, set its memory as on macOS. Also check that <code>id -u</code> prints <code>1000</code>: Liferay's container writes its log files for that user ID only, and your agent needs to read them. If it prints another number, use Docker Desktop for Linux.</p></div>
+              </details>
+              <p class="check-label">Check it</p>
+              <pre class="cmd"><code>docker info --format "{{.MemTotal}}"</code></pre>
+              <p class="expect">You should see a number of bytes of about 8 GB or more, something like:</p>
+              <pre class="cmd out"><code>8323395584</code></pre>
+            </div>
+          </li>
         </ul>
       </section>
 
@@ -190,31 +208,27 @@ This message shows that your installation appears to be working correctly.</code
           <span class="mc-num" aria-hidden="true">3</span>
           <div>
             <h2 id="downloads-h">Download ahead of time</h2>
-            <p>These downloads are about 1.5 GB. Do them at home or the office, so the course doesn't depend on the venue's Wi-Fi.</p>
+            <p>These downloads are a few GB. Do them at home or the office, so the course doesn't depend on the venue's Wi-Fi. Start Docker first.</p>
           </div>
         </div>
         <ul class="checklist">
           <li class="check-item">
-            <input type="checkbox" id="bw-bundle" data-key="bundle">
+            <input type="checkbox" id="bw-dxp" data-key="dxp">
             <div>
-              <label for="bw-bundle" class="check-title">Liferay DXP 2026.Q3.10 bundle</label>
-              <p>Save it in Liferay's download cache, where the course workspace finds it instead of downloading it again. It's about 1.3 GB.</p>
-              <details class="howto" open>
-                <summary>How to download</summary>
-                <div class="os"><h4>macOS and Linux</h4><pre class="cmd"><code>mkdir -p ~/.liferay/bundles
-curl -L -o ~/.liferay/bundles/liferay-dxp-tomcat-2026.q3.10-1793707249.7z https://releases-cdn.liferay.com/dxp/2026.q3.10/liferay-dxp-tomcat-2026.q3.10-1793707249.7z</code></pre></div>
-                <div class="os"><h4>Windows (PowerShell)</h4><pre class="cmd"><code>New-Item -ItemType Directory -Force "$HOME\.liferay\bundles"
-curl.exe -L -o "$HOME\.liferay\bundles\liferay-dxp-tomcat-2026.q3.10-1793707249.7z" https://releases-cdn.liferay.com/dxp/2026.q3.10/liferay-dxp-tomcat-2026.q3.10-1793707249.7z</code></pre></div>
-              </details>
-              <p class="check-label">Check it</p>
-              <p>The file <code>liferay-dxp-tomcat-2026.q3.10-1793707249.7z</code> in <code>~/.liferay/bundles</code> (<code>%USERPROFILE%\.liferay\bundles</code> on Windows) is about 1.3 GB. If it's much smaller, the download was interrupted: delete it and run the command again.</p>
+              <label for="bw-dxp" class="check-title">Liferay DXP 2026.Q3.10 image</label>
+              <p>Liferay DXP as a Docker image, for both Intel and Apple silicon. It's the largest download: about 2 GB, and about 5 GB on disk.</p>
+              <p class="check-label">Download and check it</p>
+              <pre class="cmd"><code>docker pull liferay/dxp:2026.q3.10
+docker image ls liferay/dxp</code></pre>
+              <p class="expect">You should see a line for <code>liferay/dxp</code> with the tag <code>2026.q3.10</code>. The columns differ between Docker versions.</p>
+              <p class="note">The course also has an option to run Liferay as a Tomcat bundle instead of a container. You don't need it unless your instructor asks you to download the bundle.</p>
             </div>
           </li>
           <li class="check-item">
             <input type="checkbox" id="bw-image" data-key="image">
             <div>
               <label for="bw-image" class="check-title">PostgreSQL image</label>
-              <p>The database the course runs in Docker. Start Docker first.</p>
+              <p>The database Liferay runs on, in its own container.</p>
               <p class="check-label">Download and check it</p>
               <pre class="cmd"><code>docker pull postgres:16
 docker image ls postgres</code></pre>
@@ -308,11 +322,12 @@ postgres     16    3f8b2c1d9a7e   2 weeks ago   453MB</code></pre>
 2. Java: run `java -version` and `javac -version`. PASS if both report version 21.x (a JDK, not just a JRE).
 3. Blade: run `blade version`. PASS if it&#x27;s 7.0 or later.
 4. Docker: run `docker compose version` and `docker info --format &quot;{{.ServerVersion}}&quot;`. PASS if Compose is installed and the Docker engine answers (so it&#x27;s running).
-5. PostgreSQL image: run `docker image ls postgres:16`. PASS if the image is listed.
-6. DXP bundle: look for liferay-dxp-tomcat-2026.q3.10-1793707249.7z in the .liferay/bundles folder of my home folder. PASS if it exists and is larger than 1 GB.
-7. Memory: report the total and the currently available RAM. PASS if at least 16 GB is installed and 8 GB is available; WARN if less is available now.
-8. Disk: check the free space on the drive with my home folder. PASS if at least 20 GB is free.
+5. Docker memory: run `docker info --format &quot;{{.MemTotal}}&quot;`. PASS if it&#x27;s at least 7.5 GB; FAIL otherwise, and tell me how to give Docker 8 GB on my operating system.
+6. Images: run `docker image ls liferay/dxp:2026.q3.10` and `docker image ls postgres:16`. PASS if both images are listed.
+7. Memory: report the total and the currently available RAM. PASS if at least 16 GB is installed; WARN if less than 8 GB is available now.
+8. Disk: check the free space on the drive Docker stores its data on. PASS if at least 20 GB is free.
 9. Ports: check whether anything is already listening on ports 8080 and 5432. PASS if both are free; otherwise WARN and tell me which program uses them.
+10. Linux only: run `id -u`. PASS if it prints 1000; otherwise WARN (Liferay&#x27;s container writes its logs for user ID 1000).
 
 Then show the results as a table with the columns Check, Result (PASS, WARN or FAIL) and Details. For anything that isn&#x27;t PASS, tell me how to fix it on my operating system.
 
