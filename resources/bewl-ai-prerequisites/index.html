@@ -156,21 +156,30 @@ javac 21.0.5</code></pre>
           <span class="mc-num" aria-hidden="true">2</span>
           <div>
             <h2 id="docker-h">Install Docker</h2>
-            <p>Docker is required. The course runs Liferay DXP and its PostgreSQL database as Docker containers, so the setup is the same on macOS, Windows and Linux.</p>
+            <p>Docker is required. The course runs Liferay DXP and its PostgreSQL database as containers, so the setup is the same on every system. On macOS and Windows, choose one of two options:</p>
+            <ul>
+              <li><strong>Option A, free:</strong> Colima on macOS, Rancher Desktop on Windows. Free and open source, for any company size.</li>
+              <li><strong>Option B, Docker Desktop:</strong> if you already have it, or your company licenses it. Docker Desktop is free only for personal use, education and small businesses (fewer than 250 employees and less than $10 million in revenue).</li>
+            </ul>
+            <p>On Linux, use Docker Engine: it's free. Install only <strong>one</strong> option. If you have both, quit the one you don't use before the course.</p>
           </div>
         </div>
         <ul class="checklist">
           <li class="check-item">
             <input type="checkbox" id="bw-docker" data-key="docker">
             <div>
-              <label for="bw-docker" class="check-title">Docker with Docker Compose, running</label>
-              <p>Docker Desktop on Windows and macOS, or Docker Engine with the Compose plugin on Linux. Start it before you check it.</p>
-              <details class="howto">
+              <label for="bw-docker" class="check-title">A Docker engine with Docker Compose, running</label>
+              <p>Option A or B on macOS and Windows, Docker Engine on Linux. Start it before you check it.</p>
+              <details class="howto" open>
                 <summary>How to install</summary>
-                <div class="os"><h4>Windows</h4><p>Install <a href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop for Windows</a>, or run the command below. Restart when asked, then start Docker Desktop.</p><pre class="cmd"><code>winget install --id Docker.DockerDesktop -e</code></pre></div>
-                <div class="os"><h4>macOS</h4><p>Install <a href="https://docs.docker.com/desktop/setup/install/mac-install/">Docker Desktop for Mac</a> for your chip (Apple silicon or Intel), or use Homebrew. Then open Docker from Applications.</p><pre class="cmd"><code>brew install --cask docker</code></pre></div>
-                <div class="os"><h4>Linux</h4><p>Install <a href="https://docs.docker.com/engine/install/">Docker Engine</a> and the <a href="https://docs.docker.com/compose/install/linux/">Compose plugin</a> for your distribution, then let your user run Docker without <code>sudo</code>: <code>sudo usermod -aG docker $USER</code>, and sign out and back in.</p></div>
-                <p class="note">Docker Desktop's license is free for personal use, education and small businesses. Larger companies need a paid subscription: check with your IT team.</p>
+                <div class="os"><h4>macOS, option A (free): Colima</h4><p>Needs macOS 13 or later and <a href="https://brew.sh/">Homebrew</a>. Install Colima, the Docker command line and Docker Compose, let Docker find Compose, then start Colima with the 8 GB of memory and 4 CPUs the course needs:</p><pre class="cmd"><code>brew install colima docker docker-compose
+mkdir -p ~/.docker/cli-plugins
+ln -sfn "$(brew --prefix)/opt/docker-compose/bin/docker-compose" ~/.docker/cli-plugins/docker-compose
+colima start --cpu 4 --memory 8 --vm-type vz --mount-type virtiofs</code></pre><p class="note">Colima doesn't start on its own after you restart your Mac: run <code>colima start</code> again (it remembers the settings). Colima shares your home folder with the containers, so keep the course folder inside it, as the workbook does.</p></div>
+                <div class="os"><h4>macOS, option B: Docker Desktop</h4><p>Install <a href="https://docs.docker.com/desktop/setup/install/mac-install/">Docker Desktop for Mac</a> for your chip (Apple silicon or Intel), or use Homebrew. Then open Docker from Applications. It includes Docker Compose.</p><pre class="cmd"><code>brew install --cask docker</code></pre></div>
+                <div class="os"><h4>Windows, option A (free): Rancher Desktop</h4><p>Install <a href="https://rancherdesktop.io/">Rancher Desktop</a>, or run the command below, then start it. On first start, choose these two settings (later, in <em>Preferences</em>):</p><ul><li><strong>Container engine: dockerd (moby)</strong>, so the <code>docker</code> and <code>docker compose</code> commands work.</li><li><strong>Kubernetes: off</strong>. It's on by default and uses memory Liferay needs.</li></ul><pre class="cmd"><code>winget install --id SUSE.RancherDesktop -e</code></pre><p class="note">Rancher Desktop runs its containers in WSL 2. If Windows asks to install or update WSL, accept and restart.</p></div>
+                <div class="os"><h4>Windows, option B: Docker Desktop</h4><p>Install <a href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop for Windows</a>, or run the command below. Restart when asked, then start Docker Desktop. It includes Docker Compose and runs its containers in WSL 2.</p><pre class="cmd"><code>winget install --id Docker.DockerDesktop -e</code></pre></div>
+                <div class="os"><h4>Linux: Docker Engine (free)</h4><p>Install <a href="https://docs.docker.com/engine/install/">Docker Engine</a> and the <a href="https://docs.docker.com/compose/install/linux/">Compose plugin</a> for your distribution from Docker's own package repository (packages <code>docker-ce</code> and <code>docker-compose-plugin</code>). Then let your user run Docker without <code>sudo</code>, and sign out and back in:</p><pre class="cmd"><code>sudo usermod -aG docker $USER</code></pre></div>
               </details>
               <p class="check-label">Check it</p>
               <pre class="cmd"><code>docker compose version
@@ -189,15 +198,16 @@ This message shows that your installation appears to be working correctly.</code
               <p>Liferay and its search engine need about 6 GB, and PostgreSQL needs some too. With less, Liferay restarts in a loop or stops with exit code 137.</p>
               <details class="howto" open>
                 <summary>How to set it</summary>
-                <div class="os"><h4>macOS</h4><p>Open Docker Desktop → <em>Settings</em> (the gear icon) → <em>Resources</em> → <em>Advanced</em>, set <strong>Memory</strong> to 8 GB or more, then click <strong>Apply &amp; restart</strong>.</p></div>
-                <div class="os"><h4>Windows</h4><p>Docker Desktop runs its containers in WSL 2, which sets the memory limit. In PowerShell, write the limit to <code>.wslconfig</code> in your user folder, then restart WSL. If you already have a <code>.wslconfig</code>, open it instead and set <code>memory=8GB</code> under <code>[wsl2]</code>. Then start Docker Desktop again and wait for <em>Engine running</em>.</p><pre class="cmd"><code>Set-Content -Path "$env:USERPROFILE\.wslconfig" -Value "[wsl2]`nmemory=8GB"
+                <div class="os"><h4>macOS, option A (Colima)</h4><p>The <code>colima start</code> command above already sets 8 GB. To change it later: <code>colima stop</code>, then <code>colima start --memory 8</code>.</p></div>
+                <div class="os"><h4>macOS, option B (Docker Desktop)</h4><p>Open Docker Desktop → <em>Settings</em> (the gear icon) → <em>Resources</em> → <em>Advanced</em>, set <strong>Memory</strong> to 8 GB or more, then click <strong>Apply &amp; restart</strong>.</p></div>
+                <div class="os"><h4>Windows, option A or B (Rancher Desktop or Docker Desktop)</h4><p>Both run their containers in WSL 2, which gives Docker half of your computer's memory by default: 8 GB on a 16 GB laptop, so there's usually nothing to set. Only if the check below shows less than 7.5 GB, write the limit to <code>.wslconfig</code> in your user folder in PowerShell, restart WSL, then quit and start Rancher Desktop or Docker Desktop again. If you already have a <code>.wslconfig</code>, open it instead and set <code>memory=8GB</code> under <code>[wsl2]</code>.</p><pre class="cmd"><code>Set-Content -Path "$env:USERPROFILE\.wslconfig" -Value "[wsl2]`nmemory=8GB"
 wsl --shutdown</code></pre></div>
-                <div class="os"><h4>Linux</h4><p>Docker Engine uses your computer's memory directly: nothing to set. If you use Docker Desktop for Linux, set its memory as on macOS. Also check that <code>id -u</code> prints <code>1000</code>: Liferay's container writes its log files for that user ID only, and your agent needs to read them. If it prints another number, use Docker Desktop for Linux.</p></div>
+                <div class="os"><h4>Linux (Docker Engine)</h4><p>Docker Engine uses your computer's memory directly: nothing to set. Also check that <code>id -u</code> prints <code>1000</code>: Liferay's container writes its log files for that user ID only, and your agent needs to read them. If it prints another number, also download the Liferay DXP bundle in step 3, so you can run Liferay without a container.</p></div>
               </details>
               <p class="check-label">Check it</p>
               <pre class="cmd"><code>docker info --format "{{.MemTotal}}"</code></pre>
               <p class="expect">You should see a number of bytes of about 8 GB or more, something like:</p>
-              <pre class="cmd out"><code>8323395584</code></pre>
+              <pre class="cmd out"><code>8307101696</code></pre>
             </div>
           </li>
         </ul>
@@ -221,7 +231,12 @@ wsl --shutdown</code></pre></div>
               <pre class="cmd"><code>docker pull liferay/dxp:2026.q3.10
 docker image ls liferay/dxp</code></pre>
               <p class="expect">You should see a line for <code>liferay/dxp</code> with the tag <code>2026.q3.10</code>. The columns differ between Docker versions.</p>
-              <p class="note">The course also has an option to run Liferay as a Tomcat bundle instead of a container. You don't need it unless your instructor asks you to download the bundle.</p>
+              <details class="howto">
+                <summary>Only on Linux if <code>id -u</code> isn't 1000, or if your instructor asks: the Liferay DXP bundle</summary>
+                <p>The course can run Liferay as a Tomcat bundle instead of a container. Save the bundle (about 1.3 GB) in Liferay's download cache:</p>
+                <pre class="cmd"><code>mkdir -p ~/.liferay/bundles
+curl -L -o ~/.liferay/bundles/liferay-dxp-tomcat-2026.q3.10-1793707249.7z https://releases-cdn.liferay.com/dxp/2026.q3.10/liferay-dxp-tomcat-2026.q3.10-1793707249.7z</code></pre>
+              </details>
             </div>
           </li>
           <li class="check-item">
@@ -327,7 +342,8 @@ postgres     16    3f8b2c1d9a7e   2 weeks ago   453MB</code></pre>
 7. Memory: report the total and the currently available RAM. PASS if at least 16 GB is installed; WARN if less than 8 GB is available now.
 8. Disk: check the free space on the drive Docker stores its data on. PASS if at least 20 GB is free.
 9. Ports: check whether anything is already listening on ports 8080 and 5432. PASS if both are free; otherwise WARN and tell me which program uses them.
-10. Linux only: run `id -u`. PASS if it prints 1000; otherwise WARN (Liferay&#x27;s container writes its logs for user ID 1000).
+10. Linux only: run `id -u`. PASS if it prints 1000; otherwise WARN: Liferay&#x27;s container writes its logs for user ID 1000, so I should download the Liferay DXP bundle from step 3 of the prerequisites page.
+11. Which Docker I use: run `docker context show` and tell me whether it&#x27;s Colima, Rancher Desktop, Docker Desktop or Docker Engine. WARN if more than one of them is installed and running at the same time.
 
 Then show the results as a table with the columns Check, Result (PASS, WARN or FAIL) and Details. For anything that isn&#x27;t PASS, tell me how to fix it on my operating system.
 
