@@ -130,7 +130,7 @@
           <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></span>
           <h3>Tutorial &amp; Alat</h3>
           <p>Tutorial langkah demi langkah, kode contoh, dan alat untuk tugas implementasi, upgrade, dan migrasi.</p>
-          <span class="meta">4 tutorial dan contoh</span>
+          <span class="meta">6 tutorial dan contoh</span>
         </a>
         <a class="card section-card" href="community/">
           <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5a5 5 0 0 1 5.5 5"/></svg></span>
@@ -290,10 +290,17 @@
         <!-- apps:cards tutorials,sample-code,tools limit=3 -->
         <article class="card resource">
           <span class="tag">Tutorial</span>
-          <h3>Tutorial Contoh (placeholder)</h3>
-          <p>Placeholder untuk tutorial yang diterbitkan sebagai halaman web di situs ini, dengan bab, sidebar, serta tautan sebelumnya dan berikutnya. Tutorial pertama yang sebenarnya akan menggantikannya.</p>
-          <span class="meta">2 bab · Halaman web</span>
-          <a class="more" href="../tutorial-docs/example-tutorial/">Mulai tutorial (bahasa Inggris) →</a>
+          <h3>Mencadangkan log webserver Liferay Cloud</h3>
+          <p>Simpan log akses nginx Liferay Cloud melewati masa retensi 30 hari. Workflow GitHub Actions terjadwal mengambil log setiap jam UTC dengan Liferay Cloud CLI dan menyimpannya, terenkripsi, di bucket Amazon S3 milik Anda dengan aturan lifecycle. Sebagian sudah diuji.</p>
+          <span class="meta">7 bab · GitHub Actions · Amazon S3</span>
+          <a class="more" href="../tutorial-docs/liferay-cloud-webserver-log-backup/">Mulai tutorial (bahasa Inggris) →</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">Tutorial</span>
+          <h3>Mengukur lalu lintas manusia dan bot di Liferay Cloud</h3>
+          <p>Pisahkan tampilan halaman situs Liferay Cloud menjadi lalu lintas manusia dan otomatis dari log webserver, dengan format log pengukuran, client extension beacon halaman, honeypot, dan pengklasifikasi Python. Dasbor HTML offline menampilkan tampilan halaman manusia, lalu lintas bot, dan waktu backend yang dipakai bot. Sebagian sudah diuji.</p>
+          <span class="meta">6 bab · Python · Client extension · nginx</span>
+          <a class="more" href="../tutorial-docs/liferay-cloud-traffic-measurement/">Mulai tutorial (bahasa Inggris) →</a>
         </article>
         <article class="card resource">
           <span class="tag">Tutorial</span>
@@ -301,13 +308,6 @@
           <p>Tutorial langkah demi langkah dan aplikasi SwiftUI referensi yang dibangun di atas headless REST API Liferay DXP 2026.Q1. Pengguna masuk dengan OAuth 2.0 dan PKCE, lalu mengelola profil, alamat, dan Liferay Object kustom, tanpa dependensi pihak ketiga. Sebagian sudah diuji.</p>
           <span class="meta">12 bab · Swift · SwiftUI · OAuth 2.0</span>
           <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">Mulai tutorial →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">Tutorial</span>
-          <h3>Migrasi SharePoint Online ke Liferay DXP</h3>
-          <p>Tutorial praktik 14 bab, dengan alat yang berfungsi, untuk memigrasikan situs SharePoint Online yang aktif, atau SharePoint Server on-premises, ke Liferay DXP 2026.Q3 dan CMS barunya. Server MCP memungkinkan agen AI membantu menginventarisasi sumber, merencanakan pemetaan, dan memeriksa hasilnya, dan SharePoint tiruan memungkinkan Anda mencobanya tanpa tenant.</p>
-          <span class="meta">14 bab · Python · MCP</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">Mulai tutorial →</a>
         </article>
         <!-- /apps:cards -->
       </div>
@@ -374,6 +374,8 @@
                 <option value="Liferay Migration Studio">Liferay Migration Studio</option>
                 <option value="AI Hub Legacy Connector">AI Hub Legacy Connector</option>
                 <option value="Solution Recipes">Solution Recipes</option>
+                <option value="Back up Liferay Cloud webserver logs">Mencadangkan log webserver Liferay Cloud</option>
+                <option value="Measure human and bot traffic on Liferay Cloud">Mengukur lalu lintas manusia dan bot di Liferay Cloud</option>
                 <option value="Native iOS app on Liferay DXP">Aplikasi iOS native di Liferay DXP</option>
                 <option value="SharePoint Online to Liferay DXP migration">Migrasi SharePoint Online ke Liferay DXP</option>
                 <option value="Liferay DXP self-hosted on Amazon EC2">Liferay DXP self-hosted di Amazon EC2</option>
