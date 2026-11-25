@@ -12,7 +12,7 @@
  *   <!-- site:sections -->  <!-- /site:sections -->
  *       The homepage's cards for the site's four sections, with counts from the catalogue.
  *   <!-- site:help-topics -->  <!-- /site:help-topics -->
- *       The <option>s of the "Get help" form's topic list: every entry, then "Something else".
+ *       The <option>s of the "Get help" form's topic list: every entry but placeholders, then "Something else".
  *       Each option's value is the English name, which goes into the forum post.
  *   marketplace-apps/<id>/index.html, in every language
  *       A page per Marketplace App with everything about it: features, screenshots, guide and download. Its
@@ -267,7 +267,7 @@ function sectionCards(page, indent) {
   const lang = page.lang;
   const lines = [];
   for (const s of SECTIONS) {
-    const n = data.apps.filter((a) => s.categories.includes(a.category)).length;
+    const n = data.apps.filter((a) => s.categories.includes(a.category) && !a.placeholder).length;
     lines.push(`<a class="card section-card" href="${esc(href(s.href(lang), page))}">`,
       `  <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[s.icon]}</svg></span>`,
       `  <h3>${esc(s.title[lang])}</h3>`, `  <p>${esc(s.text[lang])}</p>`,
@@ -281,7 +281,8 @@ const CARDS_RE = /([ \t]*)<!-- apps:cards ([\w,-]+)( limit=\d+)? -->[\s\S]*?<!--
 function helpTopics(page, indent) {
   const lang = page.lang;
   const other = { en: 'Something else', ja: 'その他', zh: '其他', id: 'Lainnya' };
-  const lines = data.apps.map((a) => `<option value="${esc(L(a.name, 'en'))}">${esc(L(a.name, lang))}</option>`);
+  // A placeholder isn't something to ask for help with.
+  const lines = data.apps.filter((a) => !a.placeholder).map((a) => `<option value="${esc(L(a.name, 'en'))}">${esc(L(a.name, lang))}</option>`);
   lines.push(`<option value="">${esc(other[lang])}</option>`);
   return indentAll(lines, indent);
 }

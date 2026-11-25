@@ -8,4 +8,5 @@ Sitemap: https://liferay-community-apac.github.io/liferay-forums/sitemap.xml
 Sitemap: https://liferay-community-apac.github.io/marketplace-app-docs/sitemap.xml
 Sitemap: https://liferay-community-apac.github.io/liferay-migration-studio/sitemap.xml
 Sitemap: https://liferay-community-apac.github.io/solution-recipes/sitemap.xml
+Sitemap: https://liferay-community-apac.github.io/tutorial-docs/sitemap.xml
 # /apps:sitemaps
