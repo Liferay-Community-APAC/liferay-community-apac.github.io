@@ -256,7 +256,12 @@ postgres     16    3f8b2c1d9a7e   2 weeks ago   453MB</code></pre>
             <input type="checkbox" id="bw-key" data-key="key">
             <div>
               <label for="bw-key" class="check-title">Your Liferay DXP activation key</label>
-              <p>The organizers email you an activation key file (<code>activation-key-….xml</code>) before the course. Save it somewhere you can find it on the first morning. It's for your own use during the course: don't share it or commit it to a repository.</p>
+              <p>Liferay DXP needs an activation key file (<code>.xml</code>). Get one of these two before the course, and save it somewhere you can find it on the first morning. It's yours alone: don't share it or commit it to a repository.</p>
+              <details class="howto">
+                <summary>How to get it</summary>
+                <div class="os"><h4>Free key (anyone)</h4><p>Sign in to <a href="https://one.liferay.com">one.liferay.com</a> (create a free account if you don't have one), open the <a href="https://one.liferay.com/p/liferay-dxp-free-tier">Liferay DXP Free Tier</a> page and click <em>Get Activation Key</em>. You get a file named <code>Liferay Free Activation Key.xml</code>. It's valid for one year and works on <code>localhost</code>, which is where you run Liferay in the course.</p></div>
+                <div class="os"><h4>Developer key (if you have one)</h4><p>If your company is a Liferay customer or partner and has issued you a DXP developer key on <a href="https://one.liferay.com">one.liferay.com</a>, you can use it instead. Make sure it covers Liferay DXP 2026.Q3 and hasn't expired.</p></div>
+              </details>
             </div>
           </li>
         </ul>
@@ -357,7 +362,7 @@ postgres     16    3f8b2c1d9a7e   2 weeks ago   453MB</code></pre>
 
 Then show the results as a table with the columns Check, Result (PASS, WARN or FAIL) and Details. For anything that isn&#x27;t PASS, tell me how to fix it on my operating system.
 
-Finally, list what I need to confirm myself, because you can&#x27;t check it: that I received my Liferay DXP activation key by email, and that I can install software and run Docker on this computer during the course.</pre>
+Finally, list what I need to confirm myself, because you can&#x27;t check it: that I have my Liferay DXP activation key file (the free key or a developer key), and that I can install software and run Docker on this computer during the course.</pre>
         </div>
         <ul class="checklist">
           <li class="check-item">
@@ -373,7 +378,7 @@ Finally, list what I need to confirm myself, because you can&#x27;t check it: th
         <div class="mc-ready" hidden>
           <strong>You're all set.</strong> See you at the course.
         </div>
-        <p class="mc-help">Something not working, or your activation key hasn't arrived? Contact the course organizers, or see <a href="../../get-help/">Get help</a>.</p>
+        <p class="mc-help">Something not working, or can't get an activation key? Contact the course organizers, or see <a href="../../get-help/">Get help</a>.</p>
       </div>
     </div>
   </section>
