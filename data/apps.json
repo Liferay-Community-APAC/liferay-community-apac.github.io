@@ -929,15 +929,24 @@
         "zh": "共 7 章 · GitHub Actions · Amazon S3",
         "id": "7 bab · GitHub Actions · Amazon S3"
       },
+      "docsLanguages": [
+        "en",
+        "ja"
+      ],
       "docs": "tutorial-docs/liferay-cloud-webserver-log-backup/",
       "search": "tutorial-docs/pagefind/",
       "sitemap": "tutorial-docs/sitemap.xml",
       "links": [
         {
-          "href": "tutorial-docs/liferay-cloud-webserver-log-backup/",
+          "href": {
+            "en": "tutorial-docs/liferay-cloud-webserver-log-backup/",
+            "ja": "tutorial-docs/liferay-cloud-webserver-log-backup/ja/",
+            "zh": "tutorial-docs/liferay-cloud-webserver-log-backup/",
+            "id": "tutorial-docs/liferay-cloud-webserver-log-backup/"
+          },
           "label": {
             "en": "Start the tutorial →",
-            "ja": "チュートリアルを始める（英語）→",
+            "ja": "チュートリアルを始める →",
             "zh": "开始学习教程（英文）→",
             "id": "Mulai tutorial (bahasa Inggris) →"
           }
@@ -965,15 +974,24 @@
         "zh": "共 6 章 · Python · 客户端扩展 · nginx",
         "id": "6 bab · Python · Client extension · nginx"
       },
+      "docsLanguages": [
+        "en",
+        "ja"
+      ],
       "docs": "tutorial-docs/liferay-cloud-traffic-measurement/",
       "search": "tutorial-docs/pagefind/",
       "sitemap": "tutorial-docs/sitemap.xml",
       "links": [
         {
-          "href": "tutorial-docs/liferay-cloud-traffic-measurement/",
+          "href": {
+            "en": "tutorial-docs/liferay-cloud-traffic-measurement/",
+            "ja": "tutorial-docs/liferay-cloud-traffic-measurement/ja/",
+            "zh": "tutorial-docs/liferay-cloud-traffic-measurement/",
+            "id": "tutorial-docs/liferay-cloud-traffic-measurement/"
+          },
           "label": {
             "en": "Start the tutorial →",
-            "ja": "チュートリアルを始める（英語）→",
+            "ja": "チュートリアルを始める →",
             "zh": "开始学习教程（英文）→",
             "id": "Mulai tutorial (bahasa Inggris) →"
           }
