@@ -129,7 +129,7 @@
           <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></span>
           <h3>教程与工具</h3>
           <p>用于实施、升级和迁移任务的分步教程、示例代码和工具。</p>
-          <span class="meta">4 个教程和示例</span>
+          <span class="meta">6 个教程和示例</span>
         </a>
         <a class="card section-card" href="community/">
           <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5a5 5 0 0 1 5.5 5"/></svg></span>
@@ -289,10 +289,17 @@
         <!-- apps:cards tutorials,sample-code,tools limit=3 -->
         <article class="card resource">
           <span class="tag">教程</span>
-          <h3>示例教程（占位）</h3>
-          <p>本站以网页形式发布的教程的占位内容，包含章节、侧边栏以及上一页和下一页链接。第一个正式教程发布后将替换它。</p>
-          <span class="meta">共 2 章 · 网页</span>
-          <a class="more" href="../tutorial-docs/example-tutorial/">开始学习教程（英文）→</a>
+          <h3>备份 Liferay Cloud Web 服务器日志</h3>
+          <p>将 Liferay Cloud 的 nginx 访问日志保存到 30 天保留期之后。定时运行的 GitHub Actions 工作流使用 Liferay Cloud CLI 按 UTC 小时获取日志，并加密存储到您自己的、配置了生命周期规则的 Amazon S3 存储桶中。目前仅部分内容已测试。</p>
+          <span class="meta">共 7 章 · GitHub Actions · Amazon S3</span>
+          <a class="more" href="../tutorial-docs/liferay-cloud-webserver-log-backup/">开始学习教程（英文）→</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">教程</span>
+          <h3>在 Liferay Cloud 上衡量真人与机器人流量</h3>
+          <p>根据 Web 服务器日志，将 Liferay Cloud 站点的页面浏览量区分为真人流量和自动化流量，使用计量日志格式、页面信标客户端扩展、蜜罐和 Python 分类脚本。离线 HTML 仪表板展示真人页面浏览量、机器人流量以及机器人占用的后端处理时间。目前仅部分内容已测试。</p>
+          <span class="meta">共 6 章 · Python · 客户端扩展 · nginx</span>
+          <a class="more" href="../tutorial-docs/liferay-cloud-traffic-measurement/">开始学习教程（英文）→</a>
         </article>
         <article class="card resource">
           <span class="tag">教程</span>
@@ -300,13 +307,6 @@
           <p>一套分步教程和 SwiftUI 参考应用，仅使用 Liferay DXP 2026.Q1 的无头 REST API 构建。用户通过 OAuth 2.0 和 PKCE 登录，然后管理个人资料、地址和自定义 Liferay 对象，无需任何第三方依赖。目前仅部分内容已测试。</p>
           <span class="meta">共 12 章 · Swift · SwiftUI · OAuth 2.0</span>
           <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">开始学习教程 →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">教程</span>
-          <h3>从 SharePoint Online 迁移到 Liferay DXP</h3>
-          <p>一套共 14 章的实践教程，附带可用的工具，指导您将正在运行的 SharePoint Online 站点（或本地部署的 SharePoint Server）迁移到 Liferay DXP 2026.Q3 及其新 CMS。借助 MCP 服务器，AI 助手可以帮助盘点源站点、规划映射并检查迁移结果。</p>
-          <span class="meta">共 14 章 · Python · MCP</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">开始学习教程 →</a>
         </article>
         <!-- /apps:cards -->
       </div>
@@ -373,6 +373,8 @@
                 <option value="Liferay Migration Studio">Liferay Migration Studio</option>
                 <option value="AI Hub Legacy Connector">AI Hub Legacy Connector</option>
                 <option value="Solution Recipes">Solution Recipes</option>
+                <option value="Back up Liferay Cloud webserver logs">备份 Liferay Cloud Web 服务器日志</option>
+                <option value="Measure human and bot traffic on Liferay Cloud">在 Liferay Cloud 上衡量真人与机器人流量</option>
                 <option value="Native iOS app on Liferay DXP">基于 Liferay DXP 的原生 iOS 应用</option>
                 <option value="SharePoint Online to Liferay DXP migration">从 SharePoint Online 迁移到 Liferay DXP</option>
                 <option value="Liferay DXP self-hosted on Amazon EC2">在 Amazon EC2 上自托管 Liferay DXP</option>

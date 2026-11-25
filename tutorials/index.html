@@ -65,10 +65,17 @@
         <!-- apps:cards tutorials -->
         <article class="card resource">
           <span class="tag">Tutorial</span>
-          <h3>Example Tutorial (placeholder)</h3>
-          <p>A placeholder for the tutorials published as web pages on this site, with chapters, a sidebar and previous and next links. The first real tutorial replaces it.</p>
-          <span class="meta">2 chapters · Web pages</span>
-          <a class="more" href="../tutorial-docs/example-tutorial/">Start the tutorial →</a>
+          <h3>Back up Liferay Cloud webserver logs</h3>
+          <p>Keep Liferay Cloud's nginx access logs beyond the 30-day retention window. A scheduled GitHub Actions workflow fetches each UTC hour with the Liferay Cloud CLI and stores it, encrypted, in your own Amazon S3 bucket with lifecycle rules. Partly tested.</p>
+          <span class="meta">7 chapters · GitHub Actions · Amazon S3</span>
+          <a class="more" href="../tutorial-docs/liferay-cloud-webserver-log-backup/">Start the tutorial →</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">Tutorial</span>
+          <h3>Measure human and bot traffic on Liferay Cloud</h3>
+          <p>Split a Liferay Cloud site's page views into human and automated traffic from the webserver logs, with a measurement log format, a page beacon client extension, a honeypot and a Python classifier. An offline HTML dashboard shows human page views, bot traffic and the backend time bots consume. Partly tested.</p>
+          <span class="meta">6 chapters · Python · Client extensions · nginx</span>
+          <a class="more" href="../tutorial-docs/liferay-cloud-traffic-measurement/">Start the tutorial →</a>
         </article>
         <article class="card resource">
           <span class="tag">Tutorial</span>

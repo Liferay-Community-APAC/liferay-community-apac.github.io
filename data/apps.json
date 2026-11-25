@@ -909,33 +909,68 @@
       "docsRepo": "https://github.com/Liferay-Community-APAC/solution-recipes"
     },
     {
-      "id": "example-tutorial",
+      "id": "liferay-cloud-webserver-log-backup",
       "category": "tutorials",
-      "placeholder": true,
       "name": {
-        "en": "Example Tutorial (placeholder)",
-        "ja": "サンプルチュートリアル（プレースホルダー）",
-        "zh": "示例教程（占位）",
-        "id": "Tutorial Contoh (placeholder)"
+        "en": "Back up Liferay Cloud webserver logs",
+        "ja": "Liferay Cloud の Web サーバーログをバックアップ",
+        "zh": "备份 Liferay Cloud Web 服务器日志",
+        "id": "Mencadangkan log webserver Liferay Cloud"
       },
       "summary": {
-        "en": "A placeholder for the tutorials published as web pages on this site, with chapters, a sidebar and previous and next links. The first real tutorial replaces it.",
-        "ja": "このサイトで Web ページとして公開するチュートリアルのプレースホルダーです。章立て、サイドバー、前後のリンクを備えています。最初の本番のチュートリアルに置き換えられます。",
-        "zh": "本站以网页形式发布的教程的占位内容，包含章节、侧边栏以及上一页和下一页链接。第一个正式教程发布后将替换它。",
-        "id": "Placeholder untuk tutorial yang diterbitkan sebagai halaman web di situs ini, dengan bab, sidebar, serta tautan sebelumnya dan berikutnya. Tutorial pertama yang sebenarnya akan menggantikannya."
+        "en": "Keep Liferay Cloud's nginx access logs beyond the 30-day retention window. A scheduled GitHub Actions workflow fetches each UTC hour with the Liferay Cloud CLI and stores it, encrypted, in your own Amazon S3 bucket with lifecycle rules. Partly tested.",
+        "ja": "Liferay Cloud の nginx アクセスログを、30 日の保持期間を超えて保管します。スケジュール実行の GitHub Actions ワークフローが Liferay Cloud CLI で UTC の 1 時間ごとにログを取得し、ライフサイクルルールを設定した自社の Amazon S3 バケットに暗号化して保存します。一部のみ検証済みです。",
+        "zh": "将 Liferay Cloud 的 nginx 访问日志保存到 30 天保留期之后。定时运行的 GitHub Actions 工作流使用 Liferay Cloud CLI 按 UTC 小时获取日志，并加密存储到您自己的、配置了生命周期规则的 Amazon S3 存储桶中。目前仅部分内容已测试。",
+        "id": "Simpan log akses nginx Liferay Cloud melewati masa retensi 30 hari. Workflow GitHub Actions terjadwal mengambil log setiap jam UTC dengan Liferay Cloud CLI dan menyimpannya, terenkripsi, di bucket Amazon S3 milik Anda dengan aturan lifecycle. Sebagian sudah diuji."
       },
       "meta": {
-        "en": "2 chapters · Web pages",
-        "ja": "全 2 章 · Web ページ",
-        "zh": "共 2 章 · 网页",
-        "id": "2 bab · Halaman web"
+        "en": "7 chapters · GitHub Actions · Amazon S3",
+        "ja": "全 7 章 · GitHub Actions · Amazon S3",
+        "zh": "共 7 章 · GitHub Actions · Amazon S3",
+        "id": "7 bab · GitHub Actions · Amazon S3"
       },
-      "docs": "tutorial-docs/example-tutorial/",
+      "docs": "tutorial-docs/liferay-cloud-webserver-log-backup/",
       "search": "tutorial-docs/pagefind/",
       "sitemap": "tutorial-docs/sitemap.xml",
       "links": [
         {
-          "href": "tutorial-docs/example-tutorial/",
+          "href": "tutorial-docs/liferay-cloud-webserver-log-backup/",
+          "label": {
+            "en": "Start the tutorial →",
+            "ja": "チュートリアルを始める（英語）→",
+            "zh": "开始学习教程（英文）→",
+            "id": "Mulai tutorial (bahasa Inggris) →"
+          }
+        }
+      ]
+    },
+    {
+      "id": "liferay-cloud-traffic-measurement",
+      "category": "tutorials",
+      "name": {
+        "en": "Measure human and bot traffic on Liferay Cloud",
+        "ja": "Liferay Cloud で人とボットのトラフィックを計測",
+        "zh": "在 Liferay Cloud 上衡量真人与机器人流量",
+        "id": "Mengukur lalu lintas manusia dan bot di Liferay Cloud"
+      },
+      "summary": {
+        "en": "Split a Liferay Cloud site's page views into human and automated traffic from the webserver logs, with a measurement log format, a page beacon client extension, a honeypot and a Python classifier. An offline HTML dashboard shows human page views, bot traffic and the backend time bots consume. Partly tested.",
+        "ja": "Web サーバーログから、Liferay Cloud サイトのページビューを人によるものと自動化されたものに分類します。計測用のログ形式、ページビーコンのクライアントエクステンション、ハニーポット、Python の分類スクリプトを使います。オフラインで開ける HTML ダッシュボードで、人のページビュー、ボットのトラフィック、ボットが消費するバックエンド処理時間を確認できます。一部のみ検証済みです。",
+        "zh": "根据 Web 服务器日志，将 Liferay Cloud 站点的页面浏览量区分为真人流量和自动化流量，使用计量日志格式、页面信标客户端扩展、蜜罐和 Python 分类脚本。离线 HTML 仪表板展示真人页面浏览量、机器人流量以及机器人占用的后端处理时间。目前仅部分内容已测试。",
+        "id": "Pisahkan tampilan halaman situs Liferay Cloud menjadi lalu lintas manusia dan otomatis dari log webserver, dengan format log pengukuran, client extension beacon halaman, honeypot, dan pengklasifikasi Python. Dasbor HTML offline menampilkan tampilan halaman manusia, lalu lintas bot, dan waktu backend yang dipakai bot. Sebagian sudah diuji."
+      },
+      "meta": {
+        "en": "6 chapters · Python · Client extensions · nginx",
+        "ja": "全 6 章 · Python · クライアントエクステンション · nginx",
+        "zh": "共 6 章 · Python · 客户端扩展 · nginx",
+        "id": "6 bab · Python · Client extension · nginx"
+      },
+      "docs": "tutorial-docs/liferay-cloud-traffic-measurement/",
+      "search": "tutorial-docs/pagefind/",
+      "sitemap": "tutorial-docs/sitemap.xml",
+      "links": [
+        {
+          "href": "tutorial-docs/liferay-cloud-traffic-measurement/",
           "label": {
             "en": "Start the tutorial →",
             "ja": "チュートリアルを始める（英語）→",

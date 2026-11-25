@@ -130,7 +130,7 @@
           <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></span>
           <h3>チュートリアルとツール</h3>
           <p>実装、アップグレード、移行に役立つチュートリアル、サンプルコード、ツール。</p>
-          <span class="meta">4 件のチュートリアルとサンプル</span>
+          <span class="meta">6 件のチュートリアルとサンプル</span>
         </a>
         <a class="card section-card" href="community/">
           <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5a5 5 0 0 1 5.5 5"/></svg></span>
@@ -290,10 +290,17 @@
         <!-- apps:cards tutorials,sample-code,tools limit=3 -->
         <article class="card resource">
           <span class="tag">チュートリアル</span>
-          <h3>サンプルチュートリアル（プレースホルダー）</h3>
-          <p>このサイトで Web ページとして公開するチュートリアルのプレースホルダーです。章立て、サイドバー、前後のリンクを備えています。最初の本番のチュートリアルに置き換えられます。</p>
-          <span class="meta">全 2 章 · Web ページ</span>
-          <a class="more" href="../tutorial-docs/example-tutorial/">チュートリアルを始める（英語）→</a>
+          <h3>Liferay Cloud の Web サーバーログをバックアップ</h3>
+          <p>Liferay Cloud の nginx アクセスログを、30 日の保持期間を超えて保管します。スケジュール実行の GitHub Actions ワークフローが Liferay Cloud CLI で UTC の 1 時間ごとにログを取得し、ライフサイクルルールを設定した自社の Amazon S3 バケットに暗号化して保存します。一部のみ検証済みです。</p>
+          <span class="meta">全 7 章 · GitHub Actions · Amazon S3</span>
+          <a class="more" href="../tutorial-docs/liferay-cloud-webserver-log-backup/">チュートリアルを始める（英語）→</a>
+        </article>
+        <article class="card resource">
+          <span class="tag">チュートリアル</span>
+          <h3>Liferay Cloud で人とボットのトラフィックを計測</h3>
+          <p>Web サーバーログから、Liferay Cloud サイトのページビューを人によるものと自動化されたものに分類します。計測用のログ形式、ページビーコンのクライアントエクステンション、ハニーポット、Python の分類スクリプトを使います。オフラインで開ける HTML ダッシュボードで、人のページビュー、ボットのトラフィック、ボットが消費するバックエンド処理時間を確認できます。一部のみ検証済みです。</p>
+          <span class="meta">全 6 章 · Python · クライアントエクステンション · nginx</span>
+          <a class="more" href="../tutorial-docs/liferay-cloud-traffic-measurement/">チュートリアルを始める（英語）→</a>
         </article>
         <article class="card resource">
           <span class="tag">チュートリアル</span>
@@ -301,13 +308,6 @@
           <p>Liferay DXP 2026.Q1 のヘッドレス REST API だけで構築する SwiftUI アプリの、ステップバイステップのチュートリアルとリファレンス実装です。OAuth 2.0 と PKCE でサインインし、プロフィール、住所、カスタム Liferay オブジェクトを管理します。サードパーティのライブラリは使用しません。一部のみ検証済みです。</p>
           <span class="meta">全 12 章 · Swift · SwiftUI · OAuth 2.0</span>
           <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-iOS-mobile-native-bootstrap">チュートリアルを始める →</a>
-        </article>
-        <article class="card resource">
-          <span class="tag">チュートリアル</span>
-          <h3>SharePoint Online から Liferay DXP への移行</h3>
-          <p>稼働中の SharePoint Online サイト（またはオンプレミスの SharePoint Server）を Liferay DXP 2026.Q3 と新しい CMS へ移行する、全 14 章のハンズオンチュートリアルと実用ツールです。MCP サーバーを使い、AI エージェントが移行元の棚卸し、マッピングの計画、移行結果の確認を支援します。</p>
-          <span class="meta">全 14 章 · Python · MCP</span>
-          <a class="more" href="https://github.com/Liferay-Community-APAC/lfrgs-sharepoint-to-liferay-migration-tutorial">チュートリアルを始める →</a>
         </article>
         <!-- /apps:cards -->
       </div>
@@ -374,6 +374,8 @@
                 <option value="Liferay Migration Studio">Liferay Migration Studio</option>
                 <option value="AI Hub Legacy Connector">AI Hub Legacy Connector</option>
                 <option value="Solution Recipes">Solution Recipes</option>
+                <option value="Back up Liferay Cloud webserver logs">Liferay Cloud の Web サーバーログをバックアップ</option>
+                <option value="Measure human and bot traffic on Liferay Cloud">Liferay Cloud で人とボットのトラフィックを計測</option>
                 <option value="Native iOS app on Liferay DXP">Liferay DXP で作るネイティブ iOS アプリ</option>
                 <option value="SharePoint Online to Liferay DXP migration">SharePoint Online から Liferay DXP への移行</option>
                 <option value="Liferay DXP self-hosted on Amazon EC2">Amazon EC2 上でのセルフホスト型 Liferay DXP</option>
