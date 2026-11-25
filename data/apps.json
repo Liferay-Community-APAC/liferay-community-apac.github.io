@@ -909,6 +909,43 @@
       "docsRepo": "https://github.com/Liferay-Community-APAC/solution-recipes"
     },
     {
+      "id": "example-tutorial",
+      "category": "tutorials",
+      "placeholder": true,
+      "name": {
+        "en": "Example Tutorial (placeholder)",
+        "ja": "サンプルチュートリアル（プレースホルダー）",
+        "zh": "示例教程（占位）",
+        "id": "Tutorial Contoh (placeholder)"
+      },
+      "summary": {
+        "en": "A placeholder for the tutorials published as web pages on this site, with chapters, a sidebar and previous and next links. The first real tutorial replaces it.",
+        "ja": "このサイトで Web ページとして公開するチュートリアルのプレースホルダーです。章立て、サイドバー、前後のリンクを備えています。最初の本番のチュートリアルに置き換えられます。",
+        "zh": "本站以网页形式发布的教程的占位内容，包含章节、侧边栏以及上一页和下一页链接。第一个正式教程发布后将替换它。",
+        "id": "Placeholder untuk tutorial yang diterbitkan sebagai halaman web di situs ini, dengan bab, sidebar, serta tautan sebelumnya dan berikutnya. Tutorial pertama yang sebenarnya akan menggantikannya."
+      },
+      "meta": {
+        "en": "2 chapters · Web pages",
+        "ja": "全 2 章 · Web ページ",
+        "zh": "共 2 章 · 网页",
+        "id": "2 bab · Halaman web"
+      },
+      "docs": "tutorial-docs/example-tutorial/",
+      "search": "tutorial-docs/pagefind/",
+      "sitemap": "tutorial-docs/sitemap.xml",
+      "links": [
+        {
+          "href": "tutorial-docs/example-tutorial/",
+          "label": {
+            "en": "Start the tutorial →",
+            "ja": "チュートリアルを始める（英語）→",
+            "zh": "开始学习教程（英文）→",
+            "id": "Mulai tutorial (bahasa Inggris) →"
+          }
+        }
+      ]
+    },
+    {
       "id": "ios-native-bootstrap",
       "category": "tutorials",
       "name": {
@@ -1006,43 +1043,6 @@
             "ja": "チュートリアルを始める →",
             "zh": "开始学习教程 →",
             "id": "Mulai tutorial →"
-          }
-        }
-      ]
-    },
-    {
-      "id": "example-tutorial",
-      "category": "tutorials",
-      "placeholder": true,
-      "name": {
-        "en": "Example Tutorial (placeholder)",
-        "ja": "サンプルチュートリアル（プレースホルダー）",
-        "zh": "示例教程（占位）",
-        "id": "Tutorial Contoh (placeholder)"
-      },
-      "summary": {
-        "en": "A placeholder for the tutorials published as web pages on this site, with chapters, a sidebar and previous and next links. The first real tutorial replaces it.",
-        "ja": "このサイトで Web ページとして公開するチュートリアルのプレースホルダーです。章立て、サイドバー、前後のリンクを備えています。最初の本番のチュートリアルに置き換えられます。",
-        "zh": "本站以网页形式发布的教程的占位内容，包含章节、侧边栏以及上一页和下一页链接。第一个正式教程发布后将替换它。",
-        "id": "Placeholder untuk tutorial yang diterbitkan sebagai halaman web di situs ini, dengan bab, sidebar, serta tautan sebelumnya dan berikutnya. Tutorial pertama yang sebenarnya akan menggantikannya."
-      },
-      "meta": {
-        "en": "2 chapters · Web pages",
-        "ja": "全 2 章 · Web ページ",
-        "zh": "共 2 章 · 网页",
-        "id": "2 bab · Halaman web"
-      },
-      "docs": "tutorial-docs/example-tutorial/",
-      "search": "tutorial-docs/pagefind/",
-      "sitemap": "tutorial-docs/sitemap.xml",
-      "links": [
-        {
-          "href": "tutorial-docs/example-tutorial/",
-          "label": {
-            "en": "Start the tutorial →",
-            "ja": "チュートリアルを始める（英語）→",
-            "zh": "开始学习教程（英文）→",
-            "id": "Mulai tutorial (bahasa Inggris) →"
           }
         }
       ]
